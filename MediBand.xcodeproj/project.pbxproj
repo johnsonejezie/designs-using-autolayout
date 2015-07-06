@@ -10,46 +10,20 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>19F5D31189806B5956BCD33E</key>
+		<key>185527BBDB128D854D52D9F9</key>
 		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
 			<key>includeInIndex</key>
-			<string>1</string>
+			<string>0</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-MediBand.release.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-MediBand/Pods-MediBand.release.xcconfig</string>
+			<string>libPods-MediBand.a</string>
 			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>2DE4CFCA31AC9EDBCA310CD3</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-MediBand/Pods-MediBand-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>361438AFA8BC43D659DB4088</key>
+		<key>25E776AD329322447BA3A00C</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -64,41 +38,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>47E747919BA52CDD2C11B70F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>FC6FBC59A1230E3C2BB55DF1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4EB25BF64F46BA65740BA574</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>361438AFA8BC43D659DB4088</string>
-				<string>19F5D31189806B5956BCD33E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>570F423304DAC0CC50A5D10A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FC6FBC59A1230E3C2BB55DF1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>745E025C2ED72858A318AA13</key>
+		<key>2EEBF908745AC6C0E576B753</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -127,6 +67,72 @@ fi
 </string>
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
+		</dict>
+		<key>38113B7C69D9E44491D4FE98</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-MediBand/Pods-MediBand-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>47E747919BA52CDD2C11B70F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>185527BBDB128D854D52D9F9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4EB25BF64F46BA65740BA574</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>25E776AD329322447BA3A00C</string>
+				<string>8139F1F108DEE0889D162C80</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8139F1F108DEE0889D162C80</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-MediBand.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-MediBand/Pods-MediBand.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>A5D15A3A1B4995E400DC15AB</key>
 		<dict>
@@ -234,7 +240,7 @@ fi
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>570F423304DAC0CC50A5D10A</string>
+				<string>DD7FEB3EE0B8A329AA9835EC</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -262,11 +268,11 @@ fi
 			<string>A5D15A621B4995E400DC15AB</string>
 			<key>buildPhases</key>
 			<array>
-				<string>745E025C2ED72858A318AA13</string>
+				<string>2EEBF908745AC6C0E576B753</string>
 				<string>A5D15A3F1B4995E400DC15AB</string>
 				<string>A5D15A401B4995E400DC15AB</string>
 				<string>A5D15A411B4995E400DC15AB</string>
-				<string>2DE4CFCA31AC9EDBCA310CD3</string>
+				<string>38113B7C69D9E44491D4FE98</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -793,13 +799,15 @@ fi
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
 		<key>A5D15A631B4995E400DC15AB</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>361438AFA8BC43D659DB4088</string>
+			<string>25E776AD329322447BA3A00C</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
@@ -810,6 +818,11 @@ fi
 				<string>MediBand/Info.plist</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
 				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>LIBRARY_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>$(PROJECT_DIR)/Pods/build/Debug-iphoneos</string>
+				</array>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
 			</dict>
@@ -821,7 +834,7 @@ fi
 		<key>A5D15A641B4995E400DC15AB</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>19F5D31189806B5956BCD33E</string>
+			<string>8139F1F108DEE0889D162C80</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
@@ -832,6 +845,11 @@ fi
 				<string>MediBand/Info.plist</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
 				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>LIBRARY_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>$(PROJECT_DIR)/Pods/build/Debug-iphoneos</string>
+				</array>
 				<key>PRODUCT_NAME</key>
 				<string>$(TARGET_NAME)</string>
 			</dict>
@@ -849,6 +867,8 @@ fi
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
@@ -907,18 +927,12 @@ fi
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>FC6FBC59A1230E3C2BB55DF1</key>
+		<key>DD7FEB3EE0B8A329AA9835EC</key>
 		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
+			<key>fileRef</key>
+			<string>185527BBDB128D854D52D9F9</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-MediBand.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
+			<string>PBXBuildFile</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

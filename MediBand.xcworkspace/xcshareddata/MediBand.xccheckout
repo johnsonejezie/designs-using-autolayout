@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0A1A1FA7-53EE-450E-BDD8-96DED0BC03B7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MediBand</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</key>
+		<string>https://github.com/andela-jejezie/designs-using-autolayout.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MediBand.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/andela-jejezie/designs-using-autolayout.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</string>
+			<key>IDESourceControlWCCName</key>
+			<string>designs-using-autolayout</string>
+		</dict>
+	</array>
+</dict>
+</plist>

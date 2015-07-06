@@ -1,8 +1,9 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '6.0'
+# platform :ios, '7.0'
 
 target 'MediBand' do
-pod 'MaterialKit'
+
+pod 'BFPaperButton', '~> 2.0.18'
 
 end
 

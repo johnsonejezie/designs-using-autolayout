@@ -1,10 +1,13 @@
 PODS:
-  - MaterialKit (0.3.5)
+  - BFPaperButton (2.0.18):
+    - UIColor+BFPaperColors
+  - UIColor+BFPaperColors (1.7.1)
 
 DEPENDENCIES:
-  - MaterialKit
+  - BFPaperButton (~> 2.0.18)
 
 SPEC CHECKSUMS:
-  MaterialKit: 6f1e9382f89593df768bc0c31ded9952a6d8ad46
+  BFPaperButton: 16b3ec9c2964d24f89f623a4113321d3f003ed60
+  UIColor+BFPaperColors: b1efa4320e2f56c4b14f73232faf967ba0e5b4a2
 
 COCOAPODS: 0.35.0

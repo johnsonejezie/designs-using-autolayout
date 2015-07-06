@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "624CF266E712137E5544C7C1"
-               BuildableName = "libPods-MediBand-MaterialKit.a"
-               BlueprintName = "Pods-MediBand-MaterialKit"
+               BlueprintIdentifier = "F02277F5E1B99FE8A9CE36FA"
+               BuildableName = "libPods-MediBand-UIColor+BFPaperColors.a"
+               BlueprintName = "Pods-MediBand-UIColor+BFPaperColors"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

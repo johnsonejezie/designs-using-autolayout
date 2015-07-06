@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-MediBand-MaterialKit.xcscheme</key>
+		<key>Pods-MediBand-BFPaperButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MediBand-UIColor+BFPaperColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>61370D7BE0B934DB58E253F6</key>
+		<key>6A63516C5D21D6535F421381</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>624CF266E712137E5544C7C1</key>
+		<key>A3FD48147489540751FE58AE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F02277F5E1B99FE8A9CE36FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

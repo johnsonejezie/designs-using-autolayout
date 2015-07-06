@@ -6,9 +6,15 @@
 // project.
 
 
-// MaterialKit
-#define COCOAPODS_POD_AVAILABLE_MaterialKit
-#define COCOAPODS_VERSION_MAJOR_MaterialKit 0
-#define COCOAPODS_VERSION_MINOR_MaterialKit 3
-#define COCOAPODS_VERSION_PATCH_MaterialKit 5
+// BFPaperButton
+#define COCOAPODS_POD_AVAILABLE_BFPaperButton
+#define COCOAPODS_VERSION_MAJOR_BFPaperButton 2
+#define COCOAPODS_VERSION_MINOR_BFPaperButton 0
+#define COCOAPODS_VERSION_PATCH_BFPaperButton 18
+
+// UIColor+BFPaperColors
+#define COCOAPODS_POD_AVAILABLE_UIColor_BFPaperColors
+#define COCOAPODS_VERSION_MAJOR_UIColor_BFPaperColors 1
+#define COCOAPODS_VERSION_MINOR_UIColor_BFPaperColors 7
+#define COCOAPODS_VERSION_PATCH_UIColor_BFPaperColors 1
 
