@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "269791F7B2C51A90ECB71BA5"
-               BuildableName = "libPods-MediBand-UIColor+BFPaperColors.a"
-               BlueprintName = "Pods-MediBand-UIColor+BFPaperColors"
+               BlueprintIdentifier = "A2CE47264172E4633F19CEF7"
+               BuildableName = "libPods-MediBand-JVFloatLabeledTextField.a"
+               BlueprintName = "Pods-MediBand-JVFloatLabeledTextField"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

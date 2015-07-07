@@ -1,13 +1,16 @@
 PODS:
   - BFPaperButton (2.0.18):
     - UIColor+BFPaperColors
+  - JVFloatLabeledTextField (1.1.0)
   - UIColor+BFPaperColors (1.7.1)
 
 DEPENDENCIES:
   - BFPaperButton (~> 2.0.18)
+  - JVFloatLabeledTextField
 
 SPEC CHECKSUMS:
   BFPaperButton: 16b3ec9c2964d24f89f623a4113321d3f003ed60
+  JVFloatLabeledTextField: ea4a3d8387ddd43724c472bb2b8ab39b79af05d4
   UIColor+BFPaperColors: b1efa4320e2f56c4b14f73232faf967ba0e5b4a2
 
 COCOAPODS: 0.35.0

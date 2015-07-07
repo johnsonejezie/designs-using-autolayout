@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-MediBand-JVFloatLabeledTextField.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MediBand-UIColor+BFPaperColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6A63516C5D21D6535F421381</key>
+		<key>269791F7B2C51A90ECB71BA5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A3FD48147489540751FE58AE</key>
+		<key>979420FB0238808AF9B2C096</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F02277F5E1B99FE8A9CE36FA</key>
+		<key>A2CE47264172E4633F19CEF7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E64B5E374FF2A30351FC416D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

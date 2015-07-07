@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3FD48147489540751FE58AE"
+               BlueprintIdentifier = "E64B5E374FF2A30351FC416D"
                BuildableName = "libPods-MediBand-BFPaperButton.a"
                BlueprintName = "Pods-MediBand-BFPaperButton"
                ReferencedContainer = "container:Pods.xcodeproj">

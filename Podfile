@@ -4,6 +4,7 @@
 target 'MediBand' do
 
 pod 'BFPaperButton', '~> 2.0.18'
+pod 'JVFloatLabeledTextField'
 
 end
 
