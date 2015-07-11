@@ -4,22 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-MediBand-BFPaperButton.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-MediBand-JVFloatLabeledTextField.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-MediBand-UIColor+BFPaperColors.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-MediBand.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftForms.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,42 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B48BA545D546D013ABEA6F7</key>
+		<key>1BD102EEB4B9A877634ACD7C4EDD7C0E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>269791F7B2C51A90ECB71BA5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5C686454A7766338DAEFFD59</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9248AAEC6891CCCD3D90EA07</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>979420FB0238808AF9B2C096</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A2CE47264172E4633F19CEF7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E64B5E374FF2A30351FC416D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F7EFAA1259934349262E84B2</key>
+		<key>BD4750EE740B3A4196B1DF06624F1489</key>
 		<dict>
 			<key>primary</key>
 			<true/>

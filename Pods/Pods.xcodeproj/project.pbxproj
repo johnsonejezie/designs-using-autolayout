@@ -7,526 +7,355 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B4B8FC36C533ECF514E7724 /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F85A84E0A3E2921A26C6077 /* JVFloatLabeledTextField.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		1DB15855CEC444605D7BFC50 /* Pods-MediBand-JVFloatLabeledTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96694CB83BE32346D2CD242F /* Pods-MediBand-JVFloatLabeledTextField-dummy.m */; };
-		24D292BB502F7AE594C6D8D9 /* NSString+TextDirectionality.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCF4A805607AFEEF098F8E /* NSString+TextDirectionality.h */; };
-		26DF20E5A6EAD7F2438E18FD /* UIColor+BFPaperColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 68BF4013B7BAFDD8D251C3E7 /* UIColor+BFPaperColors.h */; };
-		27A980CED2BFDE3B531EE13B /* Pods-MediBand-BFPaperButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 659F14755E43807CCB35E0F7 /* Pods-MediBand-BFPaperButton-dummy.m */; };
-		3E5DDFD36E4D0EFFC009410C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B202860336064896A6AA1FE3 /* Foundation.framework */; };
-		4557211BD254A5EDF3EADE8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B202860336064896A6AA1FE3 /* Foundation.framework */; };
-		5AF50E8FBA48005400D4ED86 /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C56214D9F89AE7181F4704 /* UIColor+BFPaperColors.m */; };
-		6306B65156A44C21BA18BBCB /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169A36C2A9FA63D9C51A327A /* JVFloatLabeledTextView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		7D17511B06D9419A844336FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B202860336064896A6AA1FE3 /* Foundation.framework */; };
-		817EFF8CE4F8322BDD813529 /* Pods-MediBand-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 739DC79CCB230549634CE0C2 /* Pods-MediBand-dummy.m */; };
-		852E7E5750C43BD4BF732C95 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B202860336064896A6AA1FE3 /* Foundation.framework */; };
-		A192F65766875CEB65230FED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE00BD0C0965A02F504BD89 /* UIKit.framework */; };
-		A7D472745FFFA7A18E8AEF2E /* JVFloatLabeledTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B6047B3452A9F382BE878882 /* JVFloatLabeledTextField.h */; };
-		B71D9FF4C1B15CD568244D56 /* BFPaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5D87E63A5564FED0F3305C /* BFPaperButton.m */; };
-		CAE1774239503C84576F924D /* BFPaperButton.h in Headers */ = {isa = PBXBuildFile; fileRef = F31152969654EA89475D64E2 /* BFPaperButton.h */; };
-		D3FEFCBD933C1CC900BD4D86 /* JVFloatLabeledTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BCB15A6FC5E129BCCB7D4EF /* JVFloatLabeledTextView.h */; };
-		D6AA19DA8ED60F0A0F7C7811 /* Pods-MediBand-UIColor+BFPaperColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3830984C60064291599B6FEA /* Pods-MediBand-UIColor+BFPaperColors-dummy.m */; };
-		EAB2E06F047C83E96AF080A6 /* NSString+TextDirectionality.m in Sources */ = {isa = PBXBuildFile; fileRef = E73118D8EB6E9E113B73E51E /* NSString+TextDirectionality.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0416AED78FC1BB044679F80D09606BFD /* FormDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A043E0FC0A83B6767A78C913E3047A /* FormDateCell.swift */; };
+		2475D247CE972B23523FE9AC7B078A8B /* FormBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC3922071776E0FD74D9279818EE8E4 /* FormBaseCell.swift */; };
+		2585567F2CA81FDD7233F41DCC9736D4 /* Pods-MediBand-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A10C56B46CC0953F6BDBE12CF9837CE /* Pods-MediBand-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29442D607C67DB95C172C2A5324ECF02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39B41426D32A39A4E1635531932777D /* Foundation.framework */; };
+		3248921D03E978F36D6AA0D9553E4FA6 /* FormValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736012887A5A76C113FCAFBC07442CB4 /* FormValueCell.swift */; };
+		376C72F633EDE091B7D7324607A462ED /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6313802E20E733E072E1DF3649BF8 /* FormTextFieldCell.swift */; };
+		4883074AC73A145D4D2E71BF1618D7D1 /* FormSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51DFCE9660DE68F6CF2A757B859BA1C /* FormSliderCell.swift */; };
+		4CBB455C3E49C04FD67D98E86917BEEE /* FormSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDB0002DDB9BAED4605A1D40052A3C /* FormSelector.swift */; };
+		544C6B426522F7F471397FF917331F35 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C990A798E6E814E459D8AD25577C5D1 /* FormViewController.swift */; };
+		59CD11C1D65E595319D31C21E6F7D2F8 /* FormCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD7191FA06597704AAC67A5A6048BFC /* FormCheckCell.swift */; };
+		6616884A2C05C8876A866570C9254ABD /* FormButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44FFEDBAEBC702AFA26CEB12B4D6EE /* FormButtonCell.swift */; };
+		6A77DA17F006BB79BA7CEB2C44632FEC /* FormSegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B8CD35DE0F5BAD0CD494C0C13E36D5 /* FormSegmentedControlCell.swift */; };
+		723E649410C16A5A3470C7ACD52B1668 /* FormTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89214D869F5C073019ED934FCF0ABB6A /* FormTextViewCell.swift */; };
+		7836963ACBE05DA2A68A2D0F86A6EA7E /* FormSectionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E0E73DB55B3978E300DB323B9162E /* FormSectionDescriptor.swift */; };
+		828F214D6625F9371C17957DB714C5EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39B41426D32A39A4E1635531932777D /* Foundation.framework */; };
+		96429D1B8AD714887DE45F2E227A6342 /* FormRowDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7948061247E818A1C4FB7078A4F194E /* FormRowDescriptor.swift */; };
+		999E011EEB0E3E8A2A0C7C11833A5060 /* FormSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F02E826F6BF141BC85D0176277E31A5 /* FormSelectorCell.swift */; };
+		AA930AA3FDC382BC37FBE3463339F984 /* SwiftForms-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AD94ECC9D0954A8EB4F1EAC126790179 /* SwiftForms-dummy.m */; };
+		AF0A51A9FF364A285A0F1428E31CC716 /* Pods-MediBand-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0804A25A20C25D4DA765AC9A9FC26C35 /* Pods-MediBand-dummy.m */; };
+		AF650EE9BD739A2339942A4906733355 /* FormPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F7FCFEEBEE918C757418C99A2B813 /* FormPickerCell.swift */; };
+		B4E52421AB3353BC0D028449A3FEA1DE /* FormSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F290C0E892F99C7FD9F1DEEACB0B555 /* FormSwitchCell.swift */; };
+		BFDF1E717DE8E1D29BDC25E737EB26C0 /* FormOptionsSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664464C69F7A8E4B2229EEB02D60C8E0 /* FormOptionsSelectorController.swift */; };
+		D0138D5835739B479EA405F580DA9839 /* FormDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D374AC68975451FC3B229D8B2B4CC7 /* FormDescriptor.swift */; };
+		DDDDC49E2D8A3F0296204FC4D8BD204F /* FormStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E845536D631C911D391B889DD5916C /* FormStepperCell.swift */; };
+		E565FEBF35B1D01E6BDED959C2E0E8C5 /* SwiftForms-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFB7CC9FDC29DAF12B468CBC4413C56 /* SwiftForms-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB38FFA34F1034C7E014AECD3133D7FE /* FormTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6BDE48A5AC77596B98D1A68E5AE92D /* FormTitleCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		57ED78B7B0DF02F14A6A51AD /* PBXContainerItemProxy */ = {
+		9682536A530B4AEB24039749515CDBA6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7B22BC37A261C14AB3812C99 /* Project object */;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5C686454A7766338DAEFFD59;
-			remoteInfo = "Pods-MediBand-JVFloatLabeledTextField";
-		};
-		6A4800A76B96E7018F89C3A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B22BC37A261C14AB3812C99 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9248AAEC6891CCCD3D90EA07;
-			remoteInfo = "Pods-MediBand-BFPaperButton";
-		};
-		824F8C40ACF530B1CA3240DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B22BC37A261C14AB3812C99 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F7EFAA1259934349262E84B2;
-			remoteInfo = "Pods-MediBand-UIColor+BFPaperColors";
-		};
-		FA97A316A4F01F15DF7DF5A6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B22BC37A261C14AB3812C99 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F7EFAA1259934349262E84B2;
-			remoteInfo = "Pods-MediBand-UIColor+BFPaperColors";
+			remoteGlobalIDString = BD4750EE740B3A4196B1DF06624F1489;
+			remoteInfo = SwiftForms;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03497EE3A16957824ED6B644 /* Pods-MediBand-JVFloatLabeledTextField-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand-JVFloatLabeledTextField-Private.xcconfig"; sourceTree = "<group>"; };
-		07A79B3E5B2BBCA7FA4742DC /* Pods-MediBand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand.release.xcconfig"; sourceTree = "<group>"; };
-		07F40DFA2F82F7DB3DC474A6 /* Pods-MediBand-UIColor+BFPaperColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MediBand-UIColor+BFPaperColors-prefix.pch"; sourceTree = "<group>"; };
-		0C025A37489DFBCF592C1B3C /* Pods-MediBand-BFPaperButton.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand-BFPaperButton.xcconfig"; sourceTree = "<group>"; };
-		169A36C2A9FA63D9C51A327A /* JVFloatLabeledTextView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JVFloatLabeledTextView.m; path = JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextView.m; sourceTree = "<group>"; };
-		1735E85FE841AEAC7CF2B474 /* libPods-MediBand-BFPaperButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MediBand-BFPaperButton.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F85A84E0A3E2921A26C6077 /* JVFloatLabeledTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JVFloatLabeledTextField.m; path = JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField.m; sourceTree = "<group>"; };
-		1FAAD064D91F6331B082E01D /* libPods-MediBand-UIColor+BFPaperColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MediBand-UIColor+BFPaperColors.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3830984C60064291599B6FEA /* Pods-MediBand-UIColor+BFPaperColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MediBand-UIColor+BFPaperColors-dummy.m"; sourceTree = "<group>"; };
-		3E5D87E63A5564FED0F3305C /* BFPaperButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFPaperButton.m; path = Classes/BFPaperButton.m; sourceTree = "<group>"; };
-		5A809D0BFEE384FD634A7EF1 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		5BCB15A6FC5E129BCCB7D4EF /* JVFloatLabeledTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JVFloatLabeledTextView.h; path = JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextView.h; sourceTree = "<group>"; };
-		659F14755E43807CCB35E0F7 /* Pods-MediBand-BFPaperButton-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MediBand-BFPaperButton-dummy.m"; sourceTree = "<group>"; };
-		68BF4013B7BAFDD8D251C3E7 /* UIColor+BFPaperColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+BFPaperColors.h"; path = "UIColor+BFPaperColors/UIColor+BFPaperColors.h"; sourceTree = "<group>"; };
-		68E9AC24E595F148D59999A4 /* libPods-MediBand-JVFloatLabeledTextField.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MediBand-JVFloatLabeledTextField.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7095985CE7A3DB91442FA7F0 /* Pods-MediBand-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MediBand-acknowledgements.markdown"; sourceTree = "<group>"; };
-		739DC79CCB230549634CE0C2 /* Pods-MediBand-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MediBand-dummy.m"; sourceTree = "<group>"; };
-		73C56214D9F89AE7181F4704 /* UIColor+BFPaperColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+BFPaperColors.m"; path = "UIColor+BFPaperColors/UIColor+BFPaperColors.m"; sourceTree = "<group>"; };
-		759559B9FC8D0BECCEDFDDD6 /* Pods-MediBand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand.debug.xcconfig"; sourceTree = "<group>"; };
-		88DCF4A805607AFEEF098F8E /* NSString+TextDirectionality.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+TextDirectionality.h"; path = "JVFloatLabeledTextField/JVFloatLabeledTextField/NSString+TextDirectionality.h"; sourceTree = "<group>"; };
-		8A54B5D9C8DE52ED58EA39C6 /* Pods-MediBand-UIColor+BFPaperColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand-UIColor+BFPaperColors.xcconfig"; sourceTree = "<group>"; };
-		8EB75FD02B29456F2919499B /* Pods-MediBand-BFPaperButton-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MediBand-BFPaperButton-prefix.pch"; sourceTree = "<group>"; };
-		96694CB83BE32346D2CD242F /* Pods-MediBand-JVFloatLabeledTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MediBand-JVFloatLabeledTextField-dummy.m"; sourceTree = "<group>"; };
-		9DE00BD0C0965A02F504BD89 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		A4B7A3541A298EE289482809 /* Pods-MediBand-JVFloatLabeledTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MediBand-JVFloatLabeledTextField-prefix.pch"; sourceTree = "<group>"; };
-		AA02994F016275C321AD046E /* Pods-MediBand-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MediBand-resources.sh"; sourceTree = "<group>"; };
-		B202860336064896A6AA1FE3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		B6047B3452A9F382BE878882 /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JVFloatLabeledTextField.h; path = JVFloatLabeledTextField/JVFloatLabeledTextField/JVFloatLabeledTextField.h; sourceTree = "<group>"; };
-		C1EDD61389F35FBCC62EBCF1 /* Pods-MediBand-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MediBand-acknowledgements.plist"; sourceTree = "<group>"; };
-		DA74BD7FB1A63C465AB43EB6 /* libPods-MediBand.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MediBand.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E73118D8EB6E9E113B73E51E /* NSString+TextDirectionality.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+TextDirectionality.m"; path = "JVFloatLabeledTextField/JVFloatLabeledTextField/NSString+TextDirectionality.m"; sourceTree = "<group>"; };
-		E964555AAAC75F46DF8BD555 /* Pods-MediBand-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MediBand-environment.h"; sourceTree = "<group>"; };
-		EF9578E18A2BF5F5813CE6AF /* Pods-MediBand-JVFloatLabeledTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand-JVFloatLabeledTextField.xcconfig"; sourceTree = "<group>"; };
-		F31152969654EA89475D64E2 /* BFPaperButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFPaperButton.h; path = Classes/BFPaperButton.h; sourceTree = "<group>"; };
-		F4EEDB12BBAE107C7B39FF2F /* Pods-MediBand-BFPaperButton-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand-BFPaperButton-Private.xcconfig"; sourceTree = "<group>"; };
-		F9D982A9E15090A5560A24F9 /* Pods-MediBand-UIColor+BFPaperColors-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand-UIColor+BFPaperColors-Private.xcconfig"; sourceTree = "<group>"; };
+		00E845536D631C911D391B889DD5916C /* FormStepperCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormStepperCell.swift; path = SwiftForms/cells/FormStepperCell.swift; sourceTree = "<group>"; };
+		0804A25A20C25D4DA765AC9A9FC26C35 /* Pods-MediBand-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MediBand-dummy.m"; sourceTree = "<group>"; };
+		104B43D4A2C165D48BB064377FC9B94D /* Pods-MediBand-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MediBand-resources.sh"; sourceTree = "<group>"; };
+		1A10C56B46CC0953F6BDBE12CF9837CE /* Pods-MediBand-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MediBand-umbrella.h"; sourceTree = "<group>"; };
+		2F02E826F6BF141BC85D0176277E31A5 /* FormSelectorCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormSelectorCell.swift; path = SwiftForms/cells/FormSelectorCell.swift; sourceTree = "<group>"; };
+		36D3B320102ACE3CAD05EB3A61AE4AC7 /* Pods-MediBand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand.release.xcconfig"; sourceTree = "<group>"; };
+		4878F30B8E96A43C7AAE6B486961CF86 /* Pods-MediBand-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MediBand-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4DB6313802E20E733E072E1DF3649BF8 /* FormTextFieldCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormTextFieldCell.swift; path = SwiftForms/cells/FormTextFieldCell.swift; sourceTree = "<group>"; };
+		4E922604AFD5AAF8129FD95553C3E697 /* Pods-MediBand-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MediBand-frameworks.sh"; sourceTree = "<group>"; };
+		664464C69F7A8E4B2229EEB02D60C8E0 /* FormOptionsSelectorController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormOptionsSelectorController.swift; path = SwiftForms/controllers/FormOptionsSelectorController.swift; sourceTree = "<group>"; };
+		6BC3922071776E0FD74D9279818EE8E4 /* FormBaseCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormBaseCell.swift; path = SwiftForms/cells/base/FormBaseCell.swift; sourceTree = "<group>"; };
+		6BD7191FA06597704AAC67A5A6048BFC /* FormCheckCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormCheckCell.swift; path = SwiftForms/cells/FormCheckCell.swift; sourceTree = "<group>"; };
+		6F290C0E892F99C7FD9F1DEEACB0B555 /* FormSwitchCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormSwitchCell.swift; path = SwiftForms/cells/FormSwitchCell.swift; sourceTree = "<group>"; };
+		6FFB7CC9FDC29DAF12B468CBC4413C56 /* SwiftForms-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftForms-umbrella.h"; sourceTree = "<group>"; };
+		736012887A5A76C113FCAFBC07442CB4 /* FormValueCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormValueCell.swift; path = SwiftForms/cells/base/FormValueCell.swift; sourceTree = "<group>"; };
+		73F91E5222F102B4974B2A6611CA5AE1 /* Pods-MediBand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MediBand.debug.xcconfig"; sourceTree = "<group>"; };
+		843F7FCFEEBEE918C757418C99A2B813 /* FormPickerCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormPickerCell.swift; path = SwiftForms/cells/FormPickerCell.swift; sourceTree = "<group>"; };
+		89214D869F5C073019ED934FCF0ABB6A /* FormTextViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormTextViewCell.swift; path = SwiftForms/cells/FormTextViewCell.swift; sourceTree = "<group>"; };
+		89EDB0002DDB9BAED4605A1D40052A3C /* FormSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormSelector.swift; path = SwiftForms/controllers/FormSelector.swift; sourceTree = "<group>"; };
+		8C125DA570B5F926DC3ACC56115EDD06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95D374AC68975451FC3B229D8B2B4CC7 /* FormDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormDescriptor.swift; path = SwiftForms/descriptors/FormDescriptor.swift; sourceTree = "<group>"; };
+		9C990A798E6E814E459D8AD25577C5D1 /* FormViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormViewController.swift; path = SwiftForms/controllers/FormViewController.swift; sourceTree = "<group>"; };
+		A16C3DB800AC444F8E65127E5BAE9988 /* SwiftForms.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftForms.xcconfig; sourceTree = "<group>"; };
+		A7948061247E818A1C4FB7078A4F194E /* FormRowDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormRowDescriptor.swift; path = SwiftForms/descriptors/FormRowDescriptor.swift; sourceTree = "<group>"; };
+		A8A043E0FC0A83B6767A78C913E3047A /* FormDateCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormDateCell.swift; path = SwiftForms/cells/FormDateCell.swift; sourceTree = "<group>"; };
+		ABA2F72D2348530DDF9523AD4816D2E0 /* SwiftForms.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftForms.modulemap; sourceTree = "<group>"; };
+		AD94ECC9D0954A8EB4F1EAC126790179 /* SwiftForms-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftForms-dummy.m"; sourceTree = "<group>"; };
+		B511FF5E530A0C5271ACED3ECEF24FE5 /* SwiftForms-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftForms-prefix.pch"; sourceTree = "<group>"; };
+		B824D80F3A8E5D7B377F345B428C8BEA /* SwiftForms-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SwiftForms-Private.xcconfig"; sourceTree = "<group>"; };
+		BB6BDE48A5AC77596B98D1A68E5AE92D /* FormTitleCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormTitleCell.swift; path = SwiftForms/cells/base/FormTitleCell.swift; sourceTree = "<group>"; };
+		C6D37229A72EAF8458D47411C107101A /* Pods_MediBand.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediBand.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C88113A79685B4EFEE7BAD12896829F7 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CC669C92957062DE9E31FA1C2A420D66 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D00F45575612003A53B85248560CEBDA /* Pods-MediBand-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MediBand-acknowledgements.plist"; sourceTree = "<group>"; };
+		D39B41426D32A39A4E1635531932777D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D51DFCE9660DE68F6CF2A757B859BA1C /* FormSliderCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormSliderCell.swift; path = SwiftForms/cells/FormSliderCell.swift; sourceTree = "<group>"; };
+		D86E0E73DB55B3978E300DB323B9162E /* FormSectionDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormSectionDescriptor.swift; path = SwiftForms/descriptors/FormSectionDescriptor.swift; sourceTree = "<group>"; };
+		E4B8CD35DE0F5BAD0CD494C0C13E36D5 /* FormSegmentedControlCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormSegmentedControlCell.swift; path = SwiftForms/cells/FormSegmentedControlCell.swift; sourceTree = "<group>"; };
+		EF44FFEDBAEBC702AFA26CEB12B4D6EE /* FormButtonCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormButtonCell.swift; path = SwiftForms/cells/FormButtonCell.swift; sourceTree = "<group>"; };
+		F1ED490D2804101259C1FF29360055E2 /* SwiftForms.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftForms.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBCF8FF10A86A78E196A3D0FC97D6EAD /* Pods-MediBand.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MediBand.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8C999985E7AB0CCC1C2A78B8 /* Frameworks */ = {
+		88AC80D64BF9C2A504B999B8CC4AA961 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4557211BD254A5EDF3EADE8D /* Foundation.framework in Frameworks */,
+				29442D607C67DB95C172C2A5324ECF02 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9EFB76FF541029F86575DB8D /* Frameworks */ = {
+		DA1F8BD2E61E18253C9C2771307AE807 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E5DDFD36E4D0EFFC009410C /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A394CC53AD253B30B7DD04E4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				852E7E5750C43BD4BF732C95 /* Foundation.framework in Frameworks */,
-				A192F65766875CEB65230FED /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E0A978861FC7D247FC31DEBE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7D17511B06D9419A844336FF /* Foundation.framework in Frameworks */,
+				828F214D6625F9371C17957DB714C5EA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		030DCD29444CCEE36EF22EC9 /* Pods */ = {
+		08E13EDB45932F29C3F6AB42FD445DAE /* Pods-MediBand */ = {
 			isa = PBXGroup;
 			children = (
-				4514FFCAD8A4F46652CE0FC2 /* BFPaperButton */,
-				36CDB9EEDCBE35E6B0983A22 /* JVFloatLabeledTextField */,
-				4510D96B804150A71859CAFA /* UIColor+BFPaperColors */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		0F321A485FECC89DC278EA60 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DA74BD7FB1A63C465AB43EB6 /* libPods-MediBand.a */,
-				1735E85FE841AEAC7CF2B474 /* libPods-MediBand-BFPaperButton.a */,
-				68E9AC24E595F148D59999A4 /* libPods-MediBand-JVFloatLabeledTextField.a */,
-				1FAAD064D91F6331B082E01D /* libPods-MediBand-UIColor+BFPaperColors.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		165E78D25B47BB2C35AF46A1 /* Pods-MediBand */ = {
-			isa = PBXGroup;
-			children = (
-				7095985CE7A3DB91442FA7F0 /* Pods-MediBand-acknowledgements.markdown */,
-				C1EDD61389F35FBCC62EBCF1 /* Pods-MediBand-acknowledgements.plist */,
-				739DC79CCB230549634CE0C2 /* Pods-MediBand-dummy.m */,
-				E964555AAAC75F46DF8BD555 /* Pods-MediBand-environment.h */,
-				AA02994F016275C321AD046E /* Pods-MediBand-resources.sh */,
-				759559B9FC8D0BECCEDFDDD6 /* Pods-MediBand.debug.xcconfig */,
-				07A79B3E5B2BBCA7FA4742DC /* Pods-MediBand.release.xcconfig */,
+				CC669C92957062DE9E31FA1C2A420D66 /* Info.plist */,
+				FBCF8FF10A86A78E196A3D0FC97D6EAD /* Pods-MediBand.modulemap */,
+				4878F30B8E96A43C7AAE6B486961CF86 /* Pods-MediBand-acknowledgements.markdown */,
+				D00F45575612003A53B85248560CEBDA /* Pods-MediBand-acknowledgements.plist */,
+				0804A25A20C25D4DA765AC9A9FC26C35 /* Pods-MediBand-dummy.m */,
+				4E922604AFD5AAF8129FD95553C3E697 /* Pods-MediBand-frameworks.sh */,
+				104B43D4A2C165D48BB064377FC9B94D /* Pods-MediBand-resources.sh */,
+				1A10C56B46CC0953F6BDBE12CF9837CE /* Pods-MediBand-umbrella.h */,
+				73F91E5222F102B4974B2A6611CA5AE1 /* Pods-MediBand.debug.xcconfig */,
+				36D3B320102ACE3CAD05EB3A61AE4AC7 /* Pods-MediBand.release.xcconfig */,
 			);
 			name = "Pods-MediBand";
 			path = "Target Support Files/Pods-MediBand";
 			sourceTree = "<group>";
 		};
-		1E7E52EFC4AD3C262CA12A7D /* Support Files */ = {
+		33A2DFA941E11F4B5B7E005D2FE0A3E5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8A54B5D9C8DE52ED58EA39C6 /* Pods-MediBand-UIColor+BFPaperColors.xcconfig */,
-				F9D982A9E15090A5560A24F9 /* Pods-MediBand-UIColor+BFPaperColors-Private.xcconfig */,
-				3830984C60064291599B6FEA /* Pods-MediBand-UIColor+BFPaperColors-dummy.m */,
-				07F40DFA2F82F7DB3DC474A6 /* Pods-MediBand-UIColor+BFPaperColors-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-MediBand-UIColor+BFPaperColors";
-			sourceTree = "<group>";
-		};
-		2A39EF895AA8E2E26F1EDEB8 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				B202860336064896A6AA1FE3 /* Foundation.framework */,
-				9DE00BD0C0965A02F504BD89 /* UIKit.framework */,
+				D39B41426D32A39A4E1635531932777D /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		2C3EDAFA7FC670786936312C = {
+		5E1F3384B1B39575144FEBFCF3210CCC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5A809D0BFEE384FD634A7EF1 /* Podfile */,
-				67E55A941733023BBA4302EF /* Frameworks */,
-				030DCD29444CCEE36EF22EC9 /* Pods */,
-				0F321A485FECC89DC278EA60 /* Products */,
-				EA127B52EB4257F8A2099284 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		36CDB9EEDCBE35E6B0983A22 /* JVFloatLabeledTextField */ = {
-			isa = PBXGroup;
-			children = (
-				B6047B3452A9F382BE878882 /* JVFloatLabeledTextField.h */,
-				1F85A84E0A3E2921A26C6077 /* JVFloatLabeledTextField.m */,
-				5BCB15A6FC5E129BCCB7D4EF /* JVFloatLabeledTextView.h */,
-				169A36C2A9FA63D9C51A327A /* JVFloatLabeledTextView.m */,
-				88DCF4A805607AFEEF098F8E /* NSString+TextDirectionality.h */,
-				E73118D8EB6E9E113B73E51E /* NSString+TextDirectionality.m */,
-				C8FFA78A6E316379673BCFCA /* Support Files */,
-			);
-			path = JVFloatLabeledTextField;
-			sourceTree = "<group>";
-		};
-		4510D96B804150A71859CAFA /* UIColor+BFPaperColors */ = {
-			isa = PBXGroup;
-			children = (
-				68BF4013B7BAFDD8D251C3E7 /* UIColor+BFPaperColors.h */,
-				73C56214D9F89AE7181F4704 /* UIColor+BFPaperColors.m */,
-				1E7E52EFC4AD3C262CA12A7D /* Support Files */,
-			);
-			path = "UIColor+BFPaperColors";
-			sourceTree = "<group>";
-		};
-		4514FFCAD8A4F46652CE0FC2 /* BFPaperButton */ = {
-			isa = PBXGroup;
-			children = (
-				F31152969654EA89475D64E2 /* BFPaperButton.h */,
-				3E5D87E63A5564FED0F3305C /* BFPaperButton.m */,
-				573C61A57A249F57FD54425B /* Support Files */,
-			);
-			path = BFPaperButton;
-			sourceTree = "<group>";
-		};
-		573C61A57A249F57FD54425B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C025A37489DFBCF592C1B3C /* Pods-MediBand-BFPaperButton.xcconfig */,
-				F4EEDB12BBAE107C7B39FF2F /* Pods-MediBand-BFPaperButton-Private.xcconfig */,
-				659F14755E43807CCB35E0F7 /* Pods-MediBand-BFPaperButton-dummy.m */,
-				8EB75FD02B29456F2919499B /* Pods-MediBand-BFPaperButton-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-MediBand-BFPaperButton";
-			sourceTree = "<group>";
-		};
-		67E55A941733023BBA4302EF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2A39EF895AA8E2E26F1EDEB8 /* iOS */,
+				33A2DFA941E11F4B5B7E005D2FE0A3E5 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C8FFA78A6E316379673BCFCA /* Support Files */ = {
+		71C733E932A061A84D0BF2E2E7D906CB /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				EF9578E18A2BF5F5813CE6AF /* Pods-MediBand-JVFloatLabeledTextField.xcconfig */,
-				03497EE3A16957824ED6B644 /* Pods-MediBand-JVFloatLabeledTextField-Private.xcconfig */,
-				96694CB83BE32346D2CD242F /* Pods-MediBand-JVFloatLabeledTextField-dummy.m */,
-				A4B7A3541A298EE289482809 /* Pods-MediBand-JVFloatLabeledTextField-prefix.pch */,
+				8C125DA570B5F926DC3ACC56115EDD06 /* Info.plist */,
+				ABA2F72D2348530DDF9523AD4816D2E0 /* SwiftForms.modulemap */,
+				A16C3DB800AC444F8E65127E5BAE9988 /* SwiftForms.xcconfig */,
+				B824D80F3A8E5D7B377F345B428C8BEA /* SwiftForms-Private.xcconfig */,
+				AD94ECC9D0954A8EB4F1EAC126790179 /* SwiftForms-dummy.m */,
+				B511FF5E530A0C5271ACED3ECEF24FE5 /* SwiftForms-prefix.pch */,
+				6FFB7CC9FDC29DAF12B468CBC4413C56 /* SwiftForms-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/Pods-MediBand-JVFloatLabeledTextField";
+			path = "../Target Support Files/SwiftForms";
 			sourceTree = "<group>";
 		};
-		EA127B52EB4257F8A2099284 /* Targets Support Files */ = {
+		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
-				165E78D25B47BB2C35AF46A1 /* Pods-MediBand */,
+				C88113A79685B4EFEE7BAD12896829F7 /* Podfile */,
+				5E1F3384B1B39575144FEBFCF3210CCC /* Frameworks */,
+				FCC6F965540745142F6675EF7C9E0E2D /* Pods */,
+				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
+				848A6CE8DA3504A266A17F635DC3683A /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		848A6CE8DA3504A266A17F635DC3683A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				08E13EDB45932F29C3F6AB42FD445DAE /* Pods-MediBand */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		AAB901630810178B1022E51DFB80C301 /* SwiftForms */ = {
+			isa = PBXGroup;
+			children = (
+				6BC3922071776E0FD74D9279818EE8E4 /* FormBaseCell.swift */,
+				EF44FFEDBAEBC702AFA26CEB12B4D6EE /* FormButtonCell.swift */,
+				6BD7191FA06597704AAC67A5A6048BFC /* FormCheckCell.swift */,
+				A8A043E0FC0A83B6767A78C913E3047A /* FormDateCell.swift */,
+				95D374AC68975451FC3B229D8B2B4CC7 /* FormDescriptor.swift */,
+				664464C69F7A8E4B2229EEB02D60C8E0 /* FormOptionsSelectorController.swift */,
+				843F7FCFEEBEE918C757418C99A2B813 /* FormPickerCell.swift */,
+				A7948061247E818A1C4FB7078A4F194E /* FormRowDescriptor.swift */,
+				D86E0E73DB55B3978E300DB323B9162E /* FormSectionDescriptor.swift */,
+				E4B8CD35DE0F5BAD0CD494C0C13E36D5 /* FormSegmentedControlCell.swift */,
+				89EDB0002DDB9BAED4605A1D40052A3C /* FormSelector.swift */,
+				2F02E826F6BF141BC85D0176277E31A5 /* FormSelectorCell.swift */,
+				D51DFCE9660DE68F6CF2A757B859BA1C /* FormSliderCell.swift */,
+				00E845536D631C911D391B889DD5916C /* FormStepperCell.swift */,
+				6F290C0E892F99C7FD9F1DEEACB0B555 /* FormSwitchCell.swift */,
+				4DB6313802E20E733E072E1DF3649BF8 /* FormTextFieldCell.swift */,
+				89214D869F5C073019ED934FCF0ABB6A /* FormTextViewCell.swift */,
+				BB6BDE48A5AC77596B98D1A68E5AE92D /* FormTitleCell.swift */,
+				736012887A5A76C113FCAFBC07442CB4 /* FormValueCell.swift */,
+				9C990A798E6E814E459D8AD25577C5D1 /* FormViewController.swift */,
+				71C733E932A061A84D0BF2E2E7D906CB /* Support Files */,
+			);
+			path = SwiftForms;
+			sourceTree = "<group>";
+		};
+		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6D37229A72EAF8458D47411C107101A /* Pods_MediBand.framework */,
+				F1ED490D2804101259C1FF29360055E2 /* SwiftForms.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCC6F965540745142F6675EF7C9E0E2D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AAB901630810178B1022E51DFB80C301 /* SwiftForms */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2C458C8A90B694B67B3AC6D6 /* Headers */ = {
+		06DB8EC82E5F99476F5CBC15E4B2AE1C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7D472745FFFA7A18E8AEF2E /* JVFloatLabeledTextField.h in Headers */,
-				D3FEFCBD933C1CC900BD4D86 /* JVFloatLabeledTextView.h in Headers */,
-				24D292BB502F7AE594C6D8D9 /* NSString+TextDirectionality.h in Headers */,
+				2585567F2CA81FDD7233F41DCC9736D4 /* Pods-MediBand-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F863725A91BFB2933620C16 /* Headers */ = {
+		DB193E6F3208E66BA17ECFC7CBF27EFE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAE1774239503C84576F924D /* BFPaperButton.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C9D157F3E0AC46ABDBA07264 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				26DF20E5A6EAD7F2438E18FD /* UIColor+BFPaperColors.h in Headers */,
+				E565FEBF35B1D01E6BDED959C2E0E8C5 /* SwiftForms-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0B48BA545D546D013ABEA6F7 /* Pods-MediBand */ = {
+		1BD102EEB4B9A877634ACD7C4EDD7C0E /* Pods-MediBand */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B419D7C612660C79F9A744B /* Build configuration list for PBXNativeTarget "Pods-MediBand" */;
+			buildConfigurationList = B3CE5F8F2791CFEE5295AC839A267353 /* Build configuration list for PBXNativeTarget "Pods-MediBand" */;
 			buildPhases = (
-				D9E50B79E800E3ED3B45A6E2 /* Sources */,
-				9EFB76FF541029F86575DB8D /* Frameworks */,
+				938EDB807CB79B5D14416D48BAABC35D /* Sources */,
+				88AC80D64BF9C2A504B999B8CC4AA961 /* Frameworks */,
+				06DB8EC82E5F99476F5CBC15E4B2AE1C /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				40D9E3B92EDCEBBD77FCA8BE /* PBXTargetDependency */,
-				1C105DA035E18E587F51D22D /* PBXTargetDependency */,
-				D3984B84D0E871B4D3B7EDA1 /* PBXTargetDependency */,
+				4716D01FD440037E7A2162BF0B5E8654 /* PBXTargetDependency */,
 			);
 			name = "Pods-MediBand";
 			productName = "Pods-MediBand";
-			productReference = DA74BD7FB1A63C465AB43EB6 /* libPods-MediBand.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = C6D37229A72EAF8458D47411C107101A /* Pods_MediBand.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		5C686454A7766338DAEFFD59 /* Pods-MediBand-JVFloatLabeledTextField */ = {
+		BD4750EE740B3A4196B1DF06624F1489 /* SwiftForms */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B1D7765ACA0AD575C56C7CE1 /* Build configuration list for PBXNativeTarget "Pods-MediBand-JVFloatLabeledTextField" */;
+			buildConfigurationList = F062B1F59B761995A685E06D9EE9ED55 /* Build configuration list for PBXNativeTarget "SwiftForms" */;
 			buildPhases = (
-				876B61874F50B89E19F90C42 /* Sources */,
-				A394CC53AD253B30B7DD04E4 /* Frameworks */,
-				2C458C8A90B694B67B3AC6D6 /* Headers */,
+				842057BFA7E48714BD82E629A7CC50B9 /* Sources */,
+				DA1F8BD2E61E18253C9C2771307AE807 /* Frameworks */,
+				DB193E6F3208E66BA17ECFC7CBF27EFE /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-MediBand-JVFloatLabeledTextField";
-			productName = "Pods-MediBand-JVFloatLabeledTextField";
-			productReference = 68E9AC24E595F148D59999A4 /* libPods-MediBand-JVFloatLabeledTextField.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		9248AAEC6891CCCD3D90EA07 /* Pods-MediBand-BFPaperButton */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 67E54B0F1846B0CC8760F90D /* Build configuration list for PBXNativeTarget "Pods-MediBand-BFPaperButton" */;
-			buildPhases = (
-				74453BB91D7C9DB90997B6FA /* Sources */,
-				E0A978861FC7D247FC31DEBE /* Frameworks */,
-				9F863725A91BFB2933620C16 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CA166CC2CC302CF0855C7E5C /* PBXTargetDependency */,
-			);
-			name = "Pods-MediBand-BFPaperButton";
-			productName = "Pods-MediBand-BFPaperButton";
-			productReference = 1735E85FE841AEAC7CF2B474 /* libPods-MediBand-BFPaperButton.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		F7EFAA1259934349262E84B2 /* Pods-MediBand-UIColor+BFPaperColors */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F9761D6438F0452CC7BEE0A7 /* Build configuration list for PBXNativeTarget "Pods-MediBand-UIColor+BFPaperColors" */;
-			buildPhases = (
-				999DA20EA2040F62C38FC4D2 /* Sources */,
-				8C999985E7AB0CCC1C2A78B8 /* Frameworks */,
-				C9D157F3E0AC46ABDBA07264 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-MediBand-UIColor+BFPaperColors";
-			productName = "Pods-MediBand-UIColor+BFPaperColors";
-			productReference = 1FAAD064D91F6331B082E01D /* libPods-MediBand-UIColor+BFPaperColors.a */;
-			productType = "com.apple.product-type.library.static";
+			name = SwiftForms;
+			productName = SwiftForms;
+			productReference = F1ED490D2804101259C1FF29360055E2 /* SwiftForms.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7B22BC37A261C14AB3812C99 /* Project object */ = {
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 			};
-			buildConfigurationList = E5931DB9734ACE85098D0B5B /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 2C3EDAFA7FC670786936312C;
-			productRefGroup = 0F321A485FECC89DC278EA60 /* Products */;
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = CCA510CFBEA2D207524CDA0D73C3B561 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0B48BA545D546D013ABEA6F7 /* Pods-MediBand */,
-				9248AAEC6891CCCD3D90EA07 /* Pods-MediBand-BFPaperButton */,
-				5C686454A7766338DAEFFD59 /* Pods-MediBand-JVFloatLabeledTextField */,
-				F7EFAA1259934349262E84B2 /* Pods-MediBand-UIColor+BFPaperColors */,
+				1BD102EEB4B9A877634ACD7C4EDD7C0E /* Pods-MediBand */,
+				BD4750EE740B3A4196B1DF06624F1489 /* SwiftForms */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		74453BB91D7C9DB90997B6FA /* Sources */ = {
+		842057BFA7E48714BD82E629A7CC50B9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B71D9FF4C1B15CD568244D56 /* BFPaperButton.m in Sources */,
-				27A980CED2BFDE3B531EE13B /* Pods-MediBand-BFPaperButton-dummy.m in Sources */,
+				2475D247CE972B23523FE9AC7B078A8B /* FormBaseCell.swift in Sources */,
+				6616884A2C05C8876A866570C9254ABD /* FormButtonCell.swift in Sources */,
+				59CD11C1D65E595319D31C21E6F7D2F8 /* FormCheckCell.swift in Sources */,
+				0416AED78FC1BB044679F80D09606BFD /* FormDateCell.swift in Sources */,
+				D0138D5835739B479EA405F580DA9839 /* FormDescriptor.swift in Sources */,
+				BFDF1E717DE8E1D29BDC25E737EB26C0 /* FormOptionsSelectorController.swift in Sources */,
+				AF650EE9BD739A2339942A4906733355 /* FormPickerCell.swift in Sources */,
+				96429D1B8AD714887DE45F2E227A6342 /* FormRowDescriptor.swift in Sources */,
+				7836963ACBE05DA2A68A2D0F86A6EA7E /* FormSectionDescriptor.swift in Sources */,
+				6A77DA17F006BB79BA7CEB2C44632FEC /* FormSegmentedControlCell.swift in Sources */,
+				4CBB455C3E49C04FD67D98E86917BEEE /* FormSelector.swift in Sources */,
+				999E011EEB0E3E8A2A0C7C11833A5060 /* FormSelectorCell.swift in Sources */,
+				4883074AC73A145D4D2E71BF1618D7D1 /* FormSliderCell.swift in Sources */,
+				DDDDC49E2D8A3F0296204FC4D8BD204F /* FormStepperCell.swift in Sources */,
+				B4E52421AB3353BC0D028449A3FEA1DE /* FormSwitchCell.swift in Sources */,
+				376C72F633EDE091B7D7324607A462ED /* FormTextFieldCell.swift in Sources */,
+				723E649410C16A5A3470C7ACD52B1668 /* FormTextViewCell.swift in Sources */,
+				FB38FFA34F1034C7E014AECD3133D7FE /* FormTitleCell.swift in Sources */,
+				3248921D03E978F36D6AA0D9553E4FA6 /* FormValueCell.swift in Sources */,
+				544C6B426522F7F471397FF917331F35 /* FormViewController.swift in Sources */,
+				AA930AA3FDC382BC37FBE3463339F984 /* SwiftForms-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		876B61874F50B89E19F90C42 /* Sources */ = {
+		938EDB807CB79B5D14416D48BAABC35D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B4B8FC36C533ECF514E7724 /* JVFloatLabeledTextField.m in Sources */,
-				6306B65156A44C21BA18BBCB /* JVFloatLabeledTextView.m in Sources */,
-				EAB2E06F047C83E96AF080A6 /* NSString+TextDirectionality.m in Sources */,
-				1DB15855CEC444605D7BFC50 /* Pods-MediBand-JVFloatLabeledTextField-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		999DA20EA2040F62C38FC4D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6AA19DA8ED60F0A0F7C7811 /* Pods-MediBand-UIColor+BFPaperColors-dummy.m in Sources */,
-				5AF50E8FBA48005400D4ED86 /* UIColor+BFPaperColors.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D9E50B79E800E3ED3B45A6E2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				817EFF8CE4F8322BDD813529 /* Pods-MediBand-dummy.m in Sources */,
+				AF0A51A9FF364A285A0F1428E31CC716 /* Pods-MediBand-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1C105DA035E18E587F51D22D /* PBXTargetDependency */ = {
+		4716D01FD440037E7A2162BF0B5E8654 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-MediBand-JVFloatLabeledTextField";
-			target = 5C686454A7766338DAEFFD59 /* Pods-MediBand-JVFloatLabeledTextField */;
-			targetProxy = 57ED78B7B0DF02F14A6A51AD /* PBXContainerItemProxy */;
-		};
-		40D9E3B92EDCEBBD77FCA8BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-MediBand-BFPaperButton";
-			target = 9248AAEC6891CCCD3D90EA07 /* Pods-MediBand-BFPaperButton */;
-			targetProxy = 6A4800A76B96E7018F89C3A2 /* PBXContainerItemProxy */;
-		};
-		CA166CC2CC302CF0855C7E5C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-MediBand-UIColor+BFPaperColors";
-			target = F7EFAA1259934349262E84B2 /* Pods-MediBand-UIColor+BFPaperColors */;
-			targetProxy = 824F8C40ACF530B1CA3240DC /* PBXContainerItemProxy */;
-		};
-		D3984B84D0E871B4D3B7EDA1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-MediBand-UIColor+BFPaperColors";
-			target = F7EFAA1259934349262E84B2 /* Pods-MediBand-UIColor+BFPaperColors */;
-			targetProxy = FA97A316A4F01F15DF7DF5A6 /* PBXContainerItemProxy */;
+			name = SwiftForms;
+			target = BD4750EE740B3A4196B1DF06624F1489 /* SwiftForms */;
+			targetProxy = 9682536A530B4AEB24039749515CDBA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0CD7A8F04BD6E21EEF852AA5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		21305F3D6E57A09E4A818DC6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9D982A9E15090A5560A24F9 /* Pods-MediBand-UIColor+BFPaperColors-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MediBand-UIColor+BFPaperColors/Pods-MediBand-UIColor+BFPaperColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		25422C858A7C4FE06F0FB22F /* Debug */ = {
+		0C812A8B084AB655D058D5DC45F0D458 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -558,174 +387,192 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		3AAE72F22AEE503437897B9F /* Release */ = {
+		173398C3F71CDF7E9F6B5DEF567E2AA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9D982A9E15090A5560A24F9 /* Pods-MediBand-UIColor+BFPaperColors-Private.xcconfig */;
+			baseConfigurationReference = B824D80F3A8E5D7B377F345B428C8BEA /* SwiftForms-Private.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MediBand-UIColor+BFPaperColors/Pods-MediBand-UIColor+BFPaperColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftForms/SwiftForms-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftForms/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftForms/SwiftForms.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SwiftForms;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		8B51DE8E32CC997764F5E525 /* Release */ = {
+		5AD148DB2071B14CE5A071F16F751BC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4EEDB12BBAE107C7B39FF2F /* Pods-MediBand-BFPaperButton-Private.xcconfig */;
+			baseConfigurationReference = 73F91E5222F102B4974B2A6611CA5AE1 /* Pods-MediBand.debug.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MediBand-BFPaperButton/Pods-MediBand-BFPaperButton-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		987107F6F05AB23D8CEFCBD2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 759559B9FC8D0BECCEDFDDD6 /* Pods-MediBand.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				INFOPLIST_FILE = "Target Support Files/Pods-MediBand/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-MediBand/Pods-MediBand.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pods_MediBand;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		C9857543D749543BDA3C29AF /* Debug */ = {
+		71F1F4858BC4E322431B7BAF5517E27D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03497EE3A16957824ED6B644 /* Pods-MediBand-JVFloatLabeledTextField-Private.xcconfig */;
+			baseConfigurationReference = B824D80F3A8E5D7B377F345B428C8BEA /* SwiftForms-Private.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MediBand-JVFloatLabeledTextField/Pods-MediBand-JVFloatLabeledTextField-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftForms/SwiftForms-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftForms/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftForms/SwiftForms.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SwiftForms;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		D0C29B1BE5B1338B62A84115 /* Release */ = {
+		7C84345D7EEBBBB2BFF18E13BB3BA6A7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03497EE3A16957824ED6B644 /* Pods-MediBand-JVFloatLabeledTextField-Private.xcconfig */;
 			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MediBand-JVFloatLabeledTextField/Pods-MediBand-JVFloatLabeledTextField-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		F5BCF5449795CEA3E0402275 /* Release */ = {
+		F218BD927079E0B9CF30A5E722DB03D5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07A79B3E5B2BBCA7FA4742DC /* Pods-MediBand.release.xcconfig */;
+			baseConfigurationReference = 36D3B320102ACE3CAD05EB3A61AE4AC7 /* Pods-MediBand.release.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				INFOPLIST_FILE = "Target Support Files/Pods-MediBand/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-MediBand/Pods-MediBand.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pods_MediBand;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		FD363B4F0BB049F81D25D7CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4EEDB12BBAE107C7B39FF2F /* Pods-MediBand-BFPaperButton-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MediBand-BFPaperButton/Pods-MediBand-BFPaperButton-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3B419D7C612660C79F9A744B /* Build configuration list for PBXNativeTarget "Pods-MediBand" */ = {
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				987107F6F05AB23D8CEFCBD2 /* Debug */,
-				F5BCF5449795CEA3E0402275 /* Release */,
+				0C812A8B084AB655D058D5DC45F0D458 /* Debug */,
+				7C84345D7EEBBBB2BFF18E13BB3BA6A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		67E54B0F1846B0CC8760F90D /* Build configuration list for PBXNativeTarget "Pods-MediBand-BFPaperButton" */ = {
+		B3CE5F8F2791CFEE5295AC839A267353 /* Build configuration list for PBXNativeTarget "Pods-MediBand" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD363B4F0BB049F81D25D7CD /* Debug */,
-				8B51DE8E32CC997764F5E525 /* Release */,
+				5AD148DB2071B14CE5A071F16F751BC2 /* Debug */,
+				F218BD927079E0B9CF30A5E722DB03D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B1D7765ACA0AD575C56C7CE1 /* Build configuration list for PBXNativeTarget "Pods-MediBand-JVFloatLabeledTextField" */ = {
+		F062B1F59B761995A685E06D9EE9ED55 /* Build configuration list for PBXNativeTarget "SwiftForms" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C9857543D749543BDA3C29AF /* Debug */,
-				D0C29B1BE5B1338B62A84115 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E5931DB9734ACE85098D0B5B /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				25422C858A7C4FE06F0FB22F /* Debug */,
-				0CD7A8F04BD6E21EEF852AA5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F9761D6438F0452CC7BEE0A7 /* Build configuration list for PBXNativeTarget "Pods-MediBand-UIColor+BFPaperColors" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				21305F3D6E57A09E4A818DC6 /* Debug */,
-				3AAE72F22AEE503437897B9F /* Release */,
+				71F1F4858BC4E322431B7BAF5517E27D /* Debug */,
+				173398C3F71CDF7E9F6B5DEF567E2AA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7B22BC37A261C14AB3812C99 /* Project object */;
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 }

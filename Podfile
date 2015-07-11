@@ -1,10 +1,13 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '7.0'
+# platform :ios, '6.0'
 
 target 'MediBand' do
 
-pod 'BFPaperButton', '~> 2.0.18'
-pod 'JVFloatLabeledTextField'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'SwiftForms'
 
 end
 
