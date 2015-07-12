@@ -752,10 +752,103 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="j0f-SH-GQC" kind="presentation" identifier="caseDetail" id="XeK-vu-mCr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HS-DQ-rMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5513" y="1634"/>
+        </scene>
+        <!--Case Detail View Controller-->
+        <scene sceneID="hHL-qB-9z0">
+            <objects>
+                <viewController id="j0f-SH-GQC" customClass="CaseDetailViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p1k-J5-SoQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="p6L-ZO-uy6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4yW-W5-sL0">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDZ-lF-Fxc">
+                                <rect key="frame" x="67.5" y="252" width="81" height="28"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <state key="normal" title="CANCEL">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel" destination="j0f-SH-GQC" eventType="touchUpInside" id="YA6-bL-xGV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXZ-Xa-7dI">
+                                <rect key="frame" x="76" y="26" width="147" height="28"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="13" minY="5" maxX="13" maxY="5"/>
+                                <state key="normal" title="ADD CASE NOTE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCaseNoteButton" destination="j0f-SH-GQC" eventType="touchUpInside" id="eys-zW-3fP"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This patient was diagnosed with" translatesAutoresizingMaskIntoConstraints="NO" id="NQw-7Q-uiv">
+                                <rect key="frame" x="16" y="73" width="268" height="154"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QY3-Ya-CXn">
+                                <rect key="frame" x="151.5" y="252" width="81" height="28"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="okayButtonAction" destination="j0f-SH-GQC" eventType="touchUpInside" id="M4R-Sn-mAP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="NQw-7Q-uiv" secondAttribute="height" id="07m-PY-lLV"/>
+                            <constraint firstAttribute="centerY" secondItem="NQw-7Q-uiv" secondAttribute="centerY" id="2Db-EG-eXy"/>
+                            <constraint firstItem="NQw-7Q-uiv" firstAttribute="leading" secondItem="4yW-W5-sL0" secondAttribute="leadingMargin" id="DiV-wX-7gk"/>
+                            <constraint firstItem="QY3-Ya-CXn" firstAttribute="top" secondItem="NQw-7Q-uiv" secondAttribute="bottom" constant="25" id="Ort-TY-sgt"/>
+                            <constraint firstAttribute="centerX" secondItem="BDZ-lF-Fxc" secondAttribute="centerX" constant="42" id="Sde-v4-XqQ"/>
+                            <constraint firstAttribute="centerX" secondItem="QY3-Ya-CXn" secondAttribute="centerX" constant="-42" id="Z6s-RP-MpL"/>
+                            <constraint firstAttribute="centerX" secondItem="OXZ-Xa-7dI" secondAttribute="centerX" id="Zqc-wu-GKD"/>
+                            <constraint firstItem="OXZ-Xa-7dI" firstAttribute="top" secondItem="p1k-J5-SoQ" secondAttribute="bottom" constant="6" id="boZ-Hi-Hdx"/>
+                            <constraint firstItem="p6L-ZO-uy6" firstAttribute="top" secondItem="QY3-Ya-CXn" secondAttribute="bottom" constant="20" id="dBe-0B-EcX"/>
+                            <constraint firstItem="p6L-ZO-uy6" firstAttribute="top" secondItem="BDZ-lF-Fxc" secondAttribute="bottom" constant="20" id="mzv-zX-FGT"/>
+                            <constraint firstAttribute="centerX" secondItem="NQw-7Q-uiv" secondAttribute="centerX" id="uB0-Vm-0c9"/>
+                            <constraint firstItem="NQw-7Q-uiv" firstAttribute="trailing" secondItem="4yW-W5-sL0" secondAttribute="trailingMargin" id="upM-IN-Tur"/>
+                            <constraint firstItem="BDZ-lF-Fxc" firstAttribute="width" secondItem="QY3-Ya-CXn" secondAttribute="width" id="ykl-u1-LOJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="07m-PY-lLV"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="300"/>
+                    <connections>
+                        <outlet property="addCaseNote" destination="OXZ-Xa-7dI" id="qd0-7H-7MO"/>
+                        <outlet property="cancelButton" destination="BDZ-lF-Fxc" id="mx7-Td-6v7"/>
+                        <outlet property="noteTextView" destination="NQw-7Q-uiv" id="0CK-6Z-Qb6"/>
+                        <outlet property="okButton" destination="QY3-Ya-CXn" id="byO-Bj-1f8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Fd-z1-bye" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6056" y="1634"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AWf-tF-QUk">

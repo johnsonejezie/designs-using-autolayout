@@ -12,6 +12,8 @@
 		A51D3FCB1B51060500C77665 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FCA1B51060500C77665 /* ActivityDetailsViewController.swift */; };
 		A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */; };
 		A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */; };
+		A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */; };
+		A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */; };
 		A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */; };
 		A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF81B4B917B00439584 /* GoogleIcon.swift */; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
@@ -42,6 +44,8 @@
 		A51D3FCA1B51060500C77665 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseNoteTableViewCell.swift; sourceTree = "<group>"; };
 		A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseNoteTableViewController.swift; sourceTree = "<group>"; };
+		A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationPresentationController.swift; sourceTree = "<group>"; };
+		A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseDetailViewController.swift; sourceTree = "<group>"; };
 		A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffViewController.swift; sourceTree = "<group>"; };
 		A589FAF71B4B914B00439584 /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
 		A589FAF81B4B917B00439584 /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				A51D3F8F1B50687F00C77665 /* AddPatientViewController.swift */,
 				A51D3FCA1B51060500C77665 /* ActivityDetailsViewController.swift */,
 				A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */,
+				A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */,
+				A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */,
 			);
 			path = MediBand;
 			sourceTree = "<group>";
@@ -314,7 +320,9 @@
 				A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */,
 				A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */,
 				A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */,
+				A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */,
 				A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */,
+				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
 				A51D3FCB1B51060500C77665 /* ActivityDetailsViewController.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
