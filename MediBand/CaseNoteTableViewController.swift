@@ -9,16 +9,7 @@
 import UIKit
 
 class CaseNoteTableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
-    
-    
-//    
-//    required init!(coder aDecoder: NSCoder!) {
-//        super.init(coder: aDecoder)
-//        animationPresentationController = AnimationPresentationController()
-//    }
-//    
-    
-    
+
     
     @IBAction func addCaseNote(sender: AnyObject) {
         

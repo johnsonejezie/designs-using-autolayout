@@ -11,6 +11,10 @@ import UIKit
 class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var isPresenting = false
+    var isPopUp = false
+    
+    var frame: CGRect!
+    var y : CGFloat!
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
         return 1
@@ -22,8 +26,13 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
         
         var fromViewControllerFrame = fromViewController.view.frame
         
-        fromViewControllerFrame.size = CGSizeMake(fromViewControllerFrame.size.width * 0.8, UIScreen.mainScreen().bounds.size.height * 0.45)
-        
+        if isPopUp{
+            fromViewControllerFrame.origin.y = y
+            println(y)
+             fromViewControllerFrame.size = CGSizeMake(fromViewControllerFrame.size.width * 0.8, UIScreen.mainScreen().bounds.size.height * 0.5)
+        }else{
+              fromViewControllerFrame.size = CGSizeMake(fromViewControllerFrame.size.width * 0.8, UIScreen.mainScreen().bounds.size.height * 0.45)
+        }
         
         let finalFrame = CGRectMake(32, 82, 250, 225)
         
@@ -39,9 +48,9 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
             let duration = self.transitionDuration(transitionContext)
             
             UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
-                fromViewController.view.alpha = 0.5
+                fromViewController.view.alpha = 0.9
                 toViewController.view.frame = fromViewControllerFrame
-                toViewController.view.center = fromViewController.view.center
+                toViewController.view.center.x = fromViewController.view.center.x
                 toViewController.view.layer.cornerRadius = 5
                 }) { (Bool finished) -> Void in
                     transitionContext.completeTransition(true)

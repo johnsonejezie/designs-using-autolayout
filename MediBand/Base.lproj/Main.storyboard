@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="stj-H9-ppa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IfQ-7K-F3T">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -283,7 +283,7 @@
             </objects>
             <point key="canvasLocation" x="1057" y="1003"/>
         </scene>
-        <!--Add Patient View Controller-->
+        <!--ADD PATIENT-->
         <scene sceneID="fzo-cl-Zgb">
             <objects>
                 <tableViewController id="mpR-KI-SPb" customClass="AddPatientViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
@@ -299,7 +299,7 @@
                             <outlet property="delegate" destination="mpR-KI-SPb" id="cRc-Mm-M1o"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Amp-Dz-cME"/>
+                    <navigationItem key="navigationItem" title="ADD PATIENT" id="Amp-Dz-cME"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Mm-iN-sur" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -684,8 +684,8 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oyin Yusuf" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGF-eg-vnC">
-                                                            <rect key="frame" x="8" y="10.5" width="82.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jennifer Kyari" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGF-eg-vnC">
+                                                            <rect key="frame" x="8" y="10" width="105" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -759,6 +759,228 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HS-DQ-rMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5513" y="1634"/>
+        </scene>
+        <!--NEW CARE ACTIVITY-->
+        <scene sceneID="ATh-wy-wUf">
+            <objects>
+                <viewController id="dLo-o2-qBV" customClass="NewCareActivityViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PC8-9C-Nz9"/>
+                        <viewControllerLayoutGuide type="bottom" id="vfl-N1-mbY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tuz-DM-lP9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWF-nA-PZ6">
+                                <rect key="frame" x="20" y="80" width="560" height="504"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHICHI IFEANYI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jib-mU-fz1">
+                                        <rect key="frame" x="8" y="50" width="127" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ja-bI-exJ">
+                                        <rect key="frame" x="209" y="419" width="141" height="28"/>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                        <state key="normal" title="ADD CASE NOTE">
+                                            <color key="titleColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addCaseNoteAction" destination="dLo-o2-qBV" eventType="touchUpInside" id="9zZ-gy-1zC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOX-5D-9zN">
+                                        <rect key="frame" x="251" y="455" width="58" height="28"/>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveActionButton" destination="dLo-o2-qBV" eventType="touchUpInside" id="NCc-S2-7O9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pe-qX-Fr6">
+                                        <rect key="frame" x="28" y="124" width="504" height="35"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="SELECT SPECIALIST">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="Hh8-6H-zo2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvk-sA-2z9">
+                                        <rect key="frame" x="28" y="179" width="504" height="35"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="SELECT CARE ACTIVITIES">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="OWi-JW-s3A"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8s-Ai-OAK">
+                                        <rect key="frame" x="28" y="234" width="504" height="35"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="SELECT TYPE OF CARE ACTIVITIES">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="LRc-0I-0xT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQq-cE-SPs">
+                                        <rect key="frame" x="28" y="289" width="504" height="35"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="SELECT CARE ACTIVITIES CATEGORIES">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="mUK-mG-Loe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-MH-Tcp">
+                                        <rect key="frame" x="28" y="344" width="504" height="35"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="SELECT STAFF FOR THIS ACTIVITY">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="sfn-Kc-7hi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="8Pe-qX-Fr6" firstAttribute="width" secondItem="YWF-nA-PZ6" secondAttribute="width" multiplier="0.9" id="3V8-ne-s4p"/>
+                                    <constraint firstItem="3y4-MH-Tcp" firstAttribute="top" secondItem="uQq-cE-SPs" secondAttribute="bottom" constant="20" id="3iY-oa-KGX"/>
+                                    <constraint firstAttribute="centerX" secondItem="HOX-5D-9zN" secondAttribute="centerX" id="3kL-L3-Y1b"/>
+                                    <constraint firstItem="uQq-cE-SPs" firstAttribute="top" secondItem="A8s-Ai-OAK" secondAttribute="bottom" constant="20" id="6Io-kj-gcg"/>
+                                    <constraint firstAttribute="centerX" secondItem="3y4-MH-Tcp" secondAttribute="centerX" id="7oX-WP-gNm"/>
+                                    <constraint firstItem="3y4-MH-Tcp" firstAttribute="width" secondItem="uQq-cE-SPs" secondAttribute="width" id="7pM-uh-ojn"/>
+                                    <constraint firstAttribute="centerX" secondItem="6ja-bI-exJ" secondAttribute="centerX" id="8Cx-dN-3un"/>
+                                    <constraint firstItem="HOX-5D-9zN" firstAttribute="top" secondItem="6ja-bI-exJ" secondAttribute="bottom" constant="8" id="BeY-hg-faa"/>
+                                    <constraint firstItem="nvk-sA-2z9" firstAttribute="width" secondItem="8Pe-qX-Fr6" secondAttribute="width" id="Blv-R1-mN3"/>
+                                    <constraint firstItem="jib-mU-fz1" firstAttribute="leading" secondItem="YWF-nA-PZ6" secondAttribute="leading" constant="8" id="CwG-h2-pMB"/>
+                                    <constraint firstAttribute="centerX" secondItem="uQq-cE-SPs" secondAttribute="centerX" id="Kkb-ug-MSr"/>
+                                    <constraint firstAttribute="centerX" secondItem="8Pe-qX-Fr6" secondAttribute="centerX" id="OWa-Ar-RGt"/>
+                                    <constraint firstAttribute="centerX" secondItem="A8s-Ai-OAK" secondAttribute="centerX" id="SGg-pY-urJ"/>
+                                    <constraint firstItem="A8s-Ai-OAK" firstAttribute="top" secondItem="nvk-sA-2z9" secondAttribute="bottom" constant="20" id="YYC-XW-Z76"/>
+                                    <constraint firstAttribute="centerY" secondItem="A8s-Ai-OAK" secondAttribute="centerY" id="aYf-bS-vL7"/>
+                                    <constraint firstItem="A8s-Ai-OAK" firstAttribute="width" secondItem="nvk-sA-2z9" secondAttribute="width" id="cq3-8n-iqT"/>
+                                    <constraint firstItem="uQq-cE-SPs" firstAttribute="width" secondItem="A8s-Ai-OAK" secondAttribute="width" id="l6r-Qe-JyL"/>
+                                    <constraint firstAttribute="bottom" secondItem="HOX-5D-9zN" secondAttribute="bottom" constant="21" id="mrF-Fa-mIE"/>
+                                    <constraint firstAttribute="centerX" secondItem="nvk-sA-2z9" secondAttribute="centerX" id="oCh-Iz-LPf"/>
+                                    <constraint firstItem="jib-mU-fz1" firstAttribute="top" secondItem="YWF-nA-PZ6" secondAttribute="top" constant="50" id="wIJ-3M-Qad"/>
+                                    <constraint firstItem="nvk-sA-2z9" firstAttribute="top" secondItem="8Pe-qX-Fr6" secondAttribute="bottom" constant="20" id="zZO-Vz-JNs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YWF-nA-PZ6" firstAttribute="top" secondItem="PC8-9C-Nz9" secondAttribute="bottom" constant="16" id="I3b-Cn-er3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YWF-nA-PZ6" secondAttribute="trailing" constant="4" id="Ucy-Pd-ula"/>
+                            <constraint firstItem="YWF-nA-PZ6" firstAttribute="leading" secondItem="Tuz-DM-lP9" secondAttribute="leadingMargin" constant="4" id="jKN-cw-6bJ"/>
+                            <constraint firstItem="vfl-N1-mbY" firstAttribute="top" secondItem="YWF-nA-PZ6" secondAttribute="bottom" constant="16" id="lhi-c8-wbK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="NEW CARE ACTIVITY" id="nIX-xN-xyS"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="addCaseNoteButton" destination="6ja-bI-exJ" id="C7L-Ot-2En"/>
+                        <outlet property="nameLabel" destination="jib-mU-fz1" id="a9m-gq-Yy4"/>
+                        <outlet property="saveButton" destination="HOX-5D-9zN" id="dbw-O2-38O"/>
+                        <outlet property="selectCareButton" destination="nvk-sA-2z9" id="jit-Zk-LWA"/>
+                        <outlet property="selectCategoriesButton" destination="uQq-cE-SPs" id="Dvp-br-UGc"/>
+                        <outlet property="selectSpecialistButton" destination="8Pe-qX-Fr6" id="BCs-uu-Xn3"/>
+                        <outlet property="selectStaff" destination="3y4-MH-Tcp" id="SAS-TN-FFJ"/>
+                        <outlet property="selectTypeButton" destination="A8s-Ai-OAK" id="gmQ-Hd-CMh"/>
+                        <segue destination="Vdh-hZ-1TB" kind="presentation" identifier="popTable" id="pOM-CG-R2I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZM5-MK-Q47" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6406" y="2328"/>
+        </scene>
+        <!--Pop Up Table View Controller-->
+        <scene sceneID="0r1-Ee-nTj">
+            <objects>
+                <viewController id="Vdh-hZ-1TB" customClass="PopUpTableViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nuT-f3-lK9"/>
+                        <viewControllerLayoutGuide type="bottom" id="jXX-mb-b1X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sVD-Ja-Mnc">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zcX-3e-BmG">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="247"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="K1q-Jo-bA3">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1q-Jo-bA3" id="gaa-5K-c6O">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Vdh-hZ-1TB" id="BMJ-Fx-Zi1"/>
+                                    <outlet property="delegate" destination="Vdh-hZ-1TB" id="dwh-W8-VGD"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-xI-v9p">
+                                <rect key="frame" x="127" y="262" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissView" destination="Vdh-hZ-1TB" eventType="touchUpInside" id="reV-td-AM8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jXX-mb-b1X" firstAttribute="top" secondItem="Bge-xI-v9p" secondAttribute="bottom" constant="8" id="Cn3-wH-Q9B"/>
+                            <constraint firstAttribute="centerX" secondItem="Bge-xI-v9p" secondAttribute="centerX" id="DY0-OG-c9l"/>
+                            <constraint firstItem="Bge-xI-v9p" firstAttribute="top" secondItem="zcX-3e-BmG" secondAttribute="bottom" constant="15" id="TcV-g9-jmN"/>
+                            <constraint firstItem="zcX-3e-BmG" firstAttribute="top" secondItem="sVD-Ja-Mnc" secondAttribute="topMargin" id="bZA-70-2jn"/>
+                            <constraint firstItem="zcX-3e-BmG" firstAttribute="leading" secondItem="sVD-Ja-Mnc" secondAttribute="leadingMargin" constant="-16" id="kp6-dQ-fHk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zcX-3e-BmG" secondAttribute="trailing" constant="-16" id="v2I-Gn-z92"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="300"/>
+                    <connections>
+                        <outlet property="tableView" destination="zcX-3e-BmG" id="mON-4m-dcr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K17-fg-ybi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7017" y="2328"/>
         </scene>
         <!--Case Detail View Controller-->
         <scene sceneID="hHL-qB-9z0">
@@ -1205,6 +1427,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDD-0C-jAo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4701" y="1634"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="23d-bN-2CX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IfQ-7K-F3T" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MVo-QL-RGg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dLo-o2-qBV" kind="relationship" relationship="rootViewController" id="Tk1-qf-isB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m0a-qV-0ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5513" y="2328"/>
         </scene>
     </scenes>
     <resources>
