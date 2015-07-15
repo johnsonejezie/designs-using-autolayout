@@ -20,6 +20,8 @@
 		A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */; };
 		A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */; };
 		A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */; };
+		A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */; };
+		A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */; };
 		A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */; };
 		A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF81B4B917B00439584 /* GoogleIcon.swift */; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
@@ -59,6 +61,8 @@
 		A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsTableViewCell.swift; sourceTree = "<group>"; };
+		A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffViewController.swift; sourceTree = "<group>"; };
 		A589FAF71B4B914B00439584 /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
 		A589FAF81B4B917B00439584 /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
 				A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */,
 				A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */,
+				A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */,
+				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
 			);
 			path = MediBand;
 			sourceTree = "<group>";
@@ -342,6 +348,7 @@
 				A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */,
 				A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */,
 				A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */,
+				A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */,
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
 				A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */,
 				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
@@ -350,6 +357,7 @@
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
 				A51D3FCB1B51060500C77665 /* ActivityDetailsViewController.swift in Sources */,
+				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,
 				A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */,

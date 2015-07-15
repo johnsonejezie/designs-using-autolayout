@@ -48,12 +48,6 @@ class ActivityTableViewCell: UITableViewCell {
         cardView.alpha = 1
         cardView.layer.masksToBounds = false
         cardView.layer.cornerRadius = 10
-//        cardView.layer.shadowOffset = CGSizeMake(-0.2, 0.2)
-//        cardView.layer.shadowRadius = 1
-        
-//        let path:UIBezierPath = UIBezierPath(rect: self.cardView.bounds)
-//        cardView.layer.shadowPath = path.CGPath
-//        cardView.layer.shadowOpacity = 0.2
         
     }
     
