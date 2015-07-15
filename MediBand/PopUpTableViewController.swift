@@ -8,12 +8,20 @@
 
 import UIKit
 
+protocol popUpTableViewControllerDelegate: class {
+    func popUpTableViewControllerDidCancel(controller: PopUpTableViewController)
+    func popUpTableViewController(controller: PopUpTableViewController,
+        didSelectItem item: String, fromArray:[String])
+}
+
 class PopUpTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
     
-    
+    weak var delegate: popUpTableViewControllerDelegate!
     @IBOutlet weak var tableView: UITableView!
+            
+            var list:[String]!
     
     
     override func viewDidLoad() {
@@ -40,21 +48,21 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 10
+        return list.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel?.text = "testing"
+        cell.textLabel?.text = list[indexPath.row]
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-        println(indexPath)
+            
+            delegate?.popUpTableViewController(self, didSelectItem: list[indexPath.row], fromArray:list )
         
         
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

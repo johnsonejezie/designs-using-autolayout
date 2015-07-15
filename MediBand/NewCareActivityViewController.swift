@@ -9,7 +9,7 @@
 import UIKit
 
 
- class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate {
+ class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate {
     
     var popCreated = false
     var dropdownloaded = false
@@ -44,23 +44,50 @@ import UIKit
     @IBOutlet weak var selectStaff: UIButton!
     
     
+    var specialist = [ "John Mick", "Dickson Mark", "Luke Oga", "Chima Dele", "Daniel Usman", "Vincent Yale", "Kenneth Okonkwo", "Nkem Owoh"]
+    
+    var care = ["That care", "this care", "fake care", "real care", "another care", "final care"]
+    
+    var careType = ["Which type", "What type", "This type", "Best care", "worst care"]
+    
+    var categories = ["elite category", "child category", "women category", "all category", "no category"]
+    
+    var staff = ["receptionist", "doctor", "nurse", "director", "cleaner" ]
+    
+    
+    override func viewDidLoad() {
+        selectCareButton.layer.cornerRadius = 4
+        selectCategoriesButton.layer.cornerRadius = 4
+        selectSpecialistButton.layer.cornerRadius = 4
+        selectStaff.layer.cornerRadius = 4
+        selectTypeButton.layer.cornerRadius = 4
+        
+        addCaseNoteButton.layer.cornerRadius = 4
+        saveButton.layer.cornerRadius = 3
+    }
+    
+    
     @IBAction func selectActionButton(sender: UIButton!) {
             displayPopOver(sender)
     }
     
-    
-    @IBAction func barButton(sender: UIBarButtonItem!) {
-        
-//        displayPopOver(sender)
-    }
-    
-    
     func displayPopOver(sender: UIButton){
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         var contentViewController : PopUpTableViewController = storyboard.instantiateViewControllerWithIdentifier("PopUpTableViewController") as! PopUpTableViewController
+        
+        if sender.tag == 1000 {
+            contentViewController.list = specialist
+        }else if sender.tag == 1001 {
+            contentViewController.list = care
+        }else if sender.tag == 1002 {
+            contentViewController.list = careType
+        }else if sender.tag == 1003 {
+            contentViewController.list = categories
+        }else{
+            contentViewController.list = staff
+        }
+        contentViewController.delegate = self
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        
-        
         contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, view.frame.size.height * 0.6)
         
         var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
@@ -71,6 +98,28 @@ import UIKit
         presentViewController(contentViewController, animated: true, completion: nil)
     
     }
+    
+    func popUpTableViewController(controller: PopUpTableViewController, didSelectItem item: String, fromArray: [String]) {
+        
+        if fromArray == specialist {
+            selectSpecialistButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
+        }else if fromArray == care {
+            selectCareButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
+        }else if fromArray == careType {
+            selectTypeButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
+        }else if fromArray == categories {
+            selectCategoriesButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
+        }else {
+            selectStaff.setTitle(item.uppercaseString, forState: UIControlState.Normal)
+        }
+        
+        println(item)
+    }
+    
+    func popUpTableViewControllerDidCancel(controller: PopUpTableViewController) {
+        println("cancelled")
+    }
+    
 
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
     {

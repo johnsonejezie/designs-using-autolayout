@@ -15,7 +15,6 @@
 		A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */; };
 		A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */; };
 		A51D3FFA1B52B9D900C77665 /* NewCareActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FF91B52B9D900C77665 /* NewCareActivityViewController.swift */; };
-		A51D40071B540F3800C77665 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D40061B540F3800C77665 /* PopupViewController.swift */; };
 		A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */; };
 		A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */; };
 		A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */; };
@@ -23,7 +22,6 @@
 		A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */; };
 		A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */; };
 		A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */; };
-		A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF81B4B917B00439584 /* GoogleIcon.swift */; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
 		A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A4A1B4995E400DC15AB /* ViewController.swift */; };
 		A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A4C1B4995E400DC15AB /* Main.storyboard */; };
@@ -56,7 +54,6 @@
 		A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseDetailViewController.swift; sourceTree = "<group>"; };
 		A51D3FF91B52B9D900C77665 /* NewCareActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCareActivityViewController.swift; sourceTree = "<group>"; };
 		A51D40021B538EC100C77665 /* MediBand-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediBand-Bridging-Header.h"; sourceTree = "<group>"; };
-		A51D40061B540F3800C77665 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpTableViewController.swift; sourceTree = "<group>"; };
 		A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
@@ -64,8 +61,6 @@
 		A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsTableViewCell.swift; sourceTree = "<group>"; };
 		A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffViewController.swift; sourceTree = "<group>"; };
-		A589FAF71B4B914B00439584 /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
-		A589FAF81B4B917B00439584 /* GoogleIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleIcon.swift; sourceTree = "<group>"; };
 		A5D15A431B4995E400DC15AB /* MediBand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediBand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D15A471B4995E400DC15AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D15A481B4995E400DC15AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,11 +132,8 @@
 		A5D15A451B4995E400DC15AB /* MediBand */ = {
 			isa = PBXGroup;
 			children = (
-				A51D40061B540F3800C77665 /* PopupViewController.swift */,
 				A51D40021B538EC100C77665 /* MediBand-Bridging-Header.h */,
 				A5D15A481B4995E400DC15AB /* AppDelegate.swift */,
-				A589FAF71B4B914B00439584 /* googleicon.ttf */,
-				A589FAF81B4B917B00439584 /* GoogleIcon.swift */,
 				A5D15A4A1B4995E400DC15AB /* ViewController.swift */,
 				A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */,
 				A5D15A4C1B4995E400DC15AB /* Main.storyboard */,
@@ -350,9 +342,7 @@
 				A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */,
 				A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */,
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
-				A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */,
 				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
-				A51D40071B540F3800C77665 /* PopupViewController.swift in Sources */,
 				A51D3FFA1B52B9D900C77665 /* NewCareActivityViewController.swift in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
