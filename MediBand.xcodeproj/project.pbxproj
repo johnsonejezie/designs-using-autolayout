@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */; };
+		42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */; };
 		A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */; };
 		A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A589FAF81B4B917B00439584 /* GoogleIcon.swift */; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 		185527BBDB128D854D52D9F9 /* libPods-MediBand.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MediBand.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E776AD329322447BA3A00C /* Pods-MediBand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediBand.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediBand/Pods-MediBand.debug.xcconfig"; sourceTree = "<group>"; };
 		420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffProfileViewController.swift; sourceTree = "<group>"; };
+		42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		8139F1F108DEE0889D162C80 /* Pods-MediBand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediBand.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediBand/Pods-MediBand.release.xcconfig"; sourceTree = "<group>"; };
 		A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffViewController.swift; sourceTree = "<group>"; };
 		A589FAF71B4B914B00439584 /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = googleicon.ttf; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				A5D15A461B4995E400DC15AB /* Supporting Files */,
 				A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */,
 				420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */,
+				42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */,
 			);
 			path = MediBand;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				A589FAF91B4B917B00439584 /* GoogleIcon.swift in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
+				42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */,
 				420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
