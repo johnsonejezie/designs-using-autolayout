@@ -21,11 +21,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.patientProfilePic.layer.borderWidth = 1.0;
-        self.patientProfilePic.layer.borderColor = UIColor.blackColor().CGColor;
-        self.patientProfilePic.layer.cornerRadius = self.patientProfilePic.layer.frame.height/2;
-        //        userImageView.maskView = ;
-        self.patientProfilePic.clipsToBounds = true
+      
         
         
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -53,7 +49,13 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewWillLayoutSubviews() {
+        self.patientProfilePic.layer.borderWidth = 1.0;
+        self.patientProfilePic.layer.borderColor = UIColor.blackColor().CGColor;
+        self.patientProfilePic.layer.cornerRadius = self.patientProfilePic.layer.frame.height/2;
+        //        userImageView.maskView = ;
+        self.patientProfilePic.clipsToBounds = true
+    }
     /*
     // MARK: - Navigation
 
