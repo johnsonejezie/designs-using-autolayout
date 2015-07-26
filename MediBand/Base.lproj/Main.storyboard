@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZAv-oh-1gV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="h18-uE-6pg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1375,10 +1375,10 @@
             </objects>
             <point key="canvasLocation" x="1618" y="-114"/>
         </scene>
-        <!--ActivityDetailsView Controller-->
+        <!--PatientProfileView Controller-->
         <scene sceneID="O3w-ln-Q0U">
             <objects>
-                <viewController id="YHI-wy-PGH" userLabel="ActivityDetailsView Controller" customClass="ActivityDetailsViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YHI-wy-PGH" userLabel="PatientProfileView Controller" customClass="PatientProfileViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="luR-dD-dE0"/>
                         <viewControllerLayoutGuide type="bottom" id="pOf-X8-3Iw"/>
