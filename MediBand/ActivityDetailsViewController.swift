@@ -10,12 +10,18 @@ import UIKit
 
 class ActivityDetailsViewController: UIViewController {
     
+    @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var contactTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var generalPhysicianTextField: UITextField!
+
+    @IBOutlet weak var contactLabel: UILabel!
     
+    @IBOutlet weak var emailAddressLabel: UILabel!
+    
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    
+    @IBOutlet weak var generalPhysicianLabel: UILabel!
     @IBOutlet weak var addCareButton: UIButton!
     @IBOutlet weak var viewCaseNoteButton: UIButton!
     @IBOutlet weak var viewHistoryButton: UIButton!
@@ -25,18 +31,24 @@ class ActivityDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contactTextField.layer.cornerRadius = 5
-        emailTextField.layer.cornerRadius = 5
-        generalPhysicianTextField.layer.cornerRadius = 5
-        addressTextField.layer.cornerRadius = 5
+
         
         addCareButton.layer.cornerRadius = 4
         viewCaseNoteButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
         UpdatePatientButton.layer.cornerRadius = 4
+        
+        
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLayoutSubviews() {
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = imageView.frame.size.height/2
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

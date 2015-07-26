@@ -28,6 +28,8 @@
 		A5D15A501B4995E400DC15AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A4F1B4995E400DC15AB /* Images.xcassets */; };
 		A5D15A531B4995E400DC15AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A511B4995E400DC15AB /* LaunchScreen.xib */; };
 		A5D15A5F1B4995E400DC15AB /* MediBandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A5E1B4995E400DC15AB /* MediBandTests.swift */; };
+		A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */; };
+		A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */; };
 		B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4140736F615BCEE6A380469F /* Pods_MediBand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		A5D15A581B4995E400DC15AB /* MediBandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediBandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D15A5D1B4995E400DC15AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D15A5E1B4995E400DC15AB /* MediBandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediBandTests.swift; sourceTree = "<group>"; };
+		A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewController.swift; sourceTree = "<group>"; };
+		A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,8 @@
 				A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */,
 				A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */,
 				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
+				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
+				A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */,
 			);
 			path = MediBand;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */,
 				A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */,
 				A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */,
+				A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */,
 				A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */,
 				A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */,
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
@@ -347,6 +354,7 @@
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
 				A51D3FCB1B51060500C77665 /* ActivityDetailsViewController.swift in Sources */,
+				A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */,
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,

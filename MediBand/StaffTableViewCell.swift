@@ -1,26 +1,22 @@
 //
-//  PatientsTableViewCell.swift
+//  StaffTableViewCell.swift
 //  MediBand
 //
-//  Created by Johnson Ejezie on 7/15/15.
+//  Created by Johnson Ejezie on 7/26/15.
 //  Copyright (c) 2015 Johnson Ejezie. All rights reserved.
 //
 
 import UIKit
 
-
-class PatientsTableViewCell: UITableViewCell {
-    
-    
-    
-    @IBOutlet weak var patientNameLabel: UILabel!
-
-    @IBOutlet weak var patientIDLabel: UILabel!
+class StaffTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var cardView: UIView!
-    @IBOutlet weak var generalPhysicianLabel: UILabel!
-    
+    @IBOutlet weak var staffImageView: UIImageView!
+    @IBOutlet weak var staffNameLabel: UILabel!
+
+    @IBOutlet weak var staffContactLabel: UILabel!
+    @IBOutlet weak var staffIDLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,6 +28,8 @@ class PatientsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
     override func layoutSubviews() {
         cardSetup()
     }
@@ -39,9 +37,11 @@ class PatientsTableViewCell: UITableViewCell {
     func cardSetup() {
         cardView.alpha = 1
         cardView.layer.masksToBounds = false
-        cardView.layer.cornerRadius = 10
+        cardView.layer.cornerRadius = 5
+        
+//        staffImageView.clipsToBounds = true
+//        staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
         
     }
-    
 
 }

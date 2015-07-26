@@ -11,7 +11,6 @@ import UIKit
 class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var isPresenting = false
-    var isPopUp = false
     
     var frame: CGRect!
     var y : CGFloat!
@@ -25,14 +24,8 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
         var fromViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         var fromViewControllerFrame = fromViewController.view.frame
-        
-        if isPopUp{
-            fromViewControllerFrame.origin.y = y
-            println(y)
-             fromViewControllerFrame.size = CGSizeMake(fromViewControllerFrame.size.width * 0.8, UIScreen.mainScreen().bounds.size.height * 0.5)
-        }else{
-              fromViewControllerFrame.size = CGSizeMake(fromViewControllerFrame.size.width * 0.8, UIScreen.mainScreen().bounds.size.height * 0.45)
-        }
+
+        fromViewControllerFrame.size = CGSizeMake(fromViewControllerFrame.size.width * 0.8, UIScreen.mainScreen().bounds.size.height * 0.45)
         
         let finalFrame = CGRectMake(32, 82, 250, 225)
         
@@ -50,7 +43,7 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
             UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
                 fromViewController.view.alpha = 0.9
                 toViewController.view.frame = fromViewControllerFrame
-                toViewController.view.center.x = fromViewController.view.center.x
+                toViewController.view.center = fromViewController.view.center
                 toViewController.view.layer.cornerRadius = 5
                 }) { (Bool finished) -> Void in
                     transitionContext.completeTransition(true)
