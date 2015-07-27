@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
@@ -24,11 +24,19 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 
     }
     
-    
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBAction func segmentControlAction(sender: AnyObject) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            displayPopOver(sender )
+        case 1:
+            println("date")
+        default:
+            break
+        
+        }
         
         searchBar.resignFirstResponder()
     }
@@ -37,6 +45,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        println(touches)
         self.view.endEditing(true)
     }
     
@@ -49,7 +59,25 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegueWithIdentifier("viewActivity", sender: nil)
         searchBar.resignFirstResponder()
+    }
+    
+    func displayPopOver(sender: AnyObject){
+        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        var contentViewController : ActivityStatusTableViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityStatusTableViewController") as! ActivityStatusTableViewController
+        contentViewController.delegate = self
+        contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, 220)
+        
+        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
+        detailPopover.sourceView = sender as! UIView
+        detailPopover.sourceRect.origin.x = 50
+        detailPopover.sourceRect.origin.y = sender.frame.size.height
+        detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
+        detailPopover.delegate = self
+        presentViewController(contentViewController, animated: true, completion: nil)
+        
     }
     
     
@@ -57,6 +85,21 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
        println("The search text is: '\(searchBar.text)'")
+    }
+    
+    func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
+        println(item)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return UIModalPresentationStyle.None
+    }
+    
+    func presentationController(controller: UIPresentationController!, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle)
+        -> UIViewController! {
+            let navController = UINavigationController(rootViewController: controller.presentedViewController)
+            return navController
     }
 
 }

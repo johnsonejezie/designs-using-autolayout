@@ -50,12 +50,19 @@ class PatientProfileViewController: UIViewController {
     
 
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    @IBAction func addCareActionButton() {
         
-        
-        // Dispose of any resources that can be recreated.
+        self.performSegueWithIdentifier("AddCareActivity", sender: nil)
     }
 
 
+    @IBAction func viewCaseNoteActionButton() {
+        
+        self.performSegueWithIdentifier("viewCaseNote", sender: nil)
+    }
+
+    @IBAction func viewHistoryActionButton() {
+    }
+    @IBAction func updatePatientActionButton() {
+    }
 }

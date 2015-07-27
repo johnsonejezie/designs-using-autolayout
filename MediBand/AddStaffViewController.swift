@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol addStaffControllerDelegate: class {
+    func addStaffViewController(controller: AddStaffViewController,
+        finishedAddingStaff staff: [String : String])
+}
+
 class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    weak var delegate: addStaffControllerDelegate!
+
+//    
     var tap:UITapGestureRecognizer!
     var imagePicker = UIImagePickerController()
     
@@ -24,6 +32,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var specialityTextField: UITextField!
 
     @IBOutlet weak var GeneralPractitionerIDLabel: UILabel!
+    @IBOutlet weak var staffID: UITextField!
 
     @IBOutlet weak var GeneralPracticeIDLabel: UILabel!
     
@@ -47,22 +56,40 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     }
 
     @IBAction func saveButtonAction(sender: AnyObject) {
+        
+        let dataImage:NSData = UIImagePNGRepresentation(staffImageView.image)
+        let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+
+        
+        var name:String = firstNameTextField.text + " " + lastNameTextField.text
+        var gpID:String = GeneralPractitionerIDLabel.text!
+        let gPracticeID: String = GeneralPracticeIDLabel.text!
+        
+        var staff:Dictionary<String, String> = [
+            "name": name,
+            "staffID": staffID.text,
+            "staffImage": imageString,
+            "generalPractitionerID": gpID,
+            "generalPracticeID": gpID,
+            "speciality": specialityTextField.text
+            
+        ]
+        
+        delegate?.addStaffViewController(self, finishedAddingStaff: staff)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        GeneralPracticeIDLabel.text = " \(arc4random_uniform(1000))"
+        GeneralPractitionerIDLabel.text = " \(arc4random_uniform(100000))"
+
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        
-        staffImageView.layer.masksToBounds = false
-        staffImageView.layer.cornerRadius = staffImageView.frame.size.width / 2
-        staffImageView.clipsToBounds = true
-        
-        
-        
-                
+
         firstNameTextField.layer.cornerRadius = 5
         GeneralPracticeIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
         GeneralPractitionerIDLabel.clipsToBounds = true
@@ -97,6 +124,13 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         
     }
+    
+    override func viewWillLayoutSubviews() {
+        staffImageView.layer.masksToBounds = false
+        staffImageView.layer.cornerRadius = staffImageView.frame.size.width / 2
+        staffImageView.clipsToBounds = true
+    }
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in

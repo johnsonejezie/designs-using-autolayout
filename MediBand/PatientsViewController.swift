@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate {
     
     
 
@@ -19,11 +19,6 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
 
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,9 +33,25 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("ViewPatient", sender: nil)
     }
     
-
- 
+    func addPatientViewController(controller: AddPatientViewController, didFinishedAddingPatient patient: NSDictionary) {
+        println(patient)
+    }
+    
+    @IBAction func addPatientBarButton(sender: UIBarButtonItem) {
+        
+        self.performSegueWithIdentifier("AddPatient", sender: nil)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "AddPatient" {
+            let navigationController = segue.destinationViewController
+                as! UINavigationController
+            let controller = navigationController.topViewController
+                as! AddPatientViewController
+            controller.delegate = self
+        }
+    }
 
 }

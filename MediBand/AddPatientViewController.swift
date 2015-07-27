@@ -9,7 +9,15 @@
 import UIKit
 import SwiftForms
 
+protocol addPatientControllerDelegate: class {
+    func addPatientViewController(controller: AddPatientViewController,
+        didFinishedAddingPatient patient: NSDictionary)
+}
+
 class AddPatientViewController: FormViewController {
+    
+    var tap:UIGestureRecognizer!
+    weak var delegate: addPatientControllerDelegate!
     
     struct Static {
         static let namesurname = "namesurname"
@@ -48,6 +56,10 @@ class AddPatientViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Plain, target: self, action: "submit:")
         
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
@@ -57,11 +69,19 @@ class AddPatientViewController: FormViewController {
 
     func submit(_: UIBarButtonItem!) {
         
-        let message = self.form.formValues().description
+        delegate?.addPatientViewController(self, didFinishedAddingPatient: self.form.formValues())
         
-        let alert: UIAlertView = UIAlertView(title: "Form output", message: message, delegate: nil, cancelButtonTitle: "OK")
+        self.dismissViewControllerAnimated(true, completion: nil)
         
-        alert.show()
+//        let message = self.form.formValues().description
+//        
+//        let alert: UIAlertView = UIAlertView(title: "Form output", message: message, delegate: nil, cancelButtonTitle: "OK")
+//        
+//        alert.show()
+    }
+    
+    func handleSingleTap(sender:UITapGestureRecognizer){
+        self.view.endEditing(true)
     }
     
 

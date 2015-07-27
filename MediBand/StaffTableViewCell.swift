@@ -15,7 +15,8 @@ class StaffTableViewCell: UITableViewCell {
     @IBOutlet weak var staffImageView: UIImageView!
     @IBOutlet weak var staffNameLabel: UILabel!
 
-    @IBOutlet weak var staffContactLabel: UILabel!
+    @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var flagImageView: UIImageView!
     @IBOutlet weak var staffIDLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -9,7 +9,7 @@
 import UIKit
 
 
- class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate {
+ class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate, UIViewControllerTransitioningDelegate {
     
     var popCreated = false
     var dropdownloaded = false
@@ -27,8 +27,14 @@ import UIKit
     @IBOutlet weak var saveButton: UIButton!
     
     @IBAction func addCaseNoteAction() {
+        self.performSegueWithIdentifier("addCaseNote", sender: nil)
     }
     @IBAction func saveActionButton() {
+        println(selectSpecialistButton.currentTitle!)
+        println(selectCareButton.currentTitle!)
+        println(selectTypeButton.currentTitle!)
+        println(selectCategoriesButton.currentTitle!)
+        println(selectStaff.currentTitle!)
     }
     
     
@@ -77,6 +83,7 @@ import UIKit
         
         if sender.tag == 1000 {
             contentViewController.list = specialist
+            contentViewController.containImage = true
         }else if sender.tag == 1001 {
             contentViewController.list = care
         }else if sender.tag == 1002 {
@@ -84,11 +91,13 @@ import UIKit
         }else if sender.tag == 1003 {
             contentViewController.list = categories
         }else{
+            contentViewController.containImage = true
             contentViewController.list = staff
         }
         contentViewController.delegate = self
+        let height:CGFloat = 44 *  CGFloat(contentViewController.list.count)
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, view.frame.size.height * 0.6)
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height)
         
         var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
         detailPopover.sourceView = sender
@@ -130,6 +139,29 @@ import UIKit
         -> UIViewController! {
         let navController = UINavigationController(rootViewController: controller.presentedViewController)
         return navController
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addCaseNote" {
+            let toViewController = segue.destinationViewController as! CaseDetailViewController
+            toViewController.transitioningDelegate = self
+            toViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        }
+    }
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        var animationPresentationController = AnimationPresentationController()
+        
+        animationPresentationController.isPresenting = true
+        
+        return animationPresentationController
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        var animationPresentationController = AnimationPresentationController()
+        return animationPresentationController
     }
     
     

@@ -22,6 +22,7 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
             
             var list:[String]!
+            var containImage:Bool!
     
     
     override func viewDidLoad() {
@@ -56,6 +57,12 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
         cell.textLabel?.text = list[indexPath.row]
+        
+        if (containImage != nil) {
+            cell.imageView?.image = UIImage(named: "HS1")
+        }
+        cell.textLabel?.textAlignment = NSTextAlignment.Center
+        
         return cell
     }
     

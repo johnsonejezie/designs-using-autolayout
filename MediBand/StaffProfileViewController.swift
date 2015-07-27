@@ -9,27 +9,36 @@
 import UIKit
 
 class StaffProfileViewController: UIViewController {
+    
+    
+    @IBOutlet weak var staffImageView: UIImageView!
+    @IBOutlet weak var staffNameLabel: UILabel!
+    
+    @IBOutlet weak var staffIDLabel: UILabel!
+    @IBOutlet weak var specialityLabel: UILabel!
+    @IBOutlet weak var generlPracticeLabel: UILabel!
+    @IBOutlet weak var generalPractitionerIDLabel: UILabel!
+    var staff: Dictionary<String, String>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+        staffImageView.image = UIImage(data: imageData)
+        staffIDLabel.text = staff["staffID"]
+        staffNameLabel.text = staff["name"]
+        generalPractitionerIDLabel.text = staff["generalPractitionerID"]
+        generlPracticeLabel.text = staff["generalPracticeID"]
+        specialityLabel.text = staff["speciality"]
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidLayoutSubviews() {
+        staffImageView.clipsToBounds = true
+        staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
     }
-    */
+
+
 
 }

@@ -11,6 +11,7 @@ import UIKit
 class CaseDetailViewController: UIViewController {
     
     
+    var tap:UITapGestureRecognizer!
     
     @IBOutlet weak var addCaseNote: UIButton!
     
@@ -27,8 +28,19 @@ class CaseDetailViewController: UIViewController {
         cancelButton.layer.cornerRadius = 4
         okButton.layer.cornerRadius = 4
         noteTextView.layer.cornerRadius = 5
+        
+        tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func handleSingleTap(sender:UITapGestureRecognizer){
+        self.view.endEditing(true)
     }
 
 
@@ -48,6 +60,20 @@ class CaseDetailViewController: UIViewController {
     @IBAction func cancel() {
         
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y -= keyboardSize.height/2
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y += keyboardSize.height/2
+        }
     }
     
     
