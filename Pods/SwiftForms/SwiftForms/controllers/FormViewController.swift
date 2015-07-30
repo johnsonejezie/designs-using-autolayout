@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormViewController : UITableViewController {
+public class FormViewController : UITableViewController, UIImagePickerControllerDelegate {
 
     /// MARK: Types
     

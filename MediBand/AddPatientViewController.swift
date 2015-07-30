@@ -14,10 +14,13 @@ protocol addPatientControllerDelegate: class {
         didFinishedAddingPatient patient: NSDictionary)
 }
 
-class AddPatientViewController: FormViewController {
+class AddPatientViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var tap:UIGestureRecognizer!
     weak var delegate: addPatientControllerDelegate!
+    var imagePicker = UIImagePickerController()
+    var patientImageView:UIImageView!
+
     
     struct Static {
         static let namesurname = "namesurname"
@@ -55,6 +58,33 @@ class AddPatientViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let topView:UIView = UIView(frame: CGRectMake(0, -10, view.frame.size.width, 150))
+        topView.backgroundColor = UIColor.clearColor()
+        
+         patientImageView = UIImageView(frame: CGRectMake((view.frame.size.width - 220)/2, 25, 100, 100))
+        
+        patientImageView.clipsToBounds = true
+        patientImageView.layer.cornerRadius = 100/2
+
+        
+        
+        patientImageView.image = UIImage(named: "HS3")
+        topView.addSubview(patientImageView)
+        
+        let uploadImgBtn:UIButton = UIButton()
+        uploadImgBtn.frame.size = CGSizeMake(120, 30)
+        uploadImgBtn.center.y = patientImageView.center.y + 30
+        uploadImgBtn.frame.origin.x = 160
+        uploadImgBtn.setTitle("UPLOAD PIC", forState: UIControlState.Normal)
+        uploadImgBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        uploadImgBtn.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        uploadImgBtn.backgroundColor = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1)
+        uploadImgBtn.layer.cornerRadius = 5
+        uploadImgBtn.clipsToBounds = true
+        
+        topView.addSubview(uploadImgBtn)
+        
+        view.addSubview(topView)
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tap.cancelsTouchesInView = false
@@ -64,7 +94,24 @@ class AddPatientViewController: FormViewController {
         
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
 
-        // Do any additional setup after loading the view.
+    }
+    
+    func pressed(sender: UIButton!) {
+        println("upload")
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            imagePicker.allowsEditing = false
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            println("done")
+        })
+        patientImageView.image = image
     }
 
     func submit(_: UIBarButtonItem!) {
@@ -96,8 +143,17 @@ class AddPatientViewController: FormViewController {
         
         form.title = "Add Patient Form"
         
-        let section1 = FormSectionDescriptor()
+        
+        let section27 = FormSectionDescriptor()
         var row: FormRowDescriptor! = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
+        section27.addRow(row)
+        
+        let section28 = FormSectionDescriptor()
+        row = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
+        section28.addRow(row)
+        
+        let section1 = FormSectionDescriptor()
+         row = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Surname", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section1.addRow(row)
         
@@ -239,7 +295,7 @@ class AddPatientViewController: FormViewController {
         row = FormRowDescriptor(tag: Static.nextofKin, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section25.addRow(row)
-        form.sections = [section1,section2, section3, section4, section5, section6, section7, section8, section9, section10, section11, section12, section13, section14, section15, section16, section17, section18, section19, section20, section21, section22, section23, section24, section25]
+        form.sections = [section27, section28, section1,section2, section3, section4, section5, section6, section7, section8, section9, section10, section11, section12, section13, section14, section15, section16, section17, section18, section19, section20, section21, section22, section23, section24, section25]
         self.form = form
         
         
