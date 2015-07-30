@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BFU-he-EQ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="035-lG-Gwu">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -554,6 +554,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kcc-E7-mtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3411" y="2556"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="0Cz-YQ-xzA">
+            <objects>
+                <viewController storyboardIdentifier="MenuViewController" id="XC2-fF-7vH" customClass="MenuViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2YD-IH-HrP"/>
+                        <viewControllerLayoutGuide type="bottom" id="U7J-fk-gXi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3W4-4o-cfc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iUk-fP-Jok">
+                                <rect key="frame" x="0.0" y="50" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.89411764709999997" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionsCell" id="chH-BA-vkw">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="chH-BA-vkw" id="Kgu-NL-anT">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.15686274510000001" green="0.89411764709999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.15686274510000001" green="0.89411764709999997" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="iUk-fP-Jok" secondAttribute="trailing" constant="-16" id="4Uz-L0-Aic"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="iUk-fP-Jok" secondAttribute="bottom" id="7kE-g2-Icj"/>
+                            <constraint firstItem="iUk-fP-Jok" firstAttribute="leading" secondItem="3W4-4o-cfc" secondAttribute="leadingMargin" constant="-16" id="ZO0-wI-AWY"/>
+                            <constraint firstItem="iUk-fP-Jok" firstAttribute="top" secondItem="2YD-IH-HrP" secondAttribute="bottom" id="dq0-HM-1Nn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="optionsTable" destination="iUk-fP-Jok" id="O1A-Kc-QBd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qnR-Gf-ttx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4145" y="-242"/>
         </scene>
         <!--Staff Profile View Controller-->
         <scene sceneID="tEe-WU-Llu">

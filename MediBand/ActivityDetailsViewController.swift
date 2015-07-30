@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
+class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate{
 
     
     @IBOutlet var attendingProfButton: UIButton!
@@ -21,27 +21,14 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        
-        
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.attendingProfButton.titleLabel?.numberOfLines = 1;
         self.attendingProfButton.layer.cornerRadius = 5.0;
         self.updateActivityButton.layer.cornerRadius = 5.0;
         self.viewCaseNoteButton.layer.cornerRadius = 5.0;
         self.viewPatientButton.layer.cornerRadius = 5.0;
-//        self.attendingProfButton.titleLabel?.lineBreakMode = ;
-//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-//        layout.itemSize = CGSize(width: 90, height: 120)
-        
-//        self.attendingProfCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         self.attendingProfCollectionView.dataSource = self
         self.attendingProfCollectionView.delegate = self
-     
-//        self.attendingProfCollectionView .registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-//        self.view.addSubview(self.attendingProfCollectionView)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,24 +48,43 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = self.attendingProfCollectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
+        let cell: AnyObject = self.attendingProfCollectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
         let userImageView: UIImageView! = cell.viewWithTag(1001) as! UIImageView;
         let userLabel = cell.viewWithTag(1002 ) as! UILabel;
          var image: UIImage = UIImage(named: self.usersImage[indexPath.row])!
-         userImageView.image = image
+        userImageView.image = image
         userImageView.layer.borderWidth = 1.0;
         userImageView.layer.borderColor = UIColor.blackColor().CGColor;
         userImageView.layer.cornerRadius = userImageView.layer.frame.width/2;
-//        userImageView.maskView = ;
         userImageView.clipsToBounds = true
         userLabel.text = self.usersName[indexPath.row]
-//        cell.backgroundColor = UIColor.orangeColor()
         return cell as! UICollectionViewCell
     }
-    
     @IBAction func update(sender: UIButton) {
+        let storyboard : UIStoryboard = UIStoryboard(
+            name: "Main",
+            bundle: nil)
+        var menuViewController: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        menuViewController.modalPresentationStyle = .Popover
+        menuViewController.preferredContentSize = CGSizeMake(self.view.frame.height/4, self.view.frame.height/3)
+        let popoverMenuViewController = menuViewController.popoverPresentationController
+        popoverMenuViewController?.permittedArrowDirections = .Any
+        popoverMenuViewController?.delegate = self
+        popoverMenuViewController?.sourceView = self.view
+        popoverMenuViewController?.sourceRect = CGRect(
+            x: self.updateActivityButton.layer.frame.origin.x+self.updateActivityButton.layer.frame.size.width/2-(self.view.frame.height/4)/2,
+            y: self.updateActivityButton.layer.frame.origin.y+self.updateActivityButton.layer.frame.size.height/2,
+            width: 1,
+            height: 1)
+        presentViewController(
+            menuViewController,
+            animated: true,
+            completion: nil)
+    }
+    func adaptivePresentationStyleForPresentationController(
+        controller: UIPresentationController) -> UIModalPresentationStyle {
+            return .None
     }
     
     
