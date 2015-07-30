@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate{
+class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
 
-    
+    var currentCell : Int = 1;
     @IBOutlet var attendingProfButton: UIButton!
     @IBOutlet var updateActivityButton: UIButton!
     @IBOutlet var viewCaseNoteButton: UIButton!
@@ -62,10 +62,15 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         return cell as! UICollectionViewCell
     }
     @IBAction func update(sender: UIButton) {
+        
+//        var menuView: MenuViewController = MenuViewController() as! MenuViewController
+//        menuView.delegate = self
         let storyboard : UIStoryboard = UIStoryboard(
             name: "Main",
             bundle: nil)
         var menuViewController: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        menuViewController.delegate = self
+        menuViewController.selectedCell = currentCell
         menuViewController.modalPresentationStyle = .Popover
         menuViewController.preferredContentSize = CGSizeMake(self.view.frame.height/4, self.view.frame.height/3)
         let popoverMenuViewController = menuViewController.popoverPresentationController
@@ -96,5 +101,14 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     
     @IBAction func viewCaseNote() {
+        self.performSegueWithIdentifier("viewCaseNote", sender: nil)
     }
+    
+    func menuViewResponse(controller: MenuViewController,
+        didDismissPopupView selectedCell: Int){
+            currentCell = selectedCell;
+            println("choice is \(currentCell)")
+    }
+
+    
 }
