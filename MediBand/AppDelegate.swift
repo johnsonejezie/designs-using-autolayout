@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         return true
     }
 
@@ -39,6 +44,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
+        
+        return checkOrientation(self.window?.rootViewController)// This is the custom function that u need to set your custom view to each orientation which u want to lock
+        
+    }
+    
+    func checkOrientation(viewController:UIViewController?)-> Int{
+        
+        if(viewController == nil){
+            
+            return Int(UIInterfaceOrientationMask.All.rawValue)//All means all orientation
+            
+        }else if (viewController is NewCareActivityViewController){
+            
+            return Int(UIInterfaceOrientationMask.Portrait.rawValue)//This is sign in view controller that i only want to set this to portrait mode only
+            
+        }else{
+            
+            return checkOrientation(viewController!.presentedViewController)
+        }
     }
 
 
