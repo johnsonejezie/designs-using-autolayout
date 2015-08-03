@@ -19,6 +19,16 @@
 		A51D3FFA1B52B9D900C77665 /* NewCareActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FF91B52B9D900C77665 /* NewCareActivityViewController.swift */; };
 		A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */; };
 		A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */; };
+		A57B411F1B6BB686007C735F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B411E1B6BB686007C735F /* CoreData.framework */; };
+		A57B41211B6BB6A6007C735F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41201B6BB6A6007C735F /* SystemConfiguration.framework */; };
+		A57B41231B6BB6AF007C735F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41221B6BB6AF007C735F /* libz.dylib */; };
+		A57B41251B6BB6BB007C735F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41241B6BB6BB007C735F /* libsqlite3.dylib */; };
+		A57B41571B6CC132007C735F /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41561B6CC132007C735F /* libGoogleAnalyticsServices.a */; };
+		A57B415A1B6CF839007C735F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41591B6CF839007C735F /* User.swift */; };
+		A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */; };
+		A57B41B21B6D205F007C735F /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B11B6D205F007C735F /* Staff.swift */; };
+		A57B41B41B6D2073007C735F /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B31B6D2073007C735F /* Patient.swift */; };
+		A57B41B61B6D37D9007C735F /* PersonNewtworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */; };
 		A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */; };
 		A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */; };
 		A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */; };
@@ -64,6 +74,27 @@
 		A51D40021B538EC100C77665 /* MediBand-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediBand-Bridging-Header.h"; sourceTree = "<group>"; };
 		A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStatusTableViewController.swift; sourceTree = "<group>"; };
 		A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySegmentControl.swift; sourceTree = "<group>"; };
+		A57B41141B6BB675007C735F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		A57B41161B6BB675007C735F /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		A57B41171B6BB675007C735F /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		A57B41181B6BB675007C735F /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		A57B41191B6BB675007C735F /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		A57B411A1B6BB675007C735F /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		A57B411B1B6BB675007C735F /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		A57B411C1B6BB675007C735F /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		A57B411D1B6BB675007C735F /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		A57B411E1B6BB686007C735F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A57B41201B6BB6A6007C735F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A57B41221B6BB6AF007C735F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A57B41241B6BB6BB007C735F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		A57B41561B6CC132007C735F /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		A57B41591B6CF839007C735F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A57B416D1B6D07C0007C735F /* SwiftForms.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftForms.framework; path = "Pods/../build/Debug-iphoneos/SwiftForms.framework"; sourceTree = "<group>"; };
+		A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		A57B41B11B6D205F007C735F /* Staff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
+		A57B41B31B6D2073007C735F /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonNewtworkCall.swift; sourceTree = "<group>"; };
 		A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpTableViewController.swift; sourceTree = "<group>"; };
 		A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +121,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57B41251B6BB6BB007C735F /* libsqlite3.dylib in Frameworks */,
+				A57B41231B6BB6AF007C735F /* libz.dylib in Frameworks */,
+				A57B41211B6BB6A6007C735F /* SystemConfiguration.framework in Frameworks */,
+				A57B411F1B6BB686007C735F /* CoreData.framework in Frameworks */,
 				B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */,
+				A57B41571B6CC132007C735F /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +143,12 @@
 		47E747919BA52CDD2C11B70F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A57B416D1B6D07C0007C735F /* SwiftForms.framework */,
+				A57B41561B6CC132007C735F /* libGoogleAnalyticsServices.a */,
+				A57B41241B6BB6BB007C735F /* libsqlite3.dylib */,
+				A57B41221B6BB6AF007C735F /* libz.dylib */,
+				A57B41201B6BB6A6007C735F /* SystemConfiguration.framework */,
+				A57B411E1B6BB686007C735F /* CoreData.framework */,
 				4140736F615BCEE6A380469F /* Pods_MediBand.framework */,
 			);
 			name = Frameworks;
@@ -121,9 +163,83 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A57B41131B6BB675007C735F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				A57B41141B6BB675007C735F /* GAI.h */,
+				A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */,
+				A57B41161B6BB675007C735F /* GAIEcommerceFields.h */,
+				A57B41171B6BB675007C735F /* GAIEcommerceProduct.h */,
+				A57B41181B6BB675007C735F /* GAIEcommerceProductAction.h */,
+				A57B41191B6BB675007C735F /* GAIEcommercePromotion.h */,
+				A57B411A1B6BB675007C735F /* GAIFields.h */,
+				A57B411B1B6BB675007C735F /* GAILogger.h */,
+				A57B411C1B6BB675007C735F /* GAITrackedViewController.h */,
+				A57B411D1B6BB675007C735F /* GAITracker.h */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		A57B41581B6CF7DE007C735F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A57B41591B6CF839007C735F /* User.swift */,
+				A57B41B11B6D205F007C735F /* Staff.swift */,
+				A57B41B31B6D2073007C735F /* Patient.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A57B41E51B6FA3CF007C735F /* networkCalls */ = {
+			isa = PBXGroup;
+			children = (
+				A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */,
+			);
+			name = networkCalls;
+			sourceTree = "<group>";
+		};
+		A57B41E61B6FA3F1007C735F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5D15A4A1B4995E400DC15AB /* ViewController.swift */,
+				A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */,
+				420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */,
+				A51D3F8F1B50687F00C77665 /* AddPatientViewController.swift */,
+				A51D3FCA1B51060500C77665 /* PatientProfileViewController.swift */,
+				A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */,
+				A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */,
+				A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */,
+				A51D3FF91B52B9D900C77665 /* NewCareActivityViewController.swift */,
+				A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */,
+				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
+				A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */,
+				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
+				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
+				42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */,
+				A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */,
+				4233C33B1B66588E00F8337E /* MenuViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		A57B41E71B6FA412007C735F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A5D15A511B4995E400DC15AB /* LaunchScreen.xib */,
+				A5D15A4C1B4995E400DC15AB /* Main.storyboard */,
+				A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */,
+				A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */,
+				A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */,
+				A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		A5D15A3A1B4995E400DC15AB = {
 			isa = PBXGroup;
 			children = (
+				A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */,
+				A57B41131B6BB675007C735F /* Library */,
 				A5D15A451B4995E400DC15AB /* MediBand */,
 				A5D15A5B1B4995E400DC15AB /* MediBandTests */,
 				A5D15A441B4995E400DC15AB /* Products */,
@@ -144,33 +260,11 @@
 		A5D15A451B4995E400DC15AB /* MediBand */ = {
 			isa = PBXGroup;
 			children = (
-				A51D40021B538EC100C77665 /* MediBand-Bridging-Header.h */,
-				A5D15A481B4995E400DC15AB /* AppDelegate.swift */,
-				A5D15A4A1B4995E400DC15AB /* ViewController.swift */,
-				A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */,
-				A5D15A4C1B4995E400DC15AB /* Main.storyboard */,
-				A5D15A4F1B4995E400DC15AB /* Images.xcassets */,
-				A5D15A511B4995E400DC15AB /* LaunchScreen.xib */,
+				A57B41E71B6FA412007C735F /* View */,
+				A57B41E61B6FA3F1007C735F /* Controller */,
+				A57B41E51B6FA3CF007C735F /* networkCalls */,
+				A57B41581B6CF7DE007C735F /* Model */,
 				A5D15A461B4995E400DC15AB /* Supporting Files */,
-				A589FAF51B4B7C5200439584 /* AddStaffViewController.swift */,
-				420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */,
-				A51D3F8F1B50687F00C77665 /* AddPatientViewController.swift */,
-				A51D3FCA1B51060500C77665 /* PatientProfileViewController.swift */,
-				A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */,
-				A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */,
-				A51D3FDC1B51C44400C77665 /* CaseDetailViewController.swift */,
-				A51D3FF91B52B9D900C77665 /* NewCareActivityViewController.swift */,
-				A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */,
-				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
-				A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */,
-				A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */,
-				A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */,
-				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
-				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
-				A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */,
-				42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */,
-				A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */,
-				4233C33B1B66588E00F8337E /* MenuViewController.swift */,
 			);
 			path = MediBand;
 			sourceTree = "<group>";
@@ -178,8 +272,11 @@
 		A5D15A461B4995E400DC15AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A51D40021B538EC100C77665 /* MediBand-Bridging-Header.h */,
+				A5D15A4F1B4995E400DC15AB /* Images.xcassets */,
 				A5D15A471B4995E400DC15AB /* Info.plist */,
 				A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */,
+				A5D15A481B4995E400DC15AB /* AppDelegate.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -355,6 +452,7 @@
 			files = (
 				A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */,
 				A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */,
+				A57B41B41B6D2073007C735F /* Patient.swift in Sources */,
 				A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */,
 				A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */,
 				A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */,
@@ -371,10 +469,14 @@
 				A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */,
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */,
+				A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,
+				A57B415A1B6CF839007C735F /* User.swift in Sources */,
 				A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */,
 				42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */,
+				A57B41B21B6D205F007C735F /* Staff.swift in Sources */,
+				A57B41B61B6D37D9007C735F /* PersonNewtworkCall.swift in Sources */,
 				420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,12 +609,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = MediBand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					/Users/johnsonejezie/Downloads/GoogleAnalyticsServicesiOS_3.13,
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MediBand/MediBand-Bridging-Header.h";
@@ -527,12 +635,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = MediBand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+					/Users/johnsonejezie/Downloads/GoogleAnalyticsServicesiOS_3.13,
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MediBand/MediBand-Bridging-Header.h";

@@ -50,7 +50,33 @@ import UIKit
     @IBOutlet weak var selectStaff: UIButton!
     
     
-    var specialist = [ "John Mick", "Dickson Mark", "Luke Oga", "Chima Dele", "Daniel Usman", "Vincent Yale", "Kenneth Okonkwo", "Nkem Owoh"]
+    var specialist = [
+        "Anaesthetics",
+        "Cardiology",
+        "Clinical Haematology",
+        "Clinical Immunology and Allergy",
+        "Clinical Oncology",
+        "Dermatology",
+        "Emergency",
+        "ENT",
+        "Gastroenterology",
+        "General Medicine",
+        "General Surgery",
+        "Geriatric Medicine",
+        "Gynaecology",
+        "Medical Oncology",
+        "Nephrology",
+        "Neurology",
+        "Ophthalmology",
+        "Oral & Maxillo Facial Surgery",
+        "Oral Surgery",
+        "Paediatrics",
+        "Radiology",
+        "Rehabilitation",
+        "Respiratory Medicine",
+        "Rheumatology",
+        "Trauma & Orthopaedics",
+        "Urology"]
     
     var care = ["That care", "this care", "fake care", "real care", "another care", "final care"]
     
@@ -83,7 +109,6 @@ import UIKit
         
         if sender.tag == 1000 {
             contentViewController.list = specialist
-            contentViewController.containImage = true
         }else if sender.tag == 1001 {
             contentViewController.list = care
         }else if sender.tag == 1002 {

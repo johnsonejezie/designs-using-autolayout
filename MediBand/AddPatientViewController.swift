@@ -20,6 +20,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
     weak var delegate: addPatientControllerDelegate!
     var imagePicker = UIImagePickerController()
     var patientImageView:UIImageView!
+    var image:UIImage?
 
     
     struct Static {
@@ -39,7 +40,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         static let gp = "gp"
         static let gpsurgery = "gpsurgery"
         static let MedicalInsuranceProvider = "MedicalInsuranceProvider"
-        static let photo = "photo"
         static let dob = "dob"
         static let occupation = "occupation"
         static let language = "language"
@@ -111,6 +111,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             println("done")
         })
+        self.image = image
         patientImageView.image = image
     }
 
@@ -120,11 +121,47 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
-//        let message = self.form.formValues().description
-//        
-//        let alert: UIAlertView = UIAlertView(title: "Form output", message: message, delegate: nil, cancelButtonTitle: "OK")
-//        
-//        alert.show()
+        let message = self.form.formValues().description
+        
+        var formDictionary:Dictionary<String, AnyObject> = self.form.formValues() as! Dictionary
+        
+        formDictionary["image"] = self.image
+        
+        var patient = Patient?()
+        
+        patient?.address = formDictionary["addressline1"] as! String
+        patient?.addressotherphone = formDictionary["addressotherphone"] as! String
+        patient?.addressphone = formDictionary["addressphone"] as! String
+        patient?.addresspostcode = formDictionary["addresspostcode"] as! String
+        patient?.forename = formDictionary["nameforename"] as! String
+        patient?.gp_id = formDictionary["gp"] as! String
+        patient?.gpsurgery_id = formDictionary["gpsurgery"] as! String
+        patient?.image = formDictionary["image"] as! String
+        patient?.ischild = formDictionary["ischild"] as! String
+        patient?.lkp_nametitle = formDictionary["lkp_nametitle"] as! String
+        patient?.maritalstatus_id = formDictionary["maritalstatus"] as! String
+        patient?.medical_facility_id = 4
+        patient?.medicalinsuranceprovider = formDictionary["MedicalInsuranceProvider"] as! String
+        patient?.middlename = formDictionary["namemiddlename"] as! String
+        patient?.nationality = formDictionary["nationality"] as! String
+        patient?.next_of_kin_contact = formDictionary["nextofKinContact"] as! String
+        patient?.occupation = formDictionary["occupation"] as! String
+        patient?.surname = formDictionary["surname"] as! String
+        
+        let fetchModel = PersonNewtworkCall()
+        
+        fetchModel.createNewPatient(patient!, fromMedicalFacility: 4) { (success) -> Void in
+            if success == true {
+                println("patient successfully created")
+            }else {
+                println("failed to save patient")
+                let alertView = UIAlertView(title: "Error", message: "Failed to save patient.", delegate: self, cancelButtonTitle: "Cancel")
+                alertView.delegate = self
+                alertView.show()
+            }
+        }
+        println(formDictionary)
+
     }
     
     func handleSingleTap(sender:UITapGestureRecognizer){
@@ -146,10 +183,12 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         let section27 = FormSectionDescriptor()
         var row: FormRowDescriptor! = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "", "textField.backgroundColor":UIColor.clearColor(),"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section27.addRow(row)
         
         let section28 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "", "textField.backgroundColor":UIColor.clearColor(),"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section28.addRow(row)
         
         let section1 = FormSectionDescriptor()
@@ -234,12 +273,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         row = FormRowDescriptor(tag: Static.MedicalInsuranceProvider, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Medical Insurance Provider", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section16.addRow(row)
-        
-        let section17 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.photo, rowType: .Text, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Photo","textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section17.addRow(row)
-        
+    
         let section18 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.dob, rowType: .Date, title: "Date of Birth")
 //        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["datePicker.backgroundColor":backgroundColor]
@@ -295,7 +329,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         row = FormRowDescriptor(tag: Static.nextofKin, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section25.addRow(row)
-        form.sections = [section27, section28, section1,section2, section3, section4, section5, section6, section7, section8, section9, section10, section11, section12, section13, section14, section15, section16, section17, section18, section19, section20, section21, section22, section23, section24, section25]
+        form.sections = [section27, section28, section1,section2, section3, section4, section5, section6, section7, section8, section9, section10, section11, section12, section13, section14, section15, section16, section18, section19, section20, section21, section22, section23, section24, section25]
         self.form = form
         
         

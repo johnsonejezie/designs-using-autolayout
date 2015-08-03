@@ -10,7 +10,7 @@ import UIKit
 
 class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate {
     
-    
+    var patient = [Patient]()
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
