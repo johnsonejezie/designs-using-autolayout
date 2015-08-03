@@ -491,7 +491,7 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1a-6U-eai">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1a-6U-eai">
                                         <rect key="frame" x="32" y="0.0" width="536" height="37"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.89411764709999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
@@ -549,6 +549,7 @@
                         <outlet property="viewCaseNoteButton" destination="IaM-SR-C8u" id="U2k-eL-Ahb"/>
                         <outlet property="viewPatientButton" destination="xhv-ma-gWh" id="dkO-CN-ZwO"/>
                         <segue destination="h18-uE-6pg" kind="show" identifier="viewPatient" id="XFV-cB-7yU"/>
+                        <segue destination="KWF-PI-usM" kind="show" identifier="viewCaseNote" id="fQy-6g-Cow"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kcc-E7-mtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -592,11 +593,13 @@
                     </view>
                     <connections>
                         <outlet property="optionsTable" destination="iUk-fP-Jok" id="O1A-Kc-QBd"/>
+                        <segue destination="1aZ-fx-YDb" kind="unwind" identifier="RemoveOptionsTable" unwindAction="unwindToContainerVC:" id="j5v-RE-yGn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qnR-Gf-ttx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="1aZ-fx-YDb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4145" y="-242"/>
+            <point key="canvasLocation" x="4125" y="2556"/>
         </scene>
         <!--Staff Profile View Controller-->
         <scene sceneID="tEe-WU-Llu">
@@ -2374,6 +2377,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XFV-cB-7yU"/>
-        <segue reference="chE-7V-Dgw"/>
+        <segue reference="fQy-6g-Cow"/>
+        <segue reference="XeK-vu-mCr"/>
     </inferredMetricsTieBreakers>
 </document>

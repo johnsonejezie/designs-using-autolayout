@@ -7,10 +7,16 @@
 //
 
 import UIKit
-
+protocol menuViewControllerDelegate: class {
+    func menuViewResponse(controller: MenuViewController,
+        didDismissPopupView selectedCell: Int)
+}
 class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
+  
+    weak var delegate: menuViewControllerDelegate!
     @IBOutlet var optionsTable: UITableView!
+    var selectedCell:Int = 1;
     
     let options : [String] = ["Assigned","Ungoing","Stopped","Discharge","End of care"];
     override func viewDidLoad() {
@@ -42,24 +48,20 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let cell = tableView.dequeueReusableCellWithIdentifier("OptionsCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = options[indexPath.row]
+        var detailsView = ActivityDetailsViewController()
+        if indexPath.row == selectedCell{
+        cell.backgroundColor = UIColor.whiteColor()
+        }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("selected \(options[indexPath.row])");
-      
+        self.dismissViewControllerAnimated(true, completion: nil)
+        delegate?.menuViewResponse(self, didDismissPopupView: indexPath.row);
     }
     
-    @IBAction func unwindToContainerVC(segue: UIStoryboardSegue) {
-        
-    }
-    
-    
-    
-    
-    
-    
-    
+   
     
 }
