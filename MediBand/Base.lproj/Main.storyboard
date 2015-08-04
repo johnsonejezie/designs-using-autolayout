@@ -1296,7 +1296,7 @@
             </objects>
             <point key="canvasLocation" x="4125" y="1104"/>
         </scene>
-        <!--NEW CARE ACTIVITY-->
+        <!--NEW TASK-->
         <scene sceneID="ATh-wy-wUf">
             <objects>
                 <viewController id="dLo-o2-qBV" customClass="NewCareActivityViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
@@ -1442,7 +1442,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="NEW CARE ACTIVITY" id="nIX-xN-xyS"/>
+                    <navigationItem key="navigationItem" title="NEW TASK" id="nIX-xN-xyS"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
@@ -2081,7 +2081,7 @@
             </objects>
             <point key="canvasLocation" x="4125" y="1836"/>
         </scene>
-        <!--ACTIVITIES-->
+        <!--TASK-->
         <scene sceneID="Sa5-yE-5Vq">
             <objects>
                 <viewController id="ITZ-z9-19w" customClass="ActivitiesViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
@@ -2208,7 +2208,7 @@
                             <constraint firstItem="QbX-t2-IZr" firstAttribute="height" secondItem="7ph-vm-Ssl" secondAttribute="height" multiplier="0.06" id="wLg-ot-FIh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ACTIVITIES" id="frp-RX-6Hs">
+                    <navigationItem key="navigationItem" title="TASK" id="frp-RX-6Hs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="usd-v4-a5c"/>
                     </navigationItem>
                     <connections>
@@ -2378,6 +2378,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="XFV-cB-7yU"/>
         <segue reference="fQy-6g-Cow"/>
-        <segue reference="XeK-vu-mCr"/>
+        <segue reference="chE-7V-Dgw"/>
     </inferredMetricsTieBreakers>
 </document>

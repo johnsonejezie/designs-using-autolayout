@@ -13,3 +13,5 @@
 #import "GAILogger.h"
 #import "GAITrackedViewController.h"
 #import "GAITracker.h"
+
+#import <AFNetworking/AFNetworking.h>

@@ -4,51 +4,35 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-MediBand.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>SwiftForms.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B48BA545D546D013ABEA6F7</key>
+		<key>0D7226B2061341F35F150853AFA8CBFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C686454A7766338DAEFFD59</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>649F16F72EEA702E53F2878E50FAAB88</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8D6311F46A0CFFB1C5B3831E7153A9BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9248AAEC6891CCCD3D90EA07</key>
+		<key>92962FC61ED44BD161A8AA85C159DCA4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -58,12 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE8AA95CBAF5F9ED1A0669A00F2599FE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F7EFAA1259934349262E84B2</key>
+		<key>E386B100827565D91A2D4EDB7154397A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

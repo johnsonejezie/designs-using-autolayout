@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AFNetworking
 
 class PersonNewtworkCall {
     
@@ -52,13 +53,13 @@ class PersonNewtworkCall {
                     
                     let addressotherphone = jsonObject["addressotherphone"].stringValue
                     
-                    let gp = jsonObject["gp"].stringValue
+                    let gp_id = jsonObject["gp"].int
                     
-                    let gpsurgery = jsonObject["gpsurgery"].stringValue
+                    let gpsurgery_id = jsonObject["gpsurgery"].int
                     
                     let medicalinsuranceprovider_id = jsonObject["medicalinsuranceprovider_id"].stringValue
                     
-                    let image = jsonObject["image"].stringValue
+                    let image: AnyObject = jsonObject["image"].object
                     
                     let dob = jsonObject["dob"].stringValue
                     
@@ -68,9 +69,9 @@ class PersonNewtworkCall {
                     
                     let nationality = jsonObject["nationality"].stringValue
                     
-                    let ischild = jsonObject["ischild"].stringValue
+                    let ischild = jsonObject["ischild"].bool
                     
-                    let maritalstatus = jsonObject["maritalstatus"].stringValue
+                    let maritalstatus_id = jsonObject["maritalstatus"].int
                     
                     let next_of_kin_contact = jsonObject["next_of_kin_contact"].stringValue
                     
@@ -80,7 +81,7 @@ class PersonNewtworkCall {
                     let patient_id = jsonObject["patient_id"].int
                     
                     let modified = jsonObject["modified"].stringValue
-                    self.patient = Patient(surname: surname, forename: forename, middlename: middlename, lkp_nametitle: lkp_nametitle, address: address, addresspostcode: addresspostcode, addressphone: addressphone, gp_id: gp, gpsurgery_id: gpsurgery, medicalinsuranceprovider: medicalinsuranceprovider_id, occupation: occupation, nationality: nationality, ischild: ischild, maritalstatus_id: maritalstatus, next_of_kin_contact: next_of_kin_contact, addressotherphone: addressotherphone, medical_facility_id: medical_facility_id, patient_id: patient_id! , image: image)
+                    self.patient = Patient(surname: surname, forename: forename, middlename: middlename, lkp_nametitle: lkp_nametitle, address: address, addresspostcode: addresspostcode, addressphone: addressphone, gp_id: gp_id!, gpsurgery_id: gpsurgery_id!, medicalinsuranceprovider: medicalinsuranceprovider_id, occupation: occupation, nationality: nationality, ischild: ischild!, maritalstatus_id: maritalstatus_id!, next_of_kin_contact: next_of_kin_contact, addressotherphone: addressotherphone, medical_facility_id: medical_facility_id, patient_id: patient_id! , image: image as! NSData)
                 }else {
                     
                 }
@@ -106,18 +107,14 @@ class PersonNewtworkCall {
         ]
         
         var success:Bool?
+        let manager = AFHTTPRequestOperationManager()
         
-        request(.POST, url, parameters: parameters, encoding: .JSON, headers: headers).responseJSON{req, res, json, error in
-            let jsonObject:JSON = JSON(json!)
-            success = jsonObject["success"].bool
-            
-            if (success == true) {
-                completionHandler(success: true)
-            }else{
-                completionHandler(success: false)
-            }
-            
+        manager.POST(url, parameters: nil, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+            println("JSON: " + responseObject.description)
+        }) { (req, error) -> Void in
+            println(error)
         }
+
         
     }
     

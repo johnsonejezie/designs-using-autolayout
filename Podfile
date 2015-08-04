@@ -9,7 +9,7 @@ use_frameworks!
 
 pod 'SwiftForms'
 pod 'Alamofire', '~> 1.3'
-
+pod 'AFNetworking', '~> 2.5'
 end
 
 target 'MediBandTests' do

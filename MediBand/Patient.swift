@@ -26,17 +26,17 @@ class Patient {
     
     var addressphone:String
     
-    var gp_id:String
+    var gp_id:Int
     
-    var gpsurgery_id:String
+    var gpsurgery_id:Int
     
     var medicalinsuranceprovider:String
     
     var occupation:String
     
     var nationality:String
-    var ischild:String
-    var maritalstatus_id:String
+    var ischild:Bool
+    var maritalstatus_id:Int
     
     var next_of_kin_contact:String
     
@@ -46,10 +46,10 @@ class Patient {
     
     var patient_id:Int
     
-    var image: String
+    var image: NSData
     
     
-    init?(surname: String, forename:String, middlename:String,lkp_nametitle:String, address:String,addresspostcode:String, addressphone:String, gp_id:String, gpsurgery_id:String, medicalinsuranceprovider:String, occupation:String, nationality:String, ischild:String, maritalstatus_id:String, next_of_kin_contact:String, addressotherphone: String, medical_facility_id: Int, patient_id:Int, image: String){
+    init?(surname: String, forename:String, middlename:String,lkp_nametitle:String, address:String,addresspostcode:String, addressphone:String, gp_id:Int, gpsurgery_id:Int, medicalinsuranceprovider:String, occupation:String, nationality:String, ischild:Bool, maritalstatus_id:Int, next_of_kin_contact:String, addressotherphone: String, medical_facility_id: Int, patient_id:Int, image: NSData){
         self.surname = surname
         self.forename = forename
         self.middlename = middlename

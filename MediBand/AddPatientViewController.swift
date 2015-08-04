@@ -125,30 +125,34 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         var formDictionary:Dictionary<String, AnyObject> = self.form.formValues() as! Dictionary
         
-        formDictionary["image"] = self.image
+        formDictionary["image"] = UIImagePNGRepresentation(self.image)
         
         var patient = Patient?()
         
-        patient?.address = formDictionary["addressline1"] as! String
-        patient?.addressotherphone = formDictionary["addressotherphone"] as! String
-        patient?.addressphone = formDictionary["addressphone"] as! String
-        patient?.addresspostcode = formDictionary["addresspostcode"] as! String
-        patient?.forename = formDictionary["nameforename"] as! String
-        patient?.gp_id = formDictionary["gp"] as! String
-        patient?.gpsurgery_id = formDictionary["gpsurgery"] as! String
-        patient?.image = formDictionary["image"] as! String
-        patient?.ischild = formDictionary["ischild"] as! String
-        patient?.lkp_nametitle = formDictionary["lkp_nametitle"] as! String
-        patient?.maritalstatus_id = formDictionary["maritalstatus"] as! String
-        patient?.medical_facility_id = 4
-        patient?.medicalinsuranceprovider = formDictionary["MedicalInsuranceProvider"] as! String
-        patient?.middlename = formDictionary["namemiddlename"] as! String
-        patient?.nationality = formDictionary["nationality"] as! String
-        patient?.next_of_kin_contact = formDictionary["nextofKinContact"] as! String
-        patient?.occupation = formDictionary["occupation"] as! String
-        patient?.surname = formDictionary["surname"] as! String
+        let address = formDictionary["addressline1"] as! String
+        let addressotherphone = formDictionary["addressotherphone"] as! String
+        let addressphone = formDictionary["addressphone"] as! String
+        let addresspostcode = formDictionary["addresspostcode"] as! String
+        let forename = formDictionary["nameforename"] as! String
+        let gp_id = 1
+        let gpsurgery_id = 1
+        let image = formDictionary["image"] as! NSData
+        let ischild = formDictionary["ischild"] as! String
+        let lkp_nametitle = formDictionary["lkp_nametitle"] as! String
+        let maritalstatus_id = 2
+        let medical_facility_id = 4
+        let medicalinsuranceprovider = formDictionary["MedicalInsuranceProvider"] as! String
+        let middlename = formDictionary["namemiddlename"] as! String
+        let nationality = formDictionary["nationality"] as! String
+        let next_of_kin_contact = formDictionary["nextofKinContact"] as! String
+        let occupation = formDictionary["occupation"] as! String
+        let surname = "EJEzie"
+        
+        patient = Patient(surname: surname, forename: forename, middlename: middlename, lkp_nametitle: lkp_nametitle, address: address, addresspostcode: addresspostcode, addressphone: addressphone, gp_id: gp_id, gpsurgery_id: gpsurgery_id, medicalinsuranceprovider: medicalinsuranceprovider, occupation: occupation, nationality: nationality, ischild: true, maritalstatus_id: maritalstatus_id, next_of_kin_contact: next_of_kin_contact, addressotherphone: addressotherphone, medical_facility_id: 4, patient_id: 2, image: image)
         
         let fetchModel = PersonNewtworkCall()
+        
+//        println(patient)
         
         fetchModel.createNewPatient(patient!, fromMedicalFacility: 4) { (success) -> Void in
             if success == true {
@@ -160,7 +164,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
                 alertView.show()
             }
         }
-        println(formDictionary)
+//        println(formDictionary)
 
     }
     
