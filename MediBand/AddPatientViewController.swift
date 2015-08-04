@@ -58,6 +58,15 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        var test = TaskNetworkCall()
+        var test2 = StaffNetworkCall()
+        var staff = Staff(medical_facility_id:4, speciality_id:2, general_practional_id:3, member_id: 4, role_id:3, email: "johnson.ejezie@andela.com", surname: "shittu", firstname: "kenny", image: "no image")
+//        test.create(staff);
+        var task = Task(patient_id: 419, care_activity_id: 2, speciality_id: 2, care_activity_type_id: 2, care_activity_category_id: 2, selected_staff_ids:[31,29], medical_facility_id: 4)
+//        test2.getStaffs(4);
+//        test2.viewStaff("bukky@yahoo.com");
+        
+        test.create(task);
         let topView:UIView = UIView(frame: CGRectMake(0, -10, view.frame.size.width, 150))
         topView.backgroundColor = UIColor.clearColor()
         

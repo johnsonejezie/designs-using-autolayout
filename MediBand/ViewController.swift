@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate {
     
     let session:AVCaptureSession = AVCaptureSession()
@@ -16,9 +17,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     var highlightView:UIView = UIView()
     
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
         //resizable view
         self.highlightView.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
         
