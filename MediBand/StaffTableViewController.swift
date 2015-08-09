@@ -32,6 +32,10 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.setScreeName("Staff List")
+    }
+    
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
     }
@@ -117,4 +121,27 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         println("delegate called")
     }
 
+}
+
+extension StaffTableViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
 }

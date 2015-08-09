@@ -120,6 +120,10 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.setScreeName("Add Patient View")
+    }
+    
     func pressed(sender: UIButton!) {
         println("upload")
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
@@ -169,6 +173,8 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
                 alertView.show()
             }
         }
+        
+        self.trackEvent("UX", action: "Create new patient", label: "Submit button for creating new patient", value: nil)
 
     }
     
@@ -527,3 +533,28 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
 
 }
+
+extension AddPatientViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
+}
+
+

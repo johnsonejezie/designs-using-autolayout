@@ -86,6 +86,9 @@ class LoginViewController: UIViewController {
                 error: NSError!) -> Void in
             println(error)
         }
+        
+        trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
+        
 //        self.performSegueWithIdentifier("showActivities", sender: nil)
         
     }
@@ -97,9 +100,15 @@ class LoginViewController: UIViewController {
         
         let OKAction = UIAlertAction(title: "RESET", style: .Default) { (action) in
             // ...
+            self.trackEvent("UX", action: "Reset password", label: "Forgot password button", value: nil)
         }
         alertController.addAction(OKAction)
-
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) { (action) -> Void in
+            //....
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
         
         alertController.addTextFieldWithConfigurationHandler { (textField) in
             textField.placeholder = "Email"
@@ -133,7 +142,7 @@ extension LoginViewController {
     func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
         let tracker = GAI.sharedInstance().defaultTracker
         let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
-//        tracker.send(trackDictionary)
+        tracker.send(trackDictionary as [NSObject: AnyObject])
     }
     
 }
