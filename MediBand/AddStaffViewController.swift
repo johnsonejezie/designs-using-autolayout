@@ -13,7 +13,7 @@ protocol addStaffControllerDelegate: class {
         finishedAddingStaff staff: [String : String])
 }
 
-class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ENSideMenuDelegate {
     
     weak var delegate: addStaffControllerDelegate!
 
@@ -39,6 +39,9 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
     
     @IBAction func editButtonAction(sender: AnyObject) {
         
@@ -80,8 +83,14 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
         
     }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
         GeneralPracticeIDLabel.text = " \(arc4random_uniform(1000))"
         GeneralPractitionerIDLabel.text = " \(arc4random_uniform(100000))"
 

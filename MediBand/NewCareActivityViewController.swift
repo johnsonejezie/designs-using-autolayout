@@ -9,7 +9,7 @@
 import UIKit
 
 
- class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate, UIViewControllerTransitioningDelegate {
+ class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate, UIViewControllerTransitioningDelegate, ENSideMenuDelegate {
     
     var popCreated = false
     var dropdownloaded = false
@@ -35,6 +35,17 @@ import UIKit
         println(selectTypeButton.currentTitle!)
         println(selectCategoriesButton.currentTitle!)
         println(selectStaff.currentTitle!)
+    }
+    
+    
+    
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        
+        toggleSideMenuView()
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
     }
     
     
@@ -96,6 +107,8 @@ import UIKit
         
         addCaseNoteButton.layer.cornerRadius = 4
         saveButton.layer.cornerRadius = 3
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
     }
     
     

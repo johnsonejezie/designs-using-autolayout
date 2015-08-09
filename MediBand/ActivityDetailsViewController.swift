@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
+class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate, ENSideMenuDelegate{
 
     var currentCell : Int = 1;
     @IBOutlet var attendingProfButton: UIButton!
@@ -21,6 +21,8 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.attendingProfButton.titleLabel?.numberOfLines = 1;
         self.attendingProfButton.layer.cornerRadius = 5.0;
@@ -31,9 +33,13 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         self.attendingProfCollectionView.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
     }
     
     override func viewWillLayoutSubviews() {

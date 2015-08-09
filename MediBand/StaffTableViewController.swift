@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
+class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate, ENSideMenuDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var staffs:[Dictionary<String, String>] = []
@@ -17,11 +17,23 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         self.performSegueWithIdentifier("AddStaff", sender: nil)
         
     }
+    
+    
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
         
         // Do any additional setup after loading the view.
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
     }
     
     

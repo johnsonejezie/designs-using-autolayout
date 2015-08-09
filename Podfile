@@ -8,7 +8,6 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'SwiftForms'
-pod 'Alamofire', '~> 1.3'
 pod 'AFNetworking', '~> 2.5'
 end
 

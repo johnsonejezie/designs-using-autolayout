@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-MediBand.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,12 +22,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D7226B2061341F35F150853AFA8CBFF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>92962FC61ED44BD161A8AA85C159DCA4</key>
+		<key>B20193F8711DFF52E71D2A8E5C4AE159</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E386B100827565D91A2D4EDB7154397A</key>
+		<key>CE8AA95CBAF5F9ED1A0669A00F2599FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

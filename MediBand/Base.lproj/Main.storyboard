@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BFU-he-EQ3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="14L-fE-wwp">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -10,7 +10,7 @@
         <!--BarcodeView Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="BarcodeView Controller" customClass="ViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BarcodeViewController" id="BYZ-38-t0r" userLabel="BarcodeView Controller" customClass="ViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,10 +20,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Scan BarCode" id="MMg-Ol-Qai">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="YHk-5W-fab">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="BYZ-38-t0r" id="WCO-Te-9sI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="BFU-he-EQ3" kind="show" identifier="patientSegue" id="i72-EI-d2j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="365" y="318"/>
+            <point key="canvasLocation" x="1123" y="2556"/>
         </scene>
         <!--AddStaffView Controller-->
         <scene sceneID="zPB-dr-701">
@@ -257,7 +268,14 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="ADD STAFF" id="gSh-tW-iXV"/>
+                    <navigationItem key="navigationItem" title="ADD STAFF" id="gSh-tW-iXV">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="mZm-d1-cOr">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="4PK-PV-sw1" id="qgc-LE-X0m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="GeneralPracticeIDLabel" destination="Mcg-Ek-Gzr" id="6cO-FH-cOV"/>
                         <outlet property="GeneralPractitionerIDLabel" destination="EAB-8G-cgg" id="1UX-Ir-7VA"/>
@@ -291,16 +309,23 @@
                             <outlet property="delegate" destination="mpR-KI-SPb" id="cRc-Mm-M1o"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ADD PATIENT" id="Amp-Dz-cME"/>
+                    <navigationItem key="navigationItem" title="ADD PATIENT" id="Amp-Dz-cME">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="5nq-Vc-Re5">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="mpR-KI-SPb" id="oWu-Ob-tnP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Mm-iN-sur" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1797" y="2556"/>
+            <point key="canvasLocation" x="2609" y="2556"/>
         </scene>
         <!--Activity Details View Controller-->
         <scene sceneID="PGf-kL-exr">
             <objects>
-                <viewController id="R6m-5M-1SK" customClass="ActivityDetailsViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskDetailsViewController" id="R6m-5M-1SK" customClass="ActivityDetailsViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ee2-A7-11d"/>
                         <viewControllerLayoutGuide type="bottom" id="gpK-gw-2er"/>
@@ -540,7 +565,14 @@
                             <constraint firstItem="PaV-k0-U5R" firstAttribute="top" secondItem="sxY-KJ-vSQ" secondAttribute="bottom" id="wXj-md-gUa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pDk-nA-o4o"/>
+                    <navigationItem key="navigationItem" id="pDk-nA-o4o">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="v9U-1S-bph">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="R6m-5M-1SK" id="bZg-OM-GcE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="attendingProfButton" destination="F1a-6U-eai" id="UN8-sN-C0j"/>
                         <outlet property="attendingProfCollectionView" destination="fTx-au-Byi" id="Tdt-ar-lsJ"/>
@@ -554,7 +586,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kcc-E7-mtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3411" y="2556"/>
+            <point key="canvasLocation" x="4223" y="2556"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="0Cz-YQ-xzA">
@@ -599,12 +631,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qnR-Gf-ttx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="1aZ-fx-YDb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4125" y="2556"/>
+            <point key="canvasLocation" x="4937" y="2556"/>
         </scene>
         <!--Staff Profile View Controller-->
         <scene sceneID="tEe-WU-Llu">
             <objects>
-                <viewController id="eXK-2u-vGx" customClass="StaffProfileViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StaffProfileViewController" id="eXK-2u-vGx" customClass="StaffProfileViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W4K-PS-VW4"/>
                         <viewControllerLayoutGuide type="bottom" id="w7M-72-eDU"/>
@@ -898,7 +930,14 @@
                             <constraint firstItem="w7M-72-eDU" firstAttribute="top" secondItem="hVT-XX-YbJ" secondAttribute="bottom" id="tj6-JY-SaL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="VJh-jX-nmh"/>
+                    <navigationItem key="navigationItem" id="VJh-jX-nmh">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="3dj-o3-a1X">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="eXK-2u-vGx" id="qgX-w5-uMx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="generalPractitionerIDLabel" destination="0Yq-cs-f9r" id="Rvw-kF-kYA"/>
                         <outlet property="generlPracticeLabel" destination="Dw0-f4-N2l" id="P9Y-41-c8k"/>
@@ -915,7 +954,7 @@
         <!--PATIENT-->
         <scene sceneID="er3-3g-P7Q">
             <objects>
-                <viewController id="8IW-zO-AtW" customClass="PatientsViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatientsViewController" id="8IW-zO-AtW" customClass="PatientsViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SEV-ho-650"/>
                         <viewControllerLayoutGuide type="bottom" id="XtO-dr-aFd"/>
@@ -1019,6 +1058,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PATIENT" id="sHK-YL-wEp">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="ABB-0y-bmg">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="navBar:" destination="8IW-zO-AtW" id="Hgd-C3-8BK"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="B0k-Bf-GqU">
                             <connections>
                                 <action selector="addPatientBarButton:" destination="8IW-zO-AtW" id="suP-9e-sxZ"/>
@@ -1028,7 +1073,7 @@
                     <connections>
                         <outlet property="tableView" destination="ZfU-e0-Pwt" id="QMM-TM-o3y"/>
                         <segue destination="h18-uE-6pg" kind="show" identifier="ViewPatient" id="iYo-GD-Zlm"/>
-                        <segue destination="BFU-he-EQ3" kind="presentation" identifier="AddPatient" id="mJc-9A-Fjn"/>
+                        <segue destination="p1b-SI-7Zd" kind="presentation" identifier="AddPatient" id="LSa-fA-FYq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVz-iJ-QYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1038,7 +1083,7 @@
         <!--STAFF-->
         <scene sceneID="vTa-bd-RaB">
             <objects>
-                <viewController id="hx3-7s-xPB" customClass="StaffTableViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StaffViewController" id="hx3-7s-xPB" customClass="StaffTableViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="exw-Xs-CCd"/>
                         <viewControllerLayoutGuide type="bottom" id="6bV-5c-Qma"/>
@@ -1146,6 +1191,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="STAFF" id="m4z-Hb-ybb">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="1wW-l6-diu">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="hx3-7s-xPB" id="s5b-8N-sYh"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SBw-p5-6za">
                             <connections>
                                 <action selector="addStaffButton:" destination="hx3-7s-xPB" id="wDg-eE-aHf"/>
@@ -1442,7 +1493,14 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="NEW TASK" id="nIX-xN-xyS"/>
+                    <navigationItem key="navigationItem" title="NEW TASK" id="nIX-xN-xyS">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="CYS-gv-EU4">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="dLo-o2-qBV" id="Xi5-tV-mcX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
@@ -1687,10 +1745,10 @@
             </objects>
             <point key="canvasLocation" x="4684" y="1104"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="AWf-tF-QUk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="edd-hr-F3Z" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="edd-hr-F3Z" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KoI-Pa-seh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1708,7 +1766,7 @@
         <!--PatientProfileView Controller-->
         <scene sceneID="O3w-ln-Q0U">
             <objects>
-                <viewController id="YHI-wy-PGH" userLabel="PatientProfileView Controller" customClass="PatientProfileViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatientProfileViewController" id="YHI-wy-PGH" userLabel="PatientProfileView Controller" customClass="PatientProfileViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="luR-dD-dE0"/>
                         <viewControllerLayoutGuide type="bottom" id="pOf-X8-3Iw"/>
@@ -1989,7 +2047,14 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="PATIENT" id="nzy-yT-4Rv"/>
+                    <navigationItem key="navigationItem" title="PATIENT" id="nzy-yT-4Rv">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="LFZ-WE-pZ3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="YHI-wy-PGH" id="knh-5O-ccZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="UpdatePatientButton" destination="Fa4-hz-iGM" id="evl-7C-orC"/>
                         <outlet property="addCareButton" destination="L15-K1-8dw" id="O3x-Dt-JDZ"/>
@@ -2008,10 +2073,10 @@
             </objects>
             <point key="canvasLocation" x="3411" y="1836"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="D2b-Dn-X3T">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h18-uE-6pg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h18-uE-6pg" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iz5-Dv-Guv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2026,10 +2091,10 @@
             </objects>
             <point key="canvasLocation" x="2599" y="1836"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="rG8-rp-WGZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BFU-he-EQ3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BFU-he-EQ3" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Ex-F9-NO4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2042,12 +2107,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeG-GA-g5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071" y="2556"/>
+            <point key="canvasLocation" x="1883" y="2556"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="BKC-ba-pMk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="stj-H9-ppa" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="stj-H9-ppa" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jO8-rM-S8Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2062,10 +2127,10 @@
             </objects>
             <point key="canvasLocation" x="3411" y="1104"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="23d-bN-2CX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IfQ-7K-F3T" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IfQ-7K-F3T" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MVo-QL-RGg">
@@ -2084,7 +2149,7 @@
         <!--TASK-->
         <scene sceneID="Sa5-yE-5Vq">
             <objects>
-                <viewController id="ITZ-z9-19w" customClass="ActivitiesViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskViewController" id="ITZ-z9-19w" customClass="ActivitiesViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ljo-DJ-1SY"/>
                         <viewControllerLayoutGuide type="bottom" id="arn-pD-Laf"/>
@@ -2209,6 +2274,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TASK" id="frp-RX-6Hs">
+                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="fDJ-4T-NkH">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="slideMenuToggle:" destination="ITZ-z9-19w" id="vAV-hf-ezO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="usd-v4-a5c"/>
                     </navigationItem>
                     <connections>
@@ -2260,10 +2331,10 @@
             </objects>
             <point key="canvasLocation" x="4027" y="3398"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="VyZ-Pd-a2N">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="krn-eu-QHR" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="krn-eu-QHR" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kMD-jm-S3b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2278,10 +2349,10 @@
             </objects>
             <point key="canvasLocation" x="1071" y="3384"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="ZSM-5K-6uJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vx8-jI-g1H" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vx8-jI-g1H" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hNW-u7-0uy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2296,10 +2367,10 @@
             </objects>
             <point key="canvasLocation" x="2599" y="3384"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="O9D-ti-QpH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="14L-fE-wwp" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="14L-fE-wwp" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cxB-1j-oa6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2314,10 +2385,10 @@
             </objects>
             <point key="canvasLocation" x="1071" y="1836"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="VRc-8Z-eP8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZAv-oh-1gV" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZAv-oh-1gV" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JNg-oS-iHS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2332,10 +2403,10 @@
             </objects>
             <point key="canvasLocation" x="2245" y="-952"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="S2a-Y5-iyT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="035-lG-Gwu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="035-lG-Gwu" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jEx-aW-8lN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2348,12 +2419,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIb-1T-J2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2599" y="2556"/>
+            <point key="canvasLocation" x="3411" y="2556"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Navigation Controller-->
         <scene sceneID="Y6p-oU-tUZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gCe-vR-QBY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gCe-vR-QBY" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LY1-bQ-dHM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2368,16 +2439,35 @@
             </objects>
             <point key="canvasLocation" x="3623" y="-952"/>
         </scene>
+        <!--My Navigation Controller-->
+        <scene sceneID="rTH-PA-cXa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p1b-SI-7Zd" customClass="MyNavigationController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4xi-C2-zyd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="mSy-ev-1e7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GfR-IN-YOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="311" y="2556"/>
+        </scene>
     </scenes>
     <resources>
         <image name="HS1" width="416" height="520"/>
         <image name="HS3" width="357" height="355"/>
         <image name="Solid-Color-White-Flag-3-icon" width="256" height="256"/>
         <image name="arrow" width="25" height="25"/>
+        <image name="navBarIcon" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XFV-cB-7yU"/>
         <segue reference="fQy-6g-Cow"/>
+        <segue reference="XFV-cB-7yU"/>
         <segue reference="chE-7V-Dgw"/>
     </inferredMetricsTieBreakers>
 </document>

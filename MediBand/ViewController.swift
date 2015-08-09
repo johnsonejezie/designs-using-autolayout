@@ -9,15 +9,22 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate {
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate, ENSideMenuDelegate {
     
     let session:AVCaptureSession = AVCaptureSession()
     var previewLayer:AVCaptureVideoPreviewLayer!
     var highlightView:UIView = UIView()
+    var patientID: String = ""
     
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        
+        toggleSideMenuView()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
         
         //resizable view
         self.highlightView.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
@@ -96,9 +103,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         
         if detectionString != nil {
             
+            patientID = detectionString
+            
             let message:String = "Your code is \(detectionString)"
             
             let alertView: UIAlertView = UIAlertView(title:"Alert", message: message, delegate: self, cancelButtonTitle:"Scan Again")
+            alertView.addButtonWithTitle("Continue")
             alertView.delegate = self
             alertView.show()
         }
@@ -106,8 +116,23 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         
     }
     
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
+    }
+    
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         println("scan again button clicked")
+        if buttonIndex == 1 {
+           self.performSegueWithIdentifier("patientSegue", sender: patientID)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "patientSegue" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! AddPatientViewController
+            controller.patientID = sender as! String
+        }
     }
 
 

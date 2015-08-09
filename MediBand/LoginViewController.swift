@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import AFNetworking
 
 class LoginViewController: UIViewController {
     
@@ -65,31 +65,27 @@ class LoginViewController: UIViewController {
         
         let url = "http://www.iconglobalnetwork.com/mediband/api/login"
         
-        Alamofire.request(.POST, url, parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { request, response, json, error in
-           
-            
-            if (error != nil) {
-                println(error)
-            }else {
-                var jsonObject: JSON = JSON(json!)
-                println(jsonObject)
-                let message = jsonObject["message"].stringValue
-                if message == "Invalid email or password" {
-                    let alertView = UIAlertView(title: "Login Error", message: "Invalid email or password", delegate: self, cancelButtonTitle: "Cancel")
-                        alertView.delegate = self
-                        alertView.show()
-                    
-                    println(message)
-                }
+        let manager = AFHTTPRequestOperationManager()
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.responseSerializer = AFJSONResponseSerializer()
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        
+        manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!,
+            responseObject: AnyObject!) -> Void in
+            println(responseObject)
+            var jsonObject: JSON = JSON(responseObject!)
+            println("this is response \(responseObject)")
+            let message = jsonObject["message"].stringValue
+            if message == "Invalid email or password" {
+                let alertView = UIAlertView(title: "Login Error", message: "Invalid email or password", delegate: self, cancelButtonTitle: "Cancel")
+                alertView.delegate = self
+                alertView.show()
             }
-            
-//            if let message:String = (JSON as! NSDictionary).valueForKey("message") as? String {
-//                let alertView = UIAlertView(title: "Login Error", message: "Invalid email or password", delegate: self, cancelButtonTitle: "Cancel")
-//                alertView.delegate = self
-//                alertView.show()
-//            }
+
+            }) { (operation: AFHTTPRequestOperation!,
+                error: NSError!) -> Void in
+            println(error)
         }
-        println(parameters)
 //        self.performSegueWithIdentifier("showActivities", sender: nil)
         
     }

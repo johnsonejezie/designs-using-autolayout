@@ -8,17 +8,31 @@
 
 import UIKit
 
-class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate {
+class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate, ENSideMenuDelegate {
     
+    @IBAction func navBar(sender: UIBarButtonItem) {
+        
+        println("called")
+        toggleSideMenuView()
+        
+    }
     var patient = [Patient]()
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         self.sideMenuController()?.sideMenu?.delegate = self
+        
+        let patientNetworkCall = PersonNewtworkCall()
+        
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,14 +58,14 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.performSegueWithIdentifier("AddPatient", sender: nil)
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "AddPatient" {
-            let navigationController = segue.destinationViewController
-                as! UINavigationController
-            let controller = navigationController.topViewController
-                as! AddPatientViewController
-            controller.delegate = self
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "AddPatient" {
+//            let navigationController = segue.destinationViewController
+//                as! UINavigationController
+//            let controller = navigationController.topViewController
+//                as! AddPatientViewController
+//            controller.delegate = self
+//        }
+//    }
 
 }

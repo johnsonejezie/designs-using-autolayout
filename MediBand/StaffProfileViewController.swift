@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StaffProfileViewController: UIViewController {
+class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
     
     
     @IBOutlet weak var staffImageView: UIImageView!
@@ -19,18 +19,29 @@ class StaffProfileViewController: UIViewController {
     @IBOutlet weak var generlPracticeLabel: UILabel!
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
     var staff: Dictionary<String, String>!
+    
+    
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         self.sideMenuController()?.sideMenu?.delegate = self
         
-        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-        staffImageView.image = UIImage(data: imageData)
-        staffIDLabel.text = staff["staffID"]
-        staffNameLabel.text = staff["name"]
-        generalPractitionerIDLabel.text = staff["generalPractitionerID"]
-        generlPracticeLabel.text = staff["generalPracticeID"]
-        specialityLabel.text = staff["speciality"]
+//        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+//        staffImageView.image = UIImage(data: imageData)
+//        staffIDLabel.text = staff["staffID"]
+//        staffNameLabel.text = staff["name"]
+//        generalPractitionerIDLabel.text = staff["generalPractitionerID"]
+//        generlPracticeLabel.text = staff["generalPracticeID"]
+//        specialityLabel.text = staff["speciality"]
 
     }
     
