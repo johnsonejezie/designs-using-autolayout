@@ -11,13 +11,14 @@ import AFNetworking
 
 class PersonNewtworkCall {
     
-    var patient = Patient?()
-    
-    func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility_id:Int)->Patient{
+    func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String)->[Patient]{
+        
+        var patientResult = [Patient]()
+        
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
         
         let parameters = [
-            "medical_facility_id": medical_facility_id,
+            "medical_facility_id": medical_facility,
             "assigned_staff": assigned_staff
         ]
         
@@ -31,71 +32,18 @@ class PersonNewtworkCall {
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.GET(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
             println(responseObject)
-            
-            var jsonObject:JSON = JSON(responseObject!)
-            
-            let id:String = jsonObject["id"].stringValue
-            
-            let medical_facility = jsonObject["medical_facility"].int
-            
-            let surname =  jsonObject["surname"].stringValue
-            
-            let forename = jsonObject["forename"].stringValue
-            
-            let middlename = jsonObject["middlename"].stringValue
-            
-            let lkp_nametitle = jsonObject["lkp_nametitle"].stringValue
-            
-            let address = jsonObject["address"].stringValue
-            let addressphone = jsonObject["addressphone"].stringValue
-            
-            let addresspostcode = jsonObject["addresspostcode"].stringValue
-            
-            let country = jsonObject["country"].stringValue
-            
-            let addressotherphone = jsonObject["addressotherphone"].stringValue
-            
-            let gp_id = jsonObject["gp"].int
-            
-            let gpsurgery_id = jsonObject["gpsurgery"].int
-            
-            let medicalinsuranceprovider_id = jsonObject["medicalinsuranceprovider_id"].int
-            
-            let image: AnyObject = jsonObject["image"].object
-            
-            let dob = jsonObject["dob"].stringValue
-            
-            let occupation = jsonObject["occupation"].stringValue
-            
-            let language = jsonObject["language"].stringValue
-            
-            let nationality = jsonObject["nationality"].stringValue
-            
-            let ischild = jsonObject["ischild"].bool
-            
-            let maritalstatus = jsonObject["maritalstatus"].int
-            
-            let next_of_kin_contact = jsonObject["next_of_kin_contact"].stringValue
-            
-            let next_of_kin = jsonObject["next_of_kin"].stringValue
-            
-            let created = jsonObject["created"].stringValue
-            let patient_clinic_id = jsonObject["patient_id"].int
-            
-            let modified = jsonObject["modified"].stringValue
-            
-//            self.patient = Patient(dob: dob,surname: surname, forename: forename, middlename: middlename, lkp_nametitle: lkp_nametitle, address: address, addresspostcode: addresspostcode, addressphone: addressphone, gp_id: gp_id!, gpsurgery_id: gpsurgery_id!, medicalinsuranceprovider: medicalinsuranceprovider_id!, occupation: occupation, nationality: nationality, ischild: ischild!, maritalstatus_id: maritalstatus_id!, next_of_kin_contact: next_of_kin_contact, addressotherphone: addressotherphone, medical_facility_id: medical_facility_id, patient_id: patient_id! , image: image as! NSData)
+            let dictionary = responseObject as! [String:AnyObject]
+            patientResult = self.parseDictionary(dictionary)
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             println(error)
         }
-        return self.patient!
+        return patientResult
         
     }
     
-    func createNewPatient(patient:Patient, fromMedicalFacility medical_facility_id:Int, completionHandler:(success:Bool)-> Void) {
+    func createNewPatient(patient:Patient, fromMedicalFacility medical_facility:String, completionHandler:(success:Bool)-> Void) {
         
         var data:[String: AnyObject] = [
-            "medical_facility_id": patient.medical_facility_id,
             "patient_id": patient.patient_id,
             "surname": patient.surname,
             "forename":patient.surname,
@@ -122,7 +70,7 @@ class PersonNewtworkCall {
         let url = "http:/iconglobalnetwork.com/mediband/api/create_patient"
         
         let parameters = [
-            "medical_facility_id": medical_facility_id,
+            "medical_facility_id": medical_facility,
         ]
         
         let headers = [
@@ -145,7 +93,7 @@ class PersonNewtworkCall {
         
     }
     
-    func getPatient(patient_id:Int, fromMedicalFacility medical_facility_id:Int, completionHandler:(success:Bool)-> Void){
+    func getPatient(patient_id:Int, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
         let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"
         let parameters = [
             "patient_id": patient_id,
@@ -173,14 +121,52 @@ class PersonNewtworkCall {
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        
         manager.POST(url, parameters: nil, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
             println("JSON: \(responseObject)")
             }) { (req, error) -> Void in
                 println("error in creating patient\(error.description)")
         }
-        
-        
+    }
+    
+    private func parseDictionary(dictionary:[String: AnyObject]) -> [Patient] {
+        var patients = [Patient]()
+        if let array:AnyObject = dictionary["data"] {
+            for resultDict in array as! [AnyObject] {
+                if let resultDict = resultDict as? [String: AnyObject] {
+                    let patient = Patient?()
+                    patient?.address = (resultDict["address"] as? String)!
+                    patient?.addressotherphone = resultDict["addressotherphone"] as! String
+                    patient?.addressphone = resultDict["addressphone"] as! String
+                    patient?.addresspostcode = resultDict["addresspostcode"] as! String
+                    patient?.dob = resultDict["dob"] as! String
+                    patient?.forename = resultDict["forename"] as! String
+                    patient?.gp = resultDict["gp"] as! String
+                    patient?.gpsurgery = resultDict["gpsurgery"] as! String
+                   
+                    patient?.ischild = resultDict["ischild"] as! Bool
+                    patient?.language = resultDict["language"] as! String
+                    patient?.lkp_nametitle = resultDict["lkp_nametitle"] as! String
+                    patient?.maritalstatus = resultDict["maritalstatus"] as! String
+                    patient?.medicalinsuranceprovider = resultDict["medicalinsuranceprovider"] as! String
+                    patient?.middlename = resultDict["middlename"] as! String
+                    patient?.nationality = resultDict["nationality"] as! String
+                    patient?.next_of_kin = resultDict["next_of_kin"] as! String
+                    patient?.next_of_kin_contact = resultDict["next_of_kin_contact"] as! String
+                    patient?.occupation = resultDict["occupation"] as! String
+                    patient?.patient_id = resultDict["patient_id"] as! String
+                    patient?.surname = resultDict["surname"] as! String
+                    
+                    if let image: AnyObject = resultDict["image"]  {
+                         patient?.image = image
+                    }
+                    
+                    if let result = patient {
+                        patients.append(result)
+                    }
+                }
+            }
+        }
+        return patients
     }
         
     

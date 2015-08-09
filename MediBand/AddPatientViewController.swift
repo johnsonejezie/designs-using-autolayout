@@ -16,6 +16,10 @@ protocol addPatientControllerDelegate: class {
 
 class AddPatientViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ENSideMenuDelegate {
     
+    var isEditingPatient:Bool = false
+    
+    var selectedPatient:Patient?
+
     var isAnyFieldEmpty:Bool!
     var patientID:String = ""
     var tap:UIGestureRecognizer!
@@ -57,7 +61,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         static let occupation = "occupation"
         static let language = "language"
         static let nationality = "nationality"
-        static let medical_facility = "medical_facility"
         static let ischild = "ischild"
         static let maritalstatus = "maritalstatus"
         static let nextofKinContact = "nextofKinContact"
@@ -121,6 +124,12 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
     }
     
     override func viewWillAppear(animated: Bool) {
+        if isEditingPatient == true {
+            self.form.formValues()
+        }
+        
+        
+        
         self.setScreeName("Add Patient View")
     }
     
@@ -226,28 +235,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         row = FormRowDescriptor(tag: Static.addressline1, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Address1", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section5.addRow(row)
-        
-//        let section6 = FormSectionDescriptor()
-//        row = FormRowDescriptor(tag: Static.addressline2, rowType: .Text, title: "")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address2", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-//        section6.addRow(row)
-        
-//        let section7 = FormSectionDescriptor()
-//        row = FormRowDescriptor(tag: Static.addressline3, rowType: .Text, title: "")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address3",  "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5,"textField.textAlignment" : NSTextAlignment.Left.rawValue]
-//        section7.addRow(row)
-//        
-//        let section8 = FormSectionDescriptor()
-//        row = FormRowDescriptor(tag: Static.addressline4, rowType: .Text, title: "")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address4", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-//        section8.addRow(row)
-//        
-//        let section9 = FormSectionDescriptor()
-//        row = FormRowDescriptor(tag: Static.addressline5, rowType: .Text, title: "")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address5", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-//        section9.addRow(row)
-        
-        
+
         let section10 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.addresspostcode, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address post code", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
@@ -257,11 +245,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         row = FormRowDescriptor(tag: Static.addressphone, rowType: .Number, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address phone", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section11.addRow(row)
-        
-//        let section12 = FormSectionDescriptor()
-//        row = FormRowDescriptor(tag: Static.lkp_addresscounty, rowType: .Text, title: "")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address county", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-//        section12.addRow(row)
         
         let section13 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.addressotherphone, rowType: .Number, title: "")
@@ -278,12 +261,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         row = FormRowDescriptor(tag: Static.gpsurgery, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "gp surgery", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section15.addRow(row)
-        
-//        let section35 = FormSectionDescriptor()
-//        row = FormRowDescriptor(tag: Static.medical_facility, rowType: .Name, title: "")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Medical Facility", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-//        section35.addRow(row)
-        
+
         
         let section16 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.MedicalInsuranceProvider, rowType: .Text, title: "")
@@ -354,7 +332,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         let section25 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.nextofKin, rowType: .Name, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue, "textField.text": "testing testing"]
         section25.addRow(row)
         form.sections = [section27, section28, section1,section2, section3, section4, section5, section10, section11, section13, section14, section15, section16, section18, section19, section20, section21, section22, section23, section24, section25]
         self.form = form
@@ -525,13 +503,11 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         }
         
         
-        var newPatient = Patient(dob: dateString!, surname: surname!, forename: forename!, middlename: middlename!, lkp_nametitle: lkp_nametitle!, address: address!, addresspostcode: addresspostcode!, addressphone: addressphone!, gp: gp!, gpsurgery: gpsurgery!, medicalinsuranceprovider: medicalinsuranceprovider!, occupation: occupation!, nationality: nationality!, ischild: ischild!, maritalstatus: maritalstatus!, next_of_kin_contact: next_of_kin_contact!, addressotherphone: addressotherphone!, medical_facility_id: medical_facility_id!, patient_id:patientID, language:language!, next_of_kin:next_of_kin!, image:imgString!)
+        var newPatient = Patient(dob: dateString!, surname: surname!, forename: forename!, middlename: middlename!, lkp_nametitle: lkp_nametitle!, address: address!, addresspostcode: addresspostcode!, addressphone: addressphone!, gp: gp!, gpsurgery: gpsurgery!, medicalinsuranceprovider: medicalinsuranceprovider!, occupation: occupation!, nationality: nationality!, ischild: ischild!, maritalstatus: maritalstatus!, next_of_kin_contact: next_of_kin_contact!, addressotherphone: addressotherphone!, patient_id:patientID, language:language!, next_of_kin:next_of_kin!, image:imgString!)
 
         return newPatient!
 
     }
-
-
 }
 
 extension AddPatientViewController {
