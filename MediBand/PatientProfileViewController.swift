@@ -39,14 +39,14 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
         
          self.sideMenuController()?.sideMenu?.delegate = self
         
-        let patientNetworkCall = PersonNewtworkCall()
-        patientNetworkCall.getPatient(13, fromMedicalFacility: 4) { (success) -> Void in
-            if success {
-                println(success)
-            }else {
-                println("failed")
-            }
-        }
+//        let patientNetworkCall = PersonNewtworkCall()
+//        patientNetworkCall.getPatient(13, fromMedicalFacility: 4) { (success) -> Void in
+//            if success {
+//                println(success)
+//            }else {
+//                println("failed")
+//            }
+//        }
 
         
         addCareButton.layer.cornerRadius = 4

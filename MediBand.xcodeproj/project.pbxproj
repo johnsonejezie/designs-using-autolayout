@@ -23,6 +23,7 @@
 		A521446C1B76AB2200B65E22 /* MyMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521446B1B76AB2200B65E22 /* MyMenuTableViewController.swift */; };
 		A521446E1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521446D1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift */; };
 		A52144701B77A65B00B65E22 /* DataSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521446F1B77A65B00B65E22 /* DataSingleton.swift */; };
+		A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */; };
 		A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */; };
 		A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */; };
 		A57B411F1B6BB686007C735F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B411E1B6BB686007C735F /* CoreData.framework */; };
@@ -84,6 +85,7 @@
 		A521446B1B76AB2200B65E22 /* MyMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMenuTableViewController.swift; sourceTree = "<group>"; };
 		A521446D1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPatientPopOverTableViewController.swift; sourceTree = "<group>"; };
 		A521446F1B77A65B00B65E22 /* DataSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSingleton.swift; sourceTree = "<group>"; };
+		A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNetworkCall.swift; sourceTree = "<group>"; };
 		A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStatusTableViewController.swift; sourceTree = "<group>"; };
 		A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySegmentControl.swift; sourceTree = "<group>"; };
 		A57B41141B6BB675007C735F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */,
+				A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */,
 			);
 			name = networkCalls;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				A521446C1B76AB2200B65E22 /* MyMenuTableViewController.swift in Sources */,
 				A57B41B21B6D205F007C735F /* Staff.swift in Sources */,
 				A57B41B61B6D37D9007C735F /* PersonNewtworkCall.swift in Sources */,
+				A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */,
 				420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

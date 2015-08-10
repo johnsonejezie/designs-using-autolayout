@@ -52,44 +52,9 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func loginActionButton() {
-        
-        let parameters = [
-           "email": userNameTextfield.text,
-            "password": passwordTextfield.text,
-            "medical_facility_id": 4
-        ]
-        
-        let headers = [
-            "Content-Type": "application/x-www-form-urlencoded"
-        ]
-        
-        let url = "http://www.iconglobalnetwork.com/mediband/api/login"
-        
-        let manager = AFHTTPRequestOperationManager()
-        manager.requestSerializer = AFJSONRequestSerializer()
-        manager.responseSerializer = AFJSONResponseSerializer()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        
-        manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!,
-            responseObject: AnyObject!) -> Void in
-            println(responseObject)
-            var jsonObject: JSON = JSON(responseObject!)
-            println("this is response \(responseObject)")
-            let message = jsonObject["message"].stringValue
-            if message == "Invalid email or password" {
-                let alertView = UIAlertView(title: "Login Error", message: "Invalid email or password", delegate: self, cancelButtonTitle: "Cancel")
-                alertView.delegate = self
-                alertView.show()
-            }
-
-            }) { (operation: AFHTTPRequestOperation!,
-                error: NSError!) -> Void in
-            println(error)
-        }
-        
+        let login = Login()
+        login.loginUserWith(userNameTextfield.text, andPassword: passwordTextfield.text)
         trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
-        
-//        self.performSegueWithIdentifier("showActivities", sender: nil)
         
     }
     

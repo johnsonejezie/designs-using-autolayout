@@ -10,22 +10,16 @@ import UIKit
 import AFNetworking
 
 class PersonNewtworkCall {
-    
     func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String)->[Patient]{
-        
         var patientResult = [Patient]()
-        
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
-        
         let parameters = [
             "medical_facility_id": medical_facility,
             "assigned_staff": assigned_staff
         ]
-        
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
@@ -38,11 +32,9 @@ class PersonNewtworkCall {
             println(error)
         }
         return patientResult
-        
     }
     
     func createNewPatient(patient:Patient, fromMedicalFacility medical_facility:String, completionHandler:(success:Bool)-> Void) {
-        
         var data:[String: AnyObject] = [
             "patient_id": patient.patient_id,
             "surname": patient.surname,
@@ -65,32 +57,23 @@ class PersonNewtworkCall {
             "next_of_kin":patient.next_of_kin,
             "image":patient.image!
         ]
-        println(data)
-        
         let url = "http:/iconglobalnetwork.com/mediband/api/create_patient"
-        
         let parameters = [
             "medical_facility_id": medical_facility,
         ]
-        
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
         var success:Bool?
         let manager = AFHTTPRequestOperationManager()
-        
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        
         manager.POST(url, parameters: data, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
             println("JSON: \(responseObject)")
         }) { (req, error) -> Void in
             println("error in creating patient\(error.description)")
         }
-
-        
     }
     
     func getPatient(patient_id:Int, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
@@ -99,7 +82,6 @@ class PersonNewtworkCall {
             "patient_id": patient_id,
             "medical_facility_id": medical_facility_id,
         ]
-        
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
@@ -111,7 +93,6 @@ class PersonNewtworkCall {
             println("error in getting single patient\(error.description)")
             completionHandler(success: true)
         }
-        println(parameters)
     }
     
     func editPatient(patient:Patient, completionHandler:(success:Bool)-> Void) {
@@ -142,7 +123,6 @@ class PersonNewtworkCall {
                     patient?.forename = resultDict["forename"] as! String
                     patient?.gp = resultDict["gp"] as! String
                     patient?.gpsurgery = resultDict["gpsurgery"] as! String
-                   
                     patient?.ischild = resultDict["ischild"] as! Bool
                     patient?.language = resultDict["language"] as! String
                     patient?.lkp_nametitle = resultDict["lkp_nametitle"] as! String
@@ -155,11 +135,9 @@ class PersonNewtworkCall {
                     patient?.occupation = resultDict["occupation"] as! String
                     patient?.patient_id = resultDict["patient_id"] as! String
                     patient?.surname = resultDict["surname"] as! String
-                    
                     if let image: AnyObject = resultDict["image"]  {
                          patient?.image = image
                     }
-                    
                     if let result = patient {
                         patients.append(result)
                     }
@@ -168,7 +146,4 @@ class PersonNewtworkCall {
         }
         return patients
     }
-        
-    
-    
 }

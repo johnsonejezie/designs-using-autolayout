@@ -172,16 +172,16 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
         let fetchModel = PersonNewtworkCall()
         
-        fetchModel.createNewPatient(patient, fromMedicalFacility: 4) { (success) -> Void in
-            if success == true {
-                println("patient successfully created")
-            }else {
-                println("failed to save patient")
-                let alertView = UIAlertView(title: "Error", message: "Failed to save patient.", delegate: self, cancelButtonTitle: "Cancel")
-                alertView.delegate = self
-                alertView.show()
-            }
-        }
+//        fetchModel.createNewPatient(patient, fromMedicalFacility: 4) { (success) -> Void in
+//            if success == true {
+//                println("patient successfully created")
+//            }else {
+//                println("failed to save patient")
+//                let alertView = UIAlertView(title: "Error", message: "Failed to save patient.", delegate: self, cancelButtonTitle: "Cancel")
+//                alertView.delegate = self
+//                alertView.show()
+//            }
+//        }
         
         self.trackEvent("UX", action: "Create new patient", label: "Submit button for creating new patient", value: nil)
 
