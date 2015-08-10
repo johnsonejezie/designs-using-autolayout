@@ -15,11 +15,16 @@ class TaskNetworkCall{
     
     func create(task:Task){
         
+//        self.operationManger.requestSerializer = AFJSONRequestSerializer()
+//        self.operationManger.responseSerializer = AFJSONResponseSerializer()
+//        self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
+        
+        
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         
-        let data :[String:AnyObject]=["medical_facility_id":task.medical_facility_id,"speciality_id":task.speciality_id,"care_activity_type_id":task.care_activity_type_id,"care_activity_category_id":task.care_activity_category_id,"selected_staff_ids":task.selected_staff_ids,"care_activity_id":task.care_activity_id,"patient_id":task.patient_id];
+        let data :[String:AnyObject]=["medical_facility_id":task.medical_facility_id,"speciality_id":task.speciality_id,"care_activity_type_id":task.care_activity_type_id,"care_activity_category_id":task.care_activity_category_id,"selected_staff_ids":"\"\(task.selected_staff_ids)\"","care_activity_id":task.care_activity_id,"patient_id":task.patient_id];
         
         println("create task data \(data)")
         self.operationManger.POST("http://www.iconglobalnetwork.com/mediband/api/create_task", parameters: data, success: { (requestOperation, responseObject) -> Void in
@@ -35,6 +40,7 @@ class TaskNetworkCall{
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         
         let data : [String:Int] = ["patient_id":lPatient_id, "care_activity_id":lCare_activity_id];
+        println("get task data \(data)")
         self.operationManger.POST("http://www.iconglobalnetwork.com/mediband/api/get_task_by_patient_id", parameters: data, success: { (requestOperation, responseObject) -> Void in
             println(responseObject)
             }, failure:{ (requestOperation, error) -> Void in

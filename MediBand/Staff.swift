@@ -44,4 +44,5 @@ class Staff {
        self.firstname = firstname
        self.image = image
     }
+    
 }
