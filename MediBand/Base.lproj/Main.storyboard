@@ -30,6 +30,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="BFU-he-EQ3" kind="show" identifier="patientSegue" id="i72-EI-d2j"/>
+                        <segue destination="14L-fE-wwp" kind="show" identifier="ExistingPatient" id="aT1-3l-6Mp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -837,6 +838,9 @@
                                         <variation key="heightClass=compact" misplaced="YES">
                                             <rect key="frame" x="133" y="281" width="334" height="39"/>
                                         </variation>
+                                        <connections>
+                                            <action selector="viewHistory:" destination="eXK-2u-vGx" eventType="touchUpInside" id="9pC-bz-Oqa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1073,7 +1077,7 @@
                     <connections>
                         <outlet property="tableView" destination="ZfU-e0-Pwt" id="QMM-TM-o3y"/>
                         <segue destination="h18-uE-6pg" kind="show" identifier="ViewPatient" id="iYo-GD-Zlm"/>
-                        <segue destination="p1b-SI-7Zd" kind="presentation" identifier="AddPatient" id="LSa-fA-FYq"/>
+                        <segue destination="BFU-he-EQ3" kind="show" identifier="EditPatient" id="1h7-qp-5Z6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVz-iJ-QYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1522,7 +1526,7 @@
         <!--SIGN UP-->
         <scene sceneID="dUo-u9-seO">
             <objects>
-                <viewController id="fJp-FR-f4Q" customClass="LoginViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="fJp-FR-f4Q" customClass="LoginViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nkR-tw-Fpy"/>
                         <viewControllerLayoutGuide type="bottom" id="cit-W1-SSP"/>
@@ -1600,7 +1604,7 @@
                         <outlet property="loginButton" destination="SFw-VJ-MzB" id="kq3-gM-a5a"/>
                         <outlet property="passwordTextfield" destination="eec-s0-KKz" id="5yn-At-t5h"/>
                         <outlet property="userNameTextfield" destination="MAO-LM-3IJ" id="TLa-ei-ghW"/>
-                        <segue destination="vx8-jI-g1H" kind="show" identifier="showActivities" id="K5m-yn-aw3"/>
+                        <segue destination="14L-fE-wwp" kind="show" identifier="LoginToPatients" id="k6a-Co-cpb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jj1-KA-tOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1654,6 +1658,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K17-fg-ybi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5345" y="1852"/>
+        </scene>
+        <!--Select Patient Pop Over Table View Controller-->
+        <scene sceneID="kst-fa-y1E">
+            <objects>
+                <tableViewController storyboardIdentifier="SelectPatientPopOverTableViewController" id="fa5-0i-3AJ" customClass="SelectPatientPopOverTableViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5M7-x7-5Cm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectPatientCell" id="RQw-Kg-p7r">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RQw-Kg-p7r" id="s6L-Q9-1P6">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fa5-0i-3AJ" id="DRv-yR-JjM"/>
+                            <outlet property="delegate" destination="fa5-0i-3AJ" id="D6b-ve-hzW"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="p1b-SI-7Zd" kind="show" identifier="PatientSelection" id="C2j-3g-Ns3"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Igi-KX-MO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-524" y="2564"/>
         </scene>
         <!--Case Detail View Controller-->
         <scene sceneID="hHL-qB-9z0">
@@ -1831,7 +1864,7 @@
                                         <rect key="frame" x="120" y="15" width="360" height="35.5"/>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
-                                        <state key="normal" title="ADD CARE ACTIVITY">
+                                        <state key="normal" title="ADD TASK">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2107,7 +2140,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeG-GA-g5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1883" y="2556"/>
+            <point key="canvasLocation" x="1815" y="2556"/>
         </scene>
         <!--My Navigation Controller-->
         <scene sceneID="BKC-ba-pMk">
@@ -2455,7 +2488,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfR-IN-YOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="311" y="2556"/>
+            <point key="canvasLocation" x="175" y="2564"/>
         </scene>
     </scenes>
     <resources>
@@ -2466,8 +2499,10 @@
         <image name="navBarIcon" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fQy-6g-Cow"/>
-        <segue reference="XFV-cB-7yU"/>
+        <segue reference="k6a-Co-cpb"/>
+        <segue reference="1h7-qp-5Z6"/>
+        <segue reference="iYo-GD-Zlm"/>
         <segue reference="chE-7V-Dgw"/>
+        <segue reference="fQy-6g-Cow"/>
     </inferredMetricsTieBreakers>
 </document>

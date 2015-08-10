@@ -39,14 +39,14 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
         
          self.sideMenuController()?.sideMenu?.delegate = self
         
-        let patientNetworkCall = PersonNewtworkCall()
-        patientNetworkCall.getPatient(13, fromMedicalFacility: 4) { (success) -> Void in
-            if success {
-                println(success)
-            }else {
-                println("failed")
-            }
-        }
+//        let patientNetworkCall = PersonNewtworkCall()
+//        patientNetworkCall.getPatient(13, fromMedicalFacility: 4) { (success) -> Void in
+//            if success {
+//                println(success)
+//            }else {
+//                println("failed")
+//            }
+//        }
 
         
         addCareButton.layer.cornerRadius = 4
@@ -57,6 +57,10 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
         
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.setScreeName("Patient Profile View")
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,6 +75,7 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
 
 
     @IBAction func addCareActionButton() {
+        self.trackEvent("UX", action: "Add care from patient view", label: "Add Care button", value: nil)
         
         self.performSegueWithIdentifier("AddCareActivity", sender: nil)
     }
@@ -78,11 +83,43 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
 
     @IBAction func viewCaseNoteActionButton() {
         
+        self.trackEvent("UX", action: "View Case Note", label: "View Case Button in Patient Profile", value: nil)
+        
         self.performSegueWithIdentifier("viewCaseNote", sender: nil)
     }
 
     @IBAction func viewHistoryActionButton() {
+        self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }
     @IBAction func updatePatientActionButton() {
+        
+        self.trackEvent("UX", action: "Updating patient", label: "update patient button in patient profile view", value: nil)
     }
 }
+
+extension PatientProfileViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
+}
+
+
+
+

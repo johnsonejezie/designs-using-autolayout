@@ -8,15 +8,23 @@
 
 import UIKit
 
-class MyMenuTableViewController: UITableViewController {
+class MyMenuTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     var selectedMenuItem : Int = 0
     
-    var arrayViewController = [
-        "My Task",
+    var arrayOfViewControllerAdmin = [
+        "Task",
         "Patients",
         "Scan Patient",
         "My Profile",
         "Staff",
+        "Logout"
+    ]
+    
+    var arrayViewController = [
+        "My Task",
+        "My Patients",
+        "Scan Patient",
+        "My Profile",
         "Logout"
     ]
     
@@ -49,7 +57,7 @@ class MyMenuTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return 4
+        return 6
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -64,8 +72,13 @@ class MyMenuTableViewController: UITableViewController {
             selectedBackgroundView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
             cell!.selectedBackgroundView = selectedBackgroundView
         }
+//        if User().role == "Admin" {
+            cell!.textLabel?.text = arrayOfViewControllerAdmin[indexPath.row]
+//        }else {
+//           cell!.textLabel?.text = arrayViewController[indexPath.row]
+//        }
         
-        cell!.textLabel?.text = arrayViewController[indexPath.row]
+        
         
         return cell!
     }
@@ -75,6 +88,8 @@ class MyMenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var isPop = false
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         println("Selected row: \(indexPath.row)")
         
@@ -95,17 +110,43 @@ class MyMenuTableViewController: UITableViewController {
             destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PatientsViewController")as! PatientsViewController
             break
         case 2:
-            destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("BarcodeViewController")as! ViewController
+            destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SelectPatientPopOverTableViewController") as! SelectPatientPopOverTableViewController
+            let height:CGFloat = 44 *  CGFloat(2)
+            destViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            destViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width, height)
+            var detailPopover: UIPopoverPresentationController = destViewController.popoverPresentationController!
+            detailPopover.sourceView = cell
+            detailPopover.sourceRect.origin.x = cell!.frame.size.width/2.2
+            detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
+            detailPopover.delegate = self
+            isPop = true
+            presentViewController(destViewController, animated: true, completion: nil)
             break
         case 3:
             destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
         case 4:
             destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("StaffViewController") as! StaffTableViewController
+        case 5:
+            destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         default:
             destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController4") as! UIViewController
             break
         }
-        sideMenuController()?.setContentViewController(destViewController)
+        if !isPop{
+           sideMenuController()?.setContentViewController(destViewController)
+        }
+        
+    }
+    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        println("I was called too")
+        selectedMenuItem = 0
+        tableView.reloadData()
+        return true
+    }
+    
+    func adaptivePresentationStyleForPresentationController(
+        controller: UIPresentationController) -> UIModalPresentationStyle {
+            return .None
     }
 
 }

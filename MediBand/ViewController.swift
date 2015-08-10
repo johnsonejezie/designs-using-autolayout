@@ -11,6 +11,8 @@ import AVFoundation
 
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate, ENSideMenuDelegate {
     
+    var isExistingPatient:Bool = false
+
     let session:AVCaptureSession = AVCaptureSession()
     var previewLayer:AVCaptureVideoPreviewLayer!
     var highlightView:UIView = UIView()
@@ -123,7 +125,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         println("scan again button clicked")
         if buttonIndex == 1 {
-           self.performSegueWithIdentifier("patientSegue", sender: patientID)
+            if isExistingPatient == false {
+                self.performSegueWithIdentifier("patientSegue", sender: patientID)
+            }else {
+                self.performSegueWithIdentifier("ExistingPatient", sender: isExistingPatient)
+            }
         }
     }
     
@@ -132,6 +138,10 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! AddPatientViewController
             controller.patientID = sender as! String
+        }else if segue.identifier == "ExistingPatient" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! PatientsViewController
+            controller.isExistingPatient = sender as! Bool
         }
     }
 

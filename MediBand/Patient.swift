@@ -43,16 +43,13 @@ class Patient {
     var next_of_kin: String = ""
     
     var addressotherphone: String = ""
-    
-    var medical_facility_id: String = ""
-    
     var patient_id:String = ""
     var language: String = ""
     
     var image: AnyObject?
     
     
-    init?(dob: String, surname: AnyObject, forename:AnyObject, middlename:AnyObject,lkp_nametitle:AnyObject, address:AnyObject,addresspostcode:String, addressphone:String, gp:String, gpsurgery:String, medicalinsuranceprovider:String, occupation:String, nationality:String, ischild:Bool, maritalstatus:String, next_of_kin_contact:String, addressotherphone: String, medical_facility_id: String, patient_id:String, language:String, next_of_kin:String, image:AnyObject){
+    init?(dob: String, surname: AnyObject, forename:AnyObject, middlename:AnyObject,lkp_nametitle:AnyObject, address:AnyObject,addresspostcode:String, addressphone:String, gp:String, gpsurgery:String, medicalinsuranceprovider:String, occupation:String, nationality:String, ischild:Bool, maritalstatus:String, next_of_kin_contact:String, addressotherphone: String, patient_id:String, language:String, next_of_kin:String, image:AnyObject){
         self.dob = dob
         self.surname = surname as! String
         self.forename = forename as! String
@@ -71,7 +68,6 @@ class Patient {
         self.next_of_kin = next_of_kin
         self.next_of_kin_contact = next_of_kin_contact
         self.addressotherphone = addressotherphone
-        self.medical_facility_id = medical_facility_id
         self.patient_id = patient_id
         self.language = language as String
         self.image = image

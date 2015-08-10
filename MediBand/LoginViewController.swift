@@ -52,41 +52,9 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func loginActionButton() {
-        
-        let parameters = [
-           "email": userNameTextfield.text,
-            "password": passwordTextfield.text,
-            "medical_facility_id": 4
-        ]
-        
-        let headers = [
-            "Content-Type": "application/x-www-form-urlencoded"
-        ]
-        
-        let url = "http://www.iconglobalnetwork.com/mediband/api/login"
-        
-        let manager = AFHTTPRequestOperationManager()
-        manager.requestSerializer = AFJSONRequestSerializer()
-        manager.responseSerializer = AFJSONResponseSerializer()
-        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        
-        manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!,
-            responseObject: AnyObject!) -> Void in
-            println(responseObject)
-            var jsonObject: JSON = JSON(responseObject!)
-            println("this is response \(responseObject)")
-            let message = jsonObject["message"].stringValue
-            if message == "Invalid email or password" {
-                let alertView = UIAlertView(title: "Login Error", message: "Invalid email or password", delegate: self, cancelButtonTitle: "Cancel")
-                alertView.delegate = self
-                alertView.show()
-            }
-
-            }) { (operation: AFHTTPRequestOperation!,
-                error: NSError!) -> Void in
-            println(error)
-        }
-//        self.performSegueWithIdentifier("showActivities", sender: nil)
+        let login = Login()
+        login.loginUserWith(userNameTextfield.text, andPassword: passwordTextfield.text)
+        trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
         
     }
     
@@ -97,9 +65,15 @@ class LoginViewController: UIViewController {
         
         let OKAction = UIAlertAction(title: "RESET", style: .Default) { (action) in
             // ...
+            self.trackEvent("UX", action: "Reset password", label: "Forgot password button", value: nil)
         }
         alertController.addAction(OKAction)
-
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default) { (action) -> Void in
+            //....
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
         
         alertController.addTextFieldWithConfigurationHandler { (textField) in
             textField.placeholder = "Email"
@@ -133,7 +107,7 @@ extension LoginViewController {
     func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
         let tracker = GAI.sharedInstance().defaultTracker
         let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
-//        tracker.send(trackDictionary)
+        tracker.send(trackDictionary as [NSObject: AnyObject])
     }
     
 }
