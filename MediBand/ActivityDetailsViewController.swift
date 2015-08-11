@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
+class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate, ENSideMenuDelegate{
 
     var currentCell : Int = 1;
     @IBOutlet var attendingProfButton: UIButton!
@@ -19,8 +19,11 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     @IBOutlet var attendingProfCollectionView: UICollectionView!
     var usersImage: [String] = ["HS1","HS5","HS6"]
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.attendingProfButton.titleLabel?.numberOfLines = 1;
         self.attendingProfButton.layer.cornerRadius = 5.0;
@@ -30,10 +33,18 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         self.attendingProfCollectionView.dataSource = self
         self.attendingProfCollectionView.delegate = self
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        setScreeName("Task Detail View")
+    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
     }
     
     override func viewWillLayoutSubviews() {
@@ -96,11 +107,13 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     @IBAction func viewPatientActionButton() {
         
+        trackEvent("UX", action: "View Patient", label: "view patient button from task detail view", value: nil)
         self.performSegueWithIdentifier("viewPatient", sender: nil)
     }
     
     
     @IBAction func viewCaseNote() {
+        trackEvent("UX", action: "View Case Note", label: "View case note from task detail  view", value: nil)
         self.performSegueWithIdentifier("viewCaseNote", sender: nil)
     }
     
@@ -112,3 +125,27 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 
     
 }
+
+extension ActivityDetailsViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
+}
+

@@ -21,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
-        // Configure tracker from GoogleService-Info.plist.
-//        var configureError:NSError?
-//        GGLContext.sharedInstance().configureWithError(&configureError)
-//        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
         // Optional: configure GAI options.
         var gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions

@@ -53,11 +53,9 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-MediBand/AFNetworking.framework'
-  install_framework 'Pods-MediBand/Alamofire.framework'
   install_framework 'Pods-MediBand/SwiftForms.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-MediBand/AFNetworking.framework'
-  install_framework 'Pods-MediBand/Alamofire.framework'
   install_framework 'Pods-MediBand/SwiftForms.framework'
 fi

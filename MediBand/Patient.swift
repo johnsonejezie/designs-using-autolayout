@@ -11,63 +11,65 @@ import Alamofire
 
 class Patient {
     
+    var dob: String = ""
+    var surname: String = ""
     
-    var surname: String
+    var forename:String = ""
     
-    var forename:String
+    var middlename:String = ""
     
-    var middlename:String
+    var lkp_nametitle:String = ""
     
-    var lkp_nametitle:String
+    var address:String = ""
     
-    var address:String
+    var addresspostcode:String = ""
     
-    var addresspostcode:String
+    var addressphone:String = ""
     
-    var addressphone:String
+    var gp:String = ""
     
-    var gp_id:Int
+    var gpsurgery:String = ""
     
-    var gpsurgery_id:Int
+    var medicalinsuranceprovider:String = ""
     
-    var medicalinsuranceprovider:String
+    var occupation:String = ""
     
-    var occupation:String
+    var nationality:String = ""
+    var ischild:Bool = false
+    var maritalstatus:String = ""
     
-    var nationality:String
-    var ischild:Bool
-    var maritalstatus_id:Int
+    var next_of_kin_contact:String = ""
     
-    var next_of_kin_contact:String
+    var next_of_kin: String = ""
     
-    var addressotherphone: String
+    var addressotherphone: String = ""
+    var patient_id:String = ""
+    var language: String = ""
     
-    var medical_facility_id: Int
-    
-    var patient_id:Int
-    
-    var image: NSData
+    var image: AnyObject?
     
     
-    init?(surname: String, forename:String, middlename:String,lkp_nametitle:String, address:String,addresspostcode:String, addressphone:String, gp_id:Int, gpsurgery_id:Int, medicalinsuranceprovider:String, occupation:String, nationality:String, ischild:Bool, maritalstatus_id:Int, next_of_kin_contact:String, addressotherphone: String, medical_facility_id: Int, patient_id:Int, image: NSData){
-        self.surname = surname
-        self.forename = forename
-        self.middlename = middlename
-        self.lkp_nametitle = lkp_nametitle
-        self.address = address
+    init?(dob: String, surname: AnyObject, forename:AnyObject, middlename:AnyObject,lkp_nametitle:AnyObject, address:AnyObject,addresspostcode:String, addressphone:String, gp:String, gpsurgery:String, medicalinsuranceprovider:String, occupation:String, nationality:String, ischild:Bool, maritalstatus:String, next_of_kin_contact:String, addressotherphone: String, patient_id:String, language:String, next_of_kin:String, image:AnyObject){
+        self.dob = dob
+        self.surname = surname as! String
+        self.forename = forename as! String
+        self.middlename = middlename as! String
+        self.lkp_nametitle = lkp_nametitle as! String
+        self.address = address as! String
         self.addresspostcode = addresspostcode
         self.addressphone = addressphone
-        self.gp_id = gp_id
-        self.gpsurgery_id = gpsurgery_id
+        self.gp = gp
+        self.gpsurgery = gpsurgery
         self.medicalinsuranceprovider = medicalinsuranceprovider
         self.occupation = occupation
         self.nationality = nationality
         self.ischild = ischild
-        self.maritalstatus_id = maritalstatus_id
+        self.maritalstatus = maritalstatus
+        self.next_of_kin = next_of_kin
         self.next_of_kin_contact = next_of_kin_contact
         self.addressotherphone = addressotherphone
-        self.medical_facility_id = medical_facility_id
         self.patient_id = patient_id
+        self.language = language as String
         self.image = image
         
         

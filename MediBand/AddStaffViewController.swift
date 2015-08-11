@@ -10,10 +10,10 @@ import UIKit
 
 protocol addStaffControllerDelegate: class {
     func addStaffViewController(controller: AddStaffViewController,
-        finishedAddingStaff staff: [String : String])
+        finishedAddingStaff staff: Staff)
 }
 
-class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ENSideMenuDelegate {
     
     weak var delegate: addStaffControllerDelegate!
 
@@ -27,6 +27,9 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBOutlet weak var editPicButton: UIButton!
     
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var generalPracIDTextView: UITextField!
+    @IBOutlet var roleIDTextView: UITextField!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var specialityTextField: UITextField!
@@ -39,6 +42,9 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
     
     @IBAction func editButtonAction(sender: AnyObject) {
         
@@ -60,30 +66,55 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         let dataImage:NSData = UIImagePNGRepresentation(staffImageView.image)
         let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
 
+        var firstname:String = firstNameTextField.text!
+        var surname:String = lastNameTextField.text!
+        var gpID:String = generalPracIDTextView.text!
+        var specialityID:String = specialityTextField.text!
+        var member_id:String = staffID.text!
+        var role_id:String = roleIDTextView.text!
+        var email:String = emailTextField.text!
+    
         
-        var name:String = firstNameTextField.text + " " + lastNameTextField.text
-        var gpID:String = GeneralPractitionerIDLabel.text!
-        let gPracticeID: String = GeneralPracticeIDLabel.text!
+        var staff = Staff()
+        staff.medical_facility_id = "4"
+        staff.speciality_id = specialityID
+        staff.general_practional_id = gpID
+        staff.member_id = member_id
+        staff.role_id = role_id
+        staff.email = email
+        staff.surname=surname
+        staff.firstname = firstname
+        staff.image = "N/A"
         
-        var staff:Dictionary<String, String> = [
-            "name": name,
-            "staffID": staffID.text,
-            "staffImage": imageString,
-            "generalPractitionerID": gpID,
-            "generalPracticeID": gpID,
-            "speciality": specialityTextField.text
-            
-        ]
+        var staffMethods = StaffNetworkCall()
+        staffMethods.create(staff)
+//        var staff:Dictionary<String, String> = [
+//            "name": name,
+//            "staffID": staffID.text,
+//            "staffImage": imageString,
+//            "generalPractitionerID": gpID,
+//            "generalPracticeID": gpID,
+//            "speciality": specialityTextField.text
+//            
+//        ]
+        
+        self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
         
         delegate?.addStaffViewController(self, finishedAddingStaff: staff)
         self.dismissViewControllerAnimated(true, completion: nil)
     
         
     }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        GeneralPracticeIDLabel.text = " \(arc4random_uniform(1000))"
-        GeneralPractitionerIDLabel.text = " \(arc4random_uniform(100000))"
+        
+         self.sideMenuController()?.sideMenu?.delegate = self
+//        GeneralPracticeIDLabel.text = " \(arc4random_uniform(1000))"
+//        GeneralPractitionerIDLabel.text = " \(arc4random_uniform(100000))"
 
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
@@ -91,20 +122,20 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         view.addGestureRecognizer(tap)
 
         firstNameTextField.layer.cornerRadius = 5
-        GeneralPracticeIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
-        GeneralPractitionerIDLabel.clipsToBounds = true
-        GeneralPracticeIDLabel.clipsToBounds = true
-         GeneralPractitionerIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
+//        GeneralPracticeIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
+//        GeneralPractitionerIDLabel.clipsToBounds = true
+//        GeneralPracticeIDLabel.clipsToBounds = true
+//         GeneralPractitionerIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
         
         
-        GeneralPractitionerIDLabel.layer.cornerRadius = 5
-        
-        GeneralPracticeIDLabel.layer.cornerRadius = 5
-        
-        GeneralPracticeIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
-        GeneralPractitionerIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
-
-
+//        GeneralPractitionerIDLabel.layer.cornerRadius = 5
+//        
+//        GeneralPracticeIDLabel.layer.cornerRadius = 5
+//        
+//        GeneralPracticeIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
+//        GeneralPractitionerIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
+//
+//
         
         lastNameTextField.layer.cornerRadius = 5
         specialityTextField.layer.cornerRadius = 5
@@ -167,24 +198,25 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
 
 extension AddStaffViewController {
     
-    func setScreeName(name: String) {
-        self.title = name
-        self.sendScreenView(name)
-    }
-    
-    func sendScreenView(screenName: String) {
-        let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: self.title)
-        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        func setScreeName(name: String) {
+            self.title = name
+            self.sendScreenView(name)
+        }
         
-        tracker.send(build as [NSObject: AnyObject])
-    }
-    
-    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
-        let tracker = GAI.sharedInstance().defaultTracker
-        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
-        //        tracker.send(trackDictionary)
-    }
+        func sendScreenView(screenName: String) {
+            let tracker = GAI.sharedInstance().defaultTracker
+            tracker.set(kGAIScreenName, value: self.title)
+            let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+            
+            tracker.send(build as [NSObject: AnyObject])
+        }
+        
+        func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+            let tracker = GAI.sharedInstance().defaultTracker
+            let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+            tracker.send(trackDictionary as [NSObject: AnyObject])
+        }
+        
     
 }
 

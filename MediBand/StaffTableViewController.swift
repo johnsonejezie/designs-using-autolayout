@@ -8,28 +8,56 @@
 
 import UIKit
 
-class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
+class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate, ENSideMenuDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var staffs:[Dictionary<String, String>] = []
+    var staffs:[Staff] = []
     @IBAction func addStaffButton(sender: UIBarButtonItem) {
         
         self.performSegueWithIdentifier("AddStaff", sender: nil)
         
     }
+    
+    
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         var staffMethods = StaffNetworkCall()
+        
+        staffMethods.getStaffs(4, completionBlock: { (done) -> Void in
+            if(done){
+               println("all staffs fetched and passed from staff table view controller")
+                self.tableView.reloadData()
+                println("staff count \(sharedDataSingleton.allStaffs.count) ")
+            }else{
+            println("error fetching and passing all staffs from staff table view controller")
+
+            }
+        })
+         self.sideMenuController()?.sideMenu?.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
         
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.setScreeName("Staff List")
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if staffs.count == 0 {
+        if sharedDataSingleton.allStaffs.count == 0 {
             return 1
         }else{
-          return staffs.count
+          return sharedDataSingleton.allStaffs.count
         }
     }
     
@@ -37,7 +65,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("StaffCell") as! StaffTableViewCell
         
-        if staffs.count == 0 {
+        if sharedDataSingleton.allStaffs.count == 0 {
             cell.emptyLabel.hidden = false
             cell.staffIDLabel.hidden = true
             cell.staffImageView.hidden = true
@@ -59,12 +87,12 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
             cell.flagImageView.addGestureRecognizer(tap)
             
             
-            let staff = staffs[indexPath.row]
-            
-            let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-            
-            cell.staffNameLabel.text = staff["name"]
-            cell.staffIDLabel.text = staff["staffID"]
+            var staff = sharedDataSingleton.allStaffs[indexPath.row]
+            let imageData:NSData = NSData(base64EncodedString: staff.image as String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+            println("member id \(staff.member_id)")
+             println("general id \(staff.general_practional_id)")
+            cell.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
+            cell.staffIDLabel.text = staff.id
             //            cell.staffContactLabel.text = staff["contact"]
             cell.staffImageView.image = UIImage(data: imageData)
         }
@@ -74,7 +102,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let staff = staffs[indexPath.row]
+        let staff = sharedDataSingleton.allStaffs[indexPath.row]
         self.performSegueWithIdentifier("StaffProfile", sender: staff);
     }
     
@@ -94,15 +122,38 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
                 as! UINavigationController
             let controller = navigationController.topViewController
                 as! StaffProfileViewController
-            controller.staff = sender as! [String: String]
+            controller.staff = sender as! Staff
             
         }
     }
     
-    func addStaffViewController(controller: AddStaffViewController, finishedAddingStaff staff: [String : String]) {
+    func addStaffViewController(controller: AddStaffViewController, finishedAddingStaff staff: Staff) {
         staffs.insert(staff, atIndex: staffs.count)
         tableView.reloadData()
         println("delegate called")
     }
 
+}
+
+extension StaffTableViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
 }

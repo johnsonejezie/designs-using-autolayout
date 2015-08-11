@@ -8,20 +8,32 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, ENSideMenuDelegate {
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     
+    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
+        toggleSideMenuView()
+    }
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.sideMenuController()?.sideMenu?.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
         self.view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.setScreeName("Task View")
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        return true
     }
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -102,4 +114,27 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             return navController
     }
 
+}
+
+extension ActivitiesViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
 }
