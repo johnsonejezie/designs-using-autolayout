@@ -136,7 +136,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Firstname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Wy-bC-5ek">
-                                        <rect key="frame" x="16" y="177" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="172" width="568" height="28"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -148,13 +148,13 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Speciality" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jRb-Dl-DIi">
-                                        <rect key="frame" x="16" y="220" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="210" width="568" height="28"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Staff ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X8d-61-Rsf">
-                                        <rect key="frame" x="16" y="259" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="248" width="568" height="28"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -183,13 +183,13 @@
                                     <constraint firstItem="W4V-A4-1zz" firstAttribute="top" secondItem="Vx4-xX-uwk" secondAttribute="bottom" constant="10" id="1Ib-wU-2MX"/>
                                     <constraint firstItem="X8d-61-Rsf" firstAttribute="width" secondItem="jRb-Dl-DIi" secondAttribute="width" id="2QN-G5-SAy"/>
                                     <constraint firstItem="Vx4-xX-uwk" firstAttribute="top" secondItem="TT7-Aj-Hjo" secondAttribute="bottom" constant="10" id="3ml-o1-xgK"/>
-                                    <constraint firstItem="X8d-61-Rsf" firstAttribute="top" secondItem="jRb-Dl-DIi" secondAttribute="bottom" constant="11" id="5IB-Sh-iq1"/>
-                                    <constraint firstItem="jRb-Dl-DIi" firstAttribute="top" secondItem="1Wy-bC-5ek" secondAttribute="bottom" constant="15" id="6an-Ca-mqg"/>
+                                    <constraint firstItem="X8d-61-Rsf" firstAttribute="top" secondItem="jRb-Dl-DIi" secondAttribute="bottom" constant="10" id="5IB-Sh-iq1"/>
+                                    <constraint firstItem="jRb-Dl-DIi" firstAttribute="top" secondItem="1Wy-bC-5ek" secondAttribute="bottom" constant="10" id="6an-Ca-mqg"/>
                                     <constraint firstItem="W4V-A4-1zz" firstAttribute="height" secondItem="Vx4-xX-uwk" secondAttribute="height" id="9He-Oo-nWs"/>
                                     <constraint firstItem="W4V-A4-1zz" firstAttribute="height" secondItem="HhT-Hn-Q4G" secondAttribute="height" multiplier="0.08" id="CXa-7Y-YyC"/>
                                     <constraint firstItem="jRb-Dl-DIi" firstAttribute="centerX" secondItem="1Wy-bC-5ek" secondAttribute="centerX" id="D8a-wZ-4sY"/>
                                     <constraint firstAttribute="centerX" secondItem="X8d-61-Rsf" secondAttribute="centerX" id="ELD-WX-c7a"/>
-                                    <constraint firstItem="1Wy-bC-5ek" firstAttribute="top" secondItem="W4V-A4-1zz" secondAttribute="bottom" constant="15" id="EhJ-X3-Ayd"/>
+                                    <constraint firstItem="1Wy-bC-5ek" firstAttribute="top" secondItem="W4V-A4-1zz" secondAttribute="bottom" constant="10" id="EhJ-X3-Ayd"/>
                                     <constraint firstItem="jRb-Dl-DIi" firstAttribute="height" secondItem="1Wy-bC-5ek" secondAttribute="height" id="KkX-c6-ENr"/>
                                     <constraint firstItem="TT7-Aj-Hjo" firstAttribute="height" secondItem="W4V-A4-1zz" secondAttribute="height" id="KmL-rg-vME"/>
                                     <constraint firstAttribute="centerX" secondItem="lUC-mj-ZFP" secondAttribute="centerX" id="M6q-Lb-RXc"/>

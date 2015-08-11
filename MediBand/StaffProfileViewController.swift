@@ -37,11 +37,11 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
         
 //        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
 //        staffImageView.image = UIImage(data: imageData)
-//        staffIDLabel.text = staff["staffID"]
-//        staffNameLabel.text = staff["name"]
-//        generalPractitionerIDLabel.text = staff["generalPractitionerID"]
-//        generlPracticeLabel.text = staff["generalPracticeID"]
-//        specialityLabel.text = staff["speciality"]
+        staffIDLabel.text = staff.id
+        staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
+        generalPractitionerIDLabel.text = staff.general_practional_id
+        generlPracticeLabel.text = staff.email
+        specialityLabel.text = staff.speciality
 
     }
     

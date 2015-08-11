@@ -136,9 +136,12 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
 //        GeneralPractitionerIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
 //
 //
-        
+        emailTextField.layer.cornerRadius = 5
+        roleIDTextView.layer.cornerRadius = 5
+        generalPracIDTextView.layer.cornerRadius = 5
         lastNameTextField.layer.cornerRadius = 5
         specialityTextField.layer.cornerRadius = 5
+        staffID.layer
         
         firstNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         lastNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
