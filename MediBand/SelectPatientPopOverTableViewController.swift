@@ -61,6 +61,7 @@ class SelectPatientPopOverTableViewController: UITableViewController {
         }else {
             isExistingPatient = false
         }
+        self.dismissViewControllerAnimated(true, completion: nil)
 
         self.performSegueWithIdentifier("PatientSelection", sender: isExistingPatient)
     }

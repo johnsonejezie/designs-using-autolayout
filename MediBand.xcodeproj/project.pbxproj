@@ -49,6 +49,14 @@
 		A5D15A501B4995E400DC15AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A4F1B4995E400DC15AB /* Images.xcassets */; };
 		A5D15A531B4995E400DC15AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A511B4995E400DC15AB /* LaunchScreen.xib */; };
 		A5D15A5F1B4995E400DC15AB /* MediBandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A5E1B4995E400DC15AB /* MediBandTests.swift */; };
+		A5DED1361B7CAB81003461D3 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED12E1B7CAB81003461D3 /* GCD.swift */; };
+		A5DED1371B7CAB81003461D3 /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED12F1B7CAB81003461D3 /* Net.swift */; };
+		A5DED1381B7CAB81003461D3 /* NetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1301B7CAB81003461D3 /* NetData.swift */; };
+		A5DED1391B7CAB81003461D3 /* NetDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1311B7CAB81003461D3 /* NetDownloadTask.swift */; };
+		A5DED13A1B7CAB81003461D3 /* NetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1321B7CAB81003461D3 /* NetHelper.swift */; };
+		A5DED13B1B7CAB81003461D3 /* NetRequestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1331B7CAB81003461D3 /* NetRequestSerialization.swift */; };
+		A5DED13C1B7CAB81003461D3 /* NetResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1341B7CAB81003461D3 /* NetResponseData.swift */; };
+		A5DED13D1B7CAB81003461D3 /* NetUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1351B7CAB81003461D3 /* NetUploadTask.swift */; };
 		A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */; };
 		A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */; };
 		B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4140736F615BCEE6A380469F /* Pods_MediBand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -126,6 +134,14 @@
 		A5D15A581B4995E400DC15AB /* MediBandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediBandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D15A5D1B4995E400DC15AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D15A5E1B4995E400DC15AB /* MediBandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediBandTests.swift; sourceTree = "<group>"; };
+		A5DED12E1B7CAB81003461D3 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
+		A5DED12F1B7CAB81003461D3 /* Net.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Net.swift; sourceTree = "<group>"; };
+		A5DED1301B7CAB81003461D3 /* NetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetData.swift; sourceTree = "<group>"; };
+		A5DED1311B7CAB81003461D3 /* NetDownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetDownloadTask.swift; sourceTree = "<group>"; };
+		A5DED1321B7CAB81003461D3 /* NetHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetHelper.swift; sourceTree = "<group>"; };
+		A5DED1331B7CAB81003461D3 /* NetRequestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetRequestSerialization.swift; sourceTree = "<group>"; };
+		A5DED1341B7CAB81003461D3 /* NetResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResponseData.swift; sourceTree = "<group>"; };
+		A5DED1351B7CAB81003461D3 /* NetUploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetUploadTask.swift; sourceTree = "<group>"; };
 		A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewController.swift; sourceTree = "<group>"; };
 		A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +196,7 @@
 		A57B41131B6BB675007C735F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A5DED12D1B7CAB81003461D3 /* Net */,
 				A57B41141B6BB675007C735F /* GAI.h */,
 				A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */,
 				A57B41161B6BB675007C735F /* GAIEcommerceFields.h */,
@@ -317,6 +334,21 @@
 				A5D15A5D1B4995E400DC15AB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5DED12D1B7CAB81003461D3 /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				A5DED12E1B7CAB81003461D3 /* GCD.swift */,
+				A5DED12F1B7CAB81003461D3 /* Net.swift */,
+				A5DED1301B7CAB81003461D3 /* NetData.swift */,
+				A5DED1311B7CAB81003461D3 /* NetDownloadTask.swift */,
+				A5DED1321B7CAB81003461D3 /* NetHelper.swift */,
+				A5DED1331B7CAB81003461D3 /* NetRequestSerialization.swift */,
+				A5DED1341B7CAB81003461D3 /* NetResponseData.swift */,
+				A5DED1351B7CAB81003461D3 /* NetUploadTask.swift */,
+			);
+			path = Net;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,15 +507,22 @@
 				A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */,
 				A57B41B41B6D2073007C735F /* Patient.swift in Sources */,
 				A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */,
+				A5DED13B1B7CAB81003461D3 /* NetRequestSerialization.swift in Sources */,
 				A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */,
 				A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */,
+				A5DED1361B7CAB81003461D3 /* GCD.swift in Sources */,
 				A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */,
 				A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */,
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
 				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
+				A5DED13C1B7CAB81003461D3 /* NetResponseData.swift in Sources */,
 				A51D3FFA1B52B9D900C77665 /* NewCareActivityViewController.swift in Sources */,
+				A5DED1391B7CAB81003461D3 /* NetDownloadTask.swift in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
+				A5DED1381B7CAB81003461D3 /* NetData.swift in Sources */,
+				A5DED1371B7CAB81003461D3 /* Net.swift in Sources */,
 				A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */,
+				A5DED13A1B7CAB81003461D3 /* NetHelper.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
 				A51D3FCB1B51060500C77665 /* PatientProfileViewController.swift in Sources */,
 				A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */,
@@ -498,6 +537,7 @@
 				A521446E1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift in Sources */,
 				A57B415A1B6CF839007C735F /* User.swift in Sources */,
 				A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */,
+				A5DED13D1B7CAB81003461D3 /* NetUploadTask.swift in Sources */,
 				A52144671B76AA8E00B65E22 /* ENSideMenu.swift in Sources */,
 				42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */,
 				A52144701B77A65B00B65E22 /* DataSingleton.swift in Sources */,

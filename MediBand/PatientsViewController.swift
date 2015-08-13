@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate, ENSideMenuDelegate {
     
     var isExistingPatient:Bool = false
+    var patientID:String = ""
     
     @IBAction func navBar(sender: UIBarButtonItem) {
         
@@ -18,19 +20,42 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         toggleSideMenuView()
         
     }
-    var patients = [Patient]()
+    var patients = sharedDataSingleton.patients
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.sideMenuController()?.sideMenu?.delegate = self
-        
         let patientNetworkCall = PersonNewtworkCall()
-        
+        if sharedDataSingleton.patients.count > 0 {
+            patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+                if success == true {
+                    println("successfully fetched patient")
+                    self.patients = sharedDataSingleton.patients
+                    self.tableView.reloadData()
+                }else {
+                    println("failed")
+                }
+            }
+        }else {
+            SwiftSpinner.show("Loading Patients", animated: true)
+            patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+                if success == true {
+                    println("successfully fetched patient")
+                    self.patients = sharedDataSingleton.patients
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                }else {
+                    println("failed")
+                }
+            }
+        }
+
+
+         self.sideMenuController()?.sideMenu?.delegate = self
+                
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,9 +79,10 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("patientsCell") as! PatientsTableViewCell
         
         if patients.count > 0 {
-            let list = patients[indexPath.row]
-            cell.patientNameLabel.text = list.forename + list.surname
-            cell.generalPhysicianLabel.text = list.gp
+            let patient = patients[indexPath.row]
+            println(patient.occupation)
+            cell.patientNameLabel.text = patient.forename + " " + patient.surname
+            cell.generalPhysicianLabel.text = patient.gp
         }else {
            cell.patientNameLabel.text = "Mr FRED PATRICK"
         }
@@ -64,13 +90,12 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
         var selectedPatient: Patient = patients[indexPath.row]
-        
+        sharedDataSingleton.selectedPatient = patients[indexPath.row]
         if isExistingPatient {
            performSegueWithIdentifier("EditPatient", sender: selectedPatient)
         }else{
-             performSegueWithIdentifier("ViewPatient", sender: nil)
+             performSegueWithIdentifier("ViewPatient", sender: selectedPatient)
         }
     }
     
@@ -88,8 +113,12 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
                 as! UINavigationController
             let controller = navigationController.topViewController
                 as! AddPatientViewController
-            controller.selectedPatient = sender as? Patient
+            controller.patientID = patientID
             controller.isEditingPatient = true
+        }else if segue.identifier == "ViewPatient" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! PatientProfileViewController
+            controller.patient = sender as? Patient
         }
     }
 

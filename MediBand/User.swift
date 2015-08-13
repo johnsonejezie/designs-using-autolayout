@@ -17,7 +17,7 @@ class User {
     var role: String = ""
     var memberid: String = ""
     var speciality: String = ""
-    var id : Int = 0
+    var id : String = ""
     var general_practitioner_id: String = ""
     var image:AnyObject = ""
     var created: String = ""

@@ -126,6 +126,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         println("scan again button clicked")
         if buttonIndex == 1 {
             if isExistingPatient == false {
+                 sharedDataSingleton.selectedPatient = nil
                 self.performSegueWithIdentifier("patientSegue", sender: patientID)
             }else {
                 self.performSegueWithIdentifier("ExistingPatient", sender: isExistingPatient)
@@ -142,6 +143,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! PatientsViewController
             controller.isExistingPatient = sender as! Bool
+            controller.patientID = patientID
         }
     }
 

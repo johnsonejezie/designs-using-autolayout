@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import SwiftSpinner
 
 class LoginViewController: UIViewController {
     
@@ -52,10 +53,17 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func loginActionButton() {
+        SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
-        login.loginUserWith(userNameTextfield.text, andPassword: passwordTextfield.text)
+        login.loginUserWith("johnson.ejezie@andela.com", andPassword: "wNWy") { (success) -> Void in
+            if success == true {
+                println("successful")
+                self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+            }else {
+                println("error")
+            }
+        }
         trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
-        
     }
     
     

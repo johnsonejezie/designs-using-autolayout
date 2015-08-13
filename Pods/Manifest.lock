@@ -20,14 +20,20 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Alamofire (1.3.1)
   - SwiftForms (1.0)
+  - SwiftSpinner (0.7.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
+  - Alamofire (~> 1.3)
   - SwiftForms
+  - SwiftSpinner
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
   SwiftForms: b16bf2978e6eb6617bc9f438322a1daa6c3d2dbd
+  SwiftSpinner: 034bb8b00675b3e4f4c97531fa9af3f550462192
 
 COCOAPODS: 0.38.0.beta.2

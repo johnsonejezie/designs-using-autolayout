@@ -13,38 +13,27 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
     
     @IBOutlet weak var staffImageView: UIImageView!
     @IBOutlet weak var staffNameLabel: UILabel!
-    
     @IBOutlet weak var staffIDLabel: UILabel!
     @IBOutlet weak var specialityLabel: UILabel!
     @IBOutlet weak var generlPracticeLabel: UILabel!
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
     var staff: Dictionary<String, String>!
-    
-    
+
     @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
         toggleSideMenuView()
     }
-    
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
     }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        staffNameLabel.text = sharedDataSingleton.user.firstName + " " + sharedDataSingleton.user.surname
+        staffIDLabel.text = sharedDataSingleton.user.memberid
+        specialityLabel.text = sharedDataSingleton.user.speciality
+        generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
+        generlPracticeLabel.text = sharedDataSingleton.user.medical_facility
          self.sideMenuController()?.sideMenu?.delegate = self
-        
-//        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-//        staffImageView.image = UIImage(data: imageData)
-//        staffIDLabel.text = staff["staffID"]
-//        staffNameLabel.text = staff["name"]
-//        generalPractitionerIDLabel.text = staff["generalPractitionerID"]
-//        generlPracticeLabel.text = staff["generalPracticeID"]
-//        specialityLabel.text = staff["speciality"]
-
     }
-    
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")
     }
@@ -56,12 +45,8 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
     
     
     @IBAction func viewHistory(sender: UIButton) {
-        
         self.trackEvent("UX", action:"View Staff History" , label: "Staff history button", value: nil)
     }
-    
-    
-    
 }
 
 extension StaffProfileViewController {

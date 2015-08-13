@@ -11,7 +11,7 @@ import UIKit
 class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     
     
-    
+    var patient:Patient!
     @IBOutlet weak var imageView: UIImageView!
     
 
@@ -19,9 +19,11 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     
     @IBOutlet weak var emailAddressLabel: UILabel!
     
+    @IBOutlet var firstNameLabel: UILabel!
     
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet var lastNameLabel: UILabel!
     
     @IBOutlet weak var generalPhysicianLabel: UILabel!
     @IBOutlet weak var addCareButton: UIButton!
@@ -36,27 +38,22 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         self.sideMenuController()?.sideMenu?.delegate = self
-        
-//        let patientNetworkCall = PersonNewtworkCall()
-//        patientNetworkCall.getPatient(13, fromMedicalFacility: 4) { (success) -> Void in
-//            if success {
-//                println(success)
-//            }else {
-//                println("failed")
-//            }
-//        }
-
-        
+        self.sideMenuController()?.sideMenu?.delegate = self
         addCareButton.layer.cornerRadius = 4
         viewCaseNoteButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
         UpdatePatientButton.layer.cornerRadius = 4
-        
-        
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        firstNameLabel.text = patient.forename.uppercaseString
+        lastNameLabel.text = patient.surname.uppercaseString
+        contactLabel.text = patient.addressphone
+        addressLabel.text = patient.address
+        generalPhysicianLabel.text = patient.gp
+        let image = UIImage(contentsOfFile: patient.image as! String)
+        println(image)
+//        imageView.image = image
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,8 +68,6 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
     }
-    
-
 
     @IBAction func addCareActionButton() {
         self.trackEvent("UX", action: "Add care from patient view", label: "Add Care button", value: nil)
