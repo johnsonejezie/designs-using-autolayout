@@ -16,7 +16,7 @@ class Task{
     var speciality_id:Int!;
     var care_activity_type_id:Int!;
     var care_activity_category_id:Int!;
-    var selected_staff_ids:[Int] = [];
+    var selected_staff_ids:[String] = [];
     var medical_facility_id:Int;
     var operationManger = AFHTTPRequestOperationManager()
     
@@ -27,7 +27,7 @@ class Task{
     speciality_id:Int!,
     care_activity_type_id:Int!,
     care_activity_category_id:Int!,
-    selected_staff_ids:[Int],
+    selected_staff_ids:[String],
     medical_facility_id:Int!
         ){
             self.patient_id = patient_id;

@@ -75,15 +75,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        var test = TaskNetworkCall()
-//        var test2 = StaffNetworkCall()
-//        var staff = Staff(medical_facility_id:"4", speciality_id:"2", general_practional_id:"3", member_id: "41", role_id:"1", email: "johnsonejezie@gmail.com", surname: "Jay", firstname: "Jay", image: "no image")
-//        test2.create(staff!);
-//        var task = Task(patient_id: 419, care_activity_id: 2, speciality_id: 2, care_activity_type_id: 2, care_activity_category_id: 2, selected_staff_ids:[31,29], medical_facility_id: 4)
-//        test2.getStaffs(4);
-//        test2.viewStaff("bukky@yahoo.com");
-//        
-//        test.create(task);
+     
 //        test.getTaskByPatient(419, lCare_activity_id: 2);
         self.sideMenuController()?.sideMenu?.delegate = self
         

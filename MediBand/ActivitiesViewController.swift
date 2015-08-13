@@ -20,6 +20,22 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        var taskActions = TaskNetworkCall()
+        
+//        taskActions.getTaskByStaff(32, lCare_activity_id: "Teaching Hospital");
+//        taskActions.create(<#task: Task#>);
+        var test = TaskNetworkCall()
+        //        var test2 = StaffNetworkCall()
+        //        var staff = Staff(medical_facility_id:"4", speciality_id:"2", general_practional_id:"3", member_id: "41", role_id:"1", email: "johnsonejezie@gmail.com", surname: "Jay", firstname: "Jay", image: "no image")
+        //        test2.create(staff!);
+        var task = Task(patient_id: 419, care_activity_id: 2, speciality_id: 2, care_activity_type_id: 2, care_activity_category_id: 2, selected_staff_ids:["31","32"], medical_facility_id: 4)
+        //        test2.getStaffs(4);
+        //        test2.viewStaff("bukky@yahoo.com");
+        //        
+        test.create(task);
+        
+        
+        
          self.sideMenuController()?.sideMenu?.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
