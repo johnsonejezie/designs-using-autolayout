@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */; };
+		422446A21B70C87E00C12612 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A11B70C87E00C12612 /* Task.swift */; };
+		422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A31B70D61500C12612 /* StaffNetworkCall.swift */; };
+		422446A61B70D62B00C12612 /* TaskNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A51B70D62B00C12612 /* TaskNetworkCall.swift */; };
 		4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4233C33B1B66588E00F8337E /* MenuViewController.swift */; };
 		42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */; };
 		A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3F8F1B50687F00C77665 /* AddPatientViewController.swift */; };
@@ -26,6 +29,14 @@
 		A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */; };
 		A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */; };
 		A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */; };
+		A56E0C371B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C331B8060A60098AE9D /* Info.plist */; };
+		A56E0C381B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C331B8060A60098AE9D /* Info.plist */; };
+		A56E0C391B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C351B8060A60098AE9D /* Info.plist */; };
+		A56E0C3A1B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C351B8060A60098AE9D /* Info.plist */; };
+		A56E0C3B1B8060A60098AE9D /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C361B8060A60098AE9D /* Just.swift */; };
+		A56E0C3C1B8060A60098AE9D /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C361B8060A60098AE9D /* Just.swift */; };
+		A56E0C401B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
+		A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
 		A57B411F1B6BB686007C735F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B411E1B6BB686007C735F /* CoreData.framework */; };
 		A57B41211B6BB6A6007C735F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41201B6BB6A6007C735F /* SystemConfiguration.framework */; };
 		A57B41231B6BB6AF007C735F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41221B6BB6AF007C735F /* libz.dylib */; };
@@ -76,6 +87,9 @@
 		25E776AD329322447BA3A00C /* Pods-MediBand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediBand.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediBand/Pods-MediBand.debug.xcconfig"; sourceTree = "<group>"; };
 		4140736F615BCEE6A380469F /* Pods_MediBand.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediBand.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffProfileViewController.swift; sourceTree = "<group>"; };
+		422446A11B70C87E00C12612 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		422446A31B70D61500C12612 /* StaffNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffNetworkCall.swift; sourceTree = "<group>"; };
+		422446A51B70D62B00C12612 /* TaskNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNetworkCall.swift; sourceTree = "<group>"; };
 		4233C33B1B66588E00F8337E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		8139F1F108DEE0889D162C80 /* Pods-MediBand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediBand.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediBand/Pods-MediBand.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +110,14 @@
 		A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNetworkCall.swift; sourceTree = "<group>"; };
 		A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStatusTableViewController.swift; sourceTree = "<group>"; };
 		A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySegmentControl.swift; sourceTree = "<group>"; };
+		A56E0BFF1B805EC50098AE9D /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = "../../../Downloads/Just-swift-2.0/build/Debug-iphoneos/Just.framework"; sourceTree = "<group>"; };
+		A56E0C011B805EE90098AE9D /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = "../../../Downloads/Just-swift-2.0/build/Debug/Just.framework"; sourceTree = "<group>"; };
+		A56E0C331B8060A60098AE9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A56E0C351B8060A60098AE9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A56E0C361B8060A60098AE9D /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
+		A56E0C3D1B8085170098AE9D /* MediBandTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediBandTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A57B41141B6BB675007C735F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		A57B41161B6BB675007C735F /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
@@ -173,6 +195,8 @@
 		47E747919BA52CDD2C11B70F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A56E0C011B805EE90098AE9D /* Just.framework */,
+				A56E0BFF1B805EC50098AE9D /* Just.framework */,
 				A57B416D1B6D07C0007C735F /* SwiftForms.framework */,
 				A57B41561B6CC132007C735F /* libGoogleAnalyticsServices.a */,
 				A57B41241B6BB6BB007C735F /* libsqlite3.dylib */,
@@ -193,9 +217,38 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A56E0C311B8060A60098AE9D /* Just */ = {
+			isa = PBXGroup;
+			children = (
+				A56E0C321B8060A60098AE9D /* Just-iOS */,
+				A56E0C341B8060A60098AE9D /* Just-OSX */,
+				A56E0C361B8060A60098AE9D /* Just.swift */,
+			);
+			path = Just;
+			sourceTree = "<group>";
+		};
+		A56E0C321B8060A60098AE9D /* Just-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A56E0C331B8060A60098AE9D /* Info.plist */,
+			);
+			path = "Just-iOS";
+			sourceTree = "<group>";
+		};
+		A56E0C341B8060A60098AE9D /* Just-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				A56E0C351B8060A60098AE9D /* Info.plist */,
+			);
+			path = "Just-OSX";
+			sourceTree = "<group>";
+		};
 		A57B41131B6BB675007C735F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */,
+				A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */,
+				A56E0C311B8060A60098AE9D /* Just */,
 				A5DED12D1B7CAB81003461D3 /* Net */,
 				A57B41141B6BB675007C735F /* GAI.h */,
 				A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */,
@@ -207,6 +260,7 @@
 				A57B411B1B6BB675007C735F /* GAILogger.h */,
 				A57B411C1B6BB675007C735F /* GAITrackedViewController.h */,
 				A57B411D1B6BB675007C735F /* GAITracker.h */,
+				A56E0C3D1B8085170098AE9D /* MediBandTests-Bridging-Header.h */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -217,6 +271,7 @@
 				A57B41591B6CF839007C735F /* User.swift */,
 				A57B41B11B6D205F007C735F /* Staff.swift */,
 				A57B41B31B6D2073007C735F /* Patient.swift */,
+				422446A11B70C87E00C12612 /* Task.swift */,
 				A521446F1B77A65B00B65E22 /* DataSingleton.swift */,
 			);
 			name = Model;
@@ -226,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */,
+				422446A31B70D61500C12612 /* StaffNetworkCall.swift */,
+				422446A51B70D62B00C12612 /* TaskNetworkCall.swift */,
 				A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */,
 			);
 			name = networkCalls;
@@ -435,8 +492,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56E0C371B8060A60098AE9D /* Info.plist in Resources */,
 				A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */,
 				A5D15A531B4995E400DC15AB /* LaunchScreen.xib in Resources */,
+				A56E0C391B8060A60098AE9D /* Info.plist in Resources */,
 				A5D15A501B4995E400DC15AB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +504,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56E0C3A1B8060A60098AE9D /* Info.plist in Resources */,
+				A56E0C381B8060A60098AE9D /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422446A21B70C87E00C12612 /* Task.swift in Sources */,
 				A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */,
 				A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */,
 				A57B41B41B6D2073007C735F /* Patient.swift in Sources */,
@@ -513,6 +575,7 @@
 				A5DED1361B7CAB81003461D3 /* GCD.swift in Sources */,
 				A51D3FDD1B51C44400C77665 /* CaseDetailViewController.swift in Sources */,
 				A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */,
+				A56E0C401B8085180098AE9D /* SWRevealViewController.m in Sources */,
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
 				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
 				A5DED13C1B7CAB81003461D3 /* NetResponseData.swift in Sources */,
@@ -525,12 +588,15 @@
 				A5DED13A1B7CAB81003461D3 /* NetHelper.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
 				A51D3FCB1B51060500C77665 /* PatientProfileViewController.swift in Sources */,
+				422446A61B70D62B00C12612 /* TaskNetworkCall.swift in Sources */,
 				A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */,
 				A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */,
+				A56E0C3B1B8060A60098AE9D /* Just.swift in Sources */,
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				A52144681B76AA8E00B65E22 /* ENSideMenuNavigationController.swift in Sources */,
 				4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */,
 				A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */,
+				422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,
 				A521446A1B76AB0500B65E22 /* MyNavigationController.swift in Sources */,
@@ -554,6 +620,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D15A5F1B4995E400DC15AB /* MediBandTests.swift in Sources */,
+				A56E0C3C1B8060A60098AE9D /* Just.swift in Sources */,
+				A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +748,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"/Users/johnsonejezie/Downloads/Just-swift-2.0/build/Debug-iphoneos",
+					"/Users/johnsonejezie/Downloads/Just-swift-2.0/build/Debug",
 				);
 				INFOPLIST_FILE = MediBand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -706,6 +776,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"/Users/johnsonejezie/Downloads/Just-swift-2.0/build/Debug-iphoneos",
+					"/Users/johnsonejezie/Downloads/Just-swift-2.0/build/Debug",
 				);
 				INFOPLIST_FILE = MediBand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -725,6 +797,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -736,6 +809,8 @@
 				INFOPLIST_FILE = MediBandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Library/MediBandTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediBand.app/MediBand";
 			};
 			name = Debug;
@@ -744,6 +819,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -751,6 +827,7 @@
 				INFOPLIST_FILE = MediBandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Library/MediBandTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MediBand.app/MediBand";
 			};
 			name = Release;

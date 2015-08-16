@@ -23,6 +23,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         toggleSideMenuView()
     }
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

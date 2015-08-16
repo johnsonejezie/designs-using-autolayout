@@ -14,6 +14,7 @@ class DataSingleton {
     var user:User!
     var patients:[Patient] = []
     var selectedPatient:Patient!
+    var allStaffs = [Staff]();
 }
 
 let sharedDataSingleton = DataSingleton()

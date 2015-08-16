@@ -17,8 +17,10 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
     @IBOutlet weak var specialityLabel: UILabel!
     @IBOutlet weak var generlPracticeLabel: UILabel!
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
-    var staff: Dictionary<String, String>!
 
+    var staff = Staff()
+    
+    
     @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
         toggleSideMenuView()
     }
@@ -33,6 +35,14 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
         generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
         generlPracticeLabel.text = sharedDataSingleton.user.medical_facility
          self.sideMenuController()?.sideMenu?.delegate = self
+        
+//        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+//        staffImageView.image = UIImage(data: imageData)
+        staffIDLabel.text = staff.id
+        staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
+        generalPractitionerIDLabel.text = staff.general_practional_id
+        generlPracticeLabel.text = staff.email
+        specialityLabel.text = staff.speciality
     }
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")

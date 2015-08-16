@@ -74,8 +74,8 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-         self.sideMenuController()?.sideMenu?.delegate = self
+//        test.getTaskByPatient(419, lCare_activity_id: 2);
+        self.sideMenuController()?.sideMenu?.delegate = self
         
         isAnyFieldEmpty = false
         
