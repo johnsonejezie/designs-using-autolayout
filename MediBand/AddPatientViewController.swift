@@ -14,7 +14,7 @@ protocol addPatientControllerDelegate: class {
         didFinishedAddingPatient patient: NSDictionary)
 }
 
-class AddPatientViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ENSideMenuDelegate {
+class AddPatientViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var isEditingPatient:Bool = false
     
@@ -29,13 +29,8 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
     var image:UIImage?
     
     
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
+
+    @IBOutlet var navBar: UIBarButtonItem!
 
     
     struct Static {
@@ -75,7 +70,11 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 //        test.getTaskByPatient(419, lCare_activity_id: 2);
-        self.sideMenuController()?.sideMenu?.delegate = self
+        
+        
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         isAnyFieldEmpty = false
         

@@ -8,9 +8,10 @@
 
 import UIKit
 
-class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
+class PatientProfileViewController: UIViewController {
     
     
+    @IBOutlet var navBar: UIBarButtonItem!
     var patient:Patient!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -31,14 +32,15 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     @IBOutlet weak var viewHistoryButton: UIButton!
     @IBOutlet weak var UpdatePatientButton: UIButton!
     
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.sideMenuController()?.sideMenu?.delegate = self
+        
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         addCareButton.layer.cornerRadius = 4
         viewCaseNoteButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4

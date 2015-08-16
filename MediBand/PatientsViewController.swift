@@ -9,15 +9,16 @@
 import UIKit
 import SwiftSpinner
 
-class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate, ENSideMenuDelegate {
+class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate {
     
     var isExistingPatient:Bool = false
     var patientID:String = ""
     
+    @IBOutlet var navBar: UIBarButtonItem!
     @IBAction func navBar(sender: UIBarButtonItem) {
-        
         println("called")
-        toggleSideMenuView()
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        toggleSideMenuView()
         
     }
     var patients = sharedDataSingleton.patients
@@ -25,6 +26,9 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
         
         let patientNetworkCall = PersonNewtworkCall()
         if sharedDataSingleton.patients.count > 0 {
@@ -52,8 +56,8 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
 
 
-         self.sideMenuController()?.sideMenu?.delegate = self
-                
+//         self.sideMenuController()?.sideMenu?.delegate = self
+        
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
 
     }

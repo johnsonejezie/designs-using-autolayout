@@ -11,6 +11,7 @@ import UIKit
 class CaseNoteTableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
 
     
+    @IBOutlet var navBar: UIBarButtonItem!
     @IBAction func addCaseNote(sender: AnyObject) {
         
         performSegueWithIdentifier("caseDetail", sender: nil)
@@ -23,6 +24,10 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         super.viewDidLoad()
         
         tableView.rowHeight = 120
+        
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
     
     }
     

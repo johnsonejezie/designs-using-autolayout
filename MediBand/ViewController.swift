@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate, ENSideMenuDelegate {
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate {
     
     var isExistingPatient:Bool = false
 
@@ -20,15 +20,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
         
-        toggleSideMenuView()
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         self.sideMenuController()?.sideMenu?.delegate = self
-        
+                
         //resizable view
         self.highlightView.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
         

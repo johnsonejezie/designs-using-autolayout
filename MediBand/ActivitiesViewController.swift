@@ -8,18 +8,20 @@
 
 import UIKit
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, ENSideMenuDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+    @IBOutlet var navBar: UIBarButtonItem!
+
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
 //        var taskActions = TaskNetworkCall()
         
 //        taskActions.getTaskByStaff(32, lCare_activity_id: "Teaching Hospital");
@@ -43,7 +45,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 //        test.getTaskByStaff(32, lCare_activity_id: "2")
         
         
-         self.sideMenuController()?.sideMenu?.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         

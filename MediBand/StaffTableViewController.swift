@@ -8,23 +8,31 @@
 
 import UIKit
 
-class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate, ENSideMenuDelegate {
+class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var staffs:[Staff] = []
+    
+    
+    
+    @IBOutlet var navBar: UIBarButtonItem!
+    
+    
     @IBAction func addStaffButton(sender: UIBarButtonItem) {
         
         self.performSegueWithIdentifier("AddStaff", sender: nil)
         
     }
     
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         
          var staffMethods = StaffNetworkCall()
         
@@ -38,7 +46,6 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
 
             }
         })
-         self.sideMenuController()?.sideMenu?.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
         
         // Do any additional setup after loading the view.

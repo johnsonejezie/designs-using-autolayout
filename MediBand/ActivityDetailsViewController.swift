@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate, ENSideMenuDelegate{
+class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
 
     var currentCell : Int = 1;
+    
+    @IBOutlet var navBar: UIBarButtonItem!
     @IBOutlet var attendingProfButton: UIButton!
     @IBOutlet var updateActivityButton: UIButton!
     @IBOutlet var viewCaseNoteButton: UIButton!
@@ -23,7 +25,10 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.sideMenuController()?.sideMenu?.delegate = self
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.attendingProfButton.titleLabel?.numberOfLines = 1;
         self.attendingProfButton.layer.cornerRadius = 5.0;
@@ -39,14 +44,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     }
 
 
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
-    
     override func viewWillLayoutSubviews() {
         self.patientProfilePic.layer.borderWidth = 1.0;
         self.patientProfilePic.layer.borderColor = UIColor.blackColor().CGColor;

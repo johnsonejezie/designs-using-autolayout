@@ -9,8 +9,9 @@
 import UIKit
 
 
- class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate, UIViewControllerTransitioningDelegate, ENSideMenuDelegate {
+ class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate, UIViewControllerTransitioningDelegate {
     
+    @IBOutlet var navBar: UIBarButtonItem!
     var popCreated = false
     var dropdownloaded = false
     var dropDownFrame: CGRect!
@@ -43,13 +44,7 @@ import UIKit
     
     @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
         
-        toggleSideMenuView()
     }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
-    
     
     @IBOutlet weak var selectSpecialistButton: UIButton!
     
@@ -101,6 +96,10 @@ import UIKit
     
     
     override func viewDidLoad() {
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         selectCareButton.layer.cornerRadius = 4
         selectCategoriesButton.layer.cornerRadius = 4
         selectSpecialistButton.layer.cornerRadius = 4
@@ -109,8 +108,6 @@ import UIKit
         
         addCaseNoteButton.layer.cornerRadius = 4
         saveButton.layer.cornerRadius = 3
-        
-         self.sideMenuController()?.sideMenu?.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {

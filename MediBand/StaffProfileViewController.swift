@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
+class StaffProfileViewController: UIViewController {
     
     
     @IBOutlet weak var staffImageView: UIImageView!
@@ -21,20 +21,23 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
     var staff = Staff()
     
     
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+    @IBOutlet var navBar: UIBarButtonItem!
+
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         staffNameLabel.text = sharedDataSingleton.user.firstName + " " + sharedDataSingleton.user.surname
         staffIDLabel.text = sharedDataSingleton.user.memberid
         specialityLabel.text = sharedDataSingleton.user.speciality
         generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
         generlPracticeLabel.text = sharedDataSingleton.user.medical_facility
-         self.sideMenuController()?.sideMenu?.delegate = self
         
 //        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
 //        staffImageView.image = UIImage(data: imageData)

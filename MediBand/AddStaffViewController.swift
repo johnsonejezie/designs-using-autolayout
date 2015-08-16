@@ -13,11 +13,12 @@ protocol addStaffControllerDelegate: class {
         finishedAddingStaff staff: Staff)
 }
 
-class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ENSideMenuDelegate {
+class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     weak var delegate: addStaffControllerDelegate!
 
 //    
+    @IBOutlet var navBar: UIBarButtonItem!
     var tap:UITapGestureRecognizer!
     var imagePicker = UIImagePickerController()
     
@@ -41,10 +42,6 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
     
     @IBOutlet weak var saveButton: UIButton!
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
     
     @IBAction func editButtonAction(sender: AnyObject) {
         
@@ -105,14 +102,12 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
         
     }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         self.sideMenuController()?.sideMenu?.delegate = self
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 //        GeneralPracticeIDLabel.text = " \(arc4random_uniform(1000))"
 //        GeneralPractitionerIDLabel.text = " \(arc4random_uniform(100000))"
 
