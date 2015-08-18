@@ -18,8 +18,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
     weak var delegate: addStaffControllerDelegate!
     let validator = Validator()
-    let Fields = ["Email", "General Practitioner ID", "Role ID", "Surname", "Forename", "Speciality","Staff ID"]
-    
+ 
     //
     @IBOutlet var navBar: UIBarButtonItem!
     var tap:UITapGestureRecognizer!
@@ -37,15 +36,6 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var specialityTextField: UITextField!
-    
-    //    @IBOutlet weak var firstNameErrorLabel: UILabel!
-    //    @IBOutlet weak var emailErrorLabel: UILabel!
-    //    @IBOutlet weak var generalPractitionerErrorLabel: UILabel!
-    //    @IBOutlet weak var roleIDErrorLabel: UILabel!
-    //    @IBOutlet weak var lastNameErrorLabel: UILabel!
-    //    @IBOutlet weak var specialityErrorLabel: UILabel!
-    
-    
     @IBOutlet weak var staffID: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
@@ -181,13 +171,11 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         }
     }
     
-    
     func validationSuccessful() {
         // submit the form
         
         let dataImage:NSData = UIImagePNGRepresentation(staffImageView.image)
         let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-        
         var firstname:String = firstNameTextField.text!
         var surname:String = lastNameTextField.text!
         var gpID:String = generalPracIDTextView.text!

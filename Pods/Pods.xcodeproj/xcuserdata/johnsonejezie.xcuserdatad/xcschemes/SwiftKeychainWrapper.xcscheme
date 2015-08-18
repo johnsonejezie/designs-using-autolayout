@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF7BE90D3AFC2C46B3D17E33"
-               BuildableName = "SwiftForms.framework"
-               BlueprintName = "SwiftForms"
+               BlueprintIdentifier = "C2AC3B5F8E5CDEBD068E374E"
+               BuildableName = "SwiftKeychainWrapper.framework"
+               BlueprintName = "SwiftKeychainWrapper"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

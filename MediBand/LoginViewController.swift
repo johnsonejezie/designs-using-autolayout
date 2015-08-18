@@ -9,10 +9,14 @@
 import UIKit
 import AFNetworking
 import SwiftSpinner
+import SwiftKeychainWrapper
+import SwiftValidator
 
-class LoginViewController: UIViewController {
+
+class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDelegate {
     
     var tap:UITapGestureRecognizer!
+    let validator = Validator()
 
     
     @IBOutlet weak var userNameTextfield: UITextField!
@@ -25,6 +29,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let emailString: String? = KeychainWrapper.stringForKey("email")
+        let passwordString: String? = KeychainWrapper.stringForKey("password")
+        
+        if (emailString != nil && passwordString != nil) {
+           login(emailString!, password: passwordString!)
+        }
+            
         userNameTextfield.layer.cornerRadius = 5
         passwordTextfield.layer.cornerRadius = 5
         loginButton.layer.cornerRadius = 4
@@ -34,6 +46,28 @@ class LoginViewController: UIViewController {
         view.addGestureRecognizer(tap)
 
         // Do any additional setup after loading the view.
+        
+        
+        validator.styleTransformers(success:{ (validationRule) -> Void in
+            println("here")
+            // clear error label
+            validationRule.errorLabel?.hidden = true
+            validationRule.errorLabel?.text = ""
+            validationRule.textField.layer.borderColor = UIColor.greenColor().CGColor
+            validationRule.textField.layer.borderWidth = 0.5
+            
+            }, error:{ (validationError) -> Void in
+                println("error")
+                validationError.errorLabel?.hidden = false
+                validationError.errorLabel?.text = validationError.errorMessage
+                validationError.textField.layer.borderColor = UIColor.redColor().CGColor
+                validationError.textField.layer.borderWidth = 1.0
+        })
+        
+        
+        
+        validator.registerField(userNameTextfield, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(passwordTextfield, rules: [RequiredRule(), FullNameRule()])
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,9 +87,24 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func loginActionButton() {
+        
+        validator.validate(self)
+        
+        let saveSuccessful: Bool = KeychainWrapper.setString(passwordTextfield.text, forKey: "password")
+        
+        let saveSuccessful1: Bool = KeychainWrapper.setString(userNameTextfield.text, forKey: "email")
+        println("\(saveSuccessful) and \(saveSuccessful1)")
+        trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
+    }
+    
+    func validationSuccessful() {
+        login(userNameTextfield.text, password: passwordTextfield.text)
+    }
+    
+    func login(email:String, password:String) {
         SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
-        login.loginUserWith("johnsonejezie@gmail.com", andPassword: "NjOL") { (success) -> Void in
+        login.loginUserWith(email, andPassword: password) { (success) -> Void in
             if success == true {
                 println("successful")
                 self.performSegueWithIdentifier("LoginToPatients", sender: nil)
@@ -63,7 +112,19 @@ class LoginViewController: UIViewController {
                 println("error")
             }
         }
-        trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
+    }
+    
+    func validationFailed(errors: [UITextField : ValidationError]) {
+        setErrors()
+    }
+    
+    private func setErrors(){
+        for (field, error) in validator.errors {
+            field.layer.borderColor = UIColor.redColor().CGColor
+            field.layer.borderWidth = 1.0
+            error.errorLabel?.text = error.errorMessage
+            error.errorLabel?.hidden = false
+        }
     }
     
     
