@@ -85,15 +85,6 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         var staffMethods = StaffNetworkCall()
         staffMethods.create(staff)
-//        var staff:Dictionary<String, String> = [
-//            "name": name,
-//            "staffID": staffID.text,
-//            "staffImage": imageString,
-//            "generalPractitionerID": gpID,
-//            "generalPracticeID": gpID,
-//            "speciality": specialityTextField.text
-//            
-//        ]
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
         
@@ -108,8 +99,6 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//        GeneralPracticeIDLabel.text = " \(arc4random_uniform(1000))"
-//        GeneralPractitionerIDLabel.text = " \(arc4random_uniform(100000))"
 
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
@@ -117,30 +106,19 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         view.addGestureRecognizer(tap)
 
         firstNameTextField.layer.cornerRadius = 5
-//        GeneralPracticeIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
-//        GeneralPractitionerIDLabel.clipsToBounds = true
-//        GeneralPracticeIDLabel.clipsToBounds = true
-//         GeneralPractitionerIDLabel.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.95, alpha: 1);
-        
-        
-//        GeneralPractitionerIDLabel.layer.cornerRadius = 5
-//        
-//        GeneralPracticeIDLabel.layer.cornerRadius = 5
-//        
-//        GeneralPracticeIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
-//        GeneralPractitionerIDLabel.textColor = UIColor(red: 0.73, green: 0.73, blue: 0.76, alpha: 1)
-//
-//
         emailTextField.layer.cornerRadius = 5
         roleIDTextView.layer.cornerRadius = 5
         generalPracIDTextView.layer.cornerRadius = 5
         lastNameTextField.layer.cornerRadius = 5
         specialityTextField.layer.cornerRadius = 5
-        staffID.layer
+        staffID.layer.cornerRadius = 5
         
         firstNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         lastNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         specialityTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        generalPracIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        roleIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
 
         
         saveButton.layer.cornerRadius = 4

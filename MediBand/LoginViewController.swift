@@ -55,7 +55,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginActionButton() {
         SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
-        login.loginUserWith("johnson.ejezie@andela.com", andPassword: "wNWy") { (success) -> Void in
+        login.loginUserWith("johnsonejezie@gmail.com", andPassword: "NjOL") { (success) -> Void in
             if success == true {
                 println("successful")
                 self.performSegueWithIdentifier("LoginToPatients", sender: nil)

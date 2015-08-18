@@ -1210,8 +1210,8 @@
                     <connections>
                         <outlet property="navBar" destination="1wW-l6-diu" id="Z56-8h-9gu"/>
                         <outlet property="tableView" destination="rP2-PR-tKo" id="h1V-VC-QdK"/>
-                        <segue destination="gCe-vR-QBY" kind="presentation" identifier="AddStaff" id="1jR-hn-YeI"/>
                         <segue destination="edd-hr-F3Z" kind="show" identifier="StaffProfile" id="oFy-ux-Gpp"/>
+                        <segue destination="gCe-vR-QBY" kind="custom" identifier="AddStaff" customClass="SWRevealViewControllerSeguePushController" id="oe7-jy-bGm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugy-mX-aga" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2538,6 +2538,6 @@
         <segue reference="oFy-ux-Gpp"/>
         <segue reference="1h7-qp-5Z6"/>
         <segue reference="XFV-cB-7yU"/>
-        <segue reference="XeK-vu-mCr"/>
+        <segue reference="chE-7V-Dgw"/>
     </inferredMetricsTieBreakers>
 </document>

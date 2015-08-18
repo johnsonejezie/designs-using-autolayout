@@ -17,12 +17,13 @@ protocol popUpTableViewControllerDelegate: class {
 class PopUpTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
-    
+    var isSelectingStaff:Bool?
     weak var delegate: popUpTableViewControllerDelegate!
     @IBOutlet weak var tableView: UITableView!
             
             var list:[String]!
             var containImage:Bool!
+    var staff:[Staff] = sharedDataSingleton.allStaffs
     
     
     override func viewDidLoad() {
@@ -49,17 +50,27 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return list.count
+        if isSelectingStaff == true {
+            return staff.count
+        }else {
+           return list.count
+        }
+        
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel?.text = list[indexPath.row]
-        
-        if (containImage != nil) {
-            cell.imageView?.image = UIImage(named: "HS1")
+        if isSelectingStaff == true {
+            let aStaff = staff[indexPath.row]
+            cell.textLabel?.text = aStaff.firstname + " " + aStaff.surname
+            if !aStaff.image.isEmpty {
+                cell.imageView?.image = UIImage(named: aStaff.image)
+            }
+        }else {
+          cell.textLabel?.text = list[indexPath.row]
+            
         }
         cell.textLabel?.textAlignment = NSTextAlignment.Center
         

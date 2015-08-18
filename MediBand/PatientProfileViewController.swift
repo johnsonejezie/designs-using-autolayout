@@ -53,8 +53,9 @@ class PatientProfileViewController: UIViewController {
         contactLabel.text = patient.addressphone
         addressLabel.text = patient.address
         generalPhysicianLabel.text = patient.gp
-        let image = UIImage(contentsOfFile: patient.image as! String)
-        println(image)
+        emailAddressLabel.text = patient.patient_id
+//        let image = UIImage(contentsOfFile: patient.image as! String)
+//        println(image)
 //        imageView.image = image
     }
     
@@ -86,6 +87,11 @@ class PatientProfileViewController: UIViewController {
     }
 
     @IBAction func viewHistoryActionButton() {
+        sharedDataSingleton.selectedPatient = patient
+        let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
+        taskViewController.isPatientTask = true
+        taskViewController.patient = patient
+        self.navigationController?.pushViewController(taskViewController, animated: true)
         self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }
     @IBAction func updatePatientActionButton() {

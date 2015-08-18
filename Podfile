@@ -11,6 +11,7 @@ pod 'SwiftForms'
 pod 'AFNetworking', '~> 2.5'
 pod 'Alamofire', '~> 1.3'
 pod 'SwiftSpinner'
+pod 'SwiftValidator', '2.1.1'
 end
 
 target 'MediBandTests' do

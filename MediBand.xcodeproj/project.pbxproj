@@ -34,7 +34,6 @@
 		A56E0C401B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
 		A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
 		A56E0C431B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */; };
-		A56E0C441B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */; };
 		A57B411F1B6BB686007C735F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B411E1B6BB686007C735F /* CoreData.framework */; };
 		A57B41211B6BB6A6007C735F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41201B6BB6A6007C735F /* SystemConfiguration.framework */; };
 		A57B41231B6BB6AF007C735F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41221B6BB6AF007C735F /* libz.dylib */; };
@@ -609,7 +608,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D15A5F1B4995E400DC15AB /* MediBandTests.swift in Sources */,
-				A56E0C441B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */,
 				A56E0C3C1B8060A60098AE9D /* Just.swift in Sources */,
 				A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */,
 			);

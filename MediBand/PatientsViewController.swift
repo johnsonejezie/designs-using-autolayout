@@ -39,6 +39,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.tableView.reloadData()
                 }else {
                     println("failed")
+
                 }
             }
         }else {

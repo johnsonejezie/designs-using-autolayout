@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
 
@@ -33,19 +34,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-        
-         var staffMethods = StaffNetworkCall()
-        
-        staffMethods.getStaffs(4, completionBlock: { (done) -> Void in
-            if(done){
-               println("all staffs fetched and passed from staff table view controller")
-                self.tableView.reloadData()
-                println("staff count \(sharedDataSingleton.allStaffs.count) ")
-            }else{
-            println("error fetching and passing all staffs from staff table view controller")
-
-            }
-        })
+        getStaff()
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
         
         // Do any additional setup after loading the view.
@@ -55,8 +44,35 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         self.setScreeName("Staff List")
     }
     
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
+    func getStaff(){
+        var staffMethods = StaffNetworkCall()
+        
+        if sharedDataSingleton.allStaffs.count > 0 {
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                    self.tableView.reloadData()
+                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                }else{
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
+                }
+            })
+        }else {
+            SwiftSpinner.show("Loading Staff", animated: true)
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                }else{
+                    SwiftSpinner.hide(completion: nil)
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
+                }
+            })
+        }
     }
     
     
@@ -129,6 +145,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
                 as! UINavigationController
             let controller = navigationController.topViewController
                 as! StaffProfileViewController
+            controller.isMyProfile = false
             controller.staff = sender as! Staff
             
         }

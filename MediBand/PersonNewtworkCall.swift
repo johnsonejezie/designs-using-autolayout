@@ -308,9 +308,9 @@ class PersonNewtworkCall {
                     }
                 
                     if let patient_id: String = resultDict["patient_id"] as? String  {
-                        patient.occupation = patient_id
+                        patient.patient_id = patient_id
                     }else {
-                        patient.occupation = ""
+                        patient.patient_id = ""
                     }
                     if let surname: String = resultDict["surname"] as? String  {
                         patient.surname = surname
@@ -322,13 +322,13 @@ class PersonNewtworkCall {
                     }else {
                         patient.image = ""
                     }
-                    sharedDataSingleton.patients.append(patient)
-//                    patients.append(patient)
+//                    sharedDataSingleton.patients.append(patient)
+                    patients.append(patient)
                 }
             }
         }
         println("this is patients \(sharedDataSingleton.patients)")
-//        sharedDataSingleton.patients = patients
+        sharedDataSingleton.patients = patients
         return patients
     }
     

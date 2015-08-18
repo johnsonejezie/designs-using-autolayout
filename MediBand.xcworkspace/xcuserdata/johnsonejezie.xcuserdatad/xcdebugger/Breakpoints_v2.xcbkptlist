@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MediBand/TaskNetworkCall.swift"
-            timestampString = "461400254.306188"
+            filePath = "MediBand/ActivitiesViewController.swift"
+            timestampString = "461602408.450104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "create(_:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "getTask()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

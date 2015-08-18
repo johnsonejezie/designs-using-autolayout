@@ -13,9 +13,7 @@ class StaffNetworkCall{
 
 
     let operationManger = AFHTTPRequestOperationManager()
-    
-//    var staff = Staff?()
-    
+        
     func create(staff:Staff){
         
         println("this is staff obj \(staff)")
@@ -69,11 +67,11 @@ class StaffNetworkCall{
     }
     
     
-    func getStaffs(medical_facility_id:Int! , completionBlock:(done:Bool)->Void){
+    func getStaffs(medical_facility_id:String!, completionBlock:(done:Bool)->Void){
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
-        let data : [String:Int] = ["medical_facility_id":medical_facility_id]
+        let data : [String:String] = ["medical_facility_id":medical_facility_id]
         self.operationManger.POST("http://www.iconglobalnetwork.com/mediband/api/get_staff", parameters: data, success: { (requestOperation, responseObject) -> Void in
             println(responseObject)
             
@@ -113,7 +111,13 @@ class StaffNetworkCall{
                 }else{
                     staffData.general_practional_id = "N/A"
                 }
-                staffData.speciality = dict["speciality"] as! String
+                
+                if let speciality:String = dict["speciality"]  as? String{
+                    staffData.speciality = speciality;
+                }else{
+                    staffData.speciality = "N/A"
+                }
+                
 //                staffData.member_id = dict["member_id"] as! String
                 if let member_id:String = dict["member_id"]  as? String{
                     staffData.member_id = member_id;
@@ -136,15 +140,13 @@ class StaffNetworkCall{
                 
                 print(staffData)
                 
-//                if let content = staffData {
                     result.append(staffData);
-                    sharedDataSingleton.allStaffs.append(staffData);
-//                }
                 
             }
 
             
         }
+        sharedDataSingleton.allStaffs = result
          println("staff count 1 \(sharedDataSingleton.allStaffs.count) ")
          println("staff count result \(result.count) ")
         completionBlock(done:true)

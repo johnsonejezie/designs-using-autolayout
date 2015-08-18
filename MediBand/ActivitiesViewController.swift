@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
@@ -15,50 +16,87 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet var navBar: UIBarButtonItem!
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var isPatientTask:Bool?
+    var patient:Patient?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        getTask()
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
-//        var taskActions = TaskNetworkCall()
-        
-//        taskActions.getTaskByStaff(32, lCare_activity_id: "Teaching Hospital");
-//        taskActions.create(<#task: Task#>);
-        var test = TaskNetworkCall()
-            
-        let task = Task()
-        
-        task.patient_id = "419"
-        task.care_activity_category_id = "3"
-        task.care_activity_id = "2"
-        task.care_activity_type_id = "1"
-        task.medical_facility_id = "Teaching Hospital"
-        task.selected_staff_ids = ["32", "29"]
-        task.speciality_id = "2"
-        
-    
-        
-        test.create(task)
-        
-//        test.getTaskByStaff(32, lCare_activity_id: "2")
-        
-        
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
         self.view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
-
     }
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Task View")
     }
     
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
+    func getTask() {
+        let taskNetworkCall = TaskNetworkCall()
+//        let task = Task()
+//        taskNetworkCall.create(task, completionBlock: { (success) -> Void in
+//            println(success)
+//        })
+        
+        println("this is id \(patient?.patient_id)")
+        if isPatientTask == true {
+            isPatientTask = false
+            if sharedDataSingleton.patientHistory.count > 0 {
+                var patient_id:String = ""
+                if let aPatient = patient {
+                    patient_id = aPatient.patient_id
+                }
+                taskNetworkCall.getTaskByPatient(patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
+                    if success == true {
+                        println("done")
+                    }else {
+                        println("failed")
+                    }
+                })
+            }else {
+                SwiftSpinner.show("Getting Patient History", animated: true)
+                taskNetworkCall.getTaskByPatient(sharedDataSingleton.selectedPatient.patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
+                    if success == true {
+                        SwiftSpinner.hide(completion: nil)
+                        println("done")
+                        
+                    }else {
+                        SwiftSpinner.hide(completion: nil)
+                        println("failed")
+                    }
+                })
+            }
+        }else {
+            if sharedDataSingleton.staffHistory.count > 0 {
+                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+                    if success == true {
+                        println("done")
+                    }else {
+                        println("false")
+                    }
+                }
+            }else {
+                SwiftSpinner.show("Loading task", animated: true)
+                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+                    if success == true {
+                        SwiftSpinner.hide(completion: nil)
+                        println("done")
+                    }else {
+                        SwiftSpinner.hide(completion: nil)
+                        println("false")
+                    }
+                }
+            }
+            
+        }
     }
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     

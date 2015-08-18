@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 
  class NewCareActivityViewController: UIViewController, UIPopoverPresentationControllerDelegate, popUpTableViewControllerDelegate, UIViewControllerTransitioningDelegate {
@@ -84,11 +85,40 @@ import UIKit
         "Respiratory Medicine",
         "Rheumatology",
         "Trauma & Orthopaedics",
-        "Urology"]
+        "Urology"
+    ]
     
-    var care = ["That care", "this care", "fake care", "real care", "another care", "final care"]
+    var care = [
+        "Admin EVENT Care Activity",
+        
+        "OP Attendance Care Activity",
+        
+        "IP Admission Care Activity",
+        
+        "Received Referral Care Activity",
+        
+        "A AND E Care Activity"
+    ]
     
-    var careType = ["Which type", "What type", "This type", "Best care", "worst care"]
+    var careType = [
+        "Admin EVENT",
+        
+        "Administration Error",
+        
+        "Transfer of Care",
+        
+        "Outpatient - Follow Up",
+        
+        "Outpatient Clinic",
+        
+        "Inpatient",
+        
+        "Current Inpatient",
+        
+        "Admin EVENT",
+        
+        "Emergency Care Activity"
+    ]
     
     var categories = ["elite category", "child category", "women category", "all category", "no category"]
     
@@ -96,6 +126,8 @@ import UIKit
     
     
     override func viewDidLoad() {
+        getStaff()
+        
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -122,23 +154,27 @@ import UIKit
     func displayPopOver(sender: UIButton){
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         var contentViewController : PopUpTableViewController = storyboard.instantiateViewControllerWithIdentifier("PopUpTableViewController") as! PopUpTableViewController
-        
+        let height:CGFloat?
         if sender.tag == 1000 {
             contentViewController.list = specialist
+            height = 44 *  CGFloat(contentViewController.list.count)
         }else if sender.tag == 1001 {
             contentViewController.list = care
+            height = 44 *  CGFloat(contentViewController.list.count)
         }else if sender.tag == 1002 {
             contentViewController.list = careType
+            height = 44 *  CGFloat(contentViewController.list.count)
         }else if sender.tag == 1003 {
             contentViewController.list = categories
+            height = 44 *  CGFloat(contentViewController.list.count)
         }else{
-            contentViewController.containImage = true
-            contentViewController.list = staff
+            contentViewController.isSelectingStaff = true
+            height = 44 *  CGFloat(sharedDataSingleton.allStaffs.count)
         }
         contentViewController.delegate = self
-        let height:CGFloat = 44 *  CGFloat(contentViewController.list.count)
+        
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height)
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height!)
         
         var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
         detailPopover.sourceView = sender
@@ -164,6 +200,31 @@ import UIKit
         }
         
         println(item)
+    }
+    
+    func getStaff(){
+        var staffMethods = StaffNetworkCall()
+        
+        if sharedDataSingleton.allStaffs.count > 0 {
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
+                if(done){
+                }else{
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
+                }
+            })
+        }else {
+            SwiftSpinner.show("Loading Staff", animated: true)
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                    SwiftSpinner.hide(completion: nil)
+                }else{
+                    println("error fetching and passing all staffs from staff table view controller")
+                  SwiftSpinner.hide(completion: nil)  
+                }
+            })
+        }
     }
     
     func popUpTableViewControllerDidCancel(controller: PopUpTableViewController) {
