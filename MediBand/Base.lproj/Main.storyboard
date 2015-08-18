@@ -50,10 +50,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVn-hP-PB8" userLabel="TopView">
-                                <rect key="frame" x="0.0" y="64" width="600" height="180"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HS3" translatesAutoresizingMaskIntoConstraints="NO" id="kyE-Jj-20F">
-                                        <rect key="frame" x="192" y="27" width="126" height="126"/>
+                                        <rect key="frame" x="202.5" y="22.5" width="105" height="105"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="kyE-Jj-20F" secondAttribute="height" multiplier="1:1" id="RlV-03-nBO"/>
                                             <constraint firstAttribute="width" secondItem="kyE-Jj-20F" secondAttribute="height" id="iqV-EG-x0u"/>
@@ -71,7 +71,7 @@
                                         </variation>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEs-yA-CgD">
-                                        <rect key="frame" x="323" y="102" width="95" height="30"/>
+                                        <rect key="frame" x="312.5" y="76.5" width="116" height="30"/>
                                         <state key="normal" title="EDIT PICS">
                                             <color key="titleColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,10 +122,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HhT-Hn-Q4G" userLabel="BottomView">
-                                <rect key="frame" x="0.0" y="244" width="600" height="356"/>
+                                <rect key="frame" x="0.0" y="214" width="600" height="386"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-mj-ZFP">
-                                        <rect key="frame" x="195" y="313" width="210" height="33"/>
+                                        <rect key="frame" x="195" y="343" width="210" height="33"/>
                                         <color key="backgroundColor" red="0.15686274509803921" green="0.8901960784313725" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="SAVE">
@@ -136,43 +136,43 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Firstname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Wy-bC-5ek">
-                                        <rect key="frame" x="16" y="172" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="188.5" width="568" height="31"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Surname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W4V-A4-1zz">
-                                        <rect key="frame" x="16" y="134" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="147.5" width="568" height="31"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Speciality" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jRb-Dl-DIi">
-                                        <rect key="frame" x="16" y="210" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="229.5" width="568" height="31.5"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Staff ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X8d-61-Rsf">
-                                        <rect key="frame" x="16" y="248" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="271" width="568" height="31.5"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Role ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vx4-xX-uwk">
-                                        <rect key="frame" x="16" y="96" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="106.5" width="568" height="31"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="General practitional ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TT7-Aj-Hjo">
-                                        <rect key="frame" x="16" y="58" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="66" width="568" height="30.5"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RUj-pK-bvC">
-                                        <rect key="frame" x="16" y="20" width="568" height="28"/>
+                                        <rect key="frame" x="16" y="25.5" width="568" height="30.5"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -228,7 +228,7 @@
                             </constraint>
                             <constraint firstItem="roF-P6-XoY" firstAttribute="top" secondItem="HhT-Hn-Q4G" secondAttribute="bottom" id="LCR-aF-55c"/>
                             <constraint firstItem="HhT-Hn-Q4G" firstAttribute="top" secondItem="rVn-hP-PB8" secondAttribute="bottom" id="Oyq-mq-Fmj"/>
-                            <constraint firstItem="rVn-hP-PB8" firstAttribute="height" secondItem="HFd-Sc-7Ya" secondAttribute="height" multiplier="0.3" id="SWZ-dj-fSm"/>
+                            <constraint firstItem="rVn-hP-PB8" firstAttribute="height" secondItem="HFd-Sc-7Ya" secondAttribute="height" multiplier="0.25" id="SWZ-dj-fSm"/>
                             <constraint firstItem="rVn-hP-PB8" firstAttribute="leading" secondItem="HFd-Sc-7Ya" secondAttribute="leading" id="ZFL-RV-zFX"/>
                             <constraint firstItem="HhT-Hn-Q4G" firstAttribute="top" secondItem="W4E-hV-65h" secondAttribute="bottom" id="arM-zo-7zJ"/>
                             <constraint firstAttribute="trailing" secondItem="rVn-hP-PB8" secondAttribute="trailing" id="cNA-5G-jgC"/>

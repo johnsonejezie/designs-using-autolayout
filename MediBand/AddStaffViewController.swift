@@ -7,17 +7,20 @@
 //
 
 import UIKit
+import SwiftValidator
 
 protocol addStaffControllerDelegate: class {
     func addStaffViewController(controller: AddStaffViewController,
         finishedAddingStaff staff: Staff)
 }
 
-class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ValidationDelegate, UITextFieldDelegate {
     
     weak var delegate: addStaffControllerDelegate!
-
-//    
+    let validator = Validator()
+    let Fields = ["Email", "General Practitioner ID", "Role ID", "Surname", "Forename", "Speciality","Staff ID"]
+    
+    //
     @IBOutlet var navBar: UIBarButtonItem!
     var tap:UITapGestureRecognizer!
     var imagePicker = UIImagePickerController()
@@ -34,13 +37,16 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var specialityTextField: UITextField!
-
-    @IBOutlet weak var GeneralPractitionerIDLabel: UILabel!
+    
+    //    @IBOutlet weak var firstNameErrorLabel: UILabel!
+    //    @IBOutlet weak var emailErrorLabel: UILabel!
+    //    @IBOutlet weak var generalPractitionerErrorLabel: UILabel!
+    //    @IBOutlet weak var roleIDErrorLabel: UILabel!
+    //    @IBOutlet weak var lastNameErrorLabel: UILabel!
+    //    @IBOutlet weak var specialityErrorLabel: UILabel!
+    
+    
     @IBOutlet weak var staffID: UITextField!
-
-    @IBOutlet weak var GeneralPracticeIDLabel: UILabel!
-    
-    
     @IBOutlet weak var saveButton: UIButton!
     
     @IBAction func editButtonAction(sender: AnyObject) {
@@ -57,54 +63,59 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         }
         
     }
-
+    
     @IBAction func saveButtonAction(sender: AnyObject) {
-        
-        let dataImage:NSData = UIImagePNGRepresentation(staffImageView.image)
-        let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-
-        var firstname:String = firstNameTextField.text!
-        var surname:String = lastNameTextField.text!
-        var gpID:String = generalPracIDTextView.text!
-        var specialityID:String = specialityTextField.text!
-        var member_id:String = staffID.text!
-        var role_id:String = roleIDTextView.text!
-        var email:String = emailTextField.text!
-    
-        
-        var staff = Staff()
-        staff.medical_facility_id = "4"
-        staff.speciality_id = specialityID
-        staff.general_practional_id = gpID
-        staff.member_id = member_id
-        staff.role_id = role_id
-        staff.email = email
-        staff.surname=surname
-        staff.firstname = firstname
-        staff.image = "N/A"
-        
-        var staffMethods = StaffNetworkCall()
-        staffMethods.create(staff)
-        
-        self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
-        
-        delegate?.addStaffViewController(self, finishedAddingStaff: staff)
-        self.dismissViewControllerAnimated(true, completion: nil)
-    
-        
+        validator.validate(self)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        firstNameTextField.delegate = self
+        emailTextField.delegate = self
+        roleIDTextView.delegate = self
+        generalPracIDTextView.delegate = self
+        lastNameTextField.delegate = self
+        specialityTextField.delegate = self
+        staffID.delegate = self
+        
+        validator.styleTransformers(success:{ (validationRule) -> Void in
+            println("here")
+            // clear error label
+            validationRule.errorLabel?.hidden = true
+            validationRule.errorLabel?.text = ""
+            validationRule.textField.layer.borderColor = UIColor.greenColor().CGColor
+            validationRule.textField.layer.borderWidth = 0.5
+            
+            }, error:{ (validationError) -> Void in
+                println("error")
+                validationError.errorLabel?.hidden = false
+                validationError.errorLabel?.text = validationError.errorMessage
+                validationError.textField.layer.borderColor = UIColor.redColor().CGColor
+                validationError.textField.layer.borderWidth = 1.0
+        })
+        
+        
+        
+        validator.registerField(firstNameTextField, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(lastNameTextField, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(specialityTextField, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(emailTextField, rules: [RequiredRule(), EmailRule()])
+        validator.registerField(generalPracIDTextView, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(roleIDTextView, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(staffID, rules: [RequiredRule(), FullNameRule()])
+        
+        
+        
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-
+        
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-
+        
         firstNameTextField.layer.cornerRadius = 5
         emailTextField.layer.cornerRadius = 5
         roleIDTextView.layer.cornerRadius = 5
@@ -119,10 +130,12 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         generalPracIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         roleIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        staffID.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
 
         
+        
         saveButton.layer.cornerRadius = 4
-
+        
         // Do any additional setup after loading the view.
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
@@ -149,10 +162,59 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         })
         staffImageView.image = image
     }
-
-
+    
+    
     func handleSingleTap(sender:UITapGestureRecognizer){
         self.view.endEditing(true)
+    }
+    
+    func validationFailed(errors: [UITextField : ValidationError]) {
+        setErrors()
+    }
+    
+    private func setErrors(){
+        for (field, error) in validator.errors {
+            field.layer.borderColor = UIColor.redColor().CGColor
+            field.layer.borderWidth = 1.0
+            error.errorLabel?.text = error.errorMessage
+            error.errorLabel?.hidden = false
+        }
+    }
+    
+    
+    func validationSuccessful() {
+        // submit the form
+        
+        let dataImage:NSData = UIImagePNGRepresentation(staffImageView.image)
+        let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        
+        var firstname:String = firstNameTextField.text!
+        var surname:String = lastNameTextField.text!
+        var gpID:String = generalPracIDTextView.text!
+        var specialityID:String = specialityTextField.text!
+        var member_id:String = staffID.text!
+        var role_id:String = roleIDTextView.text!
+        var email:String = emailTextField.text!
+        
+        
+        var staff = Staff()
+        staff.medical_facility_id = "4"
+        staff.speciality_id = specialityID
+        staff.general_practional_id = gpID
+        staff.member_id = member_id
+        staff.role_id = role_id
+        staff.email = email
+        staff.surname=surname
+        staff.firstname = firstname
+        staff.image = "N/A"
+        
+        var staffMethods = StaffNetworkCall()
+        staffMethods.create(staff)
+        
+        self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
+        
+        delegate?.addStaffViewController(self, finishedAddingStaff: staff)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -169,30 +231,30 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         }
     }
     
-
+    
 }
 
 extension AddStaffViewController {
     
-        func setScreeName(name: String) {
-            self.title = name
-            self.sendScreenView(name)
-        }
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
         
-        func sendScreenView(screenName: String) {
-            let tracker = GAI.sharedInstance().defaultTracker
-            tracker.set(kGAIScreenName, value: self.title)
-            let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
-            
-            tracker.send(build as [NSObject: AnyObject])
-        }
-        
-        func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
-            let tracker = GAI.sharedInstance().defaultTracker
-            let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
-            tracker.send(trackDictionary as [NSObject: AnyObject])
-        }
-        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
     
 }
 
