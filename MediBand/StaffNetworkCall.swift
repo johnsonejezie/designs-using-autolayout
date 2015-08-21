@@ -67,7 +67,7 @@ class StaffNetworkCall{
     }
     
     
-    func getStaffs(medical_facility_id:String!, completionBlock:(done:Bool)->Void){
+    func getStaffs(medical_facility_id:String!, inPageNumber pageNumber:String, completionBlock:(done:Bool)->Void){
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
@@ -99,56 +99,52 @@ class StaffNetworkCall{
         var result = [Staff]()
         for data in staffArray as [AnyObject]{
             if let dict = data as? [String:AnyObject] {
-                
-                print(dict)
-                
-                var staffData = Staff()
-                print(Staff())
-                staffData.id = dict["id"] as! String
-//                staffData.general_practional_id = dict["general_practional_id"] as! String
-                if let general_practional_id:String = dict["general_practional_id"]  as? String{
-                    staffData.general_practional_id = general_practional_id;
-                }else{
-                    staffData.general_practional_id = "N/A"
-                }
-                
-                if let speciality:String = dict["speciality"]  as? String{
-                    staffData.speciality = speciality;
-                }else{
-                    staffData.speciality = "N/A"
-                }
-                
-//                staffData.member_id = dict["member_id"] as! String
-                if let member_id:String = dict["member_id"]  as? String{
-                    staffData.member_id = member_id;
-                }else{
-                    staffData.member_id = "N/A"
-                }
-                if let role:String = dict["role"]  as? String{
-                    staffData.role = role;
-                }else{
-                    staffData.role = "N/A"
-                }
-                staffData.firstname = dict["firstname"] as! String
-                staffData.surname = dict["surname"] as! String
-                if let image:String = dict["image"]  as? String{
-                    staffData.image = image;
-                }else{
-                    staffData.image = ""
-                }
-                staffData.email = dict["email"] as! String
-                
-                print(staffData)
-                
-                    result.append(staffData);
-                
+                self.parseDict(dict)
             }
-
-            
         }
-        sharedDataSingleton.allStaffs = result
+//        sharedDataSingleton.allStaffs = result
          println("staff count 1 \(sharedDataSingleton.allStaffs.count) ")
-         println("staff count result \(result.count) ")
         completionBlock(done:true)
     }
+    
+    func parseDict(dict:[String:AnyObject]) {
+        var staffData = Staff()
+        staffData.id = dict["id"] as! String
+        if let general_practional_id:String = dict["general_practional_id"]  as? String{
+            staffData.general_practional_id = general_practional_id;
+        }else{
+            staffData.general_practional_id = "N/A"
+        }
+        
+        if let speciality:String = dict["speciality"]  as? String{
+            staffData.speciality = speciality;
+        }else{
+            staffData.speciality = "N/A"
+        }
+        
+        if let member_id:String = dict["member_id"]  as? String{
+            staffData.member_id = member_id;
+        }else{
+            staffData.member_id = "N/A"
+        }
+        if let role:String = dict["role"]  as? String{
+            staffData.role = role;
+        }else{
+            staffData.role = "N/A"
+        }
+        staffData.firstname = dict["firstname"] as! String
+        staffData.surname = dict["surname"] as! String
+        if let image:String = dict["image"]  as? String{
+            staffData.image = image;
+        }else{
+            staffData.image = ""
+        }
+        staffData.email = dict["email"] as! String
+        
+        print(staffData)
+        
+        sharedDataSingleton.allStaffs.append(staffData)
+    }
+    
+    
 }

@@ -13,8 +13,9 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var tableView: UITableView!
     var staffs:[Staff] = []
-    
-    
+    var currentPageNumber:Int = 1
+    var isRefreshing = false
+    var isFirstLoad = true
     
     @IBOutlet var navBar: UIBarButtonItem!
     
@@ -33,8 +34,8 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
-        getStaff()
+        let pageNoToString:String = String(currentPageNumber)
+        getStaff(pageNoToString)
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
         
         // Do any additional setup after loading the view.
@@ -44,23 +45,11 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         self.setScreeName("Staff List")
     }
     
-    func getStaff(){
+    func getStaff(pageNumber:String){
         var staffMethods = StaffNetworkCall()
-        
-        if sharedDataSingleton.allStaffs.count > 0 {
-            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
-                if(done){
-                    println("all staffs fetched and passed from staff table view controller")
-                    self.tableView.reloadData()
-                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
-                }else{
-                    println("error fetching and passing all staffs from staff table view controller")
-                    
-                }
-            })
-        }else {
+        if sharedDataSingleton.allStaffs.count <= 0 {
             SwiftSpinner.show("Loading Staff", animated: true)
-            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
                 if(done){
                     println("all staffs fetched and passed from staff table view controller")
                     self.tableView.reloadData()
@@ -75,13 +64,37 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        println("table scrolling")
+        if isFirstLoad == true {
+            isFirstLoad = false
+            return
+        }
+        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+            if isRefreshing == false {
+                isRefreshing = true
+                SwiftSpinner.show("loading more patient", animated: true)
+                currentPageNumber = currentPageNumber + 1
+                let pageNumber:String = String(currentPageNumber)
+                let staffNetworkCall = StaffNetworkCall()
+                staffNetworkCall.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+                    if done == true {
+                        self.tableView.reloadData()
+                    }else {
+                        self.currentPageNumber--
+                    }
+                })
+
+            }
+        }
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedDataSingleton.allStaffs.count == 0 {
-            return 1
-        }else{
-          return sharedDataSingleton.allStaffs.count
+        var count:Int = 1
+        if sharedDataSingleton.allStaffs.count > 0 {
+            count = sharedDataSingleton.allStaffs.count
         }
+        return count
     }
     
 

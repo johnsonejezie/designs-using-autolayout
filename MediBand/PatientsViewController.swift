@@ -9,10 +9,14 @@
 import UIKit
 import SwiftSpinner
 
+
 class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate {
     
     var isExistingPatient:Bool = false
     var patientID:String = ""
+    var currentPageNumber:Int = 1
+    var isRefreshing:Bool = false
+    var isFirstLoad:Bool = true
     
     @IBOutlet var navBar: UIBarButtonItem!
     @IBAction func navBar(sender: UIBarButtonItem) {
@@ -26,41 +30,62 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
-        
-        let patientNetworkCall = PersonNewtworkCall()
-        if sharedDataSingleton.patients.count > 0 {
-            patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility) { (success) -> Void in
-                if success == true {
-                    println("successfully fetched patient")
-                    self.patients = sharedDataSingleton.patients
-                    self.tableView.reloadData()
-                }else {
-                    println("failed")
+        let pageNoToString:String = String(currentPageNumber)
+        getPatients(pageNoToString)
 
-                }
-            }
-        }else {
+        tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
+
+    }
+    
+    func getPatients(pageNumber:String) {
+        let patientNetworkCall = PersonNewtworkCall()
+        if sharedDataSingleton.patients.count <= 0 {
             SwiftSpinner.show("Loading Patients", animated: true)
-            patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+            patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
                 if success == true {
-                    println("successfully fetched patient")
+//                    println("successfully fetched patient")
                     self.patients = sharedDataSingleton.patients
                     self.tableView.reloadData()
                     SwiftSpinner.hide(completion: nil)
                 }else {
-                    println("failed")
+                    SwiftSpinner.hide(completion: nil)
+                    var alertview = JSSAlertView().show(self, title: "Error", text: "Failed to get patients. Tap on Retry to try again or Cancel to dismiss this alert", buttonText: "Retry", cancelButtonText: "Cancel")
+                    alertview.setTitleFont("ClearSans-Light")
+                    alertview.setTextFont("ClearSans")
+                    alertview.setButtonFont("ClearSans-Bold")
+                    alertview.addAction(self.closeCallback)
+                    alertview.addCancelAction(self.cancelCallback)
+//                    println("failed")
                 }
             }
         }
-
-
-//         self.sideMenuController()?.sideMenu?.delegate = self
-        
-        tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
-
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        println("table scrolling")
+        if isFirstLoad == true {
+            isFirstLoad = false
+            return
+        }
+        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+            if isRefreshing == false {
+                isRefreshing = true
+                SwiftSpinner.show("loading more patient", animated: true)
+                currentPageNumber = currentPageNumber + 1
+                let pageNumber:String = String(currentPageNumber)
+                let patientNetworkCall = PersonNewtworkCall()
+                patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
+                    if success == true {
+                        self.tableView.reloadData()
+                    }else {
+                        self.isRefreshing = false
+                        self.currentPageNumber--
+                    }
+                })
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,12 +97,11 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 0
         if patients.count > 0 {
-            return patients.count
-        }else {
-          return 1
+            count = patients.count
         }
-        
+        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -89,7 +113,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.patientNameLabel.text = patient.forename + " " + patient.surname
             cell.generalPhysicianLabel.text = patient.gp
         }else {
-           cell.patientNameLabel.text = "Mr FRED PATRICK"
+           cell.patientNameLabel.text = "No Patient assigned to you"
         }
         return cell
     }
@@ -104,8 +128,17 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    
+    func closeCallback() {
+//        println("Close callback called")
+    }
+    
+    func cancelCallback() {
+//        println("Cancel callback called")
+    }
+    
     func addPatientViewController(controller: AddPatientViewController, didFinishedAddingPatient patient: NSDictionary) {
-        println(patient)
+//        println(patient)
     }
     
     @IBAction func addPatientBarButton(sender: UIBarButtonItem) {

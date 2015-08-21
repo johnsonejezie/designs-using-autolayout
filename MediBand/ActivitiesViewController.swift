@@ -39,62 +39,62 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func getTask() {
         let taskNetworkCall = TaskNetworkCall()
-//        let task = Task()
-//        taskNetworkCall.create(task, completionBlock: { (success) -> Void in
-//            println(success)
-//        })
+        let task = Task()
+        taskNetworkCall.create(task, completionBlock: { (success) -> Void in
+            println(success)
+        })
         
-        println("this is id \(patient?.patient_id)")
-        if isPatientTask == true {
-            isPatientTask = false
-            if sharedDataSingleton.patientHistory.count > 0 {
-                var patient_id:String = ""
-                if let aPatient = patient {
-                    patient_id = aPatient.patient_id
-                }
-                taskNetworkCall.getTaskByPatient(patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
-                    if success == true {
-                        println("done")
-                    }else {
-                        println("failed")
-                    }
-                })
-            }else {
-                SwiftSpinner.show("Getting Patient History", animated: true)
-                taskNetworkCall.getTaskByPatient(sharedDataSingleton.selectedPatient.patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
-                    if success == true {
-                        SwiftSpinner.hide(completion: nil)
-                        println("done")
-                        
-                    }else {
-                        SwiftSpinner.hide(completion: nil)
-                        println("failed")
-                    }
-                })
-            }
-        }else {
-            if sharedDataSingleton.staffHistory.count > 0 {
-                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
-                    if success == true {
-                        println("done")
-                    }else {
-                        println("false")
-                    }
-                }
-            }else {
-                SwiftSpinner.show("Loading task", animated: true)
-                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
-                    if success == true {
-                        SwiftSpinner.hide(completion: nil)
-                        println("done")
-                    }else {
-                        SwiftSpinner.hide(completion: nil)
-                        println("false")
-                    }
-                }
-            }
-            
-        }
+//        println("this is id \(patient?.patient_id)")
+//        if isPatientTask == true {
+//            isPatientTask = false
+//            if sharedDataSingleton.patientHistory.count > 0 {
+//                var patient_id:String = ""
+//                if let aPatient = patient {
+//                    patient_id = aPatient.patient_id
+//                }
+//                taskNetworkCall.getTaskByPatient(patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
+//                    if success == true {
+//                        println("done")
+//                    }else {
+//                        println("failed")
+//                    }
+//                })
+//            }else {
+//                SwiftSpinner.show("Getting Patient History", animated: true)
+//                taskNetworkCall.getTaskByPatient(sharedDataSingleton.selectedPatient.patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
+//                    if success == true {
+//                        SwiftSpinner.hide(completion: nil)
+//                        println("done")
+//                        
+//                    }else {
+//                        SwiftSpinner.hide(completion: nil)
+//                        println("failed")
+//                    }
+//                })
+//            }
+//        }else {
+//            if sharedDataSingleton.staffHistory.count > 0 {
+//                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+//                    if success == true {
+//                        println("done")
+//                    }else {
+//                        println("false")
+//                    }
+//                }
+//            }else {
+//                SwiftSpinner.show("Loading task", animated: true)
+//                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
+//                    if success == true {
+//                        SwiftSpinner.hide(completion: nil)
+//                        println("done")
+//                    }else {
+//                        SwiftSpinner.hide(completion: nil)
+//                        println("false")
+//                    }
+//                }
+//            }
+//            
+//        }
     }
     
     

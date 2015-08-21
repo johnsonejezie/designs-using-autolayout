@@ -17,16 +17,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     
     var tap:UITapGestureRecognizer!
     let validator = Validator()
-
+    var resetKeychain:Bool = false;
     
     @IBOutlet weak var userNameTextfield: UITextField!
-    
-
     @IBOutlet weak var passwordTextfield: UITextField!
-    
-    
-    
     @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,8 +42,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         view.addGestureRecognizer(tap)
 
         // Do any additional setup after loading the view.
-        
-        
+        setUpValidator()
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setScreeName("LoginView")
+    }
+    
+    func setUpValidator(){
         validator.styleTransformers(success:{ (validationRule) -> Void in
             println("here")
             // clear error label
@@ -64,16 +67,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                 validationError.textField.layer.borderWidth = 1.0
         })
         
-        
-        
-        validator.registerField(userNameTextfield, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(userNameTextfield, rules: [RequiredRule(), EmailRule()])
         validator.registerField(passwordTextfield, rules: [RequiredRule(), FullNameRule()])
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        setScreeName("LoginView")
-        
     }
     
     func handleSingleTap(sender:UITapGestureRecognizer){
@@ -87,17 +82,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
 
 
     @IBAction func loginActionButton() {
-        
         validator.validate(self)
-        
-        let saveSuccessful: Bool = KeychainWrapper.setString(passwordTextfield.text, forKey: "password")
-        
-        let saveSuccessful1: Bool = KeychainWrapper.setString(userNameTextfield.text, forKey: "email")
-        println("\(saveSuccessful) and \(saveSuccessful1)")
         trackEvent("UX", action: "login button clicked", label: "login button", value: nil)
     }
     
     func validationSuccessful() {
+        resetKeychain = true
         login(userNameTextfield.text, password: passwordTextfield.text)
     }
     
@@ -105,11 +95,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
         login.loginUserWith(email, andPassword: password) { (success) -> Void in
+            println("successful \(success)")
             if success == true {
-                println("successful")
+                if self.resetKeychain == true {
+                    let saveSuccessful: Bool = KeychainWrapper.setString(self.passwordTextfield.text, forKey: "password")
+                    let saveSuccessful1: Bool = KeychainWrapper.setString(self.userNameTextfield.text, forKey: "email")
+                    println("\(saveSuccessful) and \(saveSuccessful1)")
+                }
                 self.performSegueWithIdentifier("LoginToPatients", sender: nil)
             }else {
                 println("error")
+                let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
+                let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
+                SwiftSpinner.hide(completion: nil)
             }
         }
     }

@@ -16,16 +16,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MediBand/PersonNewtworkCall.swift"
+            timestampString = "461776550.196546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "getAllPatients(_:fromMedicalFacility:withPageNumber:completionHandler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MediBand/ActivitiesViewController.swift"
-            timestampString = "461602408.450104"
+            filePath = "MediBand/TaskNetworkCall.swift"
+            timestampString = "461833627.01216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "getTask()"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "create(_:completionBlock:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

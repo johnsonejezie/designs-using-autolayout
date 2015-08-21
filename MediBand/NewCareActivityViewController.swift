@@ -205,17 +205,9 @@ import SwiftSpinner
     func getStaff(){
         var staffMethods = StaffNetworkCall()
         
-        if sharedDataSingleton.allStaffs.count > 0 {
-            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
-                if(done){
-                }else{
-                    println("error fetching and passing all staffs from staff table view controller")
-                    
-                }
-            })
-        }else {
+        if sharedDataSingleton.allStaffs.count == 0 {
             SwiftSpinner.show("Loading Staff", animated: true)
-            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, completionBlock: { (done) -> Void in
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
                 if(done){
                     println("all staffs fetched and passed from staff table view controller")
                     SwiftSpinner.hide(completion: nil)

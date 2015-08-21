@@ -1445,7 +1445,7 @@
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="SELECT CARE ACTIVITIES CATEGORIES">
+                                        <state key="normal" title="RESOLUTION">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1737,6 +1737,7 @@
                         <segue destination="14L-fE-wwp" kind="custom" identifier="GoToPatients" customClass="SWRevealViewControllerSeguePushController" id="77n-Ed-ogV"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="GoToBarcode" customClass="SWRevealViewControllerSeguePushController" id="Tbm-fP-G11"/>
                         <segue destination="vx8-jI-g1H" kind="custom" identifier="GoToTask" customClass="SWRevealViewControllerSeguePushController" id="3Qo-Lk-wBa"/>
+                        <segue destination="krn-eu-QHR" kind="custom" identifier="LogOut" customClass="SWRevealViewControllerSeguePushController" id="ydu-Ai-6cO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Igi-KX-MO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2433,7 +2434,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVd-wx-WmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2140" y="2770"/>
+            <point key="canvasLocation" x="-2062" y="2840"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZSM-5K-6uJ">
@@ -2534,8 +2535,9 @@
         <image name="navBarIcon" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zJZ-xf-J6H"/>
+        <segue reference="ydu-Ai-6cO"/>
         <segue reference="77n-Ed-ogV"/>
-        <segue reference="oFy-ux-Gpp"/>
         <segue reference="1h7-qp-5Z6"/>
         <segue reference="XFV-cB-7yU"/>
         <segue reference="chE-7V-Dgw"/>

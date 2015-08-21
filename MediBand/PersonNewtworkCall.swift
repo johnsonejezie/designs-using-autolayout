@@ -11,13 +11,15 @@ import AFNetworking
 import Alamofire
 
 class PersonNewtworkCall {
-    func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String, completionHandler:(success:Bool)-> Void) {
+    func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String, withPageNumber pageNumber:String, completionHandler:(success:Bool)-> Void) {
         var patientResult = [Patient]()
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
         let parameters = [
             "medical_facility_id": medical_facility,
-            "assigned_staff": assigned_staff
+            "staff_id": assigned_staff
         ]
+        
+        println(parameters)
         let headers = [
             "Content-Type": "application/json"
         ]
@@ -77,6 +79,8 @@ class PersonNewtworkCall {
         net.POST(url, params: data, successHandler: { responseData in
             let result = responseData.json(error: nil)
             NSLog("result: \(result)")
+            let resultDict:[String:AnyObject] = result! as! [String : AnyObject]
+            self.parseDictionaryToPatient(resultDict)
             }, failureHandler: { error in
                 NSLog("Error")
         })
@@ -203,133 +207,132 @@ class PersonNewtworkCall {
     
     private func parseDictionary(dictionary:[String: AnyObject]) -> [Patient] {
         var patients = [Patient]()
-        
-        
         if let array:AnyObject = dictionary["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
-                    let patient = Patient()
-                    if let address: String = resultDict["address"] as? String  {
-                        patient.address = address
-                    }else {
-                        patient.address = ""
-                    }
-                    if let addressotherphone: String = resultDict["addressotherphone"] as? String  {
-                        patient.addressotherphone = addressotherphone
-                    }else {
-                        patient.addressotherphone = ""
-                    }
-                    if let addressphone: String = resultDict["addressphone"] as? String  {
-                        patient.addressphone = addressphone
-                    }else {
-                        patient.addressphone = ""
-                    }
-                    if let addresspostcode: String = resultDict["addresspostcode"] as? String  {
-                        patient.addresspostcode = addresspostcode
-                    }else {
-                        patient.addresspostcode = ""
-                    }
-                    if let dob: String = resultDict["dob"] as? String  {
-                        patient.dob = dob
-                    }else {
-                        patient.dob = ""
-                    }
-                    if let forename: String = resultDict["forename"] as? String  {
-                        patient.forename = forename
-                    }else {
-                        patient.forename = ""
-                    }
-                    
-                    if let gp: String = resultDict["gp"] as? String  {
-                        patient.gp = gp
-                    }else {
-                        patient.gp = ""
-                    }
-                    if let gpsurgery: String = resultDict["gpsurgery"] as? String  {
-                        patient.gpsurgery = gpsurgery
-                    }else {
-                        patient.gpsurgery = ""
-                    }
-                    if let medical_facility: String = resultDict["medical_facility"] as? String  {
-                        patient.medical_facility = medical_facility
-                    }else {
-                        patient.medical_facility = ""
-                    }
-                    if let ischild: Bool = resultDict["ischild"] as? Bool  {
-                        patient.ischild = ischild
-                    }else {
-                        patient.ischild = false
-                    }
-                    if let language: String = resultDict["language"] as? String  {
-                        patient.language = language
-                    }else {
-                        patient.language = ""
-                    }
-                    if let lkp_nametitle: String = resultDict["lkp_nametitle"] as? String  {
-                        patient.lkp_nametitle = lkp_nametitle
-                    }else {
-                        patient.lkp_nametitle = ""
-                    }
-                    if let maritalstatus: String = resultDict["maritalstatus"] as? String  {
-                        patient.maritalstatus = maritalstatus
-                    }else {
-                        patient.maritalstatus = "Single"
-                    }
-                    if let medicalinsuranceprovider: String = resultDict["medicalinsuranceprovider"] as? String  {
-                        patient.medicalinsuranceprovider = medicalinsuranceprovider
-                    }else {
-                        patient.medicalinsuranceprovider = ""
-                    }
-                    if let middlename: String = resultDict["middlename"] as? String  {
-                        patient.middlename = middlename
-                    }else {
-                        patient.middlename = ""
-                    }
-                    if let nationality: String = resultDict["nationality"] as? String  {
-                        patient.nationality = nationality
-                    }else {
-                        patient.nationality = ""
-                    }
-                    
-                    if let next_of_kin: String = resultDict["next_of_kin"] as? String  {
-                        patient.next_of_kin = next_of_kin
-                    }else {
-                        patient.next_of_kin = ""
-                    }
-                    if let next_of_kin_contact: String = resultDict["next_of_kin_contact"] as? String  {
-                        patient.next_of_kin_contact = next_of_kin_contact
-                    }else {
-                        patient.next_of_kin_contact = ""
-                    }
-                    if let occupation: String = resultDict["occupation"] as? String  {
-                        patient.occupation = occupation
-                    }else {
-                        patient.occupation = ""
-                    }
-                
-                    if let patient_id: String = resultDict["patient_id"] as? String  {
-                        patient.patient_id = patient_id
-                    }else {
-                        patient.patient_id = ""
-                    }
-                    if let surname: String = resultDict["surname"] as? String  {
-                        patient.surname = surname
-                    }else {
-                        patient.surname = ""
-                    }
-                    if let image: AnyObject = resultDict["image"]  {
-                         patient.image = image
-                    }else {
-                        patient.image = ""
-                    }
-//                    sharedDataSingleton.patients.append(patient)
-                    patients.append(patient)
+                    self.parseDictionaryToPatient(resultDict)
                 }
             }
         }
-        println("this is patients \(sharedDataSingleton.patients)")
-        sharedDataSingleton.patients = patients
+//        sharedDataSingleton.patients = patients
         return patients
+    }
+    
+    
+    func parseDictionaryToPatient(resultDict:[String: AnyObject]) {
+        let patient = Patient()
+        if let address: String = resultDict["address"] as? String  {
+            patient.address = address
+        }else {
+            patient.address = ""
+        }
+        if let addressotherphone: String = resultDict["addressotherphone"] as? String  {
+            patient.addressotherphone = addressotherphone
+        }else {
+            patient.addressotherphone = ""
+        }
+        if let addressphone: String = resultDict["addressphone"] as? String  {
+            patient.addressphone = addressphone
+        }else {
+            patient.addressphone = ""
+        }
+        if let addresspostcode: String = resultDict["addresspostcode"] as? String  {
+            patient.addresspostcode = addresspostcode
+        }else {
+            patient.addresspostcode = ""
+        }
+        if let dob: String = resultDict["dob"] as? String  {
+            patient.dob = dob
+        }else {
+            patient.dob = ""
+        }
+        if let forename: String = resultDict["forename"] as? String  {
+            patient.forename = forename
+        }else {
+            patient.forename = ""
+        }
+        if let gp: String = resultDict["gp"] as? String  {
+            patient.gp = gp
+        }else {
+            patient.gp = ""
+        }
+        if let gpsurgery: String = resultDict["gpsurgery"] as? String  {
+            patient.gpsurgery = gpsurgery
+        }else {
+            patient.gpsurgery = ""
+        }
+        if let medical_facility: String = resultDict["medical_facility"] as? String  {
+            patient.medical_facility = medical_facility
+        }else {
+            patient.medical_facility = ""
+        }
+        if let ischild: Bool = resultDict["ischild"] as? Bool  {
+            patient.ischild = ischild
+        }else {
+            patient.ischild = false
+        }
+        if let language: String = resultDict["language"] as? String  {
+            patient.language = language
+        }else {
+            patient.language = ""
+        }
+        if let lkp_nametitle: String = resultDict["lkp_nametitle"] as? String  {
+            patient.lkp_nametitle = lkp_nametitle
+        }else {
+            patient.lkp_nametitle = ""
+        }
+        if let maritalstatus: String = resultDict["maritalstatus"] as? String  {
+            patient.maritalstatus = maritalstatus
+        }else {
+            patient.maritalstatus = "Single"
+        }
+        if let medicalinsuranceprovider: String = resultDict["medicalinsuranceprovider"] as? String  {
+            patient.medicalinsuranceprovider = medicalinsuranceprovider
+        }else {
+            patient.medicalinsuranceprovider = ""
+        }
+        if let middlename: String = resultDict["middlename"] as? String  {
+            patient.middlename = middlename
+        }else {
+            patient.middlename = ""
+        }
+        if let nationality: String = resultDict["nationality"] as? String  {
+            patient.nationality = nationality
+        }else {
+            patient.nationality = ""
+        }
+        if let next_of_kin: String = resultDict["next_of_kin"] as? String  {
+            patient.next_of_kin = next_of_kin
+        }else {
+            patient.next_of_kin = ""
+        }
+        if let next_of_kin_contact: String = resultDict["next_of_kin_contact"] as? String  {
+            patient.next_of_kin_contact = next_of_kin_contact
+        }else {
+            patient.next_of_kin_contact = ""
+        }
+        if let occupation: String = resultDict["occupation"] as? String  {
+            patient.occupation = occupation
+        }else {
+            patient.occupation = ""
+        }
+        if let patient_id: String = resultDict["patient_id"] as? String  {
+            patient.patient_id = patient_id
+        }else {
+            patient.patient_id = ""
+        }
+        if let surname: String = resultDict["surname"] as? String  {
+            patient.surname = surname
+        }else {
+            patient.surname = ""
+        }
+        if let image: AnyObject = resultDict["image"]  {
+            patient.image = image
+        }else {
+            patient.image = ""
+        }
+        sharedDataSingleton.patients.append(patient)
+        //                    patients.append(patient)
     }
     
     func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {

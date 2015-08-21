@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
+
 
 class SideBarMenuTableViewController: UITableViewController {
     
@@ -76,7 +78,7 @@ class SideBarMenuTableViewController: UITableViewController {
                 performSegueWithIdentifier("GoToProfile", sender: nil)
                 break
             case 6:
-                println("log out")
+                logout()
                 break
             default:
                 break
@@ -100,12 +102,20 @@ class SideBarMenuTableViewController: UITableViewController {
                 performSegueWithIdentifier("GoToProfile", sender: nil)
                 break
             case 5:
-                println("Log out")
+                logout()
                 break
             default:
                 break
             }
         }
+    }
+    
+    func logout(){
+        let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
+        let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
+        println(removeEmailSuccessful)
+        println(removePasswordSuccessful)
+        performSegueWithIdentifier("LogOut", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

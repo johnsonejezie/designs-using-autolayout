@@ -36,17 +36,17 @@ class Login {
             println(responseObject)
             let dictionary:[String: AnyObject] = responseObject as! [String: AnyObject]
             if let message: String = dictionary["message"] as? String {
-                if message == "Invalid email or password" {
+                if (message == "Invalid email or password" || message == "Error incomplete inputs :email,password") {
                     completionHandler(success: false)
+                    return
                 }else {
                    data = self.parseDictionary(dictionary)
+                    if let result = data {
+                        user = result
+                    }
+                    completionHandler(success: true)
                 }
             }
-            
-            if let result = data {
-                user = result
-            }
-            completionHandler(success: true)
             }) { (operation: AFHTTPRequestOperation!,
                 error: NSError!) -> Void in
                 println(error)

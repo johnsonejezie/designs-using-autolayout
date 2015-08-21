@@ -67,6 +67,7 @@
 		A5DED13D1B7CAB81003461D3 /* NetUploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DED1351B7CAB81003461D3 /* NetUploadTask.swift */; };
 		A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */; };
 		A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */; };
+		A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */; };
 		B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4140736F615BCEE6A380469F /* Pods_MediBand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		A5DED1351B7CAB81003461D3 /* NetUploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetUploadTask.swift; sourceTree = "<group>"; };
 		A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewController.swift; sourceTree = "<group>"; };
 		A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewCell.swift; sourceTree = "<group>"; };
+		A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +300,7 @@
 				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
 				A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */,
 				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
+				A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */,
 				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
 				42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */,
 				A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */,
@@ -587,6 +590,7 @@
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */,
 				A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */,
+				A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */,
 				422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,
