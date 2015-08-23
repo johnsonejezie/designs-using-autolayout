@@ -17,6 +17,13 @@ import SwiftSpinner
     var dropdownloaded = false
     var dropDownFrame: CGRect!
     var pointY:CGFloat!
+    let contacts = Contants()
+    
+    var specialist_id = ""
+    var care_activity_id = ""
+    var activity_type_id = ""
+    var resolution_id = ""
+    var staff_ids:[String] = []
     
     var recognizer:UITapGestureRecognizer!
 
@@ -24,6 +31,7 @@ import SwiftSpinner
     @IBOutlet weak var nameLabel: UILabel!
 
     @IBOutlet weak var addCaseNoteButton: UIButton!
+    
     
 
     @IBOutlet weak var saveButton: UIButton!
@@ -34,11 +42,28 @@ import SwiftSpinner
     @IBAction func saveActionButton() {
         self.trackEvent("UX", action: "New Task created", label: "Save button to create new task", value: nil)
         
-        println(selectSpecialistButton.currentTitle!)
-        println(selectCareButton.currentTitle!)
-        println(selectTypeButton.currentTitle!)
-        println(selectCategoriesButton.currentTitle!)
-        println(selectStaff.currentTitle!)
+        let task = Task()
+        let taskAPI = TaskAPI()
+        
+        task.care_activity_id = care_activity_id
+        task.care_activity_type_id = activity_type_id
+        task.patient_id = sharedDataSingleton.selectedPatient.patient_id
+        task.resolution = resolution_id
+        task.specialist_id = specialist_id
+        task.selected_staff_ids = staff_ids
+        taskAPI.createTask(task, callback: { (createdtask:AnyObject?, error:NSError?) -> () in
+            if error != nil {
+                
+            }else {
+                let newtasks = createdtask as! Task
+                println("this is newtask \(newtasks.resolution)")
+            }
+        })
+        println(specialist_id)
+        println(care_activity_id)
+        println(activity_type_id)
+        println(resolution_id)
+        println(staff_ids)
     }
     
     
@@ -58,79 +83,14 @@ import SwiftSpinner
     
     @IBOutlet weak var selectStaff: UIButton!
     
-    
-    var specialist = [
-        "Anaesthetics",
-        "Cardiology",
-        "Clinical Haematology",
-        "Clinical Immunology and Allergy",
-        "Clinical Oncology",
-        "Dermatology",
-        "Emergency",
-        "ENT",
-        "Gastroenterology",
-        "General Medicine",
-        "General Surgery",
-        "Geriatric Medicine",
-        "Gynaecology",
-        "Medical Oncology",
-        "Nephrology",
-        "Neurology",
-        "Ophthalmology",
-        "Oral & Maxillo Facial Surgery",
-        "Oral Surgery",
-        "Paediatrics",
-        "Radiology",
-        "Rehabilitation",
-        "Respiratory Medicine",
-        "Rheumatology",
-        "Trauma & Orthopaedics",
-        "Urology"
-    ]
-    
-    var care = [
-        "Admin EVENT Care Activity",
-        
-        "OP Attendance Care Activity",
-        
-        "IP Admission Care Activity",
-        
-        "Received Referral Care Activity",
-        
-        "A AND E Care Activity"
-    ]
-    
-    var careType = [
-        "Admin EVENT",
-        
-        "Administration Error",
-        
-        "Transfer of Care",
-        
-        "Outpatient - Follow Up",
-        
-        "Outpatient Clinic",
-        
-        "Inpatient",
-        
-        "Current Inpatient",
-        
-        "Admin EVENT",
-        
-        "Emergency Care Activity"
-    ]
-    
-    var categories = ["elite category", "child category", "women category", "all category", "no category"]
-    
-    var staff = ["receptionist", "doctor", "nurse", "director", "cleaner" ]
-    
-    
     override func viewDidLoad() {
         getStaff()
         
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+        nameLabel.text = sharedDataSingleton.selectedPatient.forename + " " + sharedDataSingleton.selectedPatient.surname
         
         selectCareButton.layer.cornerRadius = 4
         selectCategoriesButton.layer.cornerRadius = 4
@@ -152,30 +112,29 @@ import SwiftSpinner
     }
     
     func displayPopOver(sender: UIButton){
+        
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         var contentViewController : PopUpTableViewController = storyboard.instantiateViewControllerWithIdentifier("PopUpTableViewController") as! PopUpTableViewController
         let height:CGFloat?
         if sender.tag == 1000 {
-            contentViewController.list = specialist
+            contentViewController.list = contacts.specialist
             height = 44 *  CGFloat(contentViewController.list.count)
         }else if sender.tag == 1001 {
-            contentViewController.list = care
+            contentViewController.list = contacts.care
             height = 44 *  CGFloat(contentViewController.list.count)
         }else if sender.tag == 1002 {
-            contentViewController.list = careType
+            contentViewController.list = contacts.careType
             height = 44 *  CGFloat(contentViewController.list.count)
         }else if sender.tag == 1003 {
-            contentViewController.list = categories
+            contentViewController.list = contacts.resolution
             height = 44 *  CGFloat(contentViewController.list.count)
         }else{
             contentViewController.isSelectingStaff = true
             height = 44 *  CGFloat(sharedDataSingleton.allStaffs.count)
         }
         contentViewController.delegate = self
-        
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
         contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height!)
-        
         var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
         detailPopover.sourceView = sender
         detailPopover.sourceRect.origin.x = 50
@@ -185,21 +144,28 @@ import SwiftSpinner
     
     }
     
-    func popUpTableViewController(controller: PopUpTableViewController, didSelectItem item: String, fromArray: [String]) {
-        
-        if fromArray == specialist {
+    func popUpTableViewController(controller: PopUpTableViewController, didSelectItem item: String, inRow: String, fromArray: [AnyObject]) {
+        if fromArray[0] === contacts.specialist[0] {
+            specialist_id = inRow
             selectSpecialistButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
-        }else if fromArray == care {
+        }else if fromArray[0] === contacts.care[0] {
+            care_activity_id = inRow
             selectCareButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
-        }else if fromArray == careType {
+        }else if fromArray[0] === contacts.careType[0] {
+            activity_type_id = inRow
             selectTypeButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
-        }else if fromArray == categories {
+        }else if fromArray[0] === contacts.resolution[0] {
+            resolution_id = inRow
             selectCategoriesButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
         }else {
             selectStaff.setTitle(item.uppercaseString, forState: UIControlState.Normal)
         }
-        
         println(item)
+    }
+    
+    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String]) {
+        selectStaff.setTitle("SELECTED STAFF", forState: UIControlState.Normal)
+        staff_ids = ids
     }
     
     func getStaff(){

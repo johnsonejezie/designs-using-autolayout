@@ -25,5 +25,6 @@ class Staff {
     var modified:String  = ""
     var role:String  = ""
     var speciality:String  = ""
+    var name:String = ""
     
 }

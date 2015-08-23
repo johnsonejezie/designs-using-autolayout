@@ -9,9 +9,14 @@
 import UIKit
 import SwiftSpinner
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, NSURLConnectionDataDelegate {
+    
+    
+    
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    
     
     @IBOutlet var navBar: UIBarButtonItem!
 
@@ -19,11 +24,15 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     var isPatientTask:Bool?
     var patient:Patient?
+    var tasks = [Task]()
+    
+    var patientID:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        getTask()
+
+        
+      getTask()
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -37,64 +46,34 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.setScreeName("Task View")
     }
     
+    
+  
     func getTask() {
-        let taskNetworkCall = TaskNetworkCall()
-        let task = Task()
-        taskNetworkCall.create(task, completionBlock: { (success) -> Void in
-            println(success)
-        })
-        
-//        println("this is id \(patient?.patient_id)")
-//        if isPatientTask == true {
-//            isPatientTask = false
-//            if sharedDataSingleton.patientHistory.count > 0 {
-//                var patient_id:String = ""
-//                if let aPatient = patient {
-//                    patient_id = aPatient.patient_id
-//                }
-//                taskNetworkCall.getTaskByPatient(patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
-//                    if success == true {
-//                        println("done")
-//                    }else {
-//                        println("failed")
-//                    }
-//                })
-//            }else {
-//                SwiftSpinner.show("Getting Patient History", animated: true)
-//                taskNetworkCall.getTaskByPatient(sharedDataSingleton.selectedPatient.patient_id, lCare_activity_id: sharedDataSingleton.user.medical_facility, completionBlock: { (success) -> Void in
-//                    if success == true {
-//                        SwiftSpinner.hide(completion: nil)
-//                        println("done")
-//                        
-//                    }else {
-//                        SwiftSpinner.hide(completion: nil)
-//                        println("failed")
-//                    }
-//                })
-//            }
-//        }else {
-//            if sharedDataSingleton.staffHistory.count > 0 {
-//                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
-//                    if success == true {
-//                        println("done")
-//                    }else {
-//                        println("false")
-//                    }
-//                }
-//            }else {
-//                SwiftSpinner.show("Loading task", animated: true)
-//                taskNetworkCall.getTaskByStaff(sharedDataSingleton.user.id, lCare_activity_id: sharedDataSingleton.user.medical_facility) { (success) -> Void in
-//                    if success == true {
-//                        SwiftSpinner.hide(completion: nil)
-//                        println("done")
-//                    }else {
-//                        SwiftSpinner.hide(completion: nil)
-//                        println("false")
-//                    }
-//                }
-//            }
-//            
-//        }
+        let taskAPI = TaskAPI()
+        if isPatientTask == true {
+            if let patient_id = patientID {
+                taskAPI.getTaskByPatient(patient_id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+                    if error != nil {
+                        
+                    }else {
+                       sharedDataSingleton.tasks = task as! [Task]
+                    }
+                    self.tasks = sharedDataSingleton.tasks
+                    self.tableView.reloadData()
+                })
+            }
+        }else {
+            taskAPI.getTaskByStaff(sharedDataSingleton.user.id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+                if error != nil {
+                    
+                }else {
+                    sharedDataSingleton.tasks = task as! [Task]
+                }
+                self.tasks = sharedDataSingleton.tasks
+                self.tableView.reloadData()
+            })
+        }
+ 
     }
     
     
@@ -115,7 +94,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.resignFirstResponder()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        var count = 1
+        if tasks.count > 0 {
+            count = tasks.count
+        }
+        return count
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -127,7 +110,20 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableViewCell
-        cell.nameLabel.text = "JENNIFER KYARI"
+        if tasks.count > 0 {
+            let task = self.tasks[indexPath.row]
+            cell.specialityLabel.text = task.specialist_id
+            cell.careActivityLabel.text = task.care_activity_id
+            cell.activityTypeLabel.text = task.care_activity_type_id
+            cell.resolutionLabel.text = task.resolution
+            cell.dateLabel.text = task.created
+        } else {
+            cell.specialityLabel.text = ""
+            cell.careActivityLabel.text = ""
+            cell.resolutionLabel.text = ""
+            cell.dateLabel.text = ""
+            cell.activityTypeLabel.text = "No Task"
+        }
         return cell
     }
     

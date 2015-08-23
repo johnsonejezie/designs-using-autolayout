@@ -113,9 +113,20 @@ class SideBarMenuTableViewController: UITableViewController {
     func logout(){
         let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
         let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
+        destroy()
         println(removeEmailSuccessful)
         println(removePasswordSuccessful)
         performSegueWithIdentifier("LogOut", sender: nil)
+    }
+    
+    func destroy() {
+        sharedDataSingleton.allStaffs = []
+        sharedDataSingleton.user = nil
+        sharedDataSingleton.selectedPatient = nil
+        sharedDataSingleton.selectedStaff = nil
+        sharedDataSingleton.tasks = []
+        sharedDataSingleton.patientHistory = []
+        sharedDataSingleton.staffHistory = []
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

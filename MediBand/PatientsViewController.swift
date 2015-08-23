@@ -106,7 +106,6 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("patientsCell") as! PatientsTableViewCell
-        
         if patients.count > 0 {
             let patient = patients[indexPath.row]
             println(patient.occupation)

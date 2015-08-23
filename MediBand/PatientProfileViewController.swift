@@ -91,6 +91,8 @@ class PatientProfileViewController: UIViewController {
         let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
         taskViewController.isPatientTask = true
         taskViewController.patient = patient
+        taskViewController.patientID = patient.patient_id
+        sharedDataSingleton.isCheckingNewPatientID = true
         self.navigationController?.pushViewController(taskViewController, animated: true)
         self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }

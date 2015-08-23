@@ -10,7 +10,7 @@
 		420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */; };
 		422446A21B70C87E00C12612 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A11B70C87E00C12612 /* Task.swift */; };
 		422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A31B70D61500C12612 /* StaffNetworkCall.swift */; };
-		422446A61B70D62B00C12612 /* TaskNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A51B70D62B00C12612 /* TaskNetworkCall.swift */; };
+		422446A61B70D62B00C12612 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A51B70D62B00C12612 /* TaskAPI.swift */; };
 		4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4233C33B1B66588E00F8337E /* MenuViewController.swift */; };
 		42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */; };
 		A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3F8F1B50687F00C77665 /* AddPatientViewController.swift */; };
@@ -68,6 +68,7 @@
 		A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */; };
 		A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */; };
 		A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */; };
+		A5ED9B0A1B89D30400E3EF49 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B091B89D30400E3EF49 /* Contants.swift */; };
 		B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4140736F615BCEE6A380469F /* Pods_MediBand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -87,7 +88,7 @@
 		420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffProfileViewController.swift; sourceTree = "<group>"; };
 		422446A11B70C87E00C12612 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		422446A31B70D61500C12612 /* StaffNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffNetworkCall.swift; sourceTree = "<group>"; };
-		422446A51B70D62B00C12612 /* TaskNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNetworkCall.swift; sourceTree = "<group>"; };
+		422446A51B70D62B00C12612 /* TaskAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAPI.swift; sourceTree = "<group>"; };
 		4233C33B1B66588E00F8337E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		8139F1F108DEE0889D162C80 /* Pods-MediBand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediBand.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediBand/Pods-MediBand.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewController.swift; sourceTree = "<group>"; };
 		A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewCell.swift; sourceTree = "<group>"; };
 		A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
+		A5ED9B091B89D30400E3EF49 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 				A57B41B31B6D2073007C735F /* Patient.swift */,
 				422446A11B70C87E00C12612 /* Task.swift */,
 				A521446F1B77A65B00B65E22 /* DataSingleton.swift */,
+				A5ED9B091B89D30400E3EF49 /* Contants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -278,7 +281,7 @@
 			children = (
 				A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */,
 				422446A31B70D61500C12612 /* StaffNetworkCall.swift */,
-				422446A51B70D62B00C12612 /* TaskNetworkCall.swift */,
+				422446A51B70D62B00C12612 /* TaskAPI.swift */,
 				A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */,
 			);
 			name = networkCalls;
@@ -574,6 +577,7 @@
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
 				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
 				A5DED13C1B7CAB81003461D3 /* NetResponseData.swift in Sources */,
+				A5ED9B0A1B89D30400E3EF49 /* Contants.swift in Sources */,
 				A51D3FFA1B52B9D900C77665 /* NewCareActivityViewController.swift in Sources */,
 				A5DED1391B7CAB81003461D3 /* NetDownloadTask.swift in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
@@ -583,7 +587,7 @@
 				A5DED13A1B7CAB81003461D3 /* NetHelper.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
 				A51D3FCB1B51060500C77665 /* PatientProfileViewController.swift in Sources */,
-				422446A61B70D62B00C12612 /* TaskNetworkCall.swift in Sources */,
+				422446A61B70D62B00C12612 /* TaskAPI.swift in Sources */,
 				A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */,
 				A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */,
 				A56E0C3B1B8060A60098AE9D /* Just.swift in Sources */,

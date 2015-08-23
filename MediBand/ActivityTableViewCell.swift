@@ -14,20 +14,12 @@ class ActivityTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cardView: UIView!
     
+    @IBOutlet var dateLabel: UILabel!
     
-    @IBOutlet weak var exerciseLabel: UILabel!
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    
-    
-    @IBOutlet weak var pharmacyLabel: UILabel!
-    
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    
-    
-    @IBOutlet weak var statusLabel: UILabel!
-    
+    @IBOutlet var specialityLabel: UILabel!
+    @IBOutlet var resolutionLabel: UILabel!
+    @IBOutlet var activityTypeLabel: UILabel!
+    @IBOutlet var careActivityLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -19,7 +19,10 @@ class DataSingleton {
     var tasks = [Task]()
     var patientHistory = [Task]()
     var staffHistory = [Task]()
+    var isCheckingNewPatientID:Bool = true
     
 }
 
 let sharedDataSingleton = DataSingleton()
+
+
