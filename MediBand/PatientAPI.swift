@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 import Alamofire
 
-class PersonNewtworkCall {
+class PatientAPI {
     func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String, withPageNumber pageNumber:String, completionHandler:(success:Bool)-> Void) {
         var patientResult = [Patient]()
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
@@ -97,7 +97,7 @@ class PersonNewtworkCall {
 //        }
     }
     
-    func getPatient(patient_id:Int, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
+    func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
         let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"
         let parameters = [
             "patient_id": patient_id,
@@ -107,7 +107,6 @@ class PersonNewtworkCall {
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
-        
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
             println("JSON: \(responseObject)")
             completionHandler(success: true)

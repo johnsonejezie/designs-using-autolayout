@@ -40,10 +40,10 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getPatients(pageNumber:String) {
-        let patientNetworkCall = PersonNewtworkCall()
+        let patientAPI = PatientAPI()
         if sharedDataSingleton.patients.count <= 0 {
             SwiftSpinner.show("Loading Patients", animated: true)
-            patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
+            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
                 if success == true {
 //                    println("successfully fetched patient")
                     self.patients = sharedDataSingleton.patients
@@ -75,8 +75,8 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
                 SwiftSpinner.show("loading more patient", animated: true)
                 currentPageNumber = currentPageNumber + 1
                 let pageNumber:String = String(currentPageNumber)
-                let patientNetworkCall = PersonNewtworkCall()
-                patientNetworkCall.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
+                let patientAPI = PatientAPI()
+                patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
                     if success == true {
                         self.tableView.reloadData()
                     }else {

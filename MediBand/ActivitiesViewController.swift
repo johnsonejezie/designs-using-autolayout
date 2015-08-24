@@ -129,7 +129,9 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("viewActivity", sender: nil)
+        let task = self.tasks[indexPath.row]
+        
+        self.performSegueWithIdentifier("viewActivity", sender: task)
         searchBar.resignFirstResponder()
     }
     
@@ -150,8 +152,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
        println("The search text is: '\(searchBar.text)'")
@@ -159,6 +159,14 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
         println(item)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewActivity" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! ActivityDetailsViewController
+            controller.task = sender as! Task
+        }
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle

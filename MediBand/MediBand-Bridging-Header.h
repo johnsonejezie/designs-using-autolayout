@@ -15,5 +15,5 @@
 #import "GAITracker.h"
 
 #import <AFNetworking/AFNetworking.h>
-
+#import "SCLAlertView.h"
 #import "SWRevealViewController.h"

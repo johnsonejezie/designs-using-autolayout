@@ -166,11 +166,11 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             return
         }
 
-        let fetchModel = PersonNewtworkCall()
+        let patientAPI = PatientAPI()
         
         if sharedDataSingleton.selectedPatient != nil {
             
-            fetchModel.editPatient(patient, image: self.patientImageView.image, completionHandler: { (success) -> Void in
+            patientAPI.editPatient(patient, image: self.patientImageView.image, completionHandler: { (success) -> Void in
                 if success == true {
                     println("patient edited")
                 }else {
@@ -180,7 +180,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             
         }else {
             
-            fetchModel.createNewPatient(patient, fromMedicalFacility: sharedDataSingleton.user.medical_facility, image: self.patientImageView.image, completionHandler: { (success) -> Void in
+            patientAPI.createNewPatient(patient, fromMedicalFacility: sharedDataSingleton.user.medical_facility, image: self.patientImageView.image, completionHandler: { (success) -> Void in
                 if success == true {
                     println("patient saved")
                 }else {

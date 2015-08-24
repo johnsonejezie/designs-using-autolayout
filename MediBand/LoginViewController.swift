@@ -102,7 +102,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                     let saveSuccessful1: Bool = KeychainWrapper.setString(self.userNameTextfield.text, forKey: "email")
                     println("\(saveSuccessful) and \(saveSuccessful1)")
                 }
-                self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+                println(sharedDataSingleton.user.is_password_set)
+                if sharedDataSingleton.user.is_password_set == false {
+                    SwiftSpinner.hide(completion: { () -> Void in
+                        self.loadResetPasswordAlert()
+                    })
+                }else {
+                    self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+                }
+//
             }else {
                 println("error")
                 let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
@@ -124,6 +132,42 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
             error.errorLabel?.hidden = false
         }
     }
+    
+    func loadResetPasswordAlert(){
+        let alertView = SCLAlertView()
+        let emailTextField: UITextField = alertView.addTextField("email")
+        let oldPasswordTextField: UITextField = alertView.addTextField("old password")
+        let newPasswordTextField: UITextField = alertView.addTextField("new password")
+        alertView.addButton("Reset", validationBlock: { () -> Bool in
+            let passedValidation:Bool = !emailTextField.text.isEmpty && !oldPasswordTextField.text.isEmpty && !newPasswordTextField.text.isEmpty
+            return passedValidation
+        }) { () -> Void in
+            println("validated")
+            self.resetPassword(emailTextField.text, oldPassword: oldPasswordTextField.text, newPassword: newPasswordTextField.text)
+        }
+        alertView.showEdit(self, title: "Password Reset", subTitle: "", closeButtonTitle: "Cancel", duration: 2000)
+        
+        alertView.alertIsDismissed { () -> Void in
+            SwiftSpinner.show("loading patient", animated: true)
+            self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+        }
+
+    }
+    
+    func resetPassword(email: String, oldPassword: String, newPassword: String) {
+        SwiftSpinner.show("Resetting Password", animated: true)
+        let loginAPI = Login()
+        loginAPI.resetPassword(email, oldPassword: oldPassword, newPassword: newPassword) { (success) -> Void in
+            if success == true {
+                SwiftSpinner.show("loading patient", animated: true)
+                self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+            }else {
+                
+            }
+        }
+    }
+    
+
     
     
     @IBAction func forgotPasswordActionButton() {

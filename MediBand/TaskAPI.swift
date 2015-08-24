@@ -177,6 +177,12 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             }else {
                 task.modified = ""
             }
+        
+            if let medical_facility: String = resultDict["medical_facility"] as? String {
+                task.medical_facility = medical_facility as String
+            }else {
+                task.medical_facility = ""
+            }
             if let patient_id: String = resultDict["patient_id"] as? String {
                 task.patient_id = patient_id as String
             }else {

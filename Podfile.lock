@@ -42,7 +42,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftKeychainWrapper:
-    :commit: 2f69ab859cb757e8fdb8039d578405ddb5b2e4ba
+    :commit: 65fb5f36fa9c3ad9d2159900f75234ab2508a151
     :git: https://github.com/jrendel/SwiftKeychainWrapper
 
 SPEC CHECKSUMS:

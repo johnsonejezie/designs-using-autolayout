@@ -21,10 +21,13 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     @IBOutlet var attendingProfCollectionView: UICollectionView!
     var usersImage: [String] = ["HS1","HS5","HS6"]
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
+    var task:Task!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.getPatientForTask(task.patient_id, fromMedicalFacility: task.medical_facility)
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -41,6 +44,15 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     override func viewWillAppear(animated: Bool) {
         setScreeName("Task Detail View")
+    }
+    
+    func getPatientForTask(patient_id:String, fromMedicalFacility mFacility: String) {
+        let patientAPI = PatientAPI()
+        patientAPI.getPatient(patient_id, fromMedicalFacility: mFacility) { (success) -> Void in
+            if success == true {
+                
+            }
+        }
     }
 
 

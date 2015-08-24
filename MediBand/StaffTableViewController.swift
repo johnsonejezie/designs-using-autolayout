@@ -47,47 +47,63 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func getStaff(pageNumber:String){
         var staffMethods = StaffNetworkCall()
+        let staffAPI = StaffAPI()
         if sharedDataSingleton.allStaffs.count <= 0 {
             SwiftSpinner.show("Loading Staff", animated: true)
-            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
-                if(done){
-                    println("all staffs fetched and passed from staff table view controller")
+            staffAPI.getAllStaff(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, callback: { (staffArray:AnyObject?, error:NSError?) -> () in
+                if error != nil {
+                    println(error)
+                    SwiftSpinner.hide(completion: nil)
+                }else {
+                    let staff = staffArray as! [Staff]
+                    println("this is staff array \(staff)")
                     self.tableView.reloadData()
                     SwiftSpinner.hide(completion: nil)
-                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
-                }else{
-                    SwiftSpinner.hide(completion: nil)
-                    println("error fetching and passing all staffs from staff table view controller")
-                    
                 }
             })
+            
+            
+//            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+//                if(done){
+//                    println("all staffs fetched and passed from staff table view controller")
+//                    self.tableView.reloadData()
+//                    SwiftSpinner.hide(completion: nil)
+//                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+//                }else{
+//                    SwiftSpinner.hide(completion: nil)
+//                    println("error fetching and passing all staffs from staff table view controller")
+//                    
+//                }
+//            })
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        println("table scrolling")
-        if isFirstLoad == true {
-            isFirstLoad = false
-            return
-        }
-        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-            if isRefreshing == false {
-                isRefreshing = true
-                SwiftSpinner.show("loading more patient", animated: true)
-                currentPageNumber = currentPageNumber + 1
-                let pageNumber:String = String(currentPageNumber)
-                let staffNetworkCall = StaffNetworkCall()
-                staffNetworkCall.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
-                    if done == true {
-                        self.tableView.reloadData()
-                    }else {
-                        self.currentPageNumber--
-                    }
-                })
-
-            }
-        }
-    }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        println("table scrolling")
+//        if isFirstLoad == true {
+//            isFirstLoad = false
+//            return
+//        }
+//        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+//            if isRefreshing == false {
+//                isRefreshing = true
+//                SwiftSpinner.show("loading more Staff", animated: true)
+//                currentPageNumber = currentPageNumber + 1
+//                let pageNumber:String = String(currentPageNumber)
+//                let staffNetworkCall = StaffNetworkCall()
+//                staffNetworkCall.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+//                    if done == true {
+//                        self.tableView.reloadData()
+//                        SwiftSpinner.hide(completion: nil)
+//                    }else {
+//                        self.currentPageNumber--
+//                        SwiftSpinner.hide(completion: nil)
+//                    }
+//                })
+//
+//            }
+//        }
+//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count:Int = 1

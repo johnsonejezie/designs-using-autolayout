@@ -70,7 +70,6 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         staffID.delegate = self
         
         validator.styleTransformers(success:{ (validationRule) -> Void in
-            println("here")
             // clear error label
             validationRule.errorLabel?.hidden = true
             validationRule.errorLabel?.text = ""
@@ -174,7 +173,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     func validationSuccessful() {
         // submit the form
         
-        let dataImage:NSData = UIImagePNGRepresentation(staffImageView.image)
+        let dataImage:NSData = UIImageJPEGRepresentation(staffImageView.image, 0.2)
         let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
         var firstname:String = firstNameTextField.text!
         var surname:String = lastNameTextField.text!
@@ -187,22 +186,32 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         var staff = Staff()
         staff.medical_facility_id = "4"
-        staff.speciality_id = specialityID
+        staff.speciality = specialityID
         staff.general_practional_id = gpID
         staff.member_id = member_id
-        staff.role_id = role_id
+        staff.role = role_id
         staff.email = email
         staff.surname=surname
         staff.firstname = firstname
-        staff.image = "N/A"
+        staff.image = imageString
         
-        var staffMethods = StaffNetworkCall()
-        staffMethods.create(staff)
+//        var staffMethods = StaffNetworkCall()
+//        staffMethods.create(staff)
+        let staffAPI = StaffAPI()
+        staffAPI.createStaff(staff, image:staffImageView.image, callback: { (newStaff:AnyObject?, error:NSError?) -> () in
+            if error != nil {
+                print(error)
+            }else {
+                let aStaff = newStaff as! Staff
+                println(aStaff)
+                
+                self.delegate?.addStaffViewController(self, finishedAddingStaff: aStaff)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        })
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
-        
-        delegate?.addStaffViewController(self, finishedAddingStaff: staff)
-        self.dismissViewControllerAnimated(true, completion: nil)
+
     }
     
     func keyboardWillShow(notification: NSNotification) {

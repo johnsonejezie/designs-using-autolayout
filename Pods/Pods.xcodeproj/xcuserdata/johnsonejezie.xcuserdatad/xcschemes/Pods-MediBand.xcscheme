@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FB39A4E7C8BFC5A7FF92B8FA"
+               BlueprintIdentifier = "FF7ABCFC514DFC46C5D7E1DF"
                BuildableName = "Pods_MediBand.framework"
                BlueprintName = "Pods-MediBand"
                ReferencedContainer = "container:Pods.xcodeproj">

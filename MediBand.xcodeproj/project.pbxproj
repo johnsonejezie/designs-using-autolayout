@@ -43,7 +43,7 @@
 		A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */; };
 		A57B41B21B6D205F007C735F /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B11B6D205F007C735F /* Staff.swift */; };
 		A57B41B41B6D2073007C735F /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B31B6D2073007C735F /* Patient.swift */; };
-		A57B41B61B6D37D9007C735F /* PersonNewtworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */; };
+		A57B41B61B6D37D9007C735F /* PatientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B51B6D37D9007C735F /* PatientAPI.swift */; };
 		A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */; };
 		A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */; };
 		A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */; };
@@ -69,6 +69,13 @@
 		A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */; };
 		A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */; };
 		A5ED9B0A1B89D30400E3EF49 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B091B89D30400E3EF49 /* Contants.swift */; };
+		A5ED9B0C1B8AD1F500E3EF49 /* StaffAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B0B1B8AD1F500E3EF49 /* StaffAPI.swift */; };
+		A5ED9B1B1B8BA74400E3EF49 /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B0F1B8BA74400E3EF49 /* SCLAlertView.m */; };
+		A5ED9B1C1B8BA74400E3EF49 /* SCLAlertViewResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B111B8BA74400E3EF49 /* SCLAlertViewResponder.m */; };
+		A5ED9B1D1B8BA74400E3EF49 /* SCLAlertViewStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B131B8BA74400E3EF49 /* SCLAlertViewStyleKit.m */; };
+		A5ED9B1E1B8BA74400E3EF49 /* SCLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B151B8BA74400E3EF49 /* SCLButton.m */; };
+		A5ED9B1F1B8BA74400E3EF49 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B181B8BA74400E3EF49 /* SCLTimerDisplay.m */; };
+		A5ED9B201B8BA74400E3EF49 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B1A1B8BA74400E3EF49 /* UIImage+ImageEffects.m */; };
 		B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4140736F615BCEE6A380469F /* Pods_MediBand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -134,7 +141,7 @@
 		A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A57B41B11B6D205F007C735F /* Staff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		A57B41B31B6D2073007C735F /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
-		A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonNewtworkCall.swift; sourceTree = "<group>"; };
+		A57B41B51B6D37D9007C735F /* PatientAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientAPI.swift; sourceTree = "<group>"; };
 		A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpTableViewController.swift; sourceTree = "<group>"; };
 		A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +171,20 @@
 		A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffTableViewCell.swift; sourceTree = "<group>"; };
 		A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		A5ED9B091B89D30400E3EF49 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		A5ED9B0B1B8AD1F500E3EF49 /* StaffAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffAPI.swift; sourceTree = "<group>"; };
+		A5ED9B0E1B8BA74400E3EF49 /* SCLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertView.h; sourceTree = "<group>"; };
+		A5ED9B0F1B8BA74400E3EF49 /* SCLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertView.m; sourceTree = "<group>"; };
+		A5ED9B101B8BA74400E3EF49 /* SCLAlertViewResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertViewResponder.h; sourceTree = "<group>"; };
+		A5ED9B111B8BA74400E3EF49 /* SCLAlertViewResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertViewResponder.m; sourceTree = "<group>"; };
+		A5ED9B121B8BA74400E3EF49 /* SCLAlertViewStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertViewStyleKit.h; sourceTree = "<group>"; };
+		A5ED9B131B8BA74400E3EF49 /* SCLAlertViewStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertViewStyleKit.m; sourceTree = "<group>"; };
+		A5ED9B141B8BA74400E3EF49 /* SCLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLButton.h; sourceTree = "<group>"; };
+		A5ED9B151B8BA74400E3EF49 /* SCLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLButton.m; sourceTree = "<group>"; };
+		A5ED9B161B8BA74400E3EF49 /* SCLMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLMacros.h; sourceTree = "<group>"; };
+		A5ED9B171B8BA74400E3EF49 /* SCLTimerDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLTimerDisplay.h; sourceTree = "<group>"; };
+		A5ED9B181B8BA74400E3EF49 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTimerDisplay.m; sourceTree = "<group>"; };
+		A5ED9B191B8BA74400E3EF49 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		A5ED9B1A1B8BA74400E3EF49 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +265,7 @@
 		A57B41131B6BB675007C735F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A5ED9B0D1B8BA74400E3EF49 /* SCLAlertView */,
 				A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */,
 				A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */,
 				A56E0C311B8060A60098AE9D /* Just */,
@@ -279,10 +301,11 @@
 		A57B41E51B6FA3CF007C735F /* networkCalls */ = {
 			isa = PBXGroup;
 			children = (
-				A57B41B51B6D37D9007C735F /* PersonNewtworkCall.swift */,
+				A57B41B51B6D37D9007C735F /* PatientAPI.swift */,
 				422446A31B70D61500C12612 /* StaffNetworkCall.swift */,
 				422446A51B70D62B00C12612 /* TaskAPI.swift */,
 				A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */,
+				A5ED9B0B1B8AD1F500E3EF49 /* StaffAPI.swift */,
 			);
 			name = networkCalls;
 			sourceTree = "<group>";
@@ -403,6 +426,26 @@
 				A5DED1351B7CAB81003461D3 /* NetUploadTask.swift */,
 			);
 			path = Net;
+			sourceTree = "<group>";
+		};
+		A5ED9B0D1B8BA74400E3EF49 /* SCLAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				A5ED9B0E1B8BA74400E3EF49 /* SCLAlertView.h */,
+				A5ED9B0F1B8BA74400E3EF49 /* SCLAlertView.m */,
+				A5ED9B101B8BA74400E3EF49 /* SCLAlertViewResponder.h */,
+				A5ED9B111B8BA74400E3EF49 /* SCLAlertViewResponder.m */,
+				A5ED9B121B8BA74400E3EF49 /* SCLAlertViewStyleKit.h */,
+				A5ED9B131B8BA74400E3EF49 /* SCLAlertViewStyleKit.m */,
+				A5ED9B141B8BA74400E3EF49 /* SCLButton.h */,
+				A5ED9B151B8BA74400E3EF49 /* SCLButton.m */,
+				A5ED9B161B8BA74400E3EF49 /* SCLMacros.h */,
+				A5ED9B171B8BA74400E3EF49 /* SCLTimerDisplay.h */,
+				A5ED9B181B8BA74400E3EF49 /* SCLTimerDisplay.m */,
+				A5ED9B191B8BA74400E3EF49 /* UIImage+ImageEffects.h */,
+				A5ED9B1A1B8BA74400E3EF49 /* UIImage+ImageEffects.m */,
+			);
+			path = SCLAlertView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,32 +623,39 @@
 				A5ED9B0A1B89D30400E3EF49 /* Contants.swift in Sources */,
 				A51D3FFA1B52B9D900C77665 /* NewCareActivityViewController.swift in Sources */,
 				A5DED1391B7CAB81003461D3 /* NetDownloadTask.swift in Sources */,
+				A5ED9B1B1B8BA74400E3EF49 /* SCLAlertView.m in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
 				A5DED1381B7CAB81003461D3 /* NetData.swift in Sources */,
 				A5DED1371B7CAB81003461D3 /* Net.swift in Sources */,
 				A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */,
+				A5ED9B0C1B8AD1F500E3EF49 /* StaffAPI.swift in Sources */,
 				A5DED13A1B7CAB81003461D3 /* NetHelper.swift in Sources */,
 				A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */,
+				A5ED9B1C1B8BA74400E3EF49 /* SCLAlertViewResponder.m in Sources */,
 				A51D3FCB1B51060500C77665 /* PatientProfileViewController.swift in Sources */,
 				422446A61B70D62B00C12612 /* TaskAPI.swift in Sources */,
 				A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */,
 				A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */,
+				A5ED9B201B8BA74400E3EF49 /* UIImage+ImageEffects.m in Sources */,
 				A56E0C3B1B8060A60098AE9D /* Just.swift in Sources */,
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
+				A5ED9B1F1B8BA74400E3EF49 /* SCLTimerDisplay.m in Sources */,
 				4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */,
 				A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */,
 				A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */,
 				422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,
+				A5ED9B1E1B8BA74400E3EF49 /* SCLButton.m in Sources */,
 				A521446E1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift in Sources */,
 				A57B415A1B6CF839007C735F /* User.swift in Sources */,
 				A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */,
 				A5DED13D1B7CAB81003461D3 /* NetUploadTask.swift in Sources */,
+				A5ED9B1D1B8BA74400E3EF49 /* SCLAlertViewStyleKit.m in Sources */,
 				42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */,
 				A52144701B77A65B00B65E22 /* DataSingleton.swift in Sources */,
 				A57B41B21B6D205F007C735F /* Staff.swift in Sources */,
-				A57B41B61B6D37D9007C735F /* PersonNewtworkCall.swift in Sources */,
+				A57B41B61B6D37D9007C735F /* PatientAPI.swift in Sources */,
 				A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */,
 				420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */,
 			);

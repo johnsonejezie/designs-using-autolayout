@@ -20,10 +20,6 @@ class Login {
             "password": password,
         ]
         
-        let headers = [
-            "Content-Type": "application/x-www-form-urlencoded"
-        ]
-        
         let url = "http://www.iconglobalnetwork.com/mediband/api/login"
         
         let manager = AFHTTPRequestOperationManager()
@@ -54,6 +50,33 @@ class Login {
         }
     }
     
+    func resetPassword(email:String, oldPassword:String, newPassword:String, completionBlock:(success:Bool)-> Void){
+        let parameter = [
+            "email":email,
+            "oldpassword":oldPassword,
+            "newpassword":newPassword
+        ]
+        
+        let url = "http://www.iconglobalnetwork.com/mediband/api/reset_password"
+        
+        let manager = AFHTTPRequestOperationManager()
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.responseSerializer = AFJSONResponseSerializer()
+        manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
+        manager.POST(url, parameters: parameter, success: { (operation:AFHTTPRequestOperation!, json:AnyObject!) -> Void in
+            println(json)
+            completionBlock(success: true)
+            }) { (operation:AFHTTPRequestOperation, error:NSError) -> Void in
+                println(error)
+                completionBlock(success: false)
+        }
+        
+        
+        
+    }
+    
+    
+    
     private func parseDictionary(dictionary:[String: AnyObject]) -> User {
         let user = User()
         if let resultDict: AnyObject = dictionary["data"] {
@@ -73,6 +96,11 @@ class Login {
                     user.role = resultDict["role"] as! String
                     user.speciality = resultDict["speciality"] as! String
                     user.surname = resultDict["surname"] as! String
+                    
+                    if let is_password_set: NSString = resultDict["is_password_set"] as? NSString  {
+                        user.is_password_set = is_password_set.boolValue
+                        println(is_password_set.boolValue)
+                    }
                 }
         }
         sharedDataSingleton.medical_facility = user.medical_facility

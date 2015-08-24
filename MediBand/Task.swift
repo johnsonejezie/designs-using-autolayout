@@ -17,7 +17,7 @@ class Task{
     var care_activity_type_id:String = ""
     var care_activity_category_id:String = ""
     var selected_staff_ids:[String] = [];
-    var medical_facility_id:String = ""
+    var medical_facility:String = ""
     var created:String = ""
     var modified:String = ""
     var id:String = ""
