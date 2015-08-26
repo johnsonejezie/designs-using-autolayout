@@ -16,6 +16,7 @@ class ActivityTableViewCell: UITableViewCell {
     
     @IBOutlet var dateLabel: UILabel!
     
+    @IBOutlet var emptyLabel: UILabel!
     @IBOutlet var specialityLabel: UILabel!
     @IBOutlet var resolutionLabel: UILabel!
     @IBOutlet var activityTypeLabel: UILabel!

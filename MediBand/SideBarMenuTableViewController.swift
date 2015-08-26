@@ -10,7 +10,7 @@ import UIKit
 import SwiftKeychainWrapper
 
 
-class SideBarMenuTableViewController: UITableViewController {
+class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate {
     
     var sideMenuForAdmin = [
         "MEDIBAND",
@@ -35,7 +35,7 @@ class SideBarMenuTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedDataSingleton.user.role == "Admin" {
+        if sharedDataSingleton.user.isAdmin == true {
             return sideMenuForAdmin.count
         }else {
             return sideMenuForUsers.count
@@ -46,7 +46,7 @@ class SideBarMenuTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SideMenuCell", forIndexPath: indexPath) as! UITableViewCell
         let sideMenuContent:[AnyObject]
-        if sharedDataSingleton.user.role == "Admin" {
+        if sharedDataSingleton.user.isAdmin == true {
             sideMenuContent = sideMenuForAdmin
         }else {
             sideMenuContent = sideMenuForUsers
@@ -57,8 +57,8 @@ class SideBarMenuTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        
-        if sharedDataSingleton.user.role == "Admin" {
+        println(sharedDataSingleton.user.isAdmin)
+        if sharedDataSingleton.user.isAdmin == true {
             switch (indexPath.row) {
             case 0:
                 break
@@ -69,7 +69,7 @@ class SideBarMenuTableViewController: UITableViewController {
                 performSegueWithIdentifier("GoToTask", sender: nil)
                 break
             case 3:
-                performSegueWithIdentifier("GoToBarcode", sender: nil)
+                self.displayPopOver(cell!)
                 break
             case 4:
                 performSegueWithIdentifier("GoToStaff", sender: nil)
@@ -127,6 +127,22 @@ class SideBarMenuTableViewController: UITableViewController {
         sharedDataSingleton.tasks = []
         sharedDataSingleton.patientHistory = []
         sharedDataSingleton.staffHistory = []
+    }
+    
+    func displayPopOver(sender: AnyObject){
+        let height = CGFloat(88)
+        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        var contentViewController : SelectPatientPopOverTableViewController = storyboard.instantiateViewControllerWithIdentifier("SelectPatientPopOverTableViewController") as! SelectPatientPopOverTableViewController
+//        contentViewController.delegate = self
+        contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height)
+        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
+        detailPopover.sourceView = sender as! UIView
+        detailPopover.sourceRect.origin.x = 50
+        detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
+        detailPopover.delegate = self
+        presentViewController(contentViewController, animated: true, completion: nil)
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

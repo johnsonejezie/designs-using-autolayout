@@ -50,6 +50,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
   
     func getTask() {
         let taskAPI = TaskAPI()
+        SwiftSpinner.show("Loading Task", animated: true)
         if isPatientTask == true {
             if let patient_id = patientID {
                 taskAPI.getTaskByPatient(patient_id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
@@ -60,6 +61,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
                     }
                     self.tasks = sharedDataSingleton.tasks
                     self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
                 })
             }
         }else {
@@ -71,6 +73,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
                 }
                 self.tasks = sharedDataSingleton.tasks
                 self.tableView.reloadData()
+                SwiftSpinner.hide(completion: nil)
             })
         }
  
@@ -107,22 +110,36 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.view.endEditing(true)
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableViewCell
         if tasks.count > 0 {
+            cell.specialityLabel.hidden = false
+            cell.careActivityLabel.hidden = false
+            cell.resolutionLabel.hidden = false
+            cell.dateLabel.hidden = false
+            cell.activityTypeLabel.hidden = false
+            cell.emptyLabel.hidden = true
+            
+            let constants = Contants()
             let task = self.tasks[indexPath.row]
-            cell.specialityLabel.text = task.specialist_id
-            cell.careActivityLabel.text = task.care_activity_id
-            cell.activityTypeLabel.text = task.care_activity_type_id
+            cell.specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+            cell.careActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
+            cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
             cell.resolutionLabel.text = task.resolution
+   
             cell.dateLabel.text = task.created
         } else {
-            cell.specialityLabel.text = ""
-            cell.careActivityLabel.text = ""
-            cell.resolutionLabel.text = ""
-            cell.dateLabel.text = ""
-            cell.activityTypeLabel.text = "No Task"
+            cell.specialityLabel.hidden = true
+            cell.careActivityLabel.hidden = true
+            cell.resolutionLabel.hidden = true
+            cell.dateLabel.hidden = true
+            cell.activityTypeLabel.hidden = true
+            cell.emptyLabel.hidden = false
+            if sharedDataSingleton.user.role == "Admin" {
+                cell.emptyLabel.text = "NO TASK HAVE BEEN CREATED YET"
+            }else {
+                cell.emptyLabel.text = "NO TASK ASSIGNED TO YOU"
+            }
         }
         return cell
     }
@@ -133,6 +150,18 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         
         self.performSegueWithIdentifier("viewActivity", sender: task)
         searchBar.resignFirstResponder()
+    }
+    
+    func fetchStringValueFromArray(constantArray:[AnyObject], atIndex indexAsString:String)->String {
+        var count:Int?
+       let index = indexAsString.toInt()
+        if let i = index {
+            count = i - 1
+        }
+        println(constantArray)
+        println(count)
+        let stringValue: String = (constantArray[count!] as? String)!
+        return stringValue
     }
     
     func displayPopOver(sender: AnyObject){
@@ -174,8 +203,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         return UIModalPresentationStyle.None
     }
     
-    func presentationController(controller: UIPresentationController!, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle)
-        -> UIViewController! {
+    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle)
+        -> UIViewController? {
             let navController = UINavigationController(rootViewController: controller.presentedViewController)
             return navController
     }

@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftValidator
+import SwiftSpinner
+
 
 protocol addStaffControllerDelegate: class {
     func addStaffViewController(controller: AddStaffViewController,
@@ -173,8 +175,8 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     func validationSuccessful() {
         // submit the form
         
-        let dataImage:NSData = UIImageJPEGRepresentation(staffImageView.image, 0.2)
-        let imageString = dataImage.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        SwiftSpinner.show("Creating Staff", animated: true)
+
         var firstname:String = firstNameTextField.text!
         var surname:String = lastNameTextField.text!
         var gpID:String = generalPracIDTextView.text!
@@ -185,7 +187,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         
         var staff = Staff()
-        staff.medical_facility_id = "4"
+        staff.medical_facility_id = sharedDataSingleton.user.medical_facility
         staff.speciality = specialityID
         staff.general_practional_id = gpID
         staff.member_id = member_id
@@ -193,22 +195,26 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         staff.email = email
         staff.surname=surname
         staff.firstname = firstname
-        staff.image = imageString
         
-//        var staffMethods = StaffNetworkCall()
-//        staffMethods.create(staff)
-        let staffAPI = StaffAPI()
-        staffAPI.createStaff(staff, image:staffImageView.image, callback: { (newStaff:AnyObject?, error:NSError?) -> () in
-            if error != nil {
-                print(error)
+        var staffMethods = StaffNetworkCall()
+        staffMethods.create(staff, image: staffImageView.image) { (success) -> Void in
+            if success == true {
+                SwiftSpinner.hide(completion: { () -> Void in
+                    self.delegate.addStaffViewController(self, finishedAddingStaff: staff)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
             }else {
-                let aStaff = newStaff as! Staff
-                println(aStaff)
-                
-                self.delegate?.addStaffViewController(self, finishedAddingStaff: aStaff)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                SwiftSpinner.hide(completion: { () -> Void in
+                    let alertView = SCLAlertView()
+                    alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                    alertView.alertIsDismissed({ () -> Void in
+                        
+                    })
+                })
+
             }
-        })
+        }
+
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
 

@@ -8,6 +8,8 @@
 
 import UIKit
 import SwiftSpinner
+import Haneke
+
 
 class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
 
@@ -115,41 +117,48 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StaffCell") as! StaffTableViewCell
-        
+       
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("StaffCell") as? StaffTableViewCell
+         cell!.staffImageView.image = nil;
         if sharedDataSingleton.allStaffs.count == 0 {
-            cell.emptyLabel.hidden = false
-            cell.staffIDLabel.hidden = true
-            cell.staffImageView.hidden = true
-            cell.staffNameLabel.hidden = true
-            cell.flagImageView.hidden = true
+            cell?.emptyLabel.hidden = false
+            cell?.staffIDLabel.hidden = true
+            cell?.staffImageView.hidden = true
+            cell?.staffNameLabel.hidden = true
+            cell?.flagImageView.hidden = true
         }else {
             
-            cell.emptyLabel.hidden = true
-            cell.staffIDLabel.hidden = false
-            cell.staffImageView.hidden = false
-            cell.staffNameLabel.hidden = false
-            cell.flagImageView.hidden = false
+            cell?.emptyLabel.hidden = true
+            cell?.staffIDLabel.hidden = false
+            cell?.staffImageView.hidden = false
+            cell?.staffNameLabel.hidden = false
+            cell?.flagImageView.hidden = false
             
             var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
             tap.numberOfTapsRequired = 1
             
-            cell.flagImageView.userInteractionEnabled = true
-            cell.flagImageView.tag = indexPath.row
-            cell.flagImageView.addGestureRecognizer(tap)
+            cell?.flagImageView.userInteractionEnabled = true
+            cell?.flagImageView.tag = indexPath.row
+            cell?.flagImageView.addGestureRecognizer(tap)
             
             
-            var staff = sharedDataSingleton.allStaffs[indexPath.row]
-            let imageData:NSData = NSData(base64EncodedString: staff.image as String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+            let staff = sharedDataSingleton.allStaffs[indexPath.row]
             println("member id \(staff.member_id)")
              println("general id \(staff.general_practional_id)")
-            cell.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
-            cell.staffIDLabel.text = staff.id
+            cell?.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
+            cell?.staffIDLabel.text = staff.id
             //            cell.staffContactLabel.text = staff["contact"]
-            cell.staffImageView.image = UIImage(data: imageData)
+            if staff.image != "" {
+                let URL = NSURL(string: staff.image)!
+                
+                cell?.staffImageView.hnk_setImageFromURL(URL)
+            }else {
+                cell?.staffImageView.image = UIImage(named: "defaultImage")
+            }
         }
 
-        return cell
+        return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

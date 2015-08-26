@@ -158,7 +158,6 @@ import SwiftSpinner
             resolution_id = inRow
             selectCategoriesButton.setTitle(item.uppercaseString, forState: UIControlState.Normal)
         }else {
-            selectStaff.setTitle(item.uppercaseString, forState: UIControlState.Normal)
         }
         println(item)
     }

@@ -23,4 +23,5 @@ class User {
     var created: String = ""
     var modified: String = ""
     var is_password_set:Bool = true
+    var isAdmin:Bool = false
 }

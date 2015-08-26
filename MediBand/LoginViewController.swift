@@ -116,6 +116,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                 let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
                 let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
                 SwiftSpinner.hide(completion: nil)
+                let alertView = SCLAlertView()
+                alertView.showError(self, title: "Login Error", subTitle: "Invalid email or password", closeButtonTitle: "Cancel", duration: 2000)
             }
         }
     }

@@ -55,6 +55,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         isCreatingTask = true
         let url = "http://www.iconglobalnetwork.com/mediband/api/create_task"
         let body = "patient_id=\(task.patient_id)&care_activity_id=\(task.care_activity_id)&specialist_id=\(task.specialist_id)&care_activity_type_id=\(task.care_activity_type_id)&care_activity_category_id=1&selected_staff_ids=\(task.selected_staff_ids)&medical_facility_id=\(sharedDataSingleton.user.medical_facility)&resolution=\(task.resolution)"
+        println(body)
         makeHTTPPostRequest(Path.CREATE_TASK, callback: callback, url: url, body: body)
     }
     
@@ -191,7 +192,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             if let resolution: String = resultDict["resolution"] as? String {
                 task.resolution = resolution as String
             }else {
-                task.resolution = "Assigned"
+                task.resolution = ""
             }
             if let specialist_id: String = resultDict["specialist_id"] as? String {
                 task.specialist_id = specialist_id as String

@@ -32,6 +32,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getPatients(pageNoToString)
 
@@ -97,7 +98,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
+        var count = 1
         if patients.count > 0 {
             count = patients.count
         }
@@ -107,12 +108,19 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("patientsCell") as! PatientsTableViewCell
         if patients.count > 0 {
+            cell.emptyLabel.hidden = true
+            cell.patientNameLabel.hidden = false
+            cell.generalPhysicianLabel.hidden = false
+            cell.patientImageView.hidden = false
             let patient = patients[indexPath.row]
             println(patient.occupation)
             cell.patientNameLabel.text = patient.forename + " " + patient.surname
             cell.generalPhysicianLabel.text = patient.gp
         }else {
-           cell.patientNameLabel.text = "No Patient assigned to you"
+            cell.patientImageView.hidden = true
+           cell.patientNameLabel.hidden = true
+            cell.generalPhysicianLabel.hidden = true
+            cell.emptyLabel.hidden = false
         }
         return cell
     }

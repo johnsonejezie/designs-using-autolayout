@@ -36,12 +36,13 @@ class StaffTableViewCell: UITableViewCell {
     }
     
     func cardSetup() {
+        
         cardView.alpha = 1
         cardView.layer.masksToBounds = false
         cardView.layer.cornerRadius = 5
         
-//        staffImageView.clipsToBounds = true
-//        staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
+        staffImageView.clipsToBounds = true
+        staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
         
     }
 

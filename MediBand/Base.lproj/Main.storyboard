@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-456" y="2770"/>
+            <point key="canvasLocation" x="-520" y="2770"/>
         </scene>
         <!--AddStaffView Controller-->
         <scene sceneID="zPB-dr-701">
@@ -1011,16 +1011,26 @@
                                                                 <constraint firstAttribute="width" secondItem="TSY-o0-blq" secondAttribute="height" id="i21-7Z-hVY"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO PATIENT ASSIGNED TO YOU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmL-2U-NWy">
+                                                            <rect key="frame" x="8" y="41" width="568" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="2Yf-hk-aU9" secondAttribute="trailing" constant="8" id="1tl-Fi-OrN"/>
                                                         <constraint firstAttribute="trailing" secondItem="hNu-R7-g8a" secondAttribute="trailing" constant="8.5" id="6xK-QC-2GS"/>
                                                         <constraint firstItem="2Yf-hk-aU9" firstAttribute="leading" secondItem="01K-Yr-gbB" secondAttribute="leading" constant="8" id="ANc-Ik-ccg"/>
+                                                        <constraint firstAttribute="bottom" secondItem="XmL-2U-NWy" secondAttribute="bottom" constant="41.5" id="DJy-Jj-tqv"/>
                                                         <constraint firstItem="TSY-o0-blq" firstAttribute="bottom" secondItem="hNu-R7-g8a" secondAttribute="bottom" constant="15" id="HEf-TI-5mN"/>
                                                         <constraint firstAttribute="trailing" secondItem="2Yf-hk-aU9" secondAttribute="trailing" constant="8" id="Ikc-w5-VG5"/>
                                                         <constraint firstItem="2Yf-hk-aU9" firstAttribute="top" secondItem="TSY-o0-blq" secondAttribute="top" constant="15" id="Mu5-bw-zYX"/>
+                                                        <constraint firstAttribute="trailing" secondItem="XmL-2U-NWy" secondAttribute="trailing" constant="8" id="Rm6-KQ-xEZ"/>
+                                                        <constraint firstItem="XmL-2U-NWy" firstAttribute="leading" secondItem="01K-Yr-gbB" secondAttribute="leading" constant="8" id="f0Q-ta-up5"/>
                                                         <constraint firstItem="hNu-R7-g8a" firstAttribute="leading" secondItem="01K-Yr-gbB" secondAttribute="leading" constant="8" id="j6u-pl-0Qy"/>
+                                                        <constraint firstItem="XmL-2U-NWy" firstAttribute="top" secondItem="01K-Yr-gbB" secondAttribute="top" constant="41" id="khn-um-jOn"/>
                                                         <constraint firstItem="TSY-o0-blq" firstAttribute="leading" secondItem="01K-Yr-gbB" secondAttribute="leading" constant="8" id="mz8-QV-SfK"/>
                                                         <constraint firstAttribute="centerY" secondItem="TSY-o0-blq" secondAttribute="centerY" id="oBj-6l-Txy"/>
                                                         <constraint firstItem="2Yf-hk-aU9" firstAttribute="leading" secondItem="TSY-o0-blq" secondAttribute="trailing" constant="8" id="oVG-b7-P81"/>
@@ -1047,7 +1057,9 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cardView" destination="01K-Yr-gbB" id="d9R-0o-Q4l"/>
+                                            <outlet property="emptyLabel" destination="XmL-2U-NWy" id="x4Y-Bn-Xe1"/>
                                             <outlet property="generalPhysicianLabel" destination="hNu-R7-g8a" id="M7L-dJ-iVy"/>
+                                            <outlet property="patientImageView" destination="TSY-o0-blq" id="lLI-Qy-Jjd"/>
                                             <outlet property="patientNameLabel" destination="2Yf-hk-aU9" id="rZD-aM-dm6"/>
                                         </connections>
                                     </tableViewCell>
@@ -1124,7 +1136,7 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oCX-W0-i9A">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="oCX-W0-i9A">
                                                             <rect key="frame" x="530" y="54" width="41.5" height="41.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="oCX-W0-i9A" secondAttribute="height" id="egJ-K7-EME"/>
@@ -2290,11 +2302,19 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO TASK ASSIGNED TO YOU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLH-eR-sKB">
+                                                            <rect key="frame" x="8" y="72" width="552" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="K16-eA-ljG" firstAttribute="top" secondItem="KLH-eR-sKB" secondAttribute="bottom" constant="36.5" id="0Mj-Qi-iRT"/>
                                                         <constraint firstItem="63S-aJ-5wt" firstAttribute="top" secondItem="aI0-Ts-pll" secondAttribute="bottom" constant="16" id="9D0-Dy-h0f"/>
                                                         <constraint firstAttribute="centerY" secondItem="63S-aJ-5wt" secondAttribute="centerY" constant="-20" id="HQy-vs-Zv1"/>
+                                                        <constraint firstItem="KLH-eR-sKB" firstAttribute="top" secondItem="h6E-dm-uiU" secondAttribute="bottom" constant="32" id="IuG-pi-OBW"/>
                                                         <constraint firstItem="aI0-Ts-pll" firstAttribute="top" secondItem="h6E-dm-uiU" secondAttribute="bottom" constant="16" id="MnD-nq-pqv"/>
                                                         <constraint firstItem="h6E-dm-uiU" firstAttribute="leading" secondItem="RMi-Wb-xj4" secondAttribute="leading" constant="15" id="Nu9-Tu-Qxf"/>
                                                         <constraint firstItem="SIa-Wh-F4k" firstAttribute="top" secondItem="63S-aJ-5wt" secondAttribute="bottom" constant="16" id="QLs-IQ-x2w"/>
@@ -2303,6 +2323,8 @@
                                                         <constraint firstAttribute="trailing" secondItem="K16-eA-ljG" secondAttribute="trailing" constant="15" id="eKy-AV-hkj"/>
                                                         <constraint firstItem="63S-aJ-5wt" firstAttribute="leading" secondItem="RMi-Wb-xj4" secondAttribute="leading" constant="15" id="hMj-YP-8gf"/>
                                                         <constraint firstItem="K16-eA-ljG" firstAttribute="top" secondItem="SIa-Wh-F4k" secondAttribute="top" id="io5-zn-dS1"/>
+                                                        <constraint firstItem="KLH-eR-sKB" firstAttribute="leading" secondItem="RMi-Wb-xj4" secondAttribute="leading" constant="8" id="mgf-Lc-hNe"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KLH-eR-sKB" secondAttribute="trailing" constant="8" id="xUU-Pe-aIh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -2318,6 +2340,7 @@
                                             <outlet property="cardView" destination="RMi-Wb-xj4" id="mv8-UL-t24"/>
                                             <outlet property="careActivityLabel" destination="aI0-Ts-pll" id="9wM-mr-S2D"/>
                                             <outlet property="dateLabel" destination="K16-eA-ljG" id="CH6-SE-uEk"/>
+                                            <outlet property="emptyLabel" destination="KLH-eR-sKB" id="9OJ-sn-hdE"/>
                                             <outlet property="resolutionLabel" destination="SIa-Wh-F4k" id="1Ep-bP-FPU"/>
                                             <outlet property="specialityLabel" destination="h6E-dm-uiU" id="xQL-6s-bzZ"/>
                                         </connections>
@@ -2532,14 +2555,15 @@
         <image name="HS3" width="357" height="355"/>
         <image name="Solid-Color-White-Flag-3-icon" width="256" height="256"/>
         <image name="arrow" width="25" height="25"/>
+        <image name="defaultImage" width="300" height="300"/>
         <image name="navBarIcon" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zJZ-xf-J6H"/>
         <segue reference="ydu-Ai-6cO"/>
-        <segue reference="77n-Ed-ogV"/>
-        <segue reference="1h7-qp-5Z6"/>
         <segue reference="XFV-cB-7yU"/>
         <segue reference="chE-7V-Dgw"/>
+        <segue reference="i72-EI-d2j"/>
+        <segue reference="aT1-3l-6Mp"/>
+        <segue reference="oFy-ux-Gpp"/>
     </inferredMetricsTieBreakers>
 </document>

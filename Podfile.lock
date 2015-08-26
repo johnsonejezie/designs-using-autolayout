@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Alamofire (1.3.1)
+  - HanekeSwift (0.9.1)
   - SwiftForms (1.0)
   - SwiftKeychainWrapper (1.0.9)
   - SwiftSpinner (0.7.0)
@@ -29,6 +30,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - Alamofire (~> 1.3)
+  - HanekeSwift
   - SwiftForms
   - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper`,
     branch `master`)
@@ -48,6 +50,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
+  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   SwiftForms: b16bf2978e6eb6617bc9f438322a1daa6c3d2dbd
   SwiftKeychainWrapper: ec2f6003d693bf26ec5f74b5a7de9f0884527f24
   SwiftSpinner: 034bb8b00675b3e4f4c97531fa9af3f550462192

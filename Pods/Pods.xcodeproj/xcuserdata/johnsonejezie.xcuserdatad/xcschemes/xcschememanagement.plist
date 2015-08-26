@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HanekeSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MediBand.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3E704F6FFFFA1DA3A9CC153566D8BB70</key>
+		<key>14574091E6C7B68C705CBF11E55A7603</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2322B59898337A7CFB1281718A079C19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EFB58C644BF763DB8F3DEDBFA35C4A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,17 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8D7303C663E761E97E09CDAD80799FDD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F33C891FB542C344C962F1886B1CB67</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A687CC7591B2231E4DDD2934EE19A43E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ABEFBDF67474C07B0AEA9B161E5FFD80</key>
 		<dict>
 			<key>primary</key>
 			<true/>

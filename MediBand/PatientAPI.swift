@@ -41,8 +41,7 @@ class PatientAPI {
     func createNewPatient(patient:Patient, fromMedicalFacility medical_facility:String, image:UIImage?, completionHandler:(success:Bool)-> Void) {
         
         var imgData = UIImageJPEGRepresentation(image!, 0.6)
-        let mm = NetData(jpegImage: image!, compressionQuanlity: 0.8, filename: "patientPicture")
-  
+        let mm = NetData(data: imgData, mimeType: MimeType.ImageJpeg, filename: "patient_picture.jpg")
         var data:[String: AnyObject] = [
             "patient_id": patient.patient_id,
             "surname": patient.surname,
@@ -69,33 +68,21 @@ class PatientAPI {
         ]
         println(data)
         let url = "http:/iconglobalnetwork.com/mediband/api/create_patient"
-        let parameters = [
-            "medical_facility_id": medical_facility,
-        ]
-        var success:Bool?
-        let net = Net()
-//        let urlRequest = urlRequestWithComponents(url, parameters: data)
+        let urlRequest = urlRequestWithComponents(url, parameters: data)
         
-        net.POST(url, params: data, successHandler: { responseData in
-            let result = responseData.json(error: nil)
-            NSLog("result: \(result)")
-            let resultDict:[String:AnyObject] = result! as! [String : AnyObject]
-            self.parseDictionaryToPatient(resultDict)
-            }, failureHandler: { error in
-                NSLog("Error")
-        })
-        
-//        Alamofire.upload(urlRequest.0, data: urlRequest.1)
-//            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-//                println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-//            }
-//            .responseJSON { (request, response, JSON, error) in
-//                println("REQUEST \(request)")
-//                println("RESPONSE \(response)")
-//                println("JSON \(JSON)")
-//                println("ERROR \(error)")
-//        }
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseJSON { (request, response, JSON, error) in
+                println("REQUEST \(request)")
+                println("RESPONSE \(response)")
+                println("JSON \(JSON)")
+                println("ERROR \(error)")
+        }
     }
+    
+    
     
     func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
         let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"
@@ -170,38 +157,7 @@ class PatientAPI {
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         println(data)
-//        let net = Net()
-//        net.POST(url, params: data, successHandler: { (responseData) -> () in
-//            responseData.err
-//            if let result = responseData.json as? [String: AnyObject] {
-//                 println("this is rep \(result)")
-//            }else {
-//                println("this is rep \(responseData.error)")
-//            }
-//
-//           
-//        }) { (error) -> () in
-//            println("this is error \(error)")
-//        }
-        
-//        manager.POST(url, parameters: data, constructingBodyWithBlock: { (formData: AFMultipartFormData!) -> Void in
-//            formData.appendPartWithFileData(imgData, name: "image", fileName: "picture.png", mimeType: "image/jpeg")
-//            println("this is formdata\(formData)")
-//        }, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-//            println("JSON: \(responseObject)")
-//            completionHandler(success: true)
-//        }) { (req , error) -> Void in
-//            completionHandler(success: false)
-//            println(error)
-//        }
-        
-//        manager.POST(url, parameters: data, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-//            println("JSON: \(responseObject)")
-//            completionHandler(success: true)
-//            }) { (req, error) -> Void in
-//                println("error in creating patient\(error.description)")
-//                completionHandler(success: false)
-//        }
+
     }
     
     private func parseDictionary(dictionary:[String: AnyObject]) -> [Patient] {

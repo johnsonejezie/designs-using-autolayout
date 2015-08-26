@@ -91,6 +91,9 @@ class Login {
                         user.image = image
                     }
                     user.medical_facility = resultDict["medical_facility"] as! String
+                    if user.medical_facility == "Teaching Hospital" {
+                        user.medical_facility = "4"
+                    }
                     user.memberid = resultDict["member_id"] as! String
                     user.modified = resultDict["modified"] as! String
                     user.role = resultDict["role"] as! String
@@ -99,7 +102,12 @@ class Login {
                     
                     if let is_password_set: NSString = resultDict["is_password_set"] as? NSString  {
                         user.is_password_set = is_password_set.boolValue
-                        println(is_password_set.boolValue)
+                    }
+                    
+                    if let isAdmin: Int = resultDict["is_admin"] as? Int  {
+                        if isAdmin == 1 {
+                            user.isAdmin = true
+                        }
                     }
                 }
         }

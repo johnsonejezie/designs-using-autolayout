@@ -8,36 +8,56 @@
 
 import UIKit
 import AFNetworking
+import Alamofire
+
 
 class StaffNetworkCall{
 
 
     let operationManger = AFHTTPRequestOperationManager()
         
-    func create(staff:Staff){
+    func create(staff:Staff, image:UIImage?, completionBlock:(success:Bool)->Void){
         
         println("this is staff obj \(staff)")
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
+                let imageData = UIImageJPEGRepresentation(image!, 0.6)
+        let mm = NetData(data: imageData, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
         
-        let data : [String:AnyObject] = ["medical_facility_id":staff.medical_facility_id,
-            "speciality_id":staff.speciality_id,
+        let data : [String:AnyObject] = [
+            "medical_facility_id":staff.medical_facility_id,
+            "speciality_id":staff.speciality,
             "general_practitioner_id":staff.general_practional_id,
             "member_id":staff.member_id,
-            "role_id":staff.role_id,
+            "role_id":staff.role,
             "email":staff.email,
             "surname":staff.surname,
             "firstname":staff.firstname,
-            "image":staff.image
+            "image":mm
         ];
            println("this is staff obj \(data)")
-        self.operationManger.POST("http://iconglobalnetwork.com/mediband/api/create_staff", parameters: data, success: { (requestOperation: AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            println("staff created \(responseObject)")
-            }, failure:{ (requestOperation, error) -> Void in
-                println("error creating staff \(error)")
-        })
+
         
+        
+        let urlRequest = self.urlRequestWithComponents("http://iconglobalnetwork.com/mediband/api/create_staff", parameters: data)
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
+            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+            }
+            .responseJSON { (request, response, JSON, error) in
+                if error != nil {
+                    completionBlock(success: false)
+                }else {
+                    let createdStaff:[String: AnyObject] = (JSON as? [String: AnyObject])!
+                    self.parseDict(createdStaff)
+                    completionBlock(success: true)
+                }
+                println("REQUEST \(request)")
+                println("RESPONSE \(response)")
+                println("JSON \(JSON)")
+                println("ERROR \(error)")
+        }
     }
     
     func edit(staff:Staff){
@@ -113,24 +133,24 @@ class StaffNetworkCall{
         if let general_practional_id:String = dict["general_practional_id"]  as? String{
             staffData.general_practional_id = general_practional_id;
         }else{
-            staffData.general_practional_id = "N/A"
+            staffData.general_practional_id = ""
         }
         
         if let speciality:String = dict["speciality"]  as? String{
             staffData.speciality = speciality;
         }else{
-            staffData.speciality = "N/A"
+            staffData.speciality = ""
         }
         
         if let member_id:String = dict["member_id"]  as? String{
             staffData.member_id = member_id;
         }else{
-            staffData.member_id = "N/A"
+            staffData.member_id = ""
         }
         if let role:String = dict["role"]  as? String{
             staffData.role = role;
         }else{
-            staffData.role = "N/A"
+            staffData.role = ""
         }
         staffData.firstname = dict["firstname"] as! String
         staffData.surname = dict["surname"] as! String
@@ -144,6 +164,59 @@ class StaffNetworkCall{
         print(staffData)
         
         sharedDataSingleton.allStaffs.append(staffData)
+    }
+    
+    
+    func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
+        
+        // create url request to send
+        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+        //let boundaryConstant = "myRandomBoundary12345"
+        let boundaryConstant = "NET-POST-boundary-\(arc4random())-\(arc4random())"
+        let contentType = "multipart/form-data;boundary="+boundaryConstant
+        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        
+        // create upload data to send
+        let uploadData = NSMutableData()
+        
+        // add parameters
+        for (key, value) in parameters {
+            
+            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            if value is NetData {
+                // add image
+                var postData = value as! NetData
+                
+                
+                //uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(postData.filename)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                
+                // append content disposition
+                var filenameClause = " filename=\"\(postData.filename)\""
+                let contentDispositionString = "Content-Disposition: form-data; name=\"\(key)\";\(filenameClause)\r\n"
+                let contentDispositionData = contentDispositionString.dataUsingEncoding(NSUTF8StringEncoding)
+                uploadData.appendData(contentDispositionData!)
+                
+                
+                // append content type
+                //uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!) // mark this.
+                let contentTypeString = "Content-Type: \(postData.mimeType.getString())\r\n\r\n"
+                let contentTypeData = contentTypeString.dataUsingEncoding(NSUTF8StringEncoding)
+                uploadData.appendData(contentTypeData!)
+                uploadData.appendData(postData.data)
+                
+            }else{
+                uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+            }
+        }
+        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+        
+        // return URLRequestConvertible and NSData
+        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
     
