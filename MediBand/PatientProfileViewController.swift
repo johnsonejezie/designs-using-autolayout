@@ -97,6 +97,10 @@ class PatientProfileViewController: UIViewController {
         self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }
     @IBAction func updatePatientActionButton() {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("AddPatientViewController") as! AddPatientViewController
+        sharedDataSingleton.selectedPatient = patient
+        controller.patientID = patient.patient_id
+        self.navigationController?.pushViewController(controller, animated: true)
         
         self.trackEvent("UX", action: "Updating patient", label: "update patient button in patient profile view", value: nil)
     }

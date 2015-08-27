@@ -69,7 +69,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
                 performSegueWithIdentifier("GoToTask", sender: nil)
                 break
             case 3:
-                self.displayPopOver(cell!)
+                performSegueWithIdentifier("GoToBarcode", sender: nil)
                 break
             case 4:
                 performSegueWithIdentifier("GoToStaff", sender: nil)

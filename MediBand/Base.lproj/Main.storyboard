@@ -29,8 +29,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="BFU-he-EQ3" kind="show" identifier="patientSegue" id="i72-EI-d2j"/>
-                        <segue destination="14L-fE-wwp" kind="show" identifier="ExistingPatient" id="aT1-3l-6Mp"/>
+                        <segue destination="14L-fE-wwp" kind="custom" identifier="ExistingPatient" customClass="SWRevealViewControllerSeguePushController" id="B3l-KV-T2c"/>
+                        <segue destination="BFU-he-EQ3" kind="custom" identifier="patientSegue" customClass="SWRevealViewControllerSeguePushController" id="KAz-gw-DPh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -307,7 +307,7 @@
         <!--ADD PATIENT-->
         <scene sceneID="fzo-cl-Zgb">
             <objects>
-                <tableViewController id="mpR-KI-SPb" customClass="AddPatientViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddPatientViewController" id="mpR-KI-SPb" customClass="AddPatientViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="215" sectionHeaderHeight="10" sectionFooterHeight="10" id="Zap-t1-9gN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -659,7 +659,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEt-N3-bAK">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="268"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HS3" translatesAutoresizingMaskIntoConstraints="NO" id="grd-eo-QzH">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="grd-eo-QzH">
                                                 <rect key="frame" x="233" y="93" width="134" height="134"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="grd-eo-QzH" secondAttribute="height" multiplier="1:1" id="3Es-ET-T5D"/>
@@ -1005,7 +1005,7 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HS1" translatesAutoresizingMaskIntoConstraints="NO" id="TSY-o0-blq">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="TSY-o0-blq">
                                                             <rect key="frame" x="8" y="10" width="82.5" height="82.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="TSY-o0-blq" secondAttribute="height" id="i21-7Z-hVY"/>
@@ -1081,11 +1081,6 @@
                     <navigationItem key="navigationItem" title="PATIENT" id="sHK-YL-wEp">
                         <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="ABB-0y-bmg">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="B0k-Bf-GqU">
-                            <connections>
-                                <action selector="addPatientBarButton:" destination="8IW-zO-AtW" id="suP-9e-sxZ"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -2057,7 +2052,7 @@
                                             <constraint firstItem="Ne4-55-cWE" firstAttribute="top" secondItem="iYP-GP-lYv" secondAttribute="bottom" constant="13" id="x9D-O5-4Od"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HS3" translatesAutoresizingMaskIntoConstraints="NO" id="HcV-Q2-nq0">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="HcV-Q2-nq0">
                                         <rect key="frame" x="255" y="8" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HcV-Q2-nq0" secondAttribute="height" id="JAz-8f-zcx"/>
@@ -2389,7 +2384,6 @@
                         <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="fDJ-4T-NkH">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="usd-v4-a5c"/>
                     </navigationItem>
                     <connections>
                         <outlet property="navBar" destination="fDJ-4T-NkH" id="dwa-ec-2ae"/>
@@ -2551,7 +2545,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="HS1" width="416" height="520"/>
         <image name="HS3" width="357" height="355"/>
         <image name="Solid-Color-White-Flag-3-icon" width="256" height="256"/>
         <image name="arrow" width="25" height="25"/>
@@ -2559,11 +2552,11 @@
         <image name="navBarIcon" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zJZ-xf-J6H"/>
         <segue reference="ydu-Ai-6cO"/>
-        <segue reference="XFV-cB-7yU"/>
+        <segue reference="B3l-KV-T2c"/>
+        <segue reference="iYo-GD-Zlm"/>
+        <segue reference="1h7-qp-5Z6"/>
         <segue reference="chE-7V-Dgw"/>
-        <segue reference="i72-EI-d2j"/>
-        <segue reference="aT1-3l-6Mp"/>
-        <segue reference="oFy-ux-Gpp"/>
     </inferredMetricsTieBreakers>
 </document>

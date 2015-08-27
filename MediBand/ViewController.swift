@@ -12,6 +12,7 @@ import AVFoundation
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate {
     
     var isExistingPatient:Bool = false
+    var isStartingSession:Bool = false
 
     let session:AVCaptureSession = AVCaptureSession()
     var previewLayer:AVCaptureVideoPreviewLayer!
@@ -25,7 +26,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        
         //resizable view
         self.highlightView.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
         
@@ -60,7 +62,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         self.view.layer.addSublayer(previewLayer)
         
         //start scan
-        session.startRunning()
+//        session.startRunning()
+        
+        self.showAlertForPatientScan()
         
         
     }
@@ -99,22 +103,48 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         
         self.highlightView.frame = highlighViewRect
         self.view.bringSubviewToFront(self.highlightView)
-        println(detectionString)
-        
         if detectionString != nil {
-            
             patientID = detectionString
-            
-            let message:String = "Your code is \(detectionString)"
+            let message:String = "Patient ID is \(detectionString)"
             
             let alertView: UIAlertView = UIAlertView(title:"Alert", message: message, delegate: self, cancelButtonTitle:"Scan Again")
             alertView.addButtonWithTitle("Continue")
             alertView.delegate = self
             alertView.show()
         }
+    }
+    
+    func showAlertForPatientScan() {
+
+        let alertView = SCLAlertView()
+        alertView.addButton("EXISTING PATIENT", actionBlock: { () -> Void in
+            println("existing")
+            self.isExistingPatient = true
+            self.isStartingSession = true
+            self.session.startRunning()
+        })
+        alertView.addButton("NEW PATIENT", actionBlock: { () -> Void in
+            println("new")
+            self.isExistingPatient = false
+            self.isStartingSession = true
+            self.session.startRunning()
+        })
+        alertView.showEdit(self, title: "Patient", subTitle: "Existing or New Patient?", closeButtonTitle: "CANCEL", duration: 2000)
+        
+        alertView.alertIsDismissed { () -> Void in
+            if self.isStartingSession == true {
+            }else{
+                self.isExistingPatient = false
+               self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+            }
+            
+        }
+        
         
         
     }
+    
+    
     
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true

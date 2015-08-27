@@ -69,9 +69,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        test.getTaskByPatient(419, lCare_activity_id: 2);
-        
-        
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -85,10 +82,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         patientImageView.clipsToBounds = true
         patientImageView.layer.cornerRadius = 100/2
-
-        
-        
-        patientImageView.image = UIImage(named: "HS3")
+        patientImageView.image = UIImage(named: "defaultImage")
         topView.addSubview(patientImageView)
         
         let uploadImgBtn:UIButton = UIButton()
