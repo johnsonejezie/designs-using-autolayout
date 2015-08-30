@@ -48,7 +48,7 @@ class Patient {
     var patient_id:String = ""
     var language: String = ""
     
-    var image: AnyObject = ""
+    var image: String = ""
     
     
     

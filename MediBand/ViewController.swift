@@ -107,16 +107,27 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             patientID = detectionString
             let message:String = "Patient ID is \(detectionString)"
             
-            let alertView: UIAlertView = UIAlertView(title:"Alert", message: message, delegate: self, cancelButtonTitle:"Scan Again")
-            alertView.addButtonWithTitle("Continue")
-            alertView.delegate = self
-            alertView.show()
+            let alertView = SCLAlertView()
+            alertView.addButton("CONTINUE", actionBlock: { () -> Void in
+                if self.isExistingPatient == false {
+                    sharedDataSingleton.selectedPatient = nil
+                    self.performSegueWithIdentifier("patientSegue", sender: self.patientID)
+                }else {
+                    self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+                }
+            })
+            alertView.addButton("CANCEL", actionBlock: { () -> Void in
+                self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+            })
+            alertView.showEdit(self, title: "Scan Completed", subTitle: message, closeButtonTitle: nil, duration: 2000)
         }
     }
     
     func showAlertForPatientScan() {
 
         let alertView = SCLAlertView()
+
+        
         alertView.addButton("EXISTING PATIENT", actionBlock: { () -> Void in
             println("existing")
             self.isExistingPatient = true
@@ -129,14 +140,13 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             self.isStartingSession = true
             self.session.startRunning()
         })
-        alertView.showEdit(self, title: "Patient", subTitle: "Existing or New Patient?", closeButtonTitle: "CANCEL", duration: 2000)
+        alertView.addButton("CANCEL", actionBlock: { () -> Void in
+            self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+        })
+        alertView.showEdit(self, title: "Patient", subTitle: "Existing or New Patient?", closeButtonTitle: nil, duration: 2000)
         
         alertView.alertIsDismissed { () -> Void in
-            if self.isStartingSession == true {
-            }else{
-                self.isExistingPatient = false
-               self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
-            }
+//                self.isExistingPatient = false
             
         }
         

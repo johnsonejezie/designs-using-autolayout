@@ -44,6 +44,13 @@ class StaffProfileViewController: UIViewController {
             generalPractitionerIDLabel.text = staff.general_practional_id
             generlPracticeLabel.text = staff.email
             specialityLabel.text = staff.speciality
+            
+            if staff.image != "" {
+                let URL = NSURL(string: staff.image)!
+                staffImageView.hnk_setImageFromURL(URL)
+            }else {
+                staffImageView.image = UIImage(named: "defaultImage")
+            }
         }
         
 
@@ -57,6 +64,21 @@ class StaffProfileViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         staffImageView.clipsToBounds = true
         staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
+        updateStaffButton.layer.cornerRadius = 4
+        viewHistoryButton.layer.cornerRadius = 4
+
+    }
+    
+    
+    @IBOutlet var viewHistoryButton: UIButton!
+    
+    @IBOutlet var updateStaffButton: UIButton!
+    @IBAction func updateStaff() {
+        let addStaffViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddStaffViewController") as! AddStaffViewController
+        addStaffViewController.isUpdatingStaff = true
+        addStaffViewController.staff = self.staff
+        self.navigationController?.pushViewController(addStaffViewController, animated: true)
+        self.trackEvent("UX", action:"Update Staff" , label: "Staff update button", value: nil)
     }
     
     

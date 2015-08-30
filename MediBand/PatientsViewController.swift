@@ -52,42 +52,37 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
                     SwiftSpinner.hide(completion: nil)
                 }else {
                     SwiftSpinner.hide(completion: nil)
-                    var alertview = JSSAlertView().show(self, title: "Error", text: "Failed to get patients. Tap on Retry to try again or Cancel to dismiss this alert", buttonText: "Retry", cancelButtonText: "Cancel")
-                    alertview.setTitleFont("ClearSans-Light")
-                    alertview.setTextFont("ClearSans")
-                    alertview.setButtonFont("ClearSans-Bold")
-                    alertview.addAction(self.closeCallback)
-                    alertview.addCancelAction(self.cancelCallback)
+                    
 //                    println("failed")
                 }
             }
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        println("table scrolling")
-        if isFirstLoad == true {
-            isFirstLoad = false
-            return
-        }
-        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-            if isRefreshing == false {
-                isRefreshing = true
-                SwiftSpinner.show("loading more patient", animated: true)
-                currentPageNumber = currentPageNumber + 1
-                let pageNumber:String = String(currentPageNumber)
-                let patientAPI = PatientAPI()
-                patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
-                    if success == true {
-                        self.tableView.reloadData()
-                    }else {
-                        self.isRefreshing = false
-                        self.currentPageNumber--
-                    }
-                })
-            }
-        }
-    }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        println("table scrolling")
+//        if isFirstLoad == true {
+//            isFirstLoad = false
+//            return
+//        }
+//        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+//            if isRefreshing == false {
+//                isRefreshing = true
+//                SwiftSpinner.show("loading more patient", animated: true)
+//                currentPageNumber = currentPageNumber + 1
+//                let pageNumber:String = String(currentPageNumber)
+//                let patientAPI = PatientAPI()
+//                patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
+//                    if success == true {
+//                        self.tableView.reloadData()
+//                    }else {
+//                        self.isRefreshing = false
+//                        self.currentPageNumber--
+//                    }
+//                })
+//            }
+//        }
+//    }
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Patients List View")
@@ -116,6 +111,15 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             println(patient.occupation)
             cell.patientNameLabel.text = patient.forename + " " + patient.surname
             cell.generalPhysicianLabel.text = patient.gp
+            
+            if patient.image != "" {
+                let URL = NSURL(string: patient.image)!
+                
+                cell.patientImageView.hnk_setImageFromURL(URL)
+            }else {
+                cell.patientImageView.image = UIImage(named: "defaultImage")
+            }
+            
         }else {
             cell.patientImageView.hidden = true
            cell.patientNameLabel.hidden = true

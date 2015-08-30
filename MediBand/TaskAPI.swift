@@ -105,14 +105,15 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                     self.parseDictionaryToTask(resultDict)
                 }
             }
-            return staffTasks
+            sharedDataSingleton.staffTask = staffTasks
+            return sharedDataSingleton.staffTask
         }
 
         return nil
     }
     
     func handleGetTaskByPatient(json: AnyObject)-> [Task]? {
-        println("this is staff json \(json)")
+        println("this is patient json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -120,7 +121,8 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                 }
             }
             isPatientTask = false
-            return patientTasks
+            sharedDataSingleton.patientTask = patientTasks
+            return sharedDataSingleton.patientTask
         }
         return nil
     }

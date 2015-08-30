@@ -82,4 +82,17 @@ class Contants {
         
         "Emergency Care Activity"
     ]
+    
+    
+    let role:[AnyObject] = [
+        
+        "Doctor",
+        
+        "Nurse",
+        
+        "Allied Health Profession",
+        
+        "Admin"
+    ]
+    
 }

@@ -16,16 +16,15 @@ class StaffNetworkCall{
 
     let operationManger = AFHTTPRequestOperationManager()
         
-    func create(staff:Staff, image:UIImage?, completionBlock:(success:Bool)->Void){
-        
+    func create(staff:Staff, image:UIImage?, isCreatingNewStaff:Bool, completionBlock:(success:Bool)->Void){
+        var url:String = ""
         println("this is staff obj \(staff)")
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
-                let imageData = UIImageJPEGRepresentation(image!, 0.6)
-        let mm = NetData(data: imageData, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
+ 
         
-        let data : [String:AnyObject] = [
+        var data : [String:AnyObject] = [
             "medical_facility_id":staff.medical_facility_id,
             "speciality_id":staff.speciality,
             "general_practitioner_id":staff.general_practional_id,
@@ -33,31 +32,65 @@ class StaffNetworkCall{
             "role_id":staff.role,
             "email":staff.email,
             "surname":staff.surname,
-            "firstname":staff.firstname,
-            "image":mm
+            "firstname":staff.firstname
         ];
-           println("this is staff obj \(data)")
-
         
-        
-        let urlRequest = self.urlRequestWithComponents("http://iconglobalnetwork.com/mediband/api/create_staff", parameters: data)
-        Alamofire.upload(urlRequest.0, data: urlRequest.1)
-            .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-            }
-            .responseJSON { (request, response, JSON, error) in
-                if error != nil {
-                    completionBlock(success: false)
-                }else {
-                    let createdStaff:[String: AnyObject] = (JSON as? [String: AnyObject])!
-                    self.parseDict(createdStaff)
-                    completionBlock(success: true)
-                }
-                println("REQUEST \(request)")
-                println("RESPONSE \(response)")
-                println("JSON \(JSON)")
-                println("ERROR \(error)")
+        if isCreatingNewStaff == true {
+            url = "http://iconglobalnetwork.com/mediband/api/create_staff"
+        }else {
+            url = "http://iconglobalnetwork.com/mediband/api/edit_staff"
         }
+        if let anImage:UIImage = image {
+            let imageData = UIImageJPEGRepresentation(image!, 0.6)
+            let mm = NetData(data: imageData, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
+            var parameters : [String:AnyObject] = [
+                "medical_facility_id":staff.medical_facility_id,
+                "speciality_id":staff.speciality,
+                "general_practitioner_id":staff.general_practional_id,
+                "member_id":staff.member_id,
+                "role_id":staff.role,
+                "email":staff.email,
+                "surname":staff.surname,
+                "firstname":staff.firstname,
+                "image":mm
+            ]
+            
+            println("this is staff obj \(data)")
+            let urlRequest = self.urlRequestWithComponents(url, parameters: parameters)
+            Alamofire.upload(urlRequest.0, data: urlRequest.1)
+                .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                    println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                }
+                .responseJSON { (request, response, JSON, error) in
+                    if error != nil {
+                        completionBlock(success: false)
+                    }else {
+                        if let result:AnyObject = JSON {
+                            if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
+                                self.parseDict(dict)
+                            }
+                        }
+                        completionBlock(success: true)
+                    }
+                    println("REQUEST \(request)")
+                    println("RESPONSE \(response)")
+                    println("JSON \(JSON)")
+                    println("ERROR \(error)")
+            }
+        }else {
+            self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
+                println(responseObject)
+                let result:AnyObject = responseObject
+                    if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
+                        self.parseDict(dict)
+                    }
+                completionBlock(success: true)
+                }, failure:{ (requestOperation, error) -> Void in
+                    completionBlock(success: false)
+                    println(error)
+            })
+        }
+
     }
     
     func edit(staff:Staff){
@@ -130,7 +163,7 @@ class StaffNetworkCall{
     func parseDict(dict:[String:AnyObject]) {
         var staffData = Staff()
         staffData.id = dict["id"] as! String
-        if let general_practional_id:String = dict["general_practional_id"]  as? String{
+        if let general_practional_id:String = dict["general_practitioner_id"]  as? String{
             staffData.general_practional_id = general_practional_id;
         }else{
             staffData.general_practional_id = ""

@@ -45,15 +45,28 @@ class PatientProfileViewController: UIViewController {
         viewCaseNoteButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
         UpdatePatientButton.layer.cornerRadius = 4
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+        
+        
         firstNameLabel.text = patient.forename.uppercaseString
         lastNameLabel.text = patient.surname.uppercaseString
         contactLabel.text = patient.addressphone
         addressLabel.text = patient.address
         generalPhysicianLabel.text = patient.gp
         emailAddressLabel.text = patient.patient_id
+        
+        if patient.image != "" {
+            let URL = NSURL(string: patient.image)!
+            
+            imageView.hnk_setImageFromURL(URL)
+        }else {
+            imageView.image = UIImage(named: "defaultImage")
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+
+        
+        
 //        let image = UIImage(contentsOfFile: patient.image as! String)
 //        println(image)
 //        imageView.image = image

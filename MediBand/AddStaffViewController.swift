@@ -25,6 +25,9 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet var navBar: UIBarButtonItem!
     var tap:UITapGestureRecognizer!
     var imagePicker = UIImagePickerController()
+    var isUpdatingStaff = false
+    var staff = Staff()
+    var staffImage:UIImage?
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var topContainerView: UIView!
@@ -62,6 +65,22 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isUpdatingStaff == true {
+            firstNameTextField.text = staff.firstname
+            lastNameTextField.text = staff.surname
+            emailTextField.text = staff.email
+            roleIDTextView.text = staff.role
+            generalPracIDTextView.text = staff.general_practional_id
+            specialityTextField.text = staff.speciality
+            staffID.text = staff.member_id
+            if staff.image != "" {
+                let URL = NSURL(string: staff.image)!
+                staffImageView.hnk_setImageFromURL(URL)
+            }else {
+                staffImageView.image = UIImage(named: "defaultImage")
+            }
+        }
         
         firstNameTextField.delegate = self
         emailTextField.delegate = self
@@ -152,6 +171,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
             println("done")
         })
         staffImageView.image = image
+        self.staffImage = image
     }
     
     
@@ -175,7 +195,14 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     func validationSuccessful() {
         // submit the form
         
-        SwiftSpinner.show("Creating Staff", animated: true)
+        var message:String = ""
+        if isUpdatingStaff == true {
+            message = "Updating Staff"
+        }else {
+          message = "Creating Staff"
+        }
+        
+        SwiftSpinner.show(message, animated: true)
 
         var firstname:String = firstNameTextField.text!
         var surname:String = lastNameTextField.text!
@@ -186,7 +213,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         var email:String = emailTextField.text!
         
         
-        var staff = Staff()
+        
         staff.medical_facility_id = sharedDataSingleton.user.medical_facility
         staff.speciality = specialityID
         staff.general_practional_id = gpID
@@ -196,25 +223,25 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         staff.surname=surname
         staff.firstname = firstname
         
+        
         var staffMethods = StaffNetworkCall()
-        staffMethods.create(staff, image: staffImageView.image) { (success) -> Void in
-            if success == true {
-                SwiftSpinner.hide(completion: { () -> Void in
-                    self.delegate.addStaffViewController(self, finishedAddingStaff: staff)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                })
-            }else {
-                SwiftSpinner.hide(completion: { () -> Void in
-                    let alertView = SCLAlertView()
-                    alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
-                    alertView.alertIsDismissed({ () -> Void in
-                        
-                    })
-                })
-
-            }
+        staffMethods.create(staff, image: staffImage, isCreatingNewStaff: !isUpdatingStaff) { (success) -> Void in
+                        if success == true {
+                            SwiftSpinner.hide(completion: { () -> Void in
+                                self.delegate.addStaffViewController(self, finishedAddingStaff: self.staff)
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                            })
+                        }else {
+                            SwiftSpinner.hide(completion: { () -> Void in
+                                let alertView = SCLAlertView()
+                                alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                                alertView.alertIsDismissed({ () -> Void in
+                                    
+                                })
+                            })
+            
+                        }
         }
-
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
 
@@ -223,14 +250,14 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y -= keyboardSize.height
+            self.view.frame.origin.y -= keyboardSize.height/2
         }
         
     }
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y += keyboardSize.height
+            self.view.frame.origin.y += keyboardSize.height/2
         }
     }
     

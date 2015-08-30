@@ -31,7 +31,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.tasks = sharedDataSingleton.staffTask
       getTask()
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
@@ -50,31 +50,44 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
   
     func getTask() {
         let taskAPI = TaskAPI()
-        SwiftSpinner.show("Loading Task", animated: true)
+        
         if isPatientTask == true {
             if let patient_id = patientID {
+                
+                if sharedDataSingleton.patientTask.count == 0 {
+                    SwiftSpinner.show("Loading Task", animated: true)
+                }
                 taskAPI.getTaskByPatient(patient_id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
                     if error != nil {
                         
                     }else {
-                       sharedDataSingleton.tasks = task as! [Task]
+//                       sharedDataSingleton.tasks = task as! [Task]
                     }
-                    self.tasks = sharedDataSingleton.tasks
+//                    self.tasks = sharedDataSingleton.tasks\
+                    self.tasks = sharedDataSingleton.patientTask
                     self.tableView.reloadData()
                     SwiftSpinner.hide(completion: nil)
                 })
+                
             }
         }else {
+            
+            if sharedDataSingleton.staffTask.count == 0 {
+                SwiftSpinner.show("Loading Task", animated: true)
+            }
+            
             taskAPI.getTaskByStaff(sharedDataSingleton.user.id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
                 if error != nil {
                     
                 }else {
-                    sharedDataSingleton.tasks = task as! [Task]
+//                    sharedDataSingleton.tasks = task as! [Task]
                 }
-                self.tasks = sharedDataSingleton.tasks
+                self.tasks = sharedDataSingleton.staffTask
+//                self.tasks = sharedDataSingleton.tasks
                 self.tableView.reloadData()
                 SwiftSpinner.hide(completion: nil)
             })
+            
         }
  
     }
@@ -147,7 +160,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let task = self.tasks[indexPath.row]
-        
         self.performSegueWithIdentifier("viewActivity", sender: task)
         searchBar.resignFirstResponder()
     }

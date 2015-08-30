@@ -461,7 +461,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             addresspostcode = ""
         }
-        
         let addressphone: String?
         if let addressPhone = self.form.formValues()["addressphone"] as? String {
             addressphone = addressPhone
@@ -469,7 +468,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             addressphone = ""
         }
-        
         
         let gp: String?
         if let patientGP = self.form.formValues()["gp"] as? String {
@@ -493,8 +491,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             medicalinsuranceprovider = ""
         }
-        
-        
         let occupation: String?
         if let patientOccupation = self.form.formValues()["occupation"] as? String {
             occupation = patientOccupation
@@ -539,13 +535,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             addressotherphone = ""
         }
         let medical_facility: String? = sharedDataSingleton.user.medical_facility
-        let patient_id: String?
-//        if let id = self.form.formValues()["patient_id"] as? String {
-//            patient_id = id
-//        }else {
-//            isAnyFieldEmpty = true
-//            patient_id = ""
-//        }
+
         
         let language: String?
         if let patientLanguage = self.form.formValues()["language"] as? String {

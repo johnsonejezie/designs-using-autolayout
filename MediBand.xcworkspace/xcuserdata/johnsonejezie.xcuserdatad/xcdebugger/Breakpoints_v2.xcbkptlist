@@ -16,16 +16,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MediBand/PersonNewtworkCall.swift"
-            timestampString = "461776550.196546"
+            filePath = "MediBand/StaffNetworkCall.swift"
+            timestampString = "462633117.366169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "getAllPatients(_:fromMedicalFacility:withPageNumber:completionHandler:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "create(_:image:isCreatingNewStaff:completionBlock:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MediBand/StaffAPI.swift"
-            timestampString = "462089408.647633"
+            filePath = "MediBand/StaffNetworkCall.swift"
+            timestampString = "462634281.644246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "createStaff(_:image:callback:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "create(_:image:isCreatingNewStaff:completionBlock:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

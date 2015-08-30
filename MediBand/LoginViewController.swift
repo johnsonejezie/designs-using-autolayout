@@ -150,8 +150,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         alertView.showEdit(self, title: "Password Reset", subTitle: "", closeButtonTitle: "Cancel", duration: 2000)
         
         alertView.alertIsDismissed { () -> Void in
-            SwiftSpinner.show("loading patient", animated: true)
-            self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+             self.performSegueWithIdentifier("LoginToPatients", sender: nil)
         }
 
     }

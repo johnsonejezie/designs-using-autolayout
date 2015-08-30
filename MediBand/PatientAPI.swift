@@ -11,6 +11,10 @@ import AFNetworking
 import Alamofire
 
 class PatientAPI {
+    var patient: Patient!
+    var getSinglePatient:Bool = false
+    var patients = [Patient]()
+    
     func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String, withPageNumber pageNumber:String, completionHandler:(success:Bool)-> Void) {
         var patientResult = [Patient]()
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
@@ -85,17 +89,21 @@ class PatientAPI {
     
     
     func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
+        getSinglePatient = true;
         let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"
         let parameters = [
             "patient_id": patient_id,
             "medical_facility_id": medical_facility_id,
         ]
+        println(parameters)
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
             println("JSON: \(responseObject)")
+            let resultDict = responseObject as! [String: AnyObject]
+            self.parseDictionary(resultDict)
             completionHandler(success: true)
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             println("error in getting single patient\(error.description)")
@@ -168,6 +176,7 @@ class PatientAPI {
                     self.parseDictionaryToPatient(resultDict)
                 }
             }
+           sharedDataSingleton.patients = self.patients
         }
 //        sharedDataSingleton.patients = patients
         return patients
@@ -281,12 +290,20 @@ class PatientAPI {
         }else {
             patient.surname = ""
         }
-        if let image: AnyObject = resultDict["image"]  {
+        
+        if let image:String = resultDict["image"]  as? String{
             patient.image = image
-        }else {
+        }else{
             patient.image = ""
         }
-        sharedDataSingleton.patients.append(patient)
+        
+        
+        if getSinglePatient == true {
+            self.patient = patient
+        }else {
+            self.patients.append(patient)
+        }
+        
         //                    patients.append(patient)
     }
     
