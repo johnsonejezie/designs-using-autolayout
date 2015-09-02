@@ -13,10 +13,12 @@ class PatientsTableViewCell: UITableViewCell {
     
     
     
+    @IBOutlet var patientImageView: UIImageView!
     @IBOutlet weak var patientNameLabel: UILabel!
 
     @IBOutlet weak var patientIDLabel: UILabel!
     
+    @IBOutlet var emptyLabel: UILabel!
     
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var generalPhysicianLabel: UILabel!
@@ -37,6 +39,8 @@ class PatientsTableViewCell: UITableViewCell {
     }
     
     func cardSetup() {
+        patientImageView.layer.cornerRadius = patientImageView.frame.size.height/2
+        patientImageView.clipsToBounds = true
         cardView.alpha = 1
         cardView.layer.masksToBounds = false
         cardView.layer.cornerRadius = 10

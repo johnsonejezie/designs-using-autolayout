@@ -8,10 +8,11 @@
 
 import UIKit
 
-class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
+class PatientProfileViewController: UIViewController {
     
     
-    
+    @IBOutlet var navBar: UIBarButtonItem!
+    var patient:Patient!
     @IBOutlet weak var imageView: UIImageView!
     
 
@@ -19,9 +20,11 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     
     @IBOutlet weak var emailAddressLabel: UILabel!
     
+    @IBOutlet var firstNameLabel: UILabel!
     
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet var lastNameLabel: UILabel!
     
     @IBOutlet weak var generalPhysicianLabel: UILabel!
     @IBOutlet weak var addCareButton: UIButton!
@@ -29,25 +32,14 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     @IBOutlet weak var viewHistoryButton: UIButton!
     @IBOutlet weak var UpdatePatientButton: UIButton!
     
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.sideMenuController()?.sideMenu?.delegate = self
-        
-//        let patientNetworkCall = PersonNewtworkCall()
-//        patientNetworkCall.getPatient(13, fromMedicalFacility: 4) { (success) -> Void in
-//            if success {
-//                println(success)
-//            }else {
-//                println("failed")
-//            }
-//        }
-
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         addCareButton.layer.cornerRadius = 4
         viewCaseNoteButton.layer.cornerRadius = 4
@@ -55,8 +47,29 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
         UpdatePatientButton.layer.cornerRadius = 4
         
         
+        firstNameLabel.text = patient.forename.uppercaseString
+        lastNameLabel.text = patient.surname.uppercaseString
+        contactLabel.text = patient.addressphone
+        addressLabel.text = patient.address
+        generalPhysicianLabel.text = patient.gp
+        emailAddressLabel.text = patient.patient_id
+        
+        if patient.image != "" {
+            let URL = NSURL(string: patient.image)!
+            
+            imageView.hnk_setImageFromURL(URL)
+        }else {
+            imageView.image = UIImage(named: "defaultImage")
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
 
-        // Do any additional setup after loading the view.
+        
+        
+//        let image = UIImage(contentsOfFile: patient.image as! String)
+//        println(image)
+//        imageView.image = image
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,8 +84,6 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
     }
-    
-
 
     @IBAction func addCareActionButton() {
         self.trackEvent("UX", action: "Add care from patient view", label: "Add Care button", value: nil)
@@ -89,9 +100,21 @@ class PatientProfileViewController: UIViewController, ENSideMenuDelegate {
     }
 
     @IBAction func viewHistoryActionButton() {
+        sharedDataSingleton.selectedPatient = patient
+        let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
+        taskViewController.isPatientTask = true
+        taskViewController.patient = patient
+        taskViewController.patientID = patient.patient_id
+        sharedDataSingleton.isCheckingNewPatientID = true
+        self.navigationController?.pushViewController(taskViewController, animated: true)
         self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }
     @IBAction func updatePatientActionButton() {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("AddPatientViewController") as! AddPatientViewController
+        sharedDataSingleton.selectedPatient = patient
+        controller.isEditingPatient = true
+        controller.patientID = patient.patient_id
+        self.navigationController?.pushViewController(controller, animated: true)
         
         self.trackEvent("UX", action: "Updating patient", label: "update patient button in patient profile view", value: nil)
     }

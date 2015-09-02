@@ -12,6 +12,8 @@
 	<dict>
 		<key>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</key>
 		<string>https://github.com/andela-jejezie/designs-using-autolayout.git</string>
+		<key>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</key>
+		<string>https://github.com/lingoer/SwiftyJSON.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>MediBand.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</key>
 		<string>..</string>
+		<key>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</key>
+		<string>../SwiftyJSON</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/andela-jejezie/designs-using-autolayout.git</string>
@@ -35,6 +39,14 @@
 			<string>1B367F35D4B5A013FE114CA5C191FB9D80CABF58</string>
 			<key>IDESourceControlWCCName</key>
 			<string>designs-using-autolayout</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SwiftyJSON</string>
 		</dict>
 	</array>
 </dict>

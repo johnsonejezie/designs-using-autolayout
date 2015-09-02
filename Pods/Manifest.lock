@@ -1,33 +1,59 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (2.6.0):
+    - AFNetworking/NSURLConnection (= 2.6.0)
+    - AFNetworking/NSURLSession (= 2.6.0)
+    - AFNetworking/Reachability (= 2.6.0)
+    - AFNetworking/Security (= 2.6.0)
+    - AFNetworking/Serialization (= 2.6.0)
+    - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
+  - AFNetworking/NSURLSession (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
+  - AFNetworking/Reachability (2.6.0)
+  - AFNetworking/Security (2.6.0)
+  - AFNetworking/Serialization (2.6.0)
+  - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Alamofire (1.3.1)
+  - HanekeSwift (0.9.1)
   - SwiftForms (1.0)
+  - SwiftKeychainWrapper (1.0.9)
+  - SwiftSpinner (0.7.0)
+  - SwiftValidator (2.1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
+  - Alamofire (~> 1.3)
+  - HanekeSwift
   - SwiftForms
+  - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper`,
+    branch `master`)
+  - SwiftSpinner
+  - SwiftValidator (= 2.1.1)
+
+EXTERNAL SOURCES:
+  SwiftKeychainWrapper:
+    :branch: master
+    :git: https://github.com/jrendel/SwiftKeychainWrapper
+
+CHECKOUT OPTIONS:
+  SwiftKeychainWrapper:
+    :commit: 65fb5f36fa9c3ad9d2159900f75234ab2508a151
+    :git: https://github.com/jrendel/SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
+  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   SwiftForms: b16bf2978e6eb6617bc9f438322a1daa6c3d2dbd
+  SwiftKeychainWrapper: ec2f6003d693bf26ec5f74b5a7de9f0884527f24
+  SwiftSpinner: 034bb8b00675b3e4f4c97531fa9af3f550462192
+  SwiftValidator: 79936ea870f1dba8a0824763375375bb209fe30d
 
 COCOAPODS: 0.38.0.beta.2

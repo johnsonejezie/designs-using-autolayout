@@ -8,43 +8,55 @@
 
 import UIKit
 
-class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
+class StaffProfileViewController: UIViewController {
     
     
     @IBOutlet weak var staffImageView: UIImageView!
     @IBOutlet weak var staffNameLabel: UILabel!
-    
     @IBOutlet weak var staffIDLabel: UILabel!
     @IBOutlet weak var specialityLabel: UILabel!
     @IBOutlet weak var generlPracticeLabel: UILabel!
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
+
     var staff = Staff()
+    var isMyProfile:Bool?
     
     
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
-    
+    @IBOutlet var navBar: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.sideMenuController()?.sideMenu?.delegate = self
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-//        let imageData:NSData = NSData(base64EncodedString: staff["staffImage"]!, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-//        staffImageView.image = UIImage(data: imageData)
-        staffIDLabel.text = staff.id
-        staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
-        generalPractitionerIDLabel.text = staff.general_practional_id
-        generlPracticeLabel.text = staff.email
-        specialityLabel.text = staff.speciality
+        if isMyProfile == true {
+            isMyProfile = false
+            staffNameLabel.text = sharedDataSingleton.user.firstName + " " + sharedDataSingleton.user.surname
+            staffIDLabel.text = sharedDataSingleton.user.memberid
+            specialityLabel.text = sharedDataSingleton.user.speciality
+            generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
+            generlPracticeLabel.text = sharedDataSingleton.user.medical_facility
+        }else {
+            staffIDLabel.text = staff.id
+            staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
+            generalPractitionerIDLabel.text = staff.general_practional_id
+            generlPracticeLabel.text = staff.email
+            specialityLabel.text = staff.speciality
+            
+            if staff.image != "" {
+                let URL = NSURL(string: staff.image)!
+                staffImageView.hnk_setImageFromURL(URL)
+            }else {
+                staffImageView.image = UIImage(named: "defaultImage")
+            }
+        }
+        
 
+        
+        
     }
-    
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")
     }
@@ -52,16 +64,30 @@ class StaffProfileViewController: UIViewController, ENSideMenuDelegate {
     override func viewDidLayoutSubviews() {
         staffImageView.clipsToBounds = true
         staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
+        updateStaffButton.layer.cornerRadius = 4
+        viewHistoryButton.layer.cornerRadius = 4
+
+    }
+    
+    
+    @IBOutlet var viewHistoryButton: UIButton!
+    
+    @IBOutlet var updateStaffButton: UIButton!
+    @IBAction func updateStaff() {
+        let addStaffViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddStaffViewController") as! AddStaffViewController
+        addStaffViewController.isUpdatingStaff = true
+        addStaffViewController.staff = self.staff
+        self.navigationController?.pushViewController(addStaffViewController, animated: true)
+        self.trackEvent("UX", action:"Update Staff" , label: "Staff update button", value: nil)
     }
     
     
     @IBAction func viewHistory(sender: UIButton) {
-        
+        let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
+        taskViewController.isPatientTask = false
+        self.navigationController?.pushViewController(taskViewController, animated: true)
         self.trackEvent("UX", action:"View Staff History" , label: "Staff history button", value: nil)
     }
-    
-    
-    
 }
 
 extension StaffProfileViewController {

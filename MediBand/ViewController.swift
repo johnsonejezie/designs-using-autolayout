@@ -9,9 +9,10 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate, ENSideMenuDelegate {
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate {
     
     var isExistingPatient:Bool = false
+    var isStartingSession:Bool = false
 
     let session:AVCaptureSession = AVCaptureSession()
     var previewLayer:AVCaptureVideoPreviewLayer!
@@ -20,14 +21,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
         
-        toggleSideMenuView()
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.sideMenuController()?.sideMenu?.delegate = self
         
         //resizable view
         self.highlightView.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
@@ -63,7 +62,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         self.view.layer.addSublayer(previewLayer)
         
         //start scan
-        session.startRunning()
+//        session.startRunning()
+        
+        self.showAlertForPatientScan()
         
         
     }
@@ -102,22 +103,58 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         
         self.highlightView.frame = highlighViewRect
         self.view.bringSubviewToFront(self.highlightView)
-        println(detectionString)
-        
         if detectionString != nil {
-            
             patientID = detectionString
+            let message:String = "Patient ID is \(detectionString)"
             
-            let message:String = "Your code is \(detectionString)"
+            let alertView = SCLAlertView()
+            alertView.addButton("CONTINUE", actionBlock: { () -> Void in
+                if self.isExistingPatient == false {
+                    sharedDataSingleton.selectedPatient = nil
+                    self.performSegueWithIdentifier("patientSegue", sender: self.patientID)
+                }else {
+                    self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+                }
+            })
+            alertView.addButton("CANCEL", actionBlock: { () -> Void in
+                self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+            })
+            alertView.showEdit(self, title: "Scan Completed", subTitle: message, closeButtonTitle: nil, duration: 2000)
+        }
+    }
+    
+    func showAlertForPatientScan() {
+
+        let alertView = SCLAlertView()
+
+        
+        alertView.addButton("EXISTING PATIENT", actionBlock: { () -> Void in
+            println("existing")
+            self.isExistingPatient = true
+            self.isStartingSession = true
+            self.session.startRunning()
+        })
+        alertView.addButton("NEW PATIENT", actionBlock: { () -> Void in
+            println("new")
+            self.isExistingPatient = false
+            self.isStartingSession = true
+            self.session.startRunning()
+        })
+        alertView.addButton("CANCEL", actionBlock: { () -> Void in
+            self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+        })
+        alertView.showEdit(self, title: "Patient", subTitle: "Existing or New Patient?", closeButtonTitle: nil, duration: 2000)
+        
+        alertView.alertIsDismissed { () -> Void in
+//                self.isExistingPatient = false
             
-            let alertView: UIAlertView = UIAlertView(title:"Alert", message: message, delegate: self, cancelButtonTitle:"Scan Again")
-            alertView.addButtonWithTitle("Continue")
-            alertView.delegate = self
-            alertView.show()
         }
         
         
+        
     }
+    
+    
     
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
@@ -127,6 +164,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         println("scan again button clicked")
         if buttonIndex == 1 {
             if isExistingPatient == false {
+                 sharedDataSingleton.selectedPatient = nil
                 self.performSegueWithIdentifier("patientSegue", sender: patientID)
             }else {
                 self.performSegueWithIdentifier("ExistingPatient", sender: isExistingPatient)
@@ -143,6 +181,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! PatientsViewController
             controller.isExistingPatient = sender as! Bool
+            controller.patientID = patientID
         }
     }
 

@@ -8,17 +8,19 @@
 
 import UIKit
 import SwiftForms
+import SwiftSpinner
+
 
 protocol addPatientControllerDelegate: class {
     func addPatientViewController(controller: AddPatientViewController,
         didFinishedAddingPatient patient: NSDictionary)
 }
 
-class AddPatientViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ENSideMenuDelegate {
+class AddPatientViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var isEditingPatient:Bool = false
     
-    var selectedPatient:Patient?
+//    var selectedPatient: Patient?
 
     var isAnyFieldEmpty:Bool!
     var patientID:String = ""
@@ -26,21 +28,16 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
     weak var delegate: addPatientControllerDelegate!
     var imagePicker = UIImagePickerController()
     var patientImageView:UIImageView!
-    var image:UIImage?
+    var patientImage:UIImage?
     
     
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
+
+    @IBOutlet var navBar: UIBarButtonItem!
 
     
     struct Static {
         static let emptyname = "emptyname"
+        static let anotherEmptyname = "anotherEmptyname"
         static let namesurname = "namesurname"
         static let nameforename = "nameforename"
         static let namemiddlename = "namemiddlename"
@@ -75,9 +72,9 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-     
-//        test.getTaskByPatient(419, lCare_activity_id: 2);
-        self.sideMenuController()?.sideMenu?.delegate = self
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         isAnyFieldEmpty = false
         
@@ -88,10 +85,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         patientImageView.clipsToBounds = true
         patientImageView.layer.cornerRadius = 100/2
-
-        
-        
-        patientImageView.image = UIImage(named: "HS3")
+        patientImageView.image = UIImage(named: "defaultImage")
         topView.addSubview(patientImageView)
         
         let uploadImgBtn:UIButton = UIButton()
@@ -121,17 +115,16 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Plain, target: self, action: "submit:")
         
         self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-
-    }
-    
-    override func viewWillAppear(animated: Bool) {
+        
         if isEditingPatient == true {
             self.form.formValues()
         }
-        
-        
-        
         self.setScreeName("Add Patient View")
+
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        sharedDataSingleton.selectedPatient = nil
     }
     
     func pressed(sender: UIButton!) {
@@ -150,18 +143,13 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             println("done")
         })
-        self.image = image
+        self.patientImage = image
         patientImageView.image = image
     }
 
     func submit(_: UIBarButtonItem!) {
         
-
-        
-        
         delegate?.addPatientViewController(self, didFinishedAddingPatient: self.form.formValues())
-        
-//        self.dismissViewControllerAnimated(true, completion: nil)
         
         let patient: Patient = handleForm()
         
@@ -170,20 +158,33 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = false
             return
         }
+        var message :String = ""
+        if isEditingPatient == true {
+            message = "Updating patient record"
+        }else {
+            message = "Creating patient record"
+        }
+        SwiftSpinner.show(message, animated: true)
 
-        let fetchModel = PersonNewtworkCall()
-        
-//        fetchModel.createNewPatient(patient, fromMedicalFacility: 4) { (success) -> Void in
-//            if success == true {
-//                println("patient successfully created")
-//            }else {
-//                println("failed to save patient")
-//                let alertView = UIAlertView(title: "Error", message: "Failed to save patient.", delegate: self, cancelButtonTitle: "Cancel")
-//                alertView.delegate = self
-//                alertView.show()
-//            }
-//        }
-        
+        let patientAPI = PatientAPI()
+        patientAPI.createNewPatient(patient, fromMedicalFacility: sharedDataSingleton.user.medical_facility, image: self.patientImage, isCreatingNewPatient: !isEditingPatient) { (success) -> Void in
+            if success == true {
+                SwiftSpinner.hide(completion: { () -> Void in
+                    let patientProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController
+                    patientProfileViewController.patient = sharedDataSingleton.selectedPatient
+                    self.navigationController?.pushViewController(patientProfileViewController, animated: true)
+                })
+            }else {
+                SwiftSpinner.hide(completion: { () -> Void in
+                    let alertView = SCLAlertView()
+                    alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                    alertView.alertIsDismissed({ () -> Void in
+                        
+                    })
+                })
+            }
+        }
+
         self.trackEvent("UX", action: "Create new patient", label: "Submit button for creating new patient", value: nil)
 
     }
@@ -202,94 +203,143 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         form.title = "Add Patient Form"
         
         
-        let section27 = FormSectionDescriptor()
+        let section1 = FormSectionDescriptor()
         var row: FormRowDescriptor! = FormRowDescriptor(tag: Static.emptyname, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "", "textField.backgroundColor":UIColor.clearColor(),"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section27.addRow(row)
-        
-        let section28 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.emptyname, rowType: .Name, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "", "textField.backgroundColor":UIColor.clearColor(),"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section28.addRow(row)
-        
-        let section1 = FormSectionDescriptor()
-         row = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Surname", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section1.addRow(row)
         
         let section2 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.nameforename, rowType: .Name, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Forename", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        row = FormRowDescriptor(tag: Static.anotherEmptyname, rowType: .Name, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "", "textField.backgroundColor":UIColor.clearColor(),"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
         section2.addRow(row)
         
         let section3 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.namemiddlename, rowType: .Name, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Middle name", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+         row = FormRowDescriptor(tag: Static.namesurname, rowType: .Name, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Surname", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5,  "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.surname
+        }
         section3.addRow(row)
         
         let section4 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.lkp_nametitle, rowType: .Text, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Title", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        row = FormRowDescriptor(tag: Static.nameforename, rowType: .Name, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Forename", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.forename
+        }
         section4.addRow(row)
         
         let section5 = FormSectionDescriptor()
+        row = FormRowDescriptor(tag: Static.namemiddlename, rowType: .Name, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Middle name", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.middlename
+        }
+        section5.addRow(row)
+        
+        let section6 = FormSectionDescriptor()
+        row = FormRowDescriptor(tag: Static.lkp_nametitle, rowType: .Text, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Title", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.lkp_nametitle
+        }
+        section6.addRow(row)
+        
+        let section7 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.addressline1, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : " Address1", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section5.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.address
+        }
+        section7.addRow(row)
 
-        let section10 = FormSectionDescriptor()
+        let section8 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.addresspostcode, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address post code", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.addresspostcode
+        }
+        section8.addRow(row)
+        
+        let section9 = FormSectionDescriptor()
+        row = FormRowDescriptor(tag: Static.addressphone, rowType: .Number, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address phone", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.addressphone
+        }
+        section9.addRow(row)
+        
+        let section10 = FormSectionDescriptor()
+        row = FormRowDescriptor(tag: Static.addressotherphone, rowType: .Number, title: "")
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address other phone", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.addressotherphone
+        }
         section10.addRow(row)
         
         let section11 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.addressphone, rowType: .Number, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address phone", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section11.addRow(row)
-        
-        let section13 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.addressotherphone, rowType: .Number, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Address other phone", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section13.addRow(row)
-        
-        let section14 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.gp, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "gp", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section14.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.gp
+        }
+        section11.addRow(row)
         
         
-        let section15 = FormSectionDescriptor()
+        let section12 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.gpsurgery, rowType: .Name, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "gp surgery", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section15.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.gpsurgery
+        }
+        section12.addRow(row)
 
         
-        let section16 = FormSectionDescriptor()
+        let section13 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.MedicalInsuranceProvider, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Medical Insurance Provider", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section16.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.medicalinsuranceprovider
+        }
+        section13.addRow(row)
     
-        let section18 = FormSectionDescriptor()
+        let section14 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.dob, rowType: .Date, title: "Date of Birth")
-//        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["datePicker.backgroundColor":backgroundColor]
-        section18.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            let dateString = sharedDataSingleton.selectedPatient.dob
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            let date = dateFormatter.dateFromString(dateString)
+            row.value = date
+            
+        }
+        section14.addRow(row)
         
-        let section19 = FormSectionDescriptor()
+        let section15 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.occupation, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Occupation", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section19.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.occupation
+        }
+        section15.addRow(row)
         
-        let section20 = FormSectionDescriptor()
+        let section16 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.language, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Language", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section20.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.language
+        }
+        section16.addRow(row)
         
-        let section21 = FormSectionDescriptor()
+        let section17 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.nationality, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Nationality", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section21.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.nationality
+        }
+        section17.addRow(row)
         
-        let section22 = FormSectionDescriptor()
+        let section18 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.ischild, rowType: .Picker, title: "is child")
         row.configuration[FormRowDescriptor.Configuration.Options] = [true, false]
         row.configuration[FormRowDescriptor.Configuration.TitleFormatterClosure] = { value in
@@ -302,43 +352,55 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
                 return nil
             }
         } as TitleFormatterClosure
-        row.value = false
-        section22.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.ischild
+        }else {
+            row.value = false
+        }
+        section18.addRow(row)
         
-        let section23 = FormSectionDescriptor()
+        let section19 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.maritalstatus, rowType: .Picker, title: "Marital Status")
-        row.configuration[FormRowDescriptor.Configuration.Options] = ["S", "M", "D", "W"]
+        row.configuration[FormRowDescriptor.Configuration.Options] = ["Single", "Married", "Divorced", "Widowed"]
         row.configuration[FormRowDescriptor.Configuration.TitleFormatterClosure] = { value in
             switch( value ) {
-            case "S":
+            case "Single":
                 return "Single"
-            case "M":
+            case "Married":
                 return "Married"
-            case "D":
+            case "Divorced":
                 return "Divorced"
-            case "W":
+            case "Widowed":
                 return "Widowed"
             default:
                 return nil
             }
         } as TitleFormatterClosure
         
-        row.value = "S"
-        section23.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.maritalstatus
+        }else {
+            row.value = "Single"
+        }
+        section19.addRow(row)
         
-        let section24 = FormSectionDescriptor()
+        let section20 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.nextofKinContact, rowType: .Text, title: "")
         row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin contact", "textField.backgroundColor":backgroundColor, "textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
-        section24.addRow(row)
+        if sharedDataSingleton.selectedPatient != nil {
+            row.value = sharedDataSingleton.selectedPatient.next_of_kin_contact
+        }
+        section20.addRow(row)
         
-        let section25 = FormSectionDescriptor()
+        let section21 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.nextofKin, rowType: .Name, title: "")
-        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue, "textField.text": "testing testing"]
-        section25.addRow(row)
-        form.sections = [section27, section28, section1,section2, section3, section4, section5, section10, section11, section13, section14, section15, section16, section18, section19, section20, section21, section22, section23, section24, section25]
+        row.configuration[FormRowDescriptor.Configuration.CellConfiguration] = ["textField.placeholder" : "Next of kin", "textField.backgroundColor":backgroundColor,"textField.layer.cornerRadius": 5, "textField.textAlignment" : NSTextAlignment.Left.rawValue]
+        if sharedDataSingleton.selectedPatient != nil {
+           row.value = sharedDataSingleton.selectedPatient.next_of_kin
+        }
+        section21.addRow(row)
+        form.sections = [section1,section2,section3, section4, section5, section6, section7, section8, section9, section10, section11, section12, section13, section14, section15, section16, section17, section18, section19, section20, section21]
         self.form = form
-        
-        
     }
     
     func handleForm()->Patient {
@@ -396,7 +458,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             addresspostcode = ""
         }
-        
         let addressphone: String?
         if let addressPhone = self.form.formValues()["addressphone"] as? String {
             addressphone = addressPhone
@@ -404,7 +465,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             addressphone = ""
         }
-        
         
         let gp: String?
         if let patientGP = self.form.formValues()["gp"] as? String {
@@ -428,8 +488,6 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             medicalinsuranceprovider = ""
         }
-        
-        
         let occupation: String?
         if let patientOccupation = self.form.formValues()["occupation"] as? String {
             occupation = patientOccupation
@@ -473,14 +531,8 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             addressotherphone = ""
         }
-        let medical_facility_id: String? = "4"
-        let patient_id: String?
-//        if let id = self.form.formValues()["patient_id"] as? String {
-//            patient_id = id
-//        }else {
-//            isAnyFieldEmpty = true
-//            patient_id = ""
-//        }
+        let medical_facility: String? = sharedDataSingleton.user.medical_facility
+
         
         let language: String?
         if let patientLanguage = self.form.formValues()["language"] as? String {
@@ -496,17 +548,31 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
             isAnyFieldEmpty = true
             next_of_kin = ""
         }
-        let imgString:String?
-        if let imgData = UIImagePNGRepresentation(image) {
-            imgString = imgData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
-        }else {
-            imgString = ""
-        }
-        
-        
-        var newPatient = Patient(dob: dateString!, surname: surname!, forename: forename!, middlename: middlename!, lkp_nametitle: lkp_nametitle!, address: address!, addresspostcode: addresspostcode!, addressphone: addressphone!, gp: gp!, gpsurgery: gpsurgery!, medicalinsuranceprovider: medicalinsuranceprovider!, occupation: occupation!, nationality: nationality!, ischild: ischild!, maritalstatus: maritalstatus!, next_of_kin_contact: next_of_kin_contact!, addressotherphone: addressotherphone!, patient_id:patientID, language:language!, next_of_kin:next_of_kin!, image:imgString!)
 
-        return newPatient!
+        var newPatient = Patient()
+        newPatient.dob = dateString!
+        newPatient.surname = surname!
+        newPatient.forename = forename!
+        newPatient.middlename = middlename!
+        newPatient.lkp_nametitle = lkp_nametitle!
+        newPatient.address = address!
+        newPatient.addresspostcode = addresspostcode!
+        newPatient.addressphone = addressphone!
+        newPatient.gp = gp!
+        newPatient.gpsurgery = gpsurgery!
+        newPatient.medical_facility = medical_facility!
+        newPatient.medicalinsuranceprovider = medicalinsuranceprovider!
+        newPatient.occupation = occupation!
+        newPatient.nationality = nationality!
+        newPatient.ischild = ischild!
+        newPatient.maritalstatus = maritalstatus!
+        newPatient.next_of_kin_contact = next_of_kin_contact!
+        newPatient.addressotherphone = addressotherphone!
+        newPatient.patient_id = patientID
+        newPatient.language = language!
+        newPatient.next_of_kin = next_of_kin!
+
+        return newPatient
 
     }
 }

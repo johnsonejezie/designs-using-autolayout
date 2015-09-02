@@ -7,50 +7,92 @@
 //
 
 import UIKit
+import SwiftSpinner
 
-class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, ENSideMenuDelegate {
+class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, NSURLConnectionDataDelegate {
+    
+    
+    
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+    
+    @IBOutlet var navBar: UIBarButtonItem!
+
     @IBOutlet weak var tableView: UITableView!
+    
+    var deleteTaskIndexPath: NSIndexPath? = nil
+    var isPatientTask:Bool?
+    var patient:Patient?
+    var tasks = [Task]()
+    
+    var patientID:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        var taskActions = TaskNetworkCall()
-        
-//        taskActions.getTaskByStaff(32, lCare_activity_id: "Teaching Hospital");
-//        taskActions.create(<#task: Task#>);
-        var test = TaskNetworkCall()
-        //        var test2 = StaffNetworkCall()
-        //        var staff = Staff(medical_facility_id:"4", speciality_id:"2", general_practional_id:"3", member_id: "41", role_id:"1", email: "johnsonejezie@gmail.com", surname: "Jay", firstname: "Jay", image: "no image")
-        //        test2.create(staff!);
-        var task = Task(patient_id: 419, care_activity_id: 2, speciality_id: 2, care_activity_type_id: 2, care_activity_category_id: 2, selected_staff_ids:["31","32"], medical_facility_id: 4)
-        //        test2.getStaffs(4);
-        //        test2.viewStaff("bukky@yahoo.com");
-        //        
-        test.create(task);
-        
-        
-        
-         self.sideMenuController()?.sideMenu?.delegate = self
+
+        self.tasks = sharedDataSingleton.staffTask
+      getTask()
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
         self.view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
-
     }
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Task View")
     }
     
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
+    
+  
+    func getTask() {
+        let taskAPI = TaskAPI()
+        
+        if isPatientTask == true {
+            if let patient_id = patientID {
+                
+                if sharedDataSingleton.patientTask.count == 0 {
+                    SwiftSpinner.show("Loading Task", animated: true)
+                }
+                taskAPI.getTaskByPatient(patient_id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+                    if error != nil {
+                        
+                    }else {
+//                       sharedDataSingleton.tasks = task as! [Task]
+                    }
+//                    self.tasks = sharedDataSingleton.tasks\
+                    self.tasks = sharedDataSingleton.patientTask
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                })
+                
+            }
+        }else {
+            
+            if sharedDataSingleton.staffTask.count == 0 {
+                SwiftSpinner.show("Loading Task", animated: true)
+            }
+            
+            taskAPI.getTaskByStaff(sharedDataSingleton.user.id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+                if error != nil {
+                    
+                }else {
+//                    sharedDataSingleton.tasks = task as! [Task]
+                }
+                self.tasks = sharedDataSingleton.staffTask
+//                self.tasks = sharedDataSingleton.tasks
+                self.tableView.reloadData()
+                SwiftSpinner.hide(completion: nil)
+            })
+            
+        }
+ 
     }
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -69,7 +111,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.resignFirstResponder()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        var count = 1
+        if tasks.count > 0 {
+            count = tasks.count
+        }
+        return count
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -78,17 +124,99 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.view.endEditing(true)
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableViewCell
-        cell.nameLabel.text = "JENNIFER KYARI"
+        if tasks.count > 0 {
+            cell.specialityLabel.hidden = false
+            cell.careActivityLabel.hidden = false
+            cell.resolutionLabel.hidden = false
+            cell.dateLabel.hidden = false
+            cell.activityTypeLabel.hidden = false
+            cell.emptyLabel.hidden = true
+            
+            let constants = Contants()
+            let task = self.tasks[indexPath.row]
+            cell.specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+            cell.careActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
+            cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
+            cell.resolutionLabel.text = task.resolution
+   
+            cell.dateLabel.text = task.created
+        } else {
+            cell.specialityLabel.hidden = true
+            cell.careActivityLabel.hidden = true
+            cell.resolutionLabel.hidden = true
+            cell.dateLabel.hidden = true
+            cell.activityTypeLabel.hidden = true
+            cell.emptyLabel.hidden = false
+            if sharedDataSingleton.user.role == "Admin" {
+                cell.emptyLabel.text = "NO TASK HAVE BEEN CREATED YET"
+            }else {
+                cell.emptyLabel.text = "NO TASK ASSIGNED TO YOU"
+            }
+        }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("viewActivity", sender: nil)
+        let task = self.tasks[indexPath.row]
+        self.performSegueWithIdentifier("viewActivity", sender: task)
         searchBar.resignFirstResponder()
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            deleteTaskIndexPath = indexPath
+            let taskToDelete = self.tasks[indexPath.row]
+            confirmDelete(taskToDelete)
+        }
+    }
+    
+    func confirmDelete(task: Task) {
+        let alert = UIAlertController(title: "Delete Task", message: "Are you sure you want to permanently delete this task?", preferredStyle: .ActionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteTask)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeletePlanet)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteTask(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteTaskIndexPath {
+            let task = self.tasks[indexPath.row]
+            tableView.beginUpdates()
+            
+            self.tasks.removeAtIndex(indexPath.row)
+            let taskAPI = TaskAPI()
+            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id)
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            deleteTaskIndexPath = nil
+            
+            tableView.endUpdates()
+        }
+    }
+    
+    func cancelDeletePlanet(alertAction: UIAlertAction!) {
+        deleteTaskIndexPath = nil
+    }
+    
+    
+    func fetchStringValueFromArray(constantArray:[AnyObject], atIndex indexAsString:String)->String {
+        var count:Int?
+       let index = indexAsString.toInt()
+        if let i = index {
+            count = i - 1
+        }
+        println(constantArray)
+        println(count)
+        let stringValue: String = (constantArray[count!] as? String)!
+        return stringValue
     }
     
     func displayPopOver(sender: AnyObject){
@@ -108,8 +236,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
        println("The search text is: '\(searchBar.text)'")
@@ -119,13 +245,21 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         println(item)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewActivity" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! ActivityDetailsViewController
+            controller.task = sender as! Task
+        }
+    }
+    
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
     {
         return UIModalPresentationStyle.None
     }
     
-    func presentationController(controller: UIPresentationController!, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle)
-        -> UIViewController! {
+    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle)
+        -> UIViewController? {
             let navController = UINavigationController(rootViewController: controller.presentedViewController)
             return navController
     }

@@ -7,10 +7,21 @@
 //
 
 import UIKit
+import Haneke
 
-class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate, ENSideMenuDelegate{
+class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
+    
+    
+    @IBOutlet var taskPatientNameLabel: UILabel!
+    
+    @IBOutlet var assignedStaffLabel: UILabel!
+    @IBOutlet var taskResolutionLabel: UILabel!
+    @IBOutlet var taskSpecialistLabel: UILabel!
+    @IBOutlet var taskPatientImageView: UIImageView!
 
     var currentCell : Int = 1;
+    
+    @IBOutlet var navBar: UIBarButtonItem!
     @IBOutlet var attendingProfButton: UIButton!
     @IBOutlet var updateActivityButton: UIButton!
     @IBOutlet var viewCaseNoteButton: UIButton!
@@ -19,11 +30,17 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     @IBOutlet var attendingProfCollectionView: UICollectionView!
     var usersImage: [String] = ["HS1","HS5","HS6"]
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
+    var task:Task!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.sideMenuController()?.sideMenu?.delegate = self
+        
+        self.getPatientForTask(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.medical_facility)
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.attendingProfButton.titleLabel?.numberOfLines = 1;
         self.attendingProfButton.layer.cornerRadius = 5.0;
@@ -32,21 +49,31 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         self.viewPatientButton.layer.cornerRadius = 5.0;
         self.attendingProfCollectionView.dataSource = self
         self.attendingProfCollectionView.delegate = self
+        
+        let constants = Contants()
+        taskSpecialistLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+        taskResolutionLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.specialist_id as String))
+        let assignedStaff = task.attending_professionals[0]
+        assignedStaffLabel.text = assignedStaff.name
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         setScreeName("Task Detail View")
     }
+    
+    
+    
+    func getPatientForTask(patient_id:String, fromMedicalFacility mFacility: String) {
+        let patientAPI = PatientAPI()
+        patientAPI.getPatient(patient_id, fromMedicalFacility: mFacility) { (success) -> Void in
+            if success == true {
+                
+            }
+        }
+    }
 
 
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
-    
     override func viewWillLayoutSubviews() {
         self.patientProfilePic.layer.borderWidth = 1.0;
         self.patientProfilePic.layer.borderColor = UIColor.blackColor().CGColor;
@@ -57,19 +84,26 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return task.attending_professionals.count
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: AnyObject = self.attendingProfCollectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
+        let staff = task.attending_professionals[indexPath.row]
         let userImageView: UIImageView! = cell.viewWithTag(1001) as! UIImageView;
         let userLabel = cell.viewWithTag(1002 ) as! UILabel;
-         var image: UIImage = UIImage(named: self.usersImage[indexPath.row])!
-        userImageView.image = image
+        if staff.image != "" {
+            let URL = NSURL(string: staff.image)!
+            
+            userImageView.hnk_setImageFromURL(URL)
+        }else {
+            userImageView.image = UIImage(named: "defaultImage")
+        }
+        
         userImageView.layer.borderWidth = 1.0;
         userImageView.layer.borderColor = UIColor.blackColor().CGColor;
         userImageView.layer.cornerRadius = userImageView.layer.frame.width/2;
         userImageView.clipsToBounds = true
-        userLabel.text = self.usersName[indexPath.row]
+        userLabel.text = staff.name
         return cell as! UICollectionViewCell
     }
     @IBAction func update(sender: UIButton) {
@@ -101,6 +135,18 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     func adaptivePresentationStyleForPresentationController(
         controller: UIPresentationController) -> UIModalPresentationStyle {
             return .None
+    }
+    
+    func fetchStringValueFromArray(constantArray:[AnyObject], atIndex indexAsString:String)->String {
+        var count:Int?
+        let index = indexAsString.toInt()
+        if let i = index {
+            count = i - 1
+        }
+        println(constantArray)
+        println(count)
+        let stringValue: String = (constantArray[count!] as? String)!
+        return stringValue
     }
     
     

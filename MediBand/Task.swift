@@ -11,32 +11,16 @@ import AFNetworking
 
 class Task{
 
-    var patient_id:Int!;
-    var care_activity_id:Int!;
-    var speciality_id:Int!;
-    var care_activity_type_id:Int!;
-    var care_activity_category_id:Int!;
+    var patient_id:String = ""
+    var care_activity_id:String = ""
+    var specialist_id:String = ""
+    var care_activity_type_id:String = ""
+    var care_activity_category_id:String = ""
     var selected_staff_ids:[String] = [];
-    var medical_facility_id:Int;
-    var operationManger = AFHTTPRequestOperationManager()
-    
-
-    init!(
-    patient_id:Int!,
-    care_activity_id:Int!,
-    speciality_id:Int!,
-    care_activity_type_id:Int!,
-    care_activity_category_id:Int!,
-    selected_staff_ids:[String],
-    medical_facility_id:Int!
-        ){
-            self.patient_id = patient_id;
-            self.care_activity_id = care_activity_id;
-            self.speciality_id =  speciality_id
-            self.care_activity_type_id = care_activity_type_id
-            self.care_activity_category_id = care_activity_category_id
-            self.selected_staff_ids = selected_staff_ids
-            self.medical_facility_id = medical_facility_id
-    }
-
+    var medical_facility:String = ""
+    var created:String = ""
+    var modified:String = ""
+    var id:String = ""
+    var resolution:String = ""
+    var attending_professionals:[Staff] = []
 }

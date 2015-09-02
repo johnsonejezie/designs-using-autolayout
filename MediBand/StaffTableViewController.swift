@@ -7,38 +7,37 @@
 //
 
 import UIKit
+import SwiftSpinner
+import Haneke
 
-class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate, ENSideMenuDelegate {
+
+class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var staffs:[Staff] = []
+    var currentPageNumber:Int = 1
+    var isRefreshing = false
+    var isFirstLoad = true
+    
+    @IBOutlet var navBar: UIBarButtonItem!
+    
+    
     @IBAction func addStaffButton(sender: UIBarButtonItem) {
         
         self.performSegueWithIdentifier("AddStaff", sender: nil)
         
     }
     
-    
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        toggleSideMenuView()
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         var staffMethods = StaffNetworkCall()
-        
-        staffMethods.getStaffs(4, completionBlock: { (done) -> Void in
-            if(done){
-               println("all staffs fetched and passed from staff table view controller")
-                self.tableView.reloadData()
-                println("staff count \(sharedDataSingleton.allStaffs.count) ")
-            }else{
-            println("error fetching and passing all staffs from staff table view controller")
-
-            }
-        })
-         self.sideMenuController()?.sideMenu?.delegate = self
+        navBar.target = self.revealViewController()
+        navBar.action = Selector("revealToggle:")
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        let pageNoToString:String = String(currentPageNumber)
+        getStaff(pageNoToString)
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
         
         // Do any additional setup after loading the view.
@@ -48,56 +47,117 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         self.setScreeName("Staff List")
     }
     
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
+    func getStaff(pageNumber:String){
+        var staffMethods = StaffNetworkCall()
+        if sharedDataSingleton.allStaffs.count <= 0 {
+            SwiftSpinner.show("Loading Staff", animated: true)
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                }else{
+                    SwiftSpinner.hide(completion: nil)
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
+                }
+            })
+        }else {
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                }else{
+                    SwiftSpinner.hide(completion: nil)
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
+                }
+            })
+        }
     }
     
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        println("table scrolling")
+//        if isFirstLoad == true {
+//            isFirstLoad = false
+//            return
+//        }
+//        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+//            if isRefreshing == false {
+//                isRefreshing = true
+//                SwiftSpinner.show("loading more Staff", animated: true)
+//                currentPageNumber = currentPageNumber + 1
+//                let pageNumber:String = String(currentPageNumber)
+//                let staffNetworkCall = StaffNetworkCall()
+//                staffNetworkCall.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+//                    if done == true {
+//                        self.tableView.reloadData()
+//                        SwiftSpinner.hide(completion: nil)
+//                    }else {
+//                        self.currentPageNumber--
+//                        SwiftSpinner.hide(completion: nil)
+//                    }
+//                })
+//
+//            }
+//        }
+//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedDataSingleton.allStaffs.count == 0 {
-            return 1
-        }else{
-          return sharedDataSingleton.allStaffs.count
+        var count:Int = 1
+        if sharedDataSingleton.allStaffs.count > 0 {
+            count = sharedDataSingleton.allStaffs.count
         }
+        return count
     }
     
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StaffCell") as! StaffTableViewCell
-        
+       
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("StaffCell") as? StaffTableViewCell
+         cell!.staffImageView.image = nil;
         if sharedDataSingleton.allStaffs.count == 0 {
-            cell.emptyLabel.hidden = false
-            cell.staffIDLabel.hidden = true
-            cell.staffImageView.hidden = true
-            cell.staffNameLabel.hidden = true
-            cell.flagImageView.hidden = true
+            cell?.emptyLabel.hidden = false
+            cell?.staffIDLabel.hidden = true
+            cell?.staffImageView.hidden = true
+            cell?.staffNameLabel.hidden = true
+            cell?.flagImageView.hidden = true
         }else {
             
-            cell.emptyLabel.hidden = true
-            cell.staffIDLabel.hidden = false
-            cell.staffImageView.hidden = false
-            cell.staffNameLabel.hidden = false
-            cell.flagImageView.hidden = false
+            cell?.emptyLabel.hidden = true
+            cell?.staffIDLabel.hidden = false
+            cell?.staffImageView.hidden = false
+            cell?.staffNameLabel.hidden = false
+            cell?.flagImageView.hidden = false
             
             var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
             tap.numberOfTapsRequired = 1
             
-            cell.flagImageView.userInteractionEnabled = true
-            cell.flagImageView.tag = indexPath.row
-            cell.flagImageView.addGestureRecognizer(tap)
+            cell?.flagImageView.userInteractionEnabled = true
+            cell?.flagImageView.tag = indexPath.row
+            cell?.flagImageView.addGestureRecognizer(tap)
             
             
-            var staff = sharedDataSingleton.allStaffs[indexPath.row]
-            let imageData:NSData = NSData(base64EncodedString: staff.image as String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+            let staff = sharedDataSingleton.allStaffs[indexPath.row]
             println("member id \(staff.member_id)")
              println("general id \(staff.general_practional_id)")
-            cell.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
-            cell.staffIDLabel.text = staff.id
+            cell?.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
+            cell?.staffIDLabel.text = staff.id
             //            cell.staffContactLabel.text = staff["contact"]
-            cell.staffImageView.image = UIImage(data: imageData)
+            if staff.image != "" {
+                let URL = NSURL(string: staff.image)!
+                
+                cell?.staffImageView.hnk_setImageFromURL(URL)
+            }else {
+                cell?.staffImageView.image = UIImage(named: "defaultImage")
+            }
         }
 
-        return cell
+        return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -122,6 +182,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
                 as! UINavigationController
             let controller = navigationController.topViewController
                 as! StaffProfileViewController
+            controller.isMyProfile = false
             controller.staff = sender as! Staff
             
         }

@@ -11,7 +11,20 @@ import UIKit
 class DataSingleton {
     
     var medical_facility:String = ""
-    var allStaffs = [Staff]();
+    var user:User!
+    var patients:[Patient] = []
+    var selectedPatient:Patient!
+    var allStaffs = [Staff]()
+    var selectedStaff:Staff!
+    var tasks = [Task]()
+    var patientHistory = [Task]()
+    var staffHistory = [Task]()
+    var isCheckingNewPatientID:Bool = true
+    var staffTask = [Task]()
+    var patientTask = [Task]()
+    
 }
 
 let sharedDataSingleton = DataSingleton()
+
+
