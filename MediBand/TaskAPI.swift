@@ -19,6 +19,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         case CREATE_TASK
         case GET_TASK_BY_STAFF
         case GET_TASK_BY_PATIENT
+        case DELETE_TASK
     }
     
     typealias APICallback = ((AnyObject?, NSError?) -> ())
@@ -37,6 +38,13 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_task_by_staff_id"
         let body = "staff_id=\(staff_id)&page=\(page)"
         makeHTTPPostRequest(Path.GET_TASK_BY_STAFF, callback: callback, url: url, body: body)
+    }
+    
+    func deleteTask(task_id:String, staff_id:String) {
+        let url = "http://www.iconglobalnetwork.com/mediband/api/delete_task"
+        let body = "task_id=\(task_id)&staff_id=\(staff_id)"
+        makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
+        
     }
     
     func getTaskByPatient(patient_id: String, page:String, callback: APICallback) {
@@ -90,6 +98,8 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             self.callback(self.handleGetTaskByPatient(json), nil)
         case (200, Path.CREATE_TASK):
             callback(self.handleCreateTask(json), nil)
+        case (200, Path.DELETE_TASK):
+            callback(self.handleDeleteTask(json), nil)
         default:
             // Unknown Error
             callback(nil, nil)
@@ -110,6 +120,18 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         }
 
         return nil
+    }
+    
+    func handleDeleteTask(json:AnyObject)->Bool {
+        if let resultDict = json["message"] as? String {
+            if resultDict == "message Task deleted successfully!" {
+                return true
+            }else {
+                return false
+            }
+        }else {
+            return false
+        }
     }
     
     func handleGetTaskByPatient(json: AnyObject)-> [Task]? {

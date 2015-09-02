@@ -49,34 +49,33 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func getStaff(pageNumber:String){
         var staffMethods = StaffNetworkCall()
-        let staffAPI = StaffAPI()
         if sharedDataSingleton.allStaffs.count <= 0 {
             SwiftSpinner.show("Loading Staff", animated: true)
-            staffAPI.getAllStaff(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, callback: { (staffArray:AnyObject?, error:NSError?) -> () in
-                if error != nil {
-                    println(error)
-                    SwiftSpinner.hide(completion: nil)
-                }else {
-                    let staff = staffArray as! [Staff]
-                    println("this is staff array \(staff)")
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
                     self.tableView.reloadData()
                     SwiftSpinner.hide(completion: nil)
+                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                }else{
+                    SwiftSpinner.hide(completion: nil)
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
                 }
             })
-            
-            
-//            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
-//                if(done){
-//                    println("all staffs fetched and passed from staff table view controller")
-//                    self.tableView.reloadData()
-//                    SwiftSpinner.hide(completion: nil)
-//                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
-//                }else{
-//                    SwiftSpinner.hide(completion: nil)
-//                    println("error fetching and passing all staffs from staff table view controller")
-//                    
-//                }
-//            })
+        }else {
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                }else{
+                    SwiftSpinner.hide(completion: nil)
+                    println("error fetching and passing all staffs from staff table view controller")
+                    
+                }
+            })
         }
     }
     

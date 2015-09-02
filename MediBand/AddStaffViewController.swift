@@ -16,14 +16,24 @@ protocol addStaffControllerDelegate: class {
         finishedAddingStaff staff: Staff)
 }
 
-class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ValidationDelegate, UITextFieldDelegate {
+class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ValidationDelegate, UITextFieldDelegate, popUpTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     weak var delegate: addStaffControllerDelegate!
     let validator = Validator()
- 
+    let constant = Contants()
+    var recognizer:UITapGestureRecognizer!
+    
+    var roleID = ""
+    var specialistID = ""
+    
+    @IBOutlet var roleView: UIView!
     //
+    
+    @IBOutlet var specialityView: UIView!
     @IBOutlet var navBar: UIBarButtonItem!
     var tap:UITapGestureRecognizer!
+    var roleTap:UITapGestureRecognizer!
+    
     var imagePicker = UIImagePickerController()
     var isUpdatingStaff = false
     var staff = Staff()
@@ -66,7 +76,28 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         if isUpdatingStaff == true {
+            
+            let array:[String] = constant.role as! [String]
+            if let i = find(array, staff.role) {
+                println("Jason is at index \(i)")
+                let index = i + 1
+                self.roleID = String(index)
+            } else {
+                println("Jason isn't in the array")
+            }
+            
+            let array1:[String] = constant.specialist as! [String]
+            if let i = find(array1, staff.speciality) {
+                println("Jason is at index \(i)")
+                let index = i + 1
+                self.specialistID = String(index)
+            } else {
+                println("Jason isn't in the array")
+            }
+            
+            
             firstNameTextField.text = staff.firstname
             lastNameTextField.text = staff.surname
             emailTextField.text = staff.email
@@ -112,7 +143,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         validator.registerField(specialityTextField, rules: [RequiredRule(), FullNameRule()])
         validator.registerField(emailTextField, rules: [RequiredRule(), EmailRule()])
         validator.registerField(generalPracIDTextView, rules: [RequiredRule(), FullNameRule()])
-        validator.registerField(roleIDTextView, rules: [RequiredRule(), FullNameRule()])
+        //        validator.registerField(roleIDTextView, rules: [RequiredRule(), FullNameRule()])
         validator.registerField(staffID, rules: [RequiredRule(), FullNameRule()])
         
         
@@ -121,6 +152,12 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
+        recognizer = UITapGestureRecognizer(target: self, action: "popUp:")
+        recognizer.cancelsTouchesInView = false
+        specialityView.addGestureRecognizer(recognizer)
+        
+        roleTap = UITapGestureRecognizer(target: self, action: "popUp:")
+        roleView.addGestureRecognizer(roleTap)
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tap.cancelsTouchesInView = false
@@ -128,9 +165,13 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         firstNameTextField.layer.cornerRadius = 5
         emailTextField.layer.cornerRadius = 5
+        roleView.layer.cornerRadius = 5
+        
         roleIDTextView.layer.cornerRadius = 5
         generalPracIDTextView.layer.cornerRadius = 5
         lastNameTextField.layer.cornerRadius = 5
+        specialityView.layer.cornerRadius = 5
+        
         specialityTextField.layer.cornerRadius = 5
         staffID.layer.cornerRadius = 5
         
@@ -141,7 +182,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         generalPracIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         roleIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         staffID.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-
+        
         
         
         saveButton.layer.cornerRadius = 4
@@ -152,6 +193,63 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
         
+        
+    }
+    
+    func popUp(sender:UITapGestureRecognizer) {
+        if sender.view == self.roleView {
+            self.displayPopOver(roleView)
+        }else {
+            self.displayPopOver(self.specialityView)
+        }
+    }
+    
+    
+    func displayPopOver(sender: UIView){
+        
+        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        var contentViewController : PopUpTableViewController = storyboard.instantiateViewControllerWithIdentifier("PopUpTableViewController") as! PopUpTableViewController
+        
+        let height:CGFloat?
+        
+        if sender == self.roleView{
+            contentViewController.list = constant.role
+            height = 44 *  CGFloat(constant.role.count)
+        }else {
+            contentViewController.list = constant.specialist
+            height = 44 *  CGFloat(constant.specialist.count)
+        }
+        
+        contentViewController.delegate = self
+        contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height!)
+        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
+        detailPopover.sourceView = sender
+        detailPopover.sourceRect.origin.x = 50
+        detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
+        detailPopover.delegate = self
+        presentViewController(contentViewController, animated: true, completion: nil)
+        
+    }
+    
+    func popUpTableViewControllerDidCancel(controller: PopUpTableViewController) {
+        
+    }
+    
+    func popUpTableViewController(controller: PopUpTableViewController, didSelectItem item: String, inRow: String, fromArray: [AnyObject]) {
+        if fromArray[0] === self.constant.specialist[0] {
+            self.specialityTextField.text = item
+            self.specialistID = inRow
+            println(inRow)
+        }else {
+            self.roleID = inRow
+            println(inRow)
+            roleIDTextView.text = item
+        }
+        
+        
+    }
+    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String]) {
         
     }
     
@@ -199,17 +297,17 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         if isUpdatingStaff == true {
             message = "Updating Staff"
         }else {
-          message = "Creating Staff"
+            message = "Creating Staff"
         }
         
         SwiftSpinner.show(message, animated: true)
-
+        
         var firstname:String = firstNameTextField.text!
         var surname:String = lastNameTextField.text!
         var gpID:String = generalPracIDTextView.text!
-        var specialityID:String = specialityTextField.text!
+        var specialityID:String = specialistID
         var member_id:String = staffID.text!
-        var role_id:String = roleIDTextView.text!
+        var role_id:String = self.roleID
         var email:String = emailTextField.text!
         
         
@@ -223,28 +321,33 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         staff.surname=surname
         staff.firstname = firstname
         
-        
         var staffMethods = StaffNetworkCall()
         staffMethods.create(staff, image: staffImage, isCreatingNewStaff: !isUpdatingStaff) { (success) -> Void in
-                        if success == true {
-                            SwiftSpinner.hide(completion: { () -> Void in
-                                self.delegate.addStaffViewController(self, finishedAddingStaff: self.staff)
-                                self.dismissViewControllerAnimated(true, completion: nil)
-                            })
-                        }else {
-                            SwiftSpinner.hide(completion: { () -> Void in
-                                let alertView = SCLAlertView()
-                                alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
-                                alertView.alertIsDismissed({ () -> Void in
-                                    
-                                })
-                            })
-            
-                        }
+            if success == true {
+                SwiftSpinner.hide(completion: { () -> Void in
+                    //                                self.delegate.addStaffViewController(self, finishedAddingStaff: self.staff)
+                    let staffProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
+                    self.navigationController?.pushViewController(staffProfileViewController, animated: true)
+                })
+            }else {
+                SwiftSpinner.hide(completion: { () -> Void in
+                    let alertView = SCLAlertView()
+                    alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                    alertView.alertIsDismissed({ () -> Void in
+                        
+                    })
+                })
+                
+            }
         }
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
-
+        
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return UIModalPresentationStyle.None
     }
     
     func keyboardWillShow(notification: NSNotification) {

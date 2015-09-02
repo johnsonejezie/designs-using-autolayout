@@ -112,6 +112,7 @@ class PatientProfileViewController: UIViewController {
     @IBAction func updatePatientActionButton() {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("AddPatientViewController") as! AddPatientViewController
         sharedDataSingleton.selectedPatient = patient
+        controller.isEditingPatient = true
         controller.patientID = patient.patient_id
         self.navigationController?.pushViewController(controller, animated: true)
         

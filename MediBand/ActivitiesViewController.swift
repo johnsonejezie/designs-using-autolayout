@@ -22,6 +22,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var tableView: UITableView!
     
+    var deleteTaskIndexPath: NSIndexPath? = nil
     var isPatientTask:Bool?
     var patient:Patient?
     var tasks = [Task]()
@@ -163,6 +164,48 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.performSegueWithIdentifier("viewActivity", sender: task)
         searchBar.resignFirstResponder()
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            deleteTaskIndexPath = indexPath
+            let taskToDelete = self.tasks[indexPath.row]
+            confirmDelete(taskToDelete)
+        }
+    }
+    
+    func confirmDelete(task: Task) {
+        let alert = UIAlertController(title: "Delete Task", message: "Are you sure you want to permanently delete this task?", preferredStyle: .ActionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteTask)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeletePlanet)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteTask(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteTaskIndexPath {
+            let task = self.tasks[indexPath.row]
+            tableView.beginUpdates()
+            
+            self.tasks.removeAtIndex(indexPath.row)
+            let taskAPI = TaskAPI()
+            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id)
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            deleteTaskIndexPath = nil
+            
+            tableView.endUpdates()
+        }
+    }
+    
+    func cancelDeletePlanet(alertAction: UIAlertAction!) {
+        deleteTaskIndexPath = nil
+    }
+    
     
     func fetchStringValueFromArray(constantArray:[AnyObject], atIndex indexAsString:String)->String {
         var count:Int?

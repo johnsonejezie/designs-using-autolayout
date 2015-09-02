@@ -22,11 +22,11 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func navBar(sender: UIBarButtonItem) {
         println("called")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//        toggleSideMenuView()
+        //        toggleSideMenuView()
         
     }
     var patients = sharedDataSingleton.patients
-
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +35,9 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getPatients(pageNoToString)
-
+        
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
-
+        
     }
     
     func getPatients(pageNumber:String) {
@@ -46,43 +46,50 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             SwiftSpinner.show("Loading Patients", animated: true)
             patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
                 if success == true {
-//                    println("successfully fetched patient")
                     self.patients = sharedDataSingleton.patients
                     self.tableView.reloadData()
                     SwiftSpinner.hide(completion: nil)
                 }else {
                     SwiftSpinner.hide(completion: nil)
                     
-//                    println("failed")
+                }
+            }
+        }else {
+            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
+                if success == true {
+                    self.patients = sharedDataSingleton.patients
+                    self.tableView.reloadData()
+                }else {
+                    
                 }
             }
         }
     }
     
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        println("table scrolling")
-//        if isFirstLoad == true {
-//            isFirstLoad = false
-//            return
-//        }
-//        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-//            if isRefreshing == false {
-//                isRefreshing = true
-//                SwiftSpinner.show("loading more patient", animated: true)
-//                currentPageNumber = currentPageNumber + 1
-//                let pageNumber:String = String(currentPageNumber)
-//                let patientAPI = PatientAPI()
-//                patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
-//                    if success == true {
-//                        self.tableView.reloadData()
-//                    }else {
-//                        self.isRefreshing = false
-//                        self.currentPageNumber--
-//                    }
-//                })
-//            }
-//        }
-//    }
+    //    func scrollViewDidScroll(scrollView: UIScrollView) {
+    //        println("table scrolling")
+    //        if isFirstLoad == true {
+    //            isFirstLoad = false
+    //            return
+    //        }
+    //        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
+    //            if isRefreshing == false {
+    //                isRefreshing = true
+    //                SwiftSpinner.show("loading more patient", animated: true)
+    //                currentPageNumber = currentPageNumber + 1
+    //                let pageNumber:String = String(currentPageNumber)
+    //                let patientAPI = PatientAPI()
+    //                patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
+    //                    if success == true {
+    //                        self.tableView.reloadData()
+    //                    }else {
+    //                        self.isRefreshing = false
+    //                        self.currentPageNumber--
+    //                    }
+    //                })
+    //            }
+    //        }
+    //    }
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Patients List View")
@@ -122,7 +129,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             
         }else {
             cell.patientImageView.hidden = true
-           cell.patientNameLabel.hidden = true
+            cell.patientNameLabel.hidden = true
             cell.generalPhysicianLabel.hidden = true
             cell.emptyLabel.hidden = false
         }
@@ -133,23 +140,23 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         var selectedPatient: Patient = patients[indexPath.row]
         sharedDataSingleton.selectedPatient = patients[indexPath.row]
         if isExistingPatient {
-           performSegueWithIdentifier("EditPatient", sender: selectedPatient)
+            performSegueWithIdentifier("EditPatient", sender: selectedPatient)
         }else{
-             performSegueWithIdentifier("ViewPatient", sender: selectedPatient)
+            performSegueWithIdentifier("ViewPatient", sender: selectedPatient)
         }
     }
     
     
     func closeCallback() {
-//        println("Close callback called")
+        //        println("Close callback called")
     }
     
     func cancelCallback() {
-//        println("Cancel callback called")
+        //        println("Cancel callback called")
     }
     
     func addPatientViewController(controller: AddPatientViewController, didFinishedAddingPatient patient: NSDictionary) {
-//        println(patient)
+        //        println(patient)
     }
     
     @IBAction func addPatientBarButton(sender: UIBarButtonItem) {
@@ -170,7 +177,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             controller.patient = sender as? Patient
         }
     }
-
+    
 }
 
 extension PatientsViewController {

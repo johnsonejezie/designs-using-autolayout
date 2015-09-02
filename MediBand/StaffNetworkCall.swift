@@ -12,6 +12,8 @@ import Alamofire
 
 
 class StaffNetworkCall{
+    
+    var allStaff = [Staff]()
 
 
     let operationManger = AFHTTPRequestOperationManager()
@@ -22,8 +24,6 @@ class StaffNetworkCall{
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
- 
-        
         var data : [String:AnyObject] = [
             "medical_facility_id":staff.medical_facility_id,
             "speciality_id":staff.speciality,
@@ -134,11 +134,11 @@ class StaffNetworkCall{
                 self.parseStaffs(arrayDict as! [AnyObject], completionBlock: { (done) -> Void in
                     if (done) {
                         println("all staffs parsed")
+                        sharedDataSingleton.allStaffs = self.allStaff
                          completionBlock(done:true)
                     }
                 })
             }
-
             }, failure:{ (requestOperation, error) -> Void in
                 println(error)
              
@@ -196,7 +196,7 @@ class StaffNetworkCall{
         
         print(staffData)
         
-        sharedDataSingleton.allStaffs.append(staffData)
+        self.allStaff.append(staffData)
     }
     
     
