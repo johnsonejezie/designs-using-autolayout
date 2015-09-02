@@ -12,10 +12,7 @@ class PatientProfileViewController: UIViewController {
     
     
     @IBOutlet var navBar: UIBarButtonItem!
-    var patient:Patient!
     @IBOutlet weak var imageView: UIImageView!
-    
-
     @IBOutlet weak var contactLabel: UILabel!
     
     @IBOutlet weak var emailAddressLabel: UILabel!
@@ -31,7 +28,7 @@ class PatientProfileViewController: UIViewController {
     @IBOutlet weak var viewCaseNoteButton: UIButton!
     @IBOutlet weak var viewHistoryButton: UIButton!
     @IBOutlet weak var UpdatePatientButton: UIButton!
-    
+    var patient: Patient!;
 
     
     override func viewDidLoad() {
@@ -46,7 +43,7 @@ class PatientProfileViewController: UIViewController {
         viewHistoryButton.layer.cornerRadius = 4
         UpdatePatientButton.layer.cornerRadius = 4
         
-        
+    
         firstNameLabel.text = patient.forename.uppercaseString
         lastNameLabel.text = patient.surname.uppercaseString
         contactLabel.text = patient.addressphone

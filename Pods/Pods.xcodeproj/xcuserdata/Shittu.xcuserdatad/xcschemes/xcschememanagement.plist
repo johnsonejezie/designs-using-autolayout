@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>HanekeSwift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>Pods-MediBand-BFPaperButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,6 +52,21 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>SwiftKeychainWrapper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>SwiftSpinner.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>SwiftValidator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -60,12 +80,42 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>14574091E6C7B68C705CBF11E55A7603</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2322B59898337A7CFB1281718A079C19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EFB58C644BF763DB8F3DEDBFA35C4A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5C686454A7766338DAEFFD59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>615CEA72AAA3830F13448B9852BAE534</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>83FCE0E351E7341F24569007F2AFE80C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8D6311F46A0CFFB1C5B3831E7153A9BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D7303C663E761E97E09CDAD80799FDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -76,6 +126,11 @@
 			<true/>
 		</dict>
 		<key>92962FC61ED44BD161A8AA85C159DCA4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F33C891FB542C344C962F1886B1CB67</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -35,9 +35,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getPatients(pageNoToString)
-        
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
-        
     }
     
     func getPatients(pageNumber:String) {

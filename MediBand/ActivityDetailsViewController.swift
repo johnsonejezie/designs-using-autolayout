@@ -8,7 +8,7 @@
 
 import UIKit
 import Haneke
-
+import SwiftSpinner
 class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
     
     
@@ -31,12 +31,13 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     var usersImage: [String] = ["HS1","HS5","HS6"]
     var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
     var task:Task!
+    var fetchedPatient : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        self.getPatientForTask(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.medical_facility)
+        self.getPatientForTask(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.clinic_id)
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -68,7 +69,9 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         let patientAPI = PatientAPI()
         patientAPI.getPatient(patient_id, fromMedicalFacility: mFacility) { (success) -> Void in
             if success == true {
-                
+                self.fetchedPatient = true
+            }else{
+             self.fetchedPatient = false
             }
         }
     }
@@ -152,9 +155,25 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     
     @IBAction func viewPatientActionButton() {
-        
+        if fetchedPatient {
         trackEvent("UX", action: "View Patient", label: "view patient button from task detail view", value: nil)
         self.performSegueWithIdentifier("viewPatient", sender: nil)
+        }else{
+        SwiftSpinner.show("Loading...", animated: true)
+            SwiftSpinner.hide(completion: { () -> Void in
+                print("Switching")
+                SwiftSpinner.show("Connection error...", animated: true)
+            })
+
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(3 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                SwiftSpinner.hide(completion: { () -> Void in
+                    print("error loading patient")
+                    
+                })
+            }
+        self.getPatientForTask(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.clinic_id)
+        }
     }
     
     
@@ -169,9 +188,15 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             println("choice is \(currentCell)")
     }
 
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "viewPatient"{
+        let destinationNavController = segue.destinationViewController as! UINavigationController
+        let destinationController   = destinationNavController.topViewController as! PatientProfileViewController
+        destinationController.patient = sharedDataSingleton.selectedPatient
+        }
+    }
 }
-
 extension ActivityDetailsViewController {
     
     func setScreeName(name: String) {
