@@ -26,7 +26,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     var isPatientTask:Bool?
     var patient:Patient?
     var tasks = [Task]()
-    
+    var srcViewStaffID : String = ""
     var patientID:String?
 
     override func viewDidLoad() {
@@ -76,10 +76,19 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             if sharedDataSingleton.staffTask.count == 0 {
                 SwiftSpinner.show("Loading Task", animated: true)
             }
+            var staffID :String
             
-            taskAPI.getTaskByStaff(sharedDataSingleton.user.id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+            if srcViewStaffID != "" {
+            staffID = srcViewStaffID
+            srcViewStaffID = ""
+            }else{
+             staffID = sharedDataSingleton.user.id
+            }
+            
+            
+            taskAPI.getTaskByStaff(staffID, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
                 if error != nil {
-                    
+            
                 }else {
 //                    sharedDataSingleton.tasks = task as! [Task]
                 }

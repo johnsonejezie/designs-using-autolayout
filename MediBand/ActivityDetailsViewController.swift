@@ -96,7 +96,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         let userLabel = cell.viewWithTag(1002 ) as! UILabel;
         if staff.image != "" {
             let URL = NSURL(string: staff.image)!
-            
             userImageView.hnk_setImageFromURL(URL)
         }else {
             userImageView.image = UIImage(named: "defaultImage")
@@ -107,12 +106,18 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         userImageView.layer.cornerRadius = userImageView.layer.frame.width/2;
         userImageView.clipsToBounds = true
         userLabel.text = staff.name
+        
         return cell as! UICollectionViewCell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let staffProfileController  = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
+        staffProfileController.staff = task.attending_professionals[indexPath.row]
+        
+        self.navigationController?.pushViewController(staffProfileController, animated: true)
     }
     @IBAction func update(sender: UIButton) {
         
-//        var menuView: MenuViewController = MenuViewController() as! MenuViewController
-//        menuView.delegate = self
         let storyboard : UIStoryboard = UIStoryboard(
             name: "Main",
             bundle: nil)

@@ -52,10 +52,6 @@ class StaffProfileViewController: UIViewController {
                 staffImageView.image = UIImage(named: "defaultImage")
             }
         }
-        
-
-        
-        
     }
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")
@@ -85,6 +81,7 @@ class StaffProfileViewController: UIViewController {
     @IBAction func viewHistory(sender: UIButton) {
         let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
         taskViewController.isPatientTask = false
+        taskViewController.srcViewStaffID = staff.id
         self.navigationController?.pushViewController(taskViewController, animated: true)
         self.trackEvent("UX", action:"View Staff History" , label: "Staff history button", value: nil)
     }
