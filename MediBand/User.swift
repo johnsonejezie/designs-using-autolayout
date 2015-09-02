@@ -24,4 +24,5 @@ class User {
     var modified: String = ""
     var is_password_set:Bool = true
     var isAdmin:Bool = false
+    var clinic_id:String = ""
 }

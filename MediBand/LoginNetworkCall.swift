@@ -94,6 +94,7 @@ class Login {
                     if user.medical_facility == "Teaching Hospital" {
                         user.medical_facility = "4"
                     }
+                    user.clinic_id = resultDict["clinic_id"] as! String
                     user.memberid = resultDict["member_id"] as! String
                     user.modified = resultDict["modified"] as! String
                     user.role = resultDict["role"] as! String
