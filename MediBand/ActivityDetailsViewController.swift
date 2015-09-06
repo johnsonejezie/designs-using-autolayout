@@ -13,7 +13,9 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     
     @IBOutlet var taskPatientNameLabel: UILabel!
+
     
+    @IBOutlet var taskCareActivityLabel: UILabel!
     @IBOutlet var assignedStaffLabel: UILabel!
     @IBOutlet var taskResolutionLabel: UILabel!
     @IBOutlet var taskSpecialistLabel: UILabel!
@@ -37,8 +39,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         
         
         self.getPatientForTask(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.medical_facility)
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
+
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -52,6 +53,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         
         let constants = Contants()
         taskSpecialistLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+        taskCareActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
         taskResolutionLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.specialist_id as String))
         let assignedStaff = task.attending_professionals[0]
         assignedStaffLabel.text = assignedStaff.name
@@ -66,9 +68,15 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     func getPatientForTask(patient_id:String, fromMedicalFacility mFacility: String) {
         let patientAPI = PatientAPI()
-        patientAPI.getPatient(patient_id, fromMedicalFacility: mFacility) { (success) -> Void in
-            if success == true {
-                
+        patientAPI.getPatient(patient_id, fromMedicalFacility: mFacility) { (fetchedPatient:Patient?, error:NSError?) -> () in
+            if let patient = fetchedPatient {
+              self.taskPatientNameLabel.text = patient.forename + " " + patient.surname
+                if patient.image != "" {
+                    let URL = NSURL(string: patient.image)!
+                    self.taskPatientImageView.hnk_setImageFromURL(URL)
+                }else {
+                    self.taskPatientImageView.image = UIImage(named: "defaultImage")
+                }
             }
         }
     }
@@ -160,7 +168,9 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     @IBAction func viewCaseNote() {
         trackEvent("UX", action: "View Case Note", label: "View case note from task detail  view", value: nil)
-        self.performSegueWithIdentifier("viewCaseNote", sender: nil)
+        let caseNoteTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CaseNoteTableViewController") as! CaseNoteTableViewController
+        caseNoteTableViewController.task = self.task
+        self.navigationController?.pushViewController(caseNoteTableViewController, animated: true)
     }
     
     func menuViewResponse(controller: MenuViewController,

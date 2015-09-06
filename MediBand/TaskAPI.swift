@@ -10,8 +10,6 @@ import UIKit
 import AFNetworking
 import Alamofire
 
-typealias JSONDictionary = Dictionary<String, AnyObject>
-typealias JSONArray = Array<AnyObject>
 
 class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
@@ -40,7 +38,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         makeHTTPPostRequest(Path.GET_TASK_BY_STAFF, callback: callback, url: url, body: body)
     }
     
-    func deleteTask(task_id:String, staff_id:String) {
+    func deleteTask(task_id:String, staff_id:String, callback: APICallback) {
         let url = "http://www.iconglobalnetwork.com/mediband/api/delete_task"
         let body = "task_id=\(task_id)&staff_id=\(staff_id)"
         makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
@@ -122,7 +120,8 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         return nil
     }
     
-    func handleDeleteTask(json:AnyObject)->Bool {
+    func handleDeleteTask(json:AnyObject)->Bool? {
+        println("this is delete message \(json)")
         if let resultDict = json["message"] as? String {
             if resultDict == "message Task deleted successfully!" {
                 return true

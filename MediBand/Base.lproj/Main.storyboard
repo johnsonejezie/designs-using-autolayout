@@ -380,7 +380,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HS3" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-wQ-pQI">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-wQ-pQI">
                                         <rect key="frame" x="259" y="8" width="82" height="82"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tnH-wQ-pQI" secondAttribute="height" multiplier="1:1" id="0y6-Xr-WJO"/>
@@ -602,20 +602,16 @@
                             <constraint firstItem="PaV-k0-U5R" firstAttribute="top" secondItem="sxY-KJ-vSQ" secondAttribute="bottom" id="wXj-md-gUa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pDk-nA-o4o">
-                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="v9U-1S-bph">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="pDk-nA-o4o"/>
                     <connections>
                         <outlet property="assignedStaffLabel" destination="5K1-ic-mAF" id="xMa-eU-aaT"/>
                         <outlet property="attendingProfButton" destination="F1a-6U-eai" id="UN8-sN-C0j"/>
                         <outlet property="attendingProfCollectionView" destination="fTx-au-Byi" id="Tdt-ar-lsJ"/>
-                        <outlet property="navBar" destination="v9U-1S-bph" id="acg-7K-P0a"/>
                         <outlet property="patientProfilePic" destination="tnH-wQ-pQI" id="hvA-Bt-5Md"/>
+                        <outlet property="taskCareActivityLabel" destination="8G2-Ni-goJ" id="VLa-G7-p2P"/>
                         <outlet property="taskPatientImageView" destination="tnH-wQ-pQI" id="YJf-Wm-dWI"/>
                         <outlet property="taskPatientNameLabel" destination="7hT-1b-K0T" id="XNj-bf-75v"/>
-                        <outlet property="taskResolutionLabel" destination="8G2-Ni-goJ" id="ueJ-86-A9z"/>
+                        <outlet property="taskResolutionLabel" destination="JxD-fr-cEO" id="MrD-8S-D6h"/>
                         <outlet property="taskSpecialistLabel" destination="KaS-i4-Sxs" id="kIk-Zi-MCM"/>
                         <outlet property="updateActivityButton" destination="IVt-PZ-zRw" id="SQV-jW-vjZ"/>
                         <outlet property="viewCaseNoteButton" destination="IaM-SR-C8u" id="U2k-eL-Ahb"/>
@@ -1057,7 +1053,7 @@
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO PATIENT ASSIGNED TO YOU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmL-2U-NWy">
                                                             <rect key="frame" x="8" y="41" width="568" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1271,7 +1267,7 @@
         <!--CASE NOTE-->
         <scene sceneID="g8d-Te-oEh">
             <objects>
-                <tableViewController id="KWF-PI-usM" customClass="CaseNoteTableViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CaseNoteTableViewController" id="KWF-PI-usM" customClass="CaseNoteTableViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="VfC-fg-Dk4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1347,15 +1343,25 @@
                                                         <constraint firstItem="JKu-Ch-uPQ" firstAttribute="leading" secondItem="8la-tz-VG4" secondAttribute="leading" constant="8" id="spc-gD-DH9"/>
                                                     </constraints>
                                                 </view>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO CASE NOTE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQu-T0-Vwl">
+                                                    <rect key="frame" x="8" y="41" width="539" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="TqJ-mK-L3A" firstAttribute="leading" secondItem="zzq-VJ-z2s" secondAttribute="leading" id="3er-qf-RBN"/>
                                                 <constraint firstItem="8la-tz-VG4" firstAttribute="leading" secondItem="zzq-VJ-z2s" secondAttribute="leading" id="78B-eV-Lbi"/>
                                                 <constraint firstAttribute="bottom" secondItem="TqJ-mK-L3A" secondAttribute="bottom" id="7dJ-WO-ajA"/>
+                                                <constraint firstAttribute="centerX" secondItem="FQu-T0-Vwl" secondAttribute="centerX" id="97r-Zw-Lgl"/>
+                                                <constraint firstAttribute="centerY" secondItem="FQu-T0-Vwl" secondAttribute="centerY" id="C39-KK-82H"/>
                                                 <constraint firstItem="8la-tz-VG4" firstAttribute="top" secondItem="zzq-VJ-z2s" secondAttribute="top" id="G3t-eD-iQr"/>
                                                 <constraint firstAttribute="bottom" secondItem="8la-tz-VG4" secondAttribute="bottom" id="OSO-wn-1uV"/>
                                                 <constraint firstItem="TqJ-mK-L3A" firstAttribute="top" secondItem="zzq-VJ-z2s" secondAttribute="top" id="UIw-Zd-lTU"/>
+                                                <constraint firstItem="FQu-T0-Vwl" firstAttribute="leading" secondItem="zzq-VJ-z2s" secondAttribute="leading" constant="8" id="VWq-6E-5vp"/>
+                                                <constraint firstAttribute="trailing" secondItem="FQu-T0-Vwl" secondAttribute="trailing" constant="8" id="e04-DA-Qrv"/>
                                                 <constraint firstItem="8la-tz-VG4" firstAttribute="leading" secondItem="TqJ-mK-L3A" secondAttribute="trailing" id="ehC-b9-VkR"/>
                                                 <constraint firstItem="TqJ-mK-L3A" firstAttribute="width" secondItem="zzq-VJ-z2s" secondAttribute="width" multiplier="0.5" id="n1v-RH-rG6"/>
                                                 <constraint firstAttribute="trailing" secondItem="8la-tz-VG4" secondAttribute="trailing" id="ybM-oI-RHS"/>
@@ -1376,8 +1382,13 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="addedByLabel" destination="gvd-cu-ZFv" id="iOd-Os-CN1"/>
+                                    <outlet property="addedDateLabel" destination="21O-Gt-uJV" id="5Ff-vF-EQN"/>
+                                    <outlet property="arrowImageView" destination="JKu-Ch-uPQ" id="6pv-HN-UfS"/>
                                     <outlet property="cardView" destination="zzq-VJ-z2s" id="WN9-Xr-DjO"/>
+                                    <outlet property="caseNoteDetails" destination="oW9-hi-puh" id="fkf-uJ-MIV"/>
                                     <outlet property="dateLabel" destination="dVu-pS-XiV" id="3vT-CG-q55"/>
+                                    <outlet property="emptyLabel" destination="FQu-T0-Vwl" id="VHR-o8-7CP"/>
                                     <outlet property="nameLabel" destination="CGF-eg-vnC" id="Oig-Ul-aqo"/>
                                 </connections>
                             </tableViewCell>
@@ -1388,9 +1399,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="CASE NOTE" id="3Jw-Sw-SVI">
-                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="gQZ-U4-BtL">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dGt-LH-h6J">
                             <connections>
                                 <action selector="addCaseNote:" destination="KWF-PI-usM" id="Dme-K3-Ehr"/>
@@ -1398,7 +1406,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="navBar" destination="gQZ-U4-BtL" id="0qV-N8-EOh"/>
                         <segue destination="j0f-SH-GQC" kind="presentation" identifier="caseDetail" id="XeK-vu-mCr"/>
                     </connections>
                 </tableViewController>
@@ -1427,18 +1434,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ja-bI-exJ">
-                                        <rect key="frame" x="209" y="362" width="141" height="28"/>
-                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                        <state key="normal" title="ADD CASE NOTE">
-                                            <color key="titleColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addCaseNoteAction" destination="dLo-o2-qBV" eventType="touchUpInside" id="9zZ-gy-1zC"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOX-5D-9zN">
                                         <rect key="frame" x="251" y="404" width="58" height="28"/>
                                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -1456,7 +1451,7 @@
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="SELECT SPECIALIST">
+                                        <state key="normal" title="SELECT SPECIALITY">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1525,8 +1520,6 @@
                                     <constraint firstItem="uQq-cE-SPs" firstAttribute="top" secondItem="A8s-Ai-OAK" secondAttribute="bottom" constant="20" id="6Io-kj-gcg"/>
                                     <constraint firstAttribute="centerX" secondItem="3y4-MH-Tcp" secondAttribute="centerX" id="7oX-WP-gNm"/>
                                     <constraint firstItem="3y4-MH-Tcp" firstAttribute="width" secondItem="uQq-cE-SPs" secondAttribute="width" id="7pM-uh-ojn"/>
-                                    <constraint firstAttribute="centerX" secondItem="6ja-bI-exJ" secondAttribute="centerX" id="8Cx-dN-3un"/>
-                                    <constraint firstItem="HOX-5D-9zN" firstAttribute="top" secondItem="6ja-bI-exJ" secondAttribute="bottom" constant="14" id="BeY-hg-faa"/>
                                     <constraint firstItem="nvk-sA-2z9" firstAttribute="width" secondItem="8Pe-qX-Fr6" secondAttribute="width" id="Blv-R1-mN3"/>
                                     <constraint firstItem="jib-mU-fz1" firstAttribute="leading" secondItem="YWF-nA-PZ6" secondAttribute="leading" constant="8" id="CwG-h2-pMB"/>
                                     <constraint firstAttribute="centerX" secondItem="uQq-cE-SPs" secondAttribute="centerX" id="Kkb-ug-MSr"/>
@@ -1552,17 +1545,11 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="NEW TASK" id="nIX-xN-xyS">
-                        <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="CYS-gv-EU4">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="NEW TASK" id="nIX-xN-xyS"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="addCaseNoteButton" destination="6ja-bI-exJ" id="C7L-Ot-2En"/>
                         <outlet property="nameLabel" destination="jib-mU-fz1" id="a9m-gq-Yy4"/>
-                        <outlet property="navBar" destination="CYS-gv-EU4" id="GRa-Be-hxJ"/>
                         <outlet property="saveButton" destination="HOX-5D-9zN" id="dbw-O2-38O"/>
                         <outlet property="selectCareButton" destination="nvk-sA-2z9" id="jit-Zk-LWA"/>
                         <outlet property="selectCategoriesButton" destination="uQq-cE-SPs" id="Dvp-br-UGc"/>
@@ -1570,11 +1557,13 @@
                         <outlet property="selectStaff" destination="3y4-MH-Tcp" id="SAS-TN-FFJ"/>
                         <outlet property="selectTypeButton" destination="A8s-Ai-OAK" id="gmQ-Hd-CMh"/>
                         <segue destination="j0f-SH-GQC" kind="presentation" identifier="addCaseNote" id="chE-7V-Dgw"/>
+                        <segue destination="vH7-wX-gNa" kind="unwind" identifier="UnwindToPatientProfile" unwindAction="unwindToVC:" id="Tv1-nK-1Yu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZM5-MK-Q47" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vH7-wX-gNa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3178" y="2068"/>
+            <point key="canvasLocation" x="3129" y="2084"/>
         </scene>
         <!--SIGN UP-->
         <scene sceneID="dUo-u9-seO">
@@ -2343,7 +2332,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO TASK ASSIGNED TO YOU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLH-eR-sKB">
                                                             <rect key="frame" x="8" y="72" width="552" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -2595,11 +2584,11 @@
         <image name="navBarIcon" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1h7-qp-5Z6"/>
-        <segue reference="k6a-Co-cpb"/>
         <segue reference="ydu-Ai-6cO"/>
-        <segue reference="oFy-ux-Gpp"/>
         <segue reference="Lk3-QM-Sxx"/>
         <segue reference="chE-7V-Dgw"/>
+        <segue reference="oFy-ux-Gpp"/>
+        <segue reference="k6a-Co-cpb"/>
+        <segue reference="1h7-qp-5Z6"/>
     </inferredMetricsTieBreakers>
 </document>

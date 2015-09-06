@@ -40,17 +40,18 @@ class Contants {
     ]
     
     let care:[AnyObject] = [
-        "Admin EVENT Care Activity",
+        "Admin EVENT",
         
-        "OP Attendance Care Activity",
+        "OP Attendance",
         
-        "IP Admission Care Activity",
+        "IP Attendance Activity",
         
-        "Received Referral Care Activity",
+        "Received Referral Activity",
         
-        "A AND E Care Activity"
+        "A&E Activity"
     ]
-    
+
+        
     let resolution:[AnyObject] = [
         "Closed",
         "Referral Transfer",
@@ -59,7 +60,7 @@ class Contants {
         "Inpatient Did Not Attend",
         "Outpatient Did Not Attend",
         "Inpatient Discharge",
-        "End of Outpatient Attendance",
+        "End of OP Attendance",
         "Admitted As Inpatient"
     ]
     
@@ -75,9 +76,7 @@ class Contants {
         "Outpatient Clinic",
         
         "Inpatient",
-        
-        "Current Inpatient",
-        
+                
         "Admin EVENT",
         
         "Emergency Care Activity"

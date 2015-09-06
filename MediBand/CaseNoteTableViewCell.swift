@@ -10,8 +10,13 @@ import UIKit
 
 class CaseNoteTableViewCell: UITableViewCell {
     
+    @IBOutlet var arrowImageView: UIImageView!
     
+    @IBOutlet var addedDateLabel: UILabel!
+    @IBOutlet var addedByLabel: UILabel!
+    @IBOutlet var caseNoteDetails: UILabel!
 
+    @IBOutlet var emptyLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
 

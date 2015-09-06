@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol caseDetailsControllerDelegate: class {
+    func caseDetailsController(controller: CaseDetailViewController,
+        filledInDetails details: String)
+}
+
 class CaseDetailViewController: UIViewController {
     
     
@@ -16,6 +21,7 @@ class CaseDetailViewController: UIViewController {
     @IBOutlet weak var addCaseNote: UIButton!
     
     @IBOutlet weak var cancelButton: UIButton!
+    weak var delegate: caseDetailsControllerDelegate!
     
     
     @IBOutlet weak var okButton: UIButton!
@@ -52,7 +58,8 @@ class CaseDetailViewController: UIViewController {
     
     
     @IBAction func okayButtonAction() {
-        
+        delegate?.caseDetailsController(self, filledInDetails: self.noteTextView.text)
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         println("ok button clicked")
     }
     

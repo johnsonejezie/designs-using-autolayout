@@ -81,6 +81,9 @@ class PatientProfileViewController: UIViewController {
         imageView.layer.cornerRadius = imageView.frame.size.height/2
     }
     
+    @IBAction func unwindToVC(segue: UIStoryboardSegue) {
+    }
+    
     func sideMenuShouldOpenSideMenu() -> Bool {
         return true
     }

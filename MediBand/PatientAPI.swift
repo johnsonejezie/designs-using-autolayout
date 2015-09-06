@@ -140,7 +140,7 @@ class PatientAPI {
     
     
     
-    func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(success:Bool)-> Void){
+    func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(Patient?, NSError?)-> ()){
         getSinglePatient = true;
         let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"
         let parameters = [
@@ -156,15 +156,14 @@ class PatientAPI {
             println("JSON: \(responseObject)")
             if let dictionary = responseObject["data"] as? [String:AnyObject] {
                self.parseDictionaryToPatient(dictionary)
-                completionHandler(success: true)
+                completionHandler(sharedDataSingleton.selectedPatient, nil)
             }else {
-                completionHandler(success: false)
+                completionHandler(nil, nil)
             }
-            
             
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             println("error in getting single patient\(error.description)")
-            completionHandler(success: true)
+            completionHandler(nil, nil)
         }
     }
 

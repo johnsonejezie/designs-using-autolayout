@@ -23,6 +23,8 @@
 		A521446E1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521446D1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift */; };
 		A52144701B77A65B00B65E22 /* DataSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521446F1B77A65B00B65E22 /* DataSingleton.swift */; };
 		A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */; };
+		A55227C31B9A9E0F005A7AB1 /* CaseNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55227C21B9A9E0F005A7AB1 /* CaseNote.swift */; };
+		A55227C51B9A9FFA005A7AB1 /* CaseNoteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55227C41B9A9FFA005A7AB1 /* CaseNoteAPI.swift */; };
 		A56D33FC1B8E23FC0023DB17 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D33E01B8E23FC0023DB17 /* NSData+ImageContentType.m */; };
 		A56D33FD1B8E23FC0023DB17 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D33E21B8E23FC0023DB17 /* SDImageCache.m */; };
 		A56D33FE1B8E23FC0023DB17 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D33E41B8E23FC0023DB17 /* SDWebImageCompat.m */; };
@@ -124,6 +126,8 @@
 		A521446D1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPatientPopOverTableViewController.swift; sourceTree = "<group>"; };
 		A521446F1B77A65B00B65E22 /* DataSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSingleton.swift; sourceTree = "<group>"; };
 		A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNetworkCall.swift; sourceTree = "<group>"; };
+		A55227C21B9A9E0F005A7AB1 /* CaseNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseNote.swift; sourceTree = "<group>"; };
+		A55227C41B9A9FFA005A7AB1 /* CaseNoteAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseNoteAPI.swift; sourceTree = "<group>"; };
 		A56D33DF1B8E23FC0023DB17 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		A56D33E01B8E23FC0023DB17 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
 		A56D33E11B8E23FC0023DB17 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -374,6 +378,7 @@
 				422446A11B70C87E00C12612 /* Task.swift */,
 				A521446F1B77A65B00B65E22 /* DataSingleton.swift */,
 				A5ED9B091B89D30400E3EF49 /* Contants.swift */,
+				A55227C21B9A9E0F005A7AB1 /* CaseNote.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				422446A31B70D61500C12612 /* StaffNetworkCall.swift */,
 				422446A51B70D62B00C12612 /* TaskAPI.swift */,
 				A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */,
+				A55227C41B9A9FFA005A7AB1 /* CaseNoteAPI.swift */,
 			);
 			name = networkCalls;
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				422446A21B70C87E00C12612 /* Task.swift in Sources */,
 				A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */,
 				A56E0C431B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */,
+				A55227C31B9A9E0F005A7AB1 /* CaseNote.swift in Sources */,
 				A51D3F901B50687F00C77665 /* AddPatientViewController.swift in Sources */,
 				A57B41B41B6D2073007C735F /* Patient.swift in Sources */,
 				A589FAF61B4B7C5200439584 /* AddStaffViewController.swift in Sources */,
@@ -745,6 +752,7 @@
 				A5DED13D1B7CAB81003461D3 /* NetUploadTask.swift in Sources */,
 				A5ED9B1D1B8BA74400E3EF49 /* SCLAlertViewStyleKit.m in Sources */,
 				42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */,
+				A55227C51B9A9FFA005A7AB1 /* CaseNoteAPI.swift in Sources */,
 				A56D34031B8E23FC0023DB17 /* SDWebImagePrefetcher.m in Sources */,
 				A52144701B77A65B00B65E22 /* DataSingleton.swift in Sources */,
 				A57B41B21B6D205F007C735F /* Staff.swift in Sources */,

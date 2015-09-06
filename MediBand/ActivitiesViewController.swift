@@ -111,7 +111,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.resignFirstResponder()
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 1
+        var count = 0
         if tasks.count > 0 {
             count = tasks.count
         }
@@ -166,6 +166,9 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if sharedDataSingleton.user.isAdmin == false {
+            return
+        }
         if editingStyle == .Delete {
             deleteTaskIndexPath = indexPath
             let taskToDelete = self.tasks[indexPath.row]
@@ -192,13 +195,18 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             
             self.tasks.removeAtIndex(indexPath.row)
             let taskAPI = TaskAPI()
-            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id)
+//            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id)
+            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id, callback: { (success, error) -> () in
+                if error == nil {
+                    println(success)
+                }
+            })
             // Note that indexPath is wrapped in an array:  [indexPath]
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             
             deleteTaskIndexPath = nil
+               tableView.endUpdates()
             
-            tableView.endUpdates()
         }
     }
     
@@ -215,8 +223,13 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         }
         println(constantArray)
         println(count)
-        let stringValue: String = (constantArray[count!] as? String)!
-        return stringValue
+        if count >= constantArray.count {
+            return ""
+        }else {
+            let stringValue: String = (constantArray[count!] as? String)!
+            return stringValue
+        }
+        
     }
     
     func displayPopOver(sender: AnyObject){

@@ -62,6 +62,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         static let maritalstatus = "maritalstatus"
         static let nextofKinContact = "nextofKinContact"
         static let nextofKin = "nextofKin"
+        static let nextofkinRelationship = "nextOfKinRelationship"
         static let button = "button"
     }
     
@@ -340,7 +341,7 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         section17.addRow(row)
         
         let section18 = FormSectionDescriptor()
-        row = FormRowDescriptor(tag: Static.ischild, rowType: .Picker, title: "is child")
+        row = FormRowDescriptor(tag: Static.ischild, rowType: .Picker, title: "Under 18")
         row.configuration[FormRowDescriptor.Configuration.Options] = [true, false]
         row.configuration[FormRowDescriptor.Configuration.TitleFormatterClosure] = { value in
             switch(value) {
@@ -361,13 +362,15 @@ class AddPatientViewController: FormViewController, UINavigationControllerDelega
         
         let section19 = FormSectionDescriptor()
         row = FormRowDescriptor(tag: Static.maritalstatus, rowType: .Picker, title: "Marital Status")
-        row.configuration[FormRowDescriptor.Configuration.Options] = ["Single", "Married", "Divorced", "Widowed"]
+        row.configuration[FormRowDescriptor.Configuration.Options] = ["Single", "Married", "Civil Partner", "Divorced", "Widowed"]
         row.configuration[FormRowDescriptor.Configuration.TitleFormatterClosure] = { value in
             switch( value ) {
             case "Single":
                 return "Single"
             case "Married":
                 return "Married"
+            case "Civil Partner":
+                return "Civil Partner"
             case "Divorced":
                 return "Divorced"
             case "Widowed":

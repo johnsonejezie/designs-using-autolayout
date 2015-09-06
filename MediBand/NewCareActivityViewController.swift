@@ -18,7 +18,6 @@ import SwiftSpinner
     var dropDownFrame: CGRect!
     var pointY:CGFloat!
     let contacts = Contants()
-    
     var specialist_id = ""
     var care_activity_id = ""
     var activity_type_id = ""
@@ -29,19 +28,11 @@ import SwiftSpinner
 
     
     @IBOutlet weak var nameLabel: UILabel!
-
-    @IBOutlet weak var addCaseNoteButton: UIButton!
-    
-    
-
     @IBOutlet weak var saveButton: UIButton!
     
-    @IBAction func addCaseNoteAction() {
-        self.performSegueWithIdentifier("addCaseNote", sender: nil)
-    }
     @IBAction func saveActionButton() {
         self.trackEvent("UX", action: "New Task created", label: "Save button to create new task", value: nil)
-        
+        SwiftSpinner.show("Creating Task", animated: true)
         let task = Task()
         let taskAPI = TaskAPI()
         
@@ -55,22 +46,17 @@ import SwiftSpinner
             if error != nil {
                 
             }else {
-                let newtasks = createdtask as! Task
-                println("this is newtask \(newtasks.resolution)")
+                let newtask = createdtask as! Task
+                SwiftSpinner.hide(completion: nil)
+                self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
+                println("this is newtask \(newtask.resolution)")
             }
         })
-        println(specialist_id)
-        println(care_activity_id)
-        println(activity_type_id)
-        println(resolution_id)
-        println(staff_ids)
     }
     
     
     
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        
-    }
+
     
     @IBOutlet weak var selectSpecialistButton: UIButton!
     
@@ -86,8 +72,8 @@ import SwiftSpinner
     override func viewDidLoad() {
         getStaff()
         
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
+//        navBar.target = self.revealViewController()
+//        navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         nameLabel.text = sharedDataSingleton.selectedPatient.forename + " " + sharedDataSingleton.selectedPatient.surname
@@ -98,7 +84,6 @@ import SwiftSpinner
         selectStaff.layer.cornerRadius = 4
         selectTypeButton.layer.cornerRadius = 4
         
-        addCaseNoteButton.layer.cornerRadius = 4
         saveButton.layer.cornerRadius = 3
     }
     
@@ -110,6 +95,8 @@ import SwiftSpinner
     @IBAction func selectActionButton(sender: UIButton!) {
             displayPopOver(sender)
     }
+    
+
     
     func displayPopOver(sender: UIButton){
         
@@ -187,6 +174,8 @@ import SwiftSpinner
     func popUpTableViewControllerDidCancel(controller: PopUpTableViewController) {
         println("cancelled")
     }
+    
+
     
 
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
