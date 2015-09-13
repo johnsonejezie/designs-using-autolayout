@@ -12,10 +12,7 @@ class PatientProfileViewController: UIViewController {
     
     
     @IBOutlet var navBar: UIBarButtonItem!
-    var patient:Patient!
     @IBOutlet weak var imageView: UIImageView!
-    
-
     @IBOutlet weak var contactLabel: UILabel!
     
     @IBOutlet weak var emailAddressLabel: UILabel!
@@ -28,25 +25,21 @@ class PatientProfileViewController: UIViewController {
     
     @IBOutlet weak var generalPhysicianLabel: UILabel!
     @IBOutlet weak var addCareButton: UIButton!
-    @IBOutlet weak var viewCaseNoteButton: UIButton!
     @IBOutlet weak var viewHistoryButton: UIButton!
     @IBOutlet weak var UpdatePatientButton: UIButton!
-    
+    var patient: Patient!;
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         addCareButton.layer.cornerRadius = 4
-        viewCaseNoteButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
         UpdatePatientButton.layer.cornerRadius = 4
         
-        
+    
         firstNameLabel.text = patient.forename.uppercaseString
         lastNameLabel.text = patient.surname.uppercaseString
         contactLabel.text = patient.addressphone
@@ -63,14 +56,6 @@ class PatientProfileViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-
-        
-        
-//        let image = UIImage(contentsOfFile: patient.image as! String)
-//        println(image)
-//        imageView.image = image
-    }
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Patient Profile View")
@@ -113,11 +98,11 @@ class PatientProfileViewController: UIViewController {
         self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }
     @IBAction func updatePatientActionButton() {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("AddPatientViewController") as! AddPatientViewController
-        sharedDataSingleton.selectedPatient = patient
-        controller.isEditingPatient = true
-        controller.patientID = patient.patient_id
-        self.navigationController?.pushViewController(controller, animated: true)
+//        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("AddPatientViewController") as! AddPatientViewController
+//        sharedDataSingleton.selectedPatient = patient
+//        controller.isEditingPatient = true
+//        controller.patientID = patient.patient_id
+//        self.navigationController?.pushViewController(controller, animated: true)
         
         self.trackEvent("UX", action: "Updating patient", label: "update patient button in patient profile view", value: nil)
     }
@@ -126,7 +111,7 @@ class PatientProfileViewController: UIViewController {
 extension PatientProfileViewController {
     
     func setScreeName(name: String) {
-        self.title = name
+//        self.title = name
         self.sendScreenView(name)
     }
     

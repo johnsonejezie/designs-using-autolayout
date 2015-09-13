@@ -13,6 +13,7 @@ pod 'Alamofire', '~> 1.3'
 pod 'SwiftSpinner'
 pod 'SwiftValidator', '2.1.1'
 pod 'HanekeSwift'
+pod 'XLForm', '~> 3.0'
 pod 'SwiftKeychainWrapper', :git => 'https://github.com/jrendel/SwiftKeychainWrapper', :branch => 'master'
 end
 

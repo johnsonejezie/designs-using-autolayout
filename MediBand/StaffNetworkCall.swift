@@ -14,11 +14,13 @@ import Alamofire
 class StaffNetworkCall{
     
     var allStaff = [Staff]()
+    var isCreatingStaff = false
 
 
     let operationManger = AFHTTPRequestOperationManager()
         
     func create(staff:Staff, image:UIImage?, isCreatingNewStaff:Bool, completionBlock:(success:Bool)->Void){
+        isCreatingStaff = true
         var url:String = ""
         println("this is staff obj \(staff)")
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
@@ -195,6 +197,9 @@ class StaffNetworkCall{
         staffData.email = dict["email"] as! String
         
         print(staffData)
+        if isCreatingStaff == true {
+            sharedDataSingleton.selectedStaff = staffData
+        }
         
         self.allStaff.append(staffData)
     }

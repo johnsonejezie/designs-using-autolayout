@@ -26,6 +26,7 @@ PODS:
   - SwiftKeychainWrapper (1.0.9)
   - SwiftSpinner (0.7.0)
   - SwiftValidator (2.1.1)
+  - XLForm (3.0.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
@@ -36,6 +37,7 @@ DEPENDENCIES:
     branch `master`)
   - SwiftSpinner
   - SwiftValidator (= 2.1.1)
+  - XLForm (~> 3.0)
 
 EXTERNAL SOURCES:
   SwiftKeychainWrapper:
@@ -55,5 +57,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: ec2f6003d693bf26ec5f74b5a7de9f0884527f24
   SwiftSpinner: 034bb8b00675b3e4f4c97531fa9af3f550462192
   SwiftValidator: 79936ea870f1dba8a0824763375375bb209fe30d
+  XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
 COCOAPODS: 0.38.0.beta.2

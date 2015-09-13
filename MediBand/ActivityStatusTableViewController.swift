@@ -15,7 +15,7 @@ protocol activityStatusTableViewControllerDelegate: class {
 
 class ActivityStatusTableViewController: UITableViewController {
     
-    var status = ["Assigned", "Ungoing", "Stopped", "Discharge", "End of care"]
+    var status = Contants().resolution
     
     weak var delegate: activityStatusTableViewControllerDelegate!
 
@@ -28,13 +28,13 @@ class ActivityStatusTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 5
+        return status.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell", forIndexPath: indexPath) as! UITableViewCell
         
-        cell.textLabel?.text = status[indexPath.row]
+        cell.textLabel?.text = status[indexPath.row] as? String
         cell.textLabel?.textAlignment = NSTextAlignment.Center
 
         // Configure the cell...
@@ -43,7 +43,7 @@ class ActivityStatusTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let stat: String = status[indexPath.row]
+        let stat: String = status[indexPath.row] as! String
         delegate?.activityStatusTableViewController(self, didSelectItem: stat)
         self.dismissViewControllerAnimated(true, completion: nil)
     }

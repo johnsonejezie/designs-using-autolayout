@@ -10,7 +10,7 @@ import UIKit
 import SwiftSpinner
 
 
-class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addPatientControllerDelegate {
+class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var isExistingPatient:Bool = false
     var patientID:String = ""
@@ -35,9 +35,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getPatients(pageNoToString)
-        
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
-        
     }
     
     func getPatients(pageNumber:String) {
@@ -155,7 +153,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         //        println("Cancel callback called")
     }
     
-    func addPatientViewController(controller: AddPatientViewController, didFinishedAddingPatient patient: NSDictionary) {
+    func addPatientViewController(controller: NewPatientViewController, didFinishedAddingPatient patient: NSDictionary) {
         //        println(patient)
     }
     
@@ -168,7 +166,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             let navigationController = segue.destinationViewController
                 as! UINavigationController
             let controller = navigationController.topViewController
-                as! AddPatientViewController
+                as! NewPatientViewController
             controller.patientID = patientID
             controller.isEditingPatient = true
         }else if segue.identifier == "ViewPatient" {

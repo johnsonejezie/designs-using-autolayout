@@ -59,6 +59,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-MediBand/SwiftKeychainWrapper.framework'
   install_framework 'Pods-MediBand/SwiftSpinner.framework'
   install_framework 'Pods-MediBand/SwiftValidator.framework'
+  install_framework 'Pods-MediBand/XLForm.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-MediBand/AFNetworking.framework'
@@ -68,4 +69,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-MediBand/SwiftKeychainWrapper.framework'
   install_framework 'Pods-MediBand/SwiftSpinner.framework'
   install_framework 'Pods-MediBand/SwiftValidator.framework'
+  install_framework 'Pods-MediBand/XLForm.framework'
 fi

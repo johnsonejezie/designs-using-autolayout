@@ -147,9 +147,9 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         validator.registerField(staffID, rules: [RequiredRule(), FullNameRule()])
         
         
-        
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
+//        
+//        navBar.target = self.revealViewController()
+//        navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         recognizer = UITapGestureRecognizer(target: self, action: "popUp:")
@@ -249,8 +249,8 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         
     }
-    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String]) {
-        
+
+    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String], andName name: String) {
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -310,8 +310,6 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         var role_id:String = self.roleID
         var email:String = emailTextField.text!
         
-        
-        
         staff.medical_facility_id = sharedDataSingleton.user.medical_facility
         staff.speciality = specialityID
         staff.general_practional_id = gpID
@@ -327,6 +325,7 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
                 SwiftSpinner.hide(completion: { () -> Void in
                     //                                self.delegate.addStaffViewController(self, finishedAddingStaff: self.staff)
                     let staffProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
+                    staffProfileViewController.staff = sharedDataSingleton.selectedStaff
                     self.navigationController?.pushViewController(staffProfileViewController, animated: true)
                 })
             }else {
@@ -353,14 +352,14 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y -= keyboardSize.height/2
+            self.view.frame.origin.y -= keyboardSize.height/1.8
         }
         
     }
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y += keyboardSize.height/2
+            self.view.frame.origin.y += keyboardSize.height/1.8
         }
     }
     

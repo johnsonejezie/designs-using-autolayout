@@ -13,7 +13,9 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     
     
-    
+    @IBOutlet var searchBar: UISearchBar!
+    var searchActive : Bool = false
+    var filtered:[Task] = []
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     
@@ -26,11 +28,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     var isPatientTask:Bool?
     var patient:Patient?
     var tasks = [Task]()
-    
+    var srcViewStaffID : String = ""
     var patientID:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchBar.delegate = self
 
         self.tasks = sharedDataSingleton.staffTask
       getTask()
@@ -76,10 +79,19 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             if sharedDataSingleton.staffTask.count == 0 {
                 SwiftSpinner.show("Loading Task", animated: true)
             }
+            var staffID :String
             
-            taskAPI.getTaskByStaff(sharedDataSingleton.user.id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+            if srcViewStaffID != "" {
+            staffID = srcViewStaffID
+            srcViewStaffID = ""
+            }else{
+             staffID = sharedDataSingleton.user.id
+            }
+            
+            
+            taskAPI.getTaskByStaff(staffID, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
                 if error != nil {
-                    
+            
                 }else {
 //                    sharedDataSingleton.tasks = task as! [Task]
                 }
@@ -93,9 +105,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
  
     }
     
-    
-    @IBOutlet weak var searchBar: UISearchBar!
-    
+        
     @IBAction func segmentControlAction(sender: AnyObject) {
         
         switch sender.selectedSegmentIndex {
@@ -112,6 +122,9 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
+        if (searchActive) {
+            return filtered.count
+        }
         if tasks.count > 0 {
             count = tasks.count
         }
@@ -126,7 +139,31 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableViewCell
-        if tasks.count > 0 {
+        if (searchActive) {
+            cell.specialityLabel.hidden = false
+            cell.careActivityLabel.hidden = false
+            cell.resolutionLabel.hidden = false
+            cell.dateLabel.hidden = false
+            cell.activityTypeLabel.hidden = false
+            cell.emptyLabel.hidden = true
+            
+            let constants = Contants()
+            let task = self.filtered[indexPath.row]
+            cell.specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+            cell.careActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
+            cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
+            cell.resolutionLabel.text = task.resolution
+            
+            var dateString = task.created
+            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            let formatter : NSDateFormatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date = formatter.dateFromString(subString)
+            formatter.dateFormat = "EEE, MMM d, yyyy"
+            dateString = formatter.stringFromDate(date!)
+            
+            cell.dateLabel.text = dateString
+        }else if tasks.count > 0 {
             cell.specialityLabel.hidden = false
             cell.careActivityLabel.hidden = false
             cell.resolutionLabel.hidden = false
@@ -140,8 +177,16 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             cell.careActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
             cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
             cell.resolutionLabel.text = task.resolution
+            
+            var dateString = task.created
+            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            let formatter : NSDateFormatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date = formatter.dateFromString(subString)
+            formatter.dateFormat = "EEE, MMM d, yyyy"
+            dateString = formatter.stringFromDate(date!)
    
-            cell.dateLabel.text = task.created
+            cell.dateLabel.text = dateString
         } else {
             cell.specialityLabel.hidden = true
             cell.careActivityLabel.hidden = true
@@ -232,13 +277,43 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//        let bobPredicate = NSPredicate(format: "firstName = 'Bob'")
+//        filtered = self.tasks.filter({ (text) -> Bool in
+//            let tmp: NSString = text
+//            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+//            return range.location != NSNotFound
+//        })
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+    }
+    
     func displayPopOver(sender: AnyObject){
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         var contentViewController : ActivityStatusTableViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityStatusTableViewController") as! ActivityStatusTableViewController
         contentViewController.delegate = self
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, 220)
-        
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, 396)
         var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
         detailPopover.sourceView = sender as! UIView
         detailPopover.sourceRect.origin.x = 50
@@ -249,11 +324,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-       println("The search text is: '\(searchBar.text)'")
-    }
-    
+//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+//        searchBar.resignFirstResponder()
+//       println("The search text is: '\(searchBar.text)'")
+//    }
+//    
     func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
         println(item)
     }

@@ -76,9 +76,7 @@ class Contants {
         "Outpatient Clinic",
         
         "Inpatient",
-                
-        "Admin EVENT",
-        
+                    
         "Emergency Care Activity"
     ]
     

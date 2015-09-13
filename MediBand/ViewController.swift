@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 import AVFoundation
 
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate {
@@ -59,11 +60,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as! AVCaptureVideoPreviewLayer
         previewLayer.frame = self.view.bounds
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        self.view.layer.addSublayer(previewLayer)
-        
-        //start scan
-//        session.startRunning()
-        
+        self.view.layer.addSublayer(previewLayer)        
         self.showAlertForPatientScan()
         
         
@@ -105,6 +102,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         self.view.bringSubviewToFront(self.highlightView)
         if detectionString != nil {
             patientID = detectionString
+            sharedDataSingleton.patientID = self.patientID
             let message:String = "Patient ID is \(detectionString)"
             
             let alertView = SCLAlertView()
@@ -113,7 +111,21 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                     sharedDataSingleton.selectedPatient = nil
                     self.performSegueWithIdentifier("patientSegue", sender: self.patientID)
                 }else {
-                    self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+                    SwiftSpinner.show("Searching for patient", animated: true)
+                    let patientAPI = PatientAPI()
+                    patientAPI.getPatient(self.patientID, fromMedicalFacility: sharedDataSingleton.user.clinic_id, completionHandler: { (scannedPatient:Patient?, error:NSError?) -> () in
+                        if error == nil {
+                            if let aPatient = scannedPatient {
+                                sharedDataSingleton.selectedPatient = aPatient
+                            }
+                            self.performSegueWithIdentifier("patientSegue", sender: self.isExistingPatient)
+                        }else {
+                           let alertView = SCLAlertView()
+                            alertView.showEdit(self, title: "Notice", subTitle: "Patient doesn't exist", closeButtonTitle: "Cancel", duration: 20000)
+                        }
+                        
+                    })
+                    
                 }
             })
             alertView.addButton("CANCEL", actionBlock: { () -> Void in
@@ -147,19 +159,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         
         alertView.alertIsDismissed { () -> Void in
 //                self.isExistingPatient = false
-            
         }
-        
-        
-        
     }
-    
-    
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        return true
-    }
-    
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         println("scan again button clicked")
         if buttonIndex == 1 {
@@ -167,22 +168,26 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                  sharedDataSingleton.selectedPatient = nil
                 self.performSegueWithIdentifier("patientSegue", sender: patientID)
             }else {
-                self.performSegueWithIdentifier("ExistingPatient", sender: isExistingPatient)
+                self.performSegueWithIdentifier("patientSegue", sender: isExistingPatient)
             }
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "patientSegue" {
+           SwiftSpinner.hide(completion: nil)
             let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = navigationController.topViewController as! AddPatientViewController
-            controller.patientID = sender as! String
-        }else if segue.identifier == "ExistingPatient" {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = navigationController.topViewController as! PatientsViewController
-            controller.isExistingPatient = sender as! Bool
-            controller.patientID = patientID
+           
+            let controller = navigationController.topViewController as! NewPatientViewController
+            controller.patientID = self.patientID
+            
         }
+//            else if segue.identifier == "ExistingPatient" {
+//            let navigationController = segue.destinationViewController as! UINavigationController
+//            let controller = navigationController.topViewController as! PatientsViewController
+//            controller.isExistingPatient = sender as! Bool
+//            controller.patientID = patientID
+//        }
     }
 
 

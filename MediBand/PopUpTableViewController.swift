@@ -12,7 +12,7 @@ protocol popUpTableViewControllerDelegate: class {
     func popUpTableViewControllerDidCancel(controller: PopUpTableViewController)
     func popUpTableViewController(controller: PopUpTableViewController,
         didSelectItem item: String, inRow:String, fromArray:[AnyObject])
-    func popUpTableViewwController(controller:PopUpTableViewController, selectedStaffs staff:[Staff], withIDs ids:[String])
+    func popUpTableViewwController(controller:PopUpTableViewController, selectedStaffs staff:[Staff], withIDs ids:[String], andName name:String)
 }
 
 class PopUpTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -99,14 +99,16 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
                 let name:String = aStaff.firstname + " " + aStaff.surname
                 self.removeObject(aStaff.id, fromArray: &selected_staff_ids)
                 self.removeStaff(aStaff)
-                delegate?.popUpTableViewwController(self, selectedStaffs: selected_staff, withIDs: selected_staff_ids)
+//                delegate?.popUpTableViewwController(self, selectedStaffs: selected_staff, withIDs: selected_staff_ids)
+                delegate.popUpTableViewwController(self, selectedStaffs: selected_staff, withIDs: selected_staff_ids, andName: name)
             }else {
                 cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
                 let aStaff:Staff = staff[indexPath.row]
                 let name:String = aStaff.firstname + " " + aStaff.surname
                 selected_staff.append(aStaff)
                 selected_staff_ids.append(aStaff.id)
-                delegate?.popUpTableViewwController(self, selectedStaffs: selected_staff, withIDs: selected_staff_ids)
+//                delegate?.popUpTableViewwController(self, selectedStaffs: selected_staff, withIDs: selected_staff_ids)
+                delegate.popUpTableViewwController(self, selectedStaffs: selected_staff, withIDs: selected_staff_ids, andName: name)
             }
             
         }else {

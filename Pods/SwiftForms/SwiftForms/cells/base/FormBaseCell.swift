@@ -38,6 +38,14 @@ public class FormBaseCell: UITableViewCell {
         /// override
     }
     
+    public func validationStyle() {
+        ///override
+    }
+    
+    public func validate() {
+        /// override
+    }
+    
     public func update() {
         /// override
     }

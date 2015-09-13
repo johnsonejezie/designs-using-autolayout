@@ -22,5 +22,7 @@ class Task{
     var modified:String = ""
     var id:String = ""
     var resolution:String = ""
+    var task_patient_name: String = ""
+    var task_patient_image: String = ""
     var attending_professionals:[Staff] = []
 }

@@ -33,12 +33,20 @@ class StaffProfileViewController: UIViewController {
         
         if isMyProfile == true {
             isMyProfile = false
+//            self.navigationController!.navigationBar.hidden = true
+            if sharedDataSingleton.user.isAdmin == true {
+               self.updateStaffButton.setTitle("Update Profile", forState: UIControlState.Normal)
+            }else {
+                
+               self.updateStaffButton.hidden == true
+            }
             staffNameLabel.text = sharedDataSingleton.user.firstName + " " + sharedDataSingleton.user.surname
             staffIDLabel.text = sharedDataSingleton.user.memberid
             specialityLabel.text = sharedDataSingleton.user.speciality
             generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
-            generlPracticeLabel.text = sharedDataSingleton.user.medical_facility
+            generlPracticeLabel.text = sharedDataSingleton.user.email
         }else {
+            self.navigationItem.setLeftBarButtonItem(nil, animated: true)
             staffIDLabel.text = staff.id
             staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
             generalPractitionerIDLabel.text = staff.general_practional_id
@@ -52,10 +60,6 @@ class StaffProfileViewController: UIViewController {
                 staffImageView.image = UIImage(named: "defaultImage")
             }
         }
-        
-
-        
-        
     }
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")
@@ -85,6 +89,7 @@ class StaffProfileViewController: UIViewController {
     @IBAction func viewHistory(sender: UIButton) {
         let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
         taskViewController.isPatientTask = false
+        taskViewController.srcViewStaffID = staff.id
         self.navigationController?.pushViewController(taskViewController, animated: true)
         self.trackEvent("UX", action:"View Staff History" , label: "Staff history button", value: nil)
     }

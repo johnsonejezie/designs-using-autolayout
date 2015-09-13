@@ -24,6 +24,7 @@ import SwiftSpinner
     var resolution_id = ""
     var staff_ids:[String] = []
     
+    @IBOutlet var selectedStaffLabel: UILabel!
     var recognizer:UITapGestureRecognizer!
 
     
@@ -148,9 +149,17 @@ import SwiftSpinner
         }
         println(item)
     }
+
     
-    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String]) {
+    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String], andName name: String) {
         selectStaff.setTitle("SELECTED STAFF", forState: UIControlState.Normal)
+        if (selectedStaffLabel.text?.isEmpty == true) {
+            self.selectedStaffLabel.text = name
+        }else {
+            self.selectedStaffLabel.text = selectedStaffLabel.text! + ", " + name
+        }
+        
+        self.selectedStaffLabel.hidden = false
         staff_ids = ids
     }
     
@@ -238,14 +247,14 @@ extension NewCareActivityViewController {
     
 }
 
-extension UINavigationController {
-    public override func supportedInterfaceOrientations() -> Int {
-        if visibleViewController is NewCareActivityViewController {
-            return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-        }
-        return Int(UIInterfaceOrientationMask.All.rawValue)
-    }
-}
+//extension UINavigationController {
+//    public override func supportedInterfaceOrientations() -> Int {
+//        if visibleViewController is NewCareActivityViewController {
+//            return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+//        }
+//        return Int(UIInterfaceOrientationMask.All.rawValue)
+//    }
+//}
 
 
 

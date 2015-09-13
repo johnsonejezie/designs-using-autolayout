@@ -22,7 +22,7 @@ class DataSingleton {
     var isCheckingNewPatientID:Bool = true
     var staffTask = [Task]()
     var patientTask = [Task]()
-    
+    var patientID:String = ""
 }
 
 let sharedDataSingleton = DataSingleton()

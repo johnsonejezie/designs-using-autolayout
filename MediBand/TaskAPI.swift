@@ -106,7 +106,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     
     func handleGetTaskByStaff(json: AnyObject)-> [Task]? {
-        println("this is staff json \(json)")
+        println("this is all task json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -222,26 +222,19 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             }else {
                 task.specialist_id = ""
             }
+        if let image: String = resultDict["image"] as? String {
+            task.task_patient_image = image as String
+        }else {
+            task.task_patient_image = ""
+        }
+        if let name: String = resultDict["name"] as? String {
+            task.task_patient_name = name as String
+        }else {
+            task.task_patient_name = ""
+        }
             if let selected_staff_ids:AnyObject = resultDict["selected_staff_ids"] {
-                for attending_staff in selected_staff_ids as! [AnyObject] {
-                    let staff = Staff()
-                    if let otherAttendingStaff = attending_staff as? [String:AnyObject] {
-                        if let image: String = otherAttendingStaff["image"] as? String {
-                            staff.image = image as String
-                        }
-                        if let member_id: String = otherAttendingStaff["member_id"] as? String {
-                            staff.member_id = member_id as String
-                        }
-                        if let name: String = otherAttendingStaff["name"] as? String {
-                            staff.name = name as String
-                        }
-                        if let staff_id: String = otherAttendingStaff["staff_id"] as? String {
-                            staff.id = staff_id as String
-                        }
-                    }
-                    
-                    task.attending_professionals.append(staff)
-                }
+                println(selected_staff_ids)
+                task.attending_professionals = self.parseAttendingStaff(selected_staff_ids)
             }
         if isCreatingTask == true {
             self.task = task
@@ -254,4 +247,36 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             }
         }
     }
+    
+    func parseAttendingStaff(json:AnyObject?)->[Staff] {
+        println(json)
+        var attendingStaff = [Staff]()
+        if let array:AnyObject = json {
+            println(array)
+            for resultDict in array as! [AnyObject] {
+                println(resultDict)
+                let staff = Staff()
+                if let resultDict = resultDict as? [String: AnyObject] {
+                        if let image: String = resultDict["image"] as? String {
+                            staff.image = image as String
+                        }
+                        if let member_id: String = resultDict["member_id"] as? String {
+                            staff.member_id = member_id as String
+                        }
+                        if let name: String = resultDict["name"] as? String {
+                            staff.name = name as String
+                        }
+                        if let staff_id: String = resultDict["staff_id"] as? String {
+                            staff.id = staff_id as String
+                        }
+                    println(staff.name)
+                    
+                }
+                attendingStaff.append(staff)
+            }
+        }
+        return attendingStaff
+    }
+    
+    
 }

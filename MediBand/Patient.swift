@@ -47,6 +47,7 @@ class Patient {
     var addressotherphone: String = ""
     var patient_id:String = ""
     var language: String = ""
+    var next_of_kin_relationship:String = ""
     
     var image: String = ""
     

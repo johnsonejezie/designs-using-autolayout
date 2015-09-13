@@ -8,7 +8,7 @@
 
 import UIKit
 import Haneke
-
+import SwiftSpinner
 class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
     
     
@@ -36,10 +36,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.getPatientForTask(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.medical_facility)
-
+        getStaff()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -55,6 +52,13 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         taskSpecialistLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
         taskCareActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
         taskResolutionLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.specialist_id as String))
+        taskPatientNameLabel.text = task.task_patient_name
+        if task.task_patient_image != "" {
+            let URL = NSURL(string: task.task_patient_image)!
+            self.taskPatientImageView.hnk_setImageFromURL(URL)
+        }else {
+            self.taskPatientImageView.image = UIImage(named: "defaultImage")
+        }
         let assignedStaff = task.attending_professionals[0]
         assignedStaffLabel.text = assignedStaff.name
         
@@ -65,23 +69,23 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     }
     
     
-    
-    func getPatientForTask(patient_id:String, fromMedicalFacility mFacility: String) {
-        let patientAPI = PatientAPI()
-        patientAPI.getPatient(patient_id, fromMedicalFacility: mFacility) { (fetchedPatient:Patient?, error:NSError?) -> () in
-            if let patient = fetchedPatient {
-              self.taskPatientNameLabel.text = patient.forename + " " + patient.surname
-                if patient.image != "" {
-                    let URL = NSURL(string: patient.image)!
-                    self.taskPatientImageView.hnk_setImageFromURL(URL)
-                }else {
-                    self.taskPatientImageView.image = UIImage(named: "defaultImage")
+    func getStaff(){
+        var staffMethods = StaffNetworkCall()
+        
+        if sharedDataSingleton.allStaffs.count == 0 {
+//            SwiftSpinner.show("Loading Staff", animated: true)
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+//                    SwiftSpinner.hide(completion: nil)
+                }else{
+                    println("error fetching and passing all staffs from staff table view controller")
+//                    SwiftSpinner.hide(completion: nil)
                 }
-            }
+            })
         }
     }
-
-
+    
     override func viewWillLayoutSubviews() {
         self.patientProfilePic.layer.borderWidth = 1.0;
         self.patientProfilePic.layer.borderColor = UIColor.blackColor().CGColor;
@@ -92,7 +96,9 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+         println(task.attending_professionals.count)
         return task.attending_professionals.count
+       
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: AnyObject = self.attendingProfCollectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath)
@@ -101,7 +107,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         let userLabel = cell.viewWithTag(1002 ) as! UILabel;
         if staff.image != "" {
             let URL = NSURL(string: staff.image)!
-            
             userImageView.hnk_setImageFromURL(URL)
         }else {
             userImageView.image = UIImage(named: "defaultImage")
@@ -112,12 +117,23 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         userImageView.layer.cornerRadius = userImageView.layer.frame.width/2;
         userImageView.clipsToBounds = true
         userLabel.text = staff.name
+        
         return cell as! UICollectionViewCell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let staffProfileController  = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
+        let staf: Staff = task.attending_professionals[indexPath.row]
+        
+        for staff in sharedDataSingleton.allStaffs {
+            if staf.id == staff.id {
+               staffProfileController.staff = staff
+                self.navigationController?.pushViewController(staffProfileController, animated: true)
+            }
+        }
     }
     @IBAction func update(sender: UIButton) {
         
-//        var menuView: MenuViewController = MenuViewController() as! MenuViewController
-//        menuView.delegate = self
         let storyboard : UIStoryboard = UIStoryboard(
             name: "Main",
             bundle: nil)
@@ -153,16 +169,31 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         }
         println(constantArray)
         println(count)
-        let stringValue: String = (constantArray[count!] as? String)!
-        return stringValue
+        if count >= constantArray.count {
+            return ""
+        }else {
+            let stringValue: String = (constantArray[count!] as? String)!
+            return stringValue
+        }
     }
     
     
     
     @IBAction func viewPatientActionButton() {
-        
+        SwiftSpinner.show("Loading...", animated: true)
         trackEvent("UX", action: "View Patient", label: "view patient button from task detail view", value: nil)
-        self.performSegueWithIdentifier("viewPatient", sender: nil)
+        let patientAPI = PatientAPI()
+        
+        patientAPI.getPatient(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.clinic_id) { (fetchedPatient:Patient?, error:NSError?) -> () in
+            if error == nil {
+                SwiftSpinner.hide(completion: nil)
+               self.performSegueWithIdentifier("viewPatient", sender: fetchedPatient)
+            }else {
+                SwiftSpinner.hide(completion: nil)
+                let alertView = SCLAlertView()
+                alertView.showError(self, title: "Error", subTitle: "Failed to get patient. Please try again later", closeButtonTitle: "Cancel", duration: 2000)
+            }
+        }
     }
     
     
@@ -179,9 +210,14 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             println("choice is \(currentCell)")
     }
 
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewPatient"{
+        let destinationNavController = segue.destinationViewController as! UINavigationController
+        let destinationController   = destinationNavController.topViewController as! PatientProfileViewController
+        destinationController.patient = sharedDataSingleton.selectedPatient
+        }
+    }
 }
-
 extension ActivityDetailsViewController {
     
     func setScreeName(name: String) {

@@ -33,8 +33,8 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
+//        navBar.target = self.revealViewController()
+//        navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getStaff(pageNoToString)

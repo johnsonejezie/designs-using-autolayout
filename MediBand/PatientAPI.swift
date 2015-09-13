@@ -62,9 +62,11 @@ class PatientAPI {
             "ischild":patient.ischild,
             "maritalstatus":patient.maritalstatus,
             "next_of_kin_contact":patient.next_of_kin_contact,
-            "next_of_kin":patient.next_of_kin
+            "next_of_kin":patient.next_of_kin,
+            "next_of_kin_relationship": patient.next_of_kin_relationship
         ]
-
+        
+        println(parameters)
         
         if isCreatingNewPatient == true {
             url = "http:/iconglobalnetwork.com/mediband/api/create_patient"
@@ -98,6 +100,8 @@ class PatientAPI {
                 "next_of_kin":patient.next_of_kin,
                 "image": mm
             ]
+            
+            
             let urlRequest = urlRequestWithComponents(url, parameters: data)
             
             Alamofire.upload(urlRequest.0, data: urlRequest.1)
@@ -288,6 +292,12 @@ class PatientAPI {
             patient.surname = surname
         }else {
             patient.surname = ""
+        }
+        
+        if let next_of_kin_relationship: String = resultDict["next_of_kin_relationship"] as? String  {
+            patient.next_of_kin_relationship = next_of_kin_relationship
+        }else {
+            patient.next_of_kin_relationship = ""
         }
         
         if let image:String = resultDict["image"]  as? String{

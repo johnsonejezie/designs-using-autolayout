@@ -77,6 +77,13 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let caseNote = self.caseNotes[indexPath.row]
+        let detail:String = caseNote.details
+        let alertView = SCLAlertView()
+        alertView.showEdit(self, title: "Case Note Detail", subTitle: detail, closeButtonTitle: "CANCEL", duration: 20000)
+    }
+    
     
     func createCaseNote(task_id:String) {
         SwiftSpinner.show("Creating Case Note", animated: true)

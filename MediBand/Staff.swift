@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import XLForm
 
 
-class Staff {
+class Staff: NSObject, XLFormOptionObject {
     var medical_facility_id:String = ""
     var speciality_id:String = ""
     var general_practional_id:String  = ""
@@ -26,5 +27,13 @@ class Staff {
     var role:String  = ""
     var speciality:String  = ""
     var name:String = ""
+    
+    func formDisplayText() -> String {
+        return self.firstname + " " + self.surname
+    }
+    
+    func formValue() -> AnyObject {
+        return self.id
+    }
     
 }

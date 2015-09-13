@@ -108,6 +108,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                         self.loadResetPasswordAlert()
                     })
                 }else {
+                    SwiftSpinner.hide(completion: nil)
                     self.performSegueWithIdentifier("LoginToPatients", sender: nil)
                 }
 //

@@ -19,3 +19,4 @@
 #import "SWRevealViewController.h"
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
+#import <XLForm/XLForm.h>
