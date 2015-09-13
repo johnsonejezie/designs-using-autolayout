@@ -32,7 +32,7 @@ class PatientProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sharedDataSingleton.selectedIDs = []
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         addCareButton.layer.cornerRadius = 4

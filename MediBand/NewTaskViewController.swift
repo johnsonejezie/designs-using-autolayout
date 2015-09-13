@@ -60,7 +60,7 @@ class NewTaskViewController: XLFormViewController {
         label.frame.origin.y = patientImageView.frame.height + 60
         label.center.x = patientImageView.center.x
         label.textAlignment = NSTextAlignment.Center
-//        label.text = sharedDataSingleton.selectedPatient.forename + " " + sharedDataSingleton.selectedPatient.surname
+        label.text = sharedDataSingleton.selectedPatient.forename + " " + sharedDataSingleton.selectedPatient.surname
 
         topView.addSubview(label)
         
@@ -75,14 +75,13 @@ class NewTaskViewController: XLFormViewController {
         
         
         self.trackEvent("UX", action: "New Task created", label: "Save button to create new task", value: nil)
-//        SwiftSpinner.show("Creating Task", animated: true)
+        SwiftSpinner.show("Creating Task", animated: true)
         let task = Task()
         let taskAPI = TaskAPI()
         var results = [String:AnyObject]()
         if let care_activity_id = form.formRowWithTag(Tags.careActivity.rawValue)!.value?.formValue() as? Int {
             task.care_activity_id = String(care_activity_id)
            results["care_activity_id"] = care_activity_id
-            println(care_activity_id)
         }
         
         if let care_activity_type_id = form.formRowWithTag(Tags.careType.rawValue)!.value?.formValue() as? Int {
@@ -97,19 +96,28 @@ class NewTaskViewController: XLFormViewController {
             task.specialist_id = String(specialist_id)
         }
         
-        if let staff_ids = form.formRowWithTag(Tags.specialist.rawValue)!.value as? Int {
-//            task.specialist_id = String(specialist_id)
+        if let staff_ids = form.formRowWithTag(Tags.selectedStaff.rawValue)!.value as? [String] {
+            
+            task.selected_staff_ids = staff_ids
+           
         }
+        task.patient_id = sharedDataSingleton.selectedPatient.patient_id
         
+        println(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
 
+        
+        
         taskAPI.createTask(task, callback: { (createdtask:AnyObject?, error:NSError?) -> () in
             if error != nil {
                 
             }else {
-                let newtask = createdtask as! Task
-                SwiftSpinner.hide(completion: nil)
-                self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
-                println("this is newtask \(newtask.resolution)")
+                if let newtask = createdtask as? Task {
+                    SwiftSpinner.hide(completion: nil)
+                    sharedDataSingleton.selectedIDs = []
+                    self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
+                    println("this is newtask \(newtask.resolution)")
+                }
+               
             }
         })
         
@@ -129,15 +137,15 @@ class NewTaskViewController: XLFormViewController {
     func getStaff(){
         var staffMethods = StaffNetworkCall()
         
-//        if sharedDataSingleton.allStaffs.count == 0 {
-//            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
-//                if(done){
-//                    println("all staffs fetched and passed from staff table view controller")
-//                }else{
-//                    println("error fetching and passing all staffs from staff table view controller")
-//                }
-//            })
-//        }
+        if sharedDataSingleton.allStaffs.count == 0 {
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
+                if(done){
+                    println("all staffs fetched and passed from staff table view controller")
+                }else{
+                    println("error fetching and passing all staffs from staff table view controller")
+                }
+            })
+        }
     }
     
     @IBAction func saveActionButton() {

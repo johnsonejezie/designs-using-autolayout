@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bTD-XR-cw8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hu7-hy-fBM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1374,169 +1374,6 @@
             </objects>
             <point key="canvasLocation" x="3185" y="1176"/>
         </scene>
-        <!--NEW TASK-->
-        <scene sceneID="ATh-wy-wUf">
-            <objects>
-                <viewController id="dLo-o2-qBV" customClass="NewCareActivityViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PC8-9C-Nz9"/>
-                        <viewControllerLayoutGuide type="bottom" id="vfl-N1-mbY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Tuz-DM-lP9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWF-nA-PZ6">
-                                <rect key="frame" x="20" y="80" width="560" height="460"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHICHI IFEANYI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jib-mU-fz1">
-                                        <rect key="frame" x="8" y="50" width="127" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOX-5D-9zN">
-                                        <rect key="frame" x="251" y="404" width="58" height="28"/>
-                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                        <state key="normal" title="SAVE">
-                                            <color key="titleColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="saveActionButton" destination="dLo-o2-qBV" eventType="touchUpInside" id="NCc-S2-7O9"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pe-qX-Fr6">
-                                        <rect key="frame" x="28" y="94" width="504" height="35"/>
-                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="SELECT SPECIALITY">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="Hh8-6H-zo2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvk-sA-2z9">
-                                        <rect key="frame" x="28" y="149" width="504" height="35"/>
-                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="SELECT CARE ACTIVITIES">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="OWi-JW-s3A"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8s-Ai-OAK">
-                                        <rect key="frame" x="28" y="204" width="504" height="35"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="SELECT TYPE OF CARE ACTIVITIES">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="LRc-0I-0xT"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQq-cE-SPs">
-                                        <rect key="frame" x="28" y="259" width="504" height="35"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="RESOLUTION">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="mUK-mG-Loe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-MH-Tcp">
-                                        <rect key="frame" x="28" y="314" width="504" height="35"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="SELECT STAFF FOR THIS ACTIVITY">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectActionButton:" destination="dLo-o2-qBV" eventType="touchUpInside" id="sfn-Kc-7hi"/>
-                                        </connections>
-                                    </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVo-50-maE">
-                                        <rect key="frame" x="28" y="357" width="504" height="21"/>
-                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="8Pe-qX-Fr6" firstAttribute="width" secondItem="YWF-nA-PZ6" secondAttribute="width" multiplier="0.9" id="3V8-ne-s4p"/>
-                                    <constraint firstItem="3y4-MH-Tcp" firstAttribute="top" secondItem="uQq-cE-SPs" secondAttribute="bottom" constant="20" id="3iY-oa-KGX"/>
-                                    <constraint firstAttribute="centerX" secondItem="HOX-5D-9zN" secondAttribute="centerX" id="3kL-L3-Y1b"/>
-                                    <constraint firstItem="uQq-cE-SPs" firstAttribute="top" secondItem="A8s-Ai-OAK" secondAttribute="bottom" constant="20" id="6Io-kj-gcg"/>
-                                    <constraint firstAttribute="centerX" secondItem="3y4-MH-Tcp" secondAttribute="centerX" id="7oX-WP-gNm"/>
-                                    <constraint firstItem="3y4-MH-Tcp" firstAttribute="width" secondItem="uQq-cE-SPs" secondAttribute="width" id="7pM-uh-ojn"/>
-                                    <constraint firstItem="nvk-sA-2z9" firstAttribute="width" secondItem="8Pe-qX-Fr6" secondAttribute="width" id="Blv-R1-mN3"/>
-                                    <constraint firstItem="jib-mU-fz1" firstAttribute="leading" secondItem="YWF-nA-PZ6" secondAttribute="leading" constant="8" id="CwG-h2-pMB"/>
-                                    <constraint firstItem="BVo-50-maE" firstAttribute="top" secondItem="3y4-MH-Tcp" secondAttribute="bottom" constant="8" id="Iyn-EP-ZkG"/>
-                                    <constraint firstAttribute="centerX" secondItem="uQq-cE-SPs" secondAttribute="centerX" id="Kkb-ug-MSr"/>
-                                    <constraint firstAttribute="centerX" secondItem="8Pe-qX-Fr6" secondAttribute="centerX" id="OWa-Ar-RGt"/>
-                                    <constraint firstItem="3y4-MH-Tcp" firstAttribute="centerX" secondItem="BVo-50-maE" secondAttribute="centerX" id="PLP-dB-7ky"/>
-                                    <constraint firstAttribute="centerX" secondItem="A8s-Ai-OAK" secondAttribute="centerX" id="SGg-pY-urJ"/>
-                                    <constraint firstItem="A8s-Ai-OAK" firstAttribute="top" secondItem="nvk-sA-2z9" secondAttribute="bottom" constant="20" id="YYC-XW-Z76"/>
-                                    <constraint firstAttribute="centerY" secondItem="A8s-Ai-OAK" secondAttribute="centerY" constant="8.5" id="aYf-bS-vL7"/>
-                                    <constraint firstItem="A8s-Ai-OAK" firstAttribute="width" secondItem="nvk-sA-2z9" secondAttribute="width" id="cq3-8n-iqT"/>
-                                    <constraint firstItem="3y4-MH-Tcp" firstAttribute="width" secondItem="BVo-50-maE" secondAttribute="width" id="kl5-Vg-C8a"/>
-                                    <constraint firstItem="uQq-cE-SPs" firstAttribute="width" secondItem="A8s-Ai-OAK" secondAttribute="width" id="l6r-Qe-JyL"/>
-                                    <constraint firstAttribute="bottom" secondItem="HOX-5D-9zN" secondAttribute="bottom" constant="28" id="mrF-Fa-mIE"/>
-                                    <constraint firstAttribute="centerX" secondItem="nvk-sA-2z9" secondAttribute="centerX" id="oCh-Iz-LPf"/>
-                                    <constraint firstItem="jib-mU-fz1" firstAttribute="top" secondItem="YWF-nA-PZ6" secondAttribute="top" constant="50" id="wIJ-3M-Qad"/>
-                                    <constraint firstItem="nvk-sA-2z9" firstAttribute="top" secondItem="8Pe-qX-Fr6" secondAttribute="bottom" constant="20" id="zZO-Vz-JNs"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="YWF-nA-PZ6" firstAttribute="top" secondItem="PC8-9C-Nz9" secondAttribute="bottom" constant="16" id="I3b-Cn-er3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="YWF-nA-PZ6" secondAttribute="trailing" constant="4" id="Ucy-Pd-ula"/>
-                            <constraint firstItem="YWF-nA-PZ6" firstAttribute="leading" secondItem="Tuz-DM-lP9" secondAttribute="leadingMargin" constant="4" id="jKN-cw-6bJ"/>
-                            <constraint firstItem="vfl-N1-mbY" firstAttribute="top" secondItem="YWF-nA-PZ6" secondAttribute="bottom" constant="16" id="lhi-c8-wbK"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="NEW TASK" id="nIX-xN-xyS"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <connections>
-                        <outlet property="nameLabel" destination="jib-mU-fz1" id="a9m-gq-Yy4"/>
-                        <outlet property="saveButton" destination="HOX-5D-9zN" id="dbw-O2-38O"/>
-                        <outlet property="selectCareButton" destination="nvk-sA-2z9" id="jit-Zk-LWA"/>
-                        <outlet property="selectCategoriesButton" destination="uQq-cE-SPs" id="Dvp-br-UGc"/>
-                        <outlet property="selectSpecialistButton" destination="8Pe-qX-Fr6" id="BCs-uu-Xn3"/>
-                        <outlet property="selectStaff" destination="3y4-MH-Tcp" id="SAS-TN-FFJ"/>
-                        <outlet property="selectTypeButton" destination="A8s-Ai-OAK" id="gmQ-Hd-CMh"/>
-                        <outlet property="selectedStaffLabel" destination="BVo-50-maE" id="C3I-IG-cfS"/>
-                        <segue destination="j0f-SH-GQC" kind="presentation" identifier="addCaseNote" id="chE-7V-Dgw"/>
-                        <segue destination="vH7-wX-gNa" kind="unwind" identifier="UnwindToPatientProfile" unwindAction="unwindToVC:" id="Tv1-nK-1Yu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZM5-MK-Q47" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="vH7-wX-gNa" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="3143" y="2060"/>
-        </scene>
         <!--New Task View Controller-->
         <scene sceneID="nF0-xt-9QD">
             <objects>
@@ -1551,16 +1388,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="txM-Lt-7zc">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="kkB-CF-eZg">
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="kkB-CF-eZg">
                             <connections>
                                 <action selector="submit:" destination="nfE-Pd-IbE" id="Sao-5a-cNn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="js1-Mr-T6M" kind="unwind" identifier="UnwindToPatientProfile" unwindAction="unwindToVC:" id="diJ-Tp-Y5y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FX5-f4-lhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="js1-Mr-T6M" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3955" y="2760"/>
+            <point key="canvasLocation" x="3135" y="2060"/>
         </scene>
         <!--SIGN UP-->
         <scene sceneID="dUo-u9-seO">
@@ -2251,7 +2092,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="dLo-o2-qBV" kind="relationship" relationship="rootViewController" id="Tk1-qf-isB"/>
+                        <segue destination="nfE-Pd-IbE" kind="relationship" relationship="rootViewController" id="wdO-ai-yTT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0a-qV-0ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2583,9 +2424,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="nfE-Pd-IbE" kind="relationship" relationship="rootViewController" id="APK-UV-dbP"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqc-GK-uz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2606,6 +2444,5 @@
         <segue reference="QC8-sU-1qt"/>
         <segue reference="oFy-ux-Gpp"/>
         <segue reference="iYo-GD-Zlm"/>
-        <segue reference="chE-7V-Dgw"/>
     </inferredMetricsTieBreakers>
 </document>

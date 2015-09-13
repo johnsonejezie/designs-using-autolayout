@@ -128,7 +128,9 @@ class UserCell : UITableViewCell {
 //}
 
 class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewController, XLFormRowDescriptorPopoverViewController {
-
+    
+    var selected_staff_ids:[String] = []
+    var selected_staff:[Staff] = []
     
     var rowDescriptor : XLFormRowDescriptor?
     var popoverController : UIPopoverController?
@@ -154,6 +156,12 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
         super.viewDidLoad()
         self.tableView.registerClass(UserCell.self, forCellReuseIdentifier: self.kUserCellIdentifier)
         self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "savePressed:")
+    }
+    
+    func savePressed(button: UIBarButtonItem)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
 // MARK: UITableViewDataSource
@@ -179,9 +187,15 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
             
             cell.userImage.hnk_setImageFromURL(URL)
         }
-        if self.rowDescriptor?.value != nil {
-            cell.accessoryType = self.rowDescriptor!.value!.formValue().isEqual(userId) ? .Checkmark : .None
+        
+        if contains(sharedDataSingleton.selectedIDs, userId) {
+            cell.accessoryType = .Checkmark
+        }else {
+           cell.accessoryType = .None
         }
+//        if self.rowDescriptor?.value != nil {
+//            cell.accessoryType = self.rowDescriptor!.value!.formValue().isEqual(userId) ? .Checkmark : .None
+//        }
         return cell;
 
     }
@@ -195,16 +209,41 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let usersData = sharedDataSingleton.allStaffs
-        let userData = usersData[indexPath.row] as Staff
-//        let user = User(userId: (userData["id"] as! Int), userName: userData["name"] as! String, userImage: userData["imageName"] as! String)
-        self.rowDescriptor!.value = userData;
-        if let porpOver = self.popoverController {
-            porpOver.dismissPopoverAnimated(true)
-            porpOver.delegate?.popoverControllerDidDismissPopover!(porpOver)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.accessoryType == UITableViewCellAccessoryType.Checkmark {
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+            let aStaff:Staff = sharedDataSingleton.allStaffs[indexPath.row]
+            let name:String = aStaff.firstname + " " + aStaff.surname
+            self.removeObject(aStaff.id, fromArray: &selected_staff_ids)
+            self.removeStaff(aStaff)
+            self.rowDescriptor?.value = selected_staff_ids
+            sharedDataSingleton.selectedIDs = selected_staff_ids
+
+        }else {
+            cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            let aStaff:Staff = sharedDataSingleton.allStaffs[indexPath.row]
+            let name:String = aStaff.firstname + " " + aStaff.surname
+            selected_staff.append(aStaff)
+            selected_staff_ids.append(aStaff.id)
+             self.rowDescriptor?.value = selected_staff_ids
+            sharedDataSingleton.selectedIDs = selected_staff_ids
         }
-        else if self.parentViewController is UINavigationController {
-            self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func removeObject<T : Equatable>(object: T, inout fromArray array: [T])
+    {
+        var index = find(array, object)
+        if let ind = index {
+            array.removeAtIndex(ind)
+        }
+        
+    }
+    
+    func removeStaff(aStaff:Staff) {
+        for var i = 0; i < selected_staff.count; ++i {
+            if aStaff.id == selected_staff[i].id {
+                selected_staff.removeAtIndex(i)
+            }
         }
     }
     

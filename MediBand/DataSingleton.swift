@@ -23,6 +23,7 @@ class DataSingleton {
     var staffTask = [Task]()
     var patientTask = [Task]()
     var patientID:String = ""
+    var selectedIDs = [String]()
 }
 
 let sharedDataSingleton = DataSingleton()
