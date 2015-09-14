@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return Int(UIInterfaceOrientationMask.All.rawValue)//All means all orientation
             
-        }else if (viewController is NewCareActivityViewController){
+        }else if (viewController is NewTaskViewController){
             
             return Int(UIInterfaceOrientationMask.Portrait.rawValue)//This is sign in view controller that i only want to set this to portrait mode only
             

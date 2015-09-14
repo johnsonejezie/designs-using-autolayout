@@ -25,6 +25,7 @@ class DataSingleton {
     var patientID:String = ""
     var selectedIDs = [String]()
     var isEditingProfile = false
+    var specialistFilterString = ""
 }
 
 let sharedDataSingleton = DataSingleton()
