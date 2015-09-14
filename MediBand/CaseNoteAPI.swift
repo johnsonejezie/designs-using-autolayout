@@ -25,9 +25,9 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
     var caseNote = CaseNote()
     
     
-    func getCaseNotes(staff_id: String, page:String, callback: APICallback) {
+    func getCaseNotes(task_id:String, staff_id: String, page:String, callback: APICallback) {
         let url = "http://iconglobalnetwork.com/mediband/api/get_casenotes"
-        let body = "staff_id=\(staff_id)&page=\(page)"
+        let body = "task_id=\(task_id)&staff_id=\(staff_id)&page=\(page)"
         makeHTTPPostRequest(Path.GET_CASENOTE, callback: callback, url: url, body: body)
     }
     

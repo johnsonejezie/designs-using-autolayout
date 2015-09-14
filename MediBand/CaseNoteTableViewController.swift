@@ -9,7 +9,7 @@
 import UIKit
 import SwiftSpinner
 
-class CaseNoteTableViewController: UITableViewController, UIViewControllerTransitioningDelegate, caseDetailsControllerDelegate {
+class CaseNoteTableViewController: UITableViewController, UIViewControllerTransitioningDelegate, addCaseControllerDelegate {
 
     
     @IBOutlet var navBar: UIBarButtonItem!
@@ -18,7 +18,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     var caseNotes = [CaseNote]()
     @IBAction func addCaseNote(sender: AnyObject) {
         
-        performSegueWithIdentifier("caseDetail", sender: nil)
+        performSegueWithIdentifier("AddCaseNote", sender: nil)
         
         println("add new note")
     }
@@ -34,6 +34,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Case Notes View")
+        getCaseNote(task.id, staff_id: sharedDataSingleton.user.id, page: "1")
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -57,7 +58,15 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         if caseNotes.count > 0 {
             let caseNote = caseNotes[indexPath.row]
             cell.nameLabel.text = caseNote.name
-            cell.dateLabel.text = caseNote.created
+            
+            var dateString = caseNote.created
+            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            let formatter : NSDateFormatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date = formatter.dateFromString(subString)
+            formatter.dateFormat = "EEE, MMM d, yyyy"
+            dateString = formatter.stringFromDate(date!)
+            cell.dateLabel.text = dateString
             cell.nameLabel.hidden = false
             cell.dateLabel.hidden = false
             cell.addedByLabel.hidden = false
@@ -80,8 +89,27 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let caseNote = self.caseNotes[indexPath.row]
         let detail:String = caseNote.details
-        let alertView = SCLAlertView()
-        alertView.showEdit(self, title: "Case Note Detail", subTitle: detail, closeButtonTitle: "CANCEL", duration: 20000)
+        self.performSegueWithIdentifier("CaseNoteDetails", sender: detail);
+//        let alertView = SCLAlertView()
+//        alertView.showEdit(self, title: "Case Note Detail", subTitle: detail, closeButtonTitle: "CANCEL", duration: 20000)
+    }
+    
+    
+    func getCaseNote(task_id:String, staff_id:String, page:String) {
+        SwiftSpinner.show("Getting Case Notes", animated: true)
+        let caseNoteAPI = CaseNoteAPI()
+        caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
+            if error == nil {
+                let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
+                self.caseNotes = taskCaseNotes
+                self.tableView.reloadData()
+                SwiftSpinner.hide(completion: nil)
+            }else {
+                SwiftSpinner.hide(completion: nil)
+                let alertView = SCLAlertView()
+                alertView.showError(self, title: "Error", subTitle: "Failed to load Case Notes", closeButtonTitle: "Cancel", duration: 2000)
+            }
+        }
     }
     
     
@@ -106,15 +134,20 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "caseDetail" {
-            let toViewController = segue.destinationViewController as! CaseDetailViewController
+        if segue.identifier == "AddCaseNote" {
+            let toViewController = segue.destinationViewController as! AddCaseViewController
             toViewController.transitioningDelegate = self
             toViewController.delegate = self
+            toViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        }else if segue.identifier == "CaseNoteDetails" {
+            let toViewController = segue.destinationViewController as! CaseDetailViewController
+            toViewController.transitioningDelegate = self
+            toViewController.caseNoteDetails = sender as! String
             toViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         }
     }
     
-    func caseDetailsController(controller: CaseDetailViewController, filledInDetails details: String) {
+    func addCaseController(controller: AddCaseViewController, filledInDetails details: String) {
         self.caseNoteDetails = details
         self.createCaseNote(self.task.id)
     }
