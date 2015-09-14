@@ -172,6 +172,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddStaff" {
+            sharedDataSingleton.selectedStaff = nil
             let navigationController = segue.destinationViewController
                 as! UINavigationController
             let controller = navigationController.topViewController
@@ -188,10 +189,14 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+//    func addStaffViewController(controller: AddStaffViewController, finishedAddingStaff staff: Staff) {
+//        staffs.insert(staff, atIndex: staffs.count)
+//        tableView.reloadData()
+//        println("delegate called")
+//    }
     func addStaffViewController(controller: AddStaffViewController, finishedAddingStaff staff: Staff) {
         staffs.insert(staff, atIndex: staffs.count)
         tableView.reloadData()
-        println("delegate called")
     }
 
 }

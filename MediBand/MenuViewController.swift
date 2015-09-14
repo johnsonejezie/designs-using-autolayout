@@ -18,7 +18,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var optionsTable: UITableView!
     var selectedCell:Int = 1;
     
-    let options : [String] = ["Assigned","Ungoing","Stopped","Discharge","End of care"];
+    let options : [AnyObject] = Contants().resolution;
     override func viewDidLoad() {
         super.viewDidLoad()
         self.optionsTable.delegate = self
@@ -47,7 +47,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("OptionsCell", forIndexPath: indexPath) as! UITableViewCell
-        cell.textLabel?.text = options[indexPath.row]
+        cell.textLabel?.text = options[indexPath.row] as? String
         var detailsView = ActivityDetailsViewController()
         if indexPath.row == selectedCell{
         cell.backgroundColor = UIColor.whiteColor()

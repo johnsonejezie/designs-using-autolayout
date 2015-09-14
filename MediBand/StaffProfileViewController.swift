@@ -32,7 +32,7 @@ class StaffProfileViewController: UIViewController {
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         if isMyProfile == true {
-            isMyProfile = false
+            sharedDataSingleton.isEditingProfile = true
 //            self.navigationController!.navigationBar.hidden = true
             if sharedDataSingleton.user.isAdmin == true {
                self.updateStaffButton.setTitle("Update Profile", forState: UIControlState.Normal)
@@ -46,6 +46,7 @@ class StaffProfileViewController: UIViewController {
             generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
             generlPracticeLabel.text = sharedDataSingleton.user.email
         }else {
+            sharedDataSingleton.selectedStaff = staff
             self.navigationItem.setLeftBarButtonItem(nil, animated: true)
             staffIDLabel.text = staff.id
             staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
@@ -81,6 +82,14 @@ class StaffProfileViewController: UIViewController {
         let addStaffViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddStaffViewController") as! AddStaffViewController
         addStaffViewController.isUpdatingStaff = true
         addStaffViewController.staff = self.staff
+        if isMyProfile == true {
+            sharedDataSingleton.isEditingProfile = true
+            isMyProfile = false
+            addStaffViewController.isEditingMyProfile = true
+        }else {
+           sharedDataSingleton.selectedStaff = self.staff 
+        }
+        
         self.navigationController?.pushViewController(addStaffViewController, animated: true)
         self.trackEvent("UX", action:"Update Staff" , label: "Staff update button", value: nil)
     }

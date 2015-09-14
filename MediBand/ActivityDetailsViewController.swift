@@ -30,8 +30,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     @IBOutlet var viewPatientButton: UIButton!
     @IBOutlet var patientProfilePic: UIImageView!
     @IBOutlet var attendingProfCollectionView: UICollectionView!
-    var usersImage: [String] = ["HS1","HS5","HS6"]
-    var usersName: [String] = ["Ben Francis","Ruth Osteen","Daniel Doug"]
+
     var task:Task!
     
     override func viewDidLoad() {
@@ -141,7 +140,8 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         menuViewController.delegate = self
         menuViewController.selectedCell = currentCell
         menuViewController.modalPresentationStyle = .Popover
-        menuViewController.preferredContentSize = CGSizeMake(self.view.frame.height/4, self.view.frame.height/3)
+        let height = CGFloat(44 * Contants().resolution.count)
+        menuViewController.preferredContentSize = CGSizeMake(self.view.frame.height/2, height)
         let popoverMenuViewController = menuViewController.popoverPresentationController
         popoverMenuViewController?.permittedArrowDirections = .Any
         popoverMenuViewController?.delegate = self
@@ -207,7 +207,22 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     func menuViewResponse(controller: MenuViewController,
         didDismissPopupView selectedCell: Int){
             currentCell = selectedCell;
+            let resolution_id = String(currentCell + 1)
+            self.updateTaskStatus(resolution_id)
             println("choice is \(currentCell)")
+    }
+    
+    func updateTaskStatus(resolution:String) {
+        let taskAPI = TaskAPI()
+        taskAPI.updateTaskStatus(self.task.id, staff_id: sharedDataSingleton.user.id, resolution_id: resolution) { (updatedTask:AnyObject?, error:NSError?) -> () in
+            if error != nil {
+                let alertView = SCLAlertView()
+                alertView.showError(self, title: "Error", subTitle: "Failed to update task status. Try again later", closeButtonTitle: "Cancel", duration: 20000)
+            }else {
+                let alertView = SCLAlertView()
+                alertView.showEdit(self, title: "Success", subTitle: "Task Status Updated", closeButtonTitle: "Cancel", duration: 20000)
+            }
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

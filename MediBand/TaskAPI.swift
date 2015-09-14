@@ -18,6 +18,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         case GET_TASK_BY_STAFF
         case GET_TASK_BY_PATIENT
         case DELETE_TASK
+        case UPDATE_TASK_STATUS
     }
     
     typealias APICallback = ((AnyObject?, NSError?) -> ())
@@ -41,8 +42,14 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     func deleteTask(task_id:String, staff_id:String, callback: APICallback) {
         let url = "http://www.iconglobalnetwork.com/mediband/api/delete_task"
         let body = "task_id=\(task_id)&staff_id=\(staff_id)"
-        makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
+        makeHTTPPostRequest(Path.UPDATE_TASK_STATUS, callback: callback, url: url, body: body)
         
+    }
+    
+    func updateTaskStatus(task_id:String, staff_id:String, resolution_id:String, callback: APICallback) {
+        let url = "http:/www.iconglobalnetwork.com/mediband/api/update_task_status"
+        let body = "staff_id=\(staff_id)&task_id=\(task_id)&resolution_id=\(resolution_id)"
+        makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
     }
     
     func getTaskByPatient(patient_id: String, page:String, callback: APICallback) {
@@ -98,6 +105,8 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             callback(self.handleCreateTask(json), nil)
         case (200, Path.DELETE_TASK):
             callback(self.handleDeleteTask(json), nil)
+        case (200, Path.UPDATE_TASK_STATUS):
+            callback(self.handleUpdateTask(json), nil)
         default:
             // Unknown Error
             callback(nil, nil)
@@ -153,6 +162,18 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         if let resultDict = json["data"] as? [String: AnyObject] {
             self.parseDictionaryToTask(resultDict)
             return self.task
+        }
+        return nil
+    }
+    
+    func handleUpdateTask(json: AnyObject)-> Bool? {
+        println("this is staff json \(json)")
+        if let resultDict = json["data"] as? [String: AnyObject]{
+            if let success: Bool = resultDict["success"] as? Bool {
+                if success == true {
+                    return true
+                }
+            }
         }
         return nil
     }

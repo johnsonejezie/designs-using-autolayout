@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import SwiftValidator
+//import SwiftValidator
 
-public class FormTextFieldCell: FormBaseCell, ValidationDelegate {
+public class FormTextFieldCell: FormBaseCell {
 
     /// MARK: Cell views
     
     public let titleLabel = UILabel()
     public let textField = UITextField()
-    let validator = Validator()
     
     /// MARK: Properties
     
@@ -48,44 +47,6 @@ public class FormTextFieldCell: FormBaseCell, ValidationDelegate {
         textField.addTarget(self, action: "editingChanged:", forControlEvents: .EditingChanged)
     }
     
-    public func validationFailed(errors: [UITextField : ValidationError]) {
-        setErrors()
-    }
-    
-    public func validationSuccessful() {
-        
-    }
-    
-    private func setErrors(){
-        for (field, error) in validator.errors {
-            field.layer.borderColor = UIColor.redColor().CGColor
-            field.layer.borderWidth = 1.0
-            error.errorLabel?.text = error.errorMessage
-            error.errorLabel?.hidden = false
-        }
-    }
-    public override func validationStyle () {
-            validator.styleTransformers(success:{ (validationRule) -> Void in
-            // clear error label
-            validationRule.errorLabel?.hidden = true
-            validationRule.errorLabel?.text = ""
-            validationRule.textField.layer.borderColor = UIColor.greenColor().CGColor
-            validationRule.textField.layer.borderWidth = 0.5
-        
-            }, error:{ (validationError) -> Void in
-            println("error")
-            validationError.errorLabel?.hidden = false
-            validationError.errorLabel?.text = validationError.errorMessage
-            validationError.textField.layer.borderColor = UIColor.redColor().CGColor
-            validationError.textField.layer.borderWidth = 1.0
-            })
-    }
-
-
-    public override func validate() {
-        validator.validate(self)
-    }
-    
     public override func update() {
         super.update()
         
@@ -107,53 +68,41 @@ public class FormTextFieldCell: FormBaseCell, ValidationDelegate {
             textField.autocorrectionType = .Default
             textField.autocapitalizationType = .Sentences
             textField.keyboardType = .Default
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Number:
             textField.keyboardType = .NumberPad
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .NumbersAndPunctuation:
             textField.keyboardType = .NumbersAndPunctuation
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Decimal:
             textField.keyboardType = .DecimalPad
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Name:
             textField.autocorrectionType = .No
             textField.autocapitalizationType = .Words
             textField.keyboardType = .Default
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Phone:
             textField.keyboardType = .PhonePad
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .NamePhone:
             textField.autocorrectionType = .No
             textField.autocapitalizationType = .Words
             textField.keyboardType = .NamePhonePad
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .URL:
             textField.autocorrectionType = .No
             textField.autocapitalizationType = .None
             textField.keyboardType = .URL
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Twitter:
             textField.autocorrectionType = .No
             textField.autocapitalizationType = .None
             textField.keyboardType = .Twitter
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Email:
             textField.autocorrectionType = .No
             textField.autocapitalizationType = .None
             textField.keyboardType = .EmailAddress
-            validator.registerField(textField, rules: [RequiredRule(), EmailRule()])
         case .ASCIICapable:
             textField.autocorrectionType = .No
             textField.autocapitalizationType = .None
             textField.keyboardType = .ASCIICapable
-            validator.registerField(textField, rules: [RequiredRule(), FullNameRule()])
         case .Password:
             textField.secureTextEntry = true
             textField.clearsOnBeginEditing = false
-            validator.registerField(textField, rules: [RequiredRule(), PasswordRule()])
         default:
             break
         }

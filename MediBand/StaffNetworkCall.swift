@@ -37,6 +37,8 @@ class StaffNetworkCall{
             "firstname":staff.firstname
         ];
         
+        println("this is staff obj \(data)")
+        
         if isCreatingNewStaff == true {
             url = "http://iconglobalnetwork.com/mediband/api/create_staff"
         }else {

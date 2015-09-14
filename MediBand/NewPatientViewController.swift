@@ -160,7 +160,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         section.addFormRow(row)
         
         // Address phone
-        row = XLFormRowDescriptor(tag: "addressPhone", rowType: XLFormRowDescriptorTypeText)
+        row = XLFormRowDescriptor(tag: "addressPhone", rowType: XLFormRowDescriptorTypeNumber)
         row.cellConfigAtConfigure["textField.placeholder"] = "Address phone"
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
@@ -169,7 +169,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         section.addFormRow(row)
         
         // Address other phone
-        row = XLFormRowDescriptor(tag: "addressOtherPhone", rowType: XLFormRowDescriptorTypeText)
+        row = XLFormRowDescriptor(tag: "addressOtherPhone", rowType: XLFormRowDescriptorTypeNumber)
         row.cellConfigAtConfigure["textField.placeholder"] = "Address other phone"
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {

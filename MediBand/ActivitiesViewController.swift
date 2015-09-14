@@ -36,7 +36,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.searchBar.delegate = self
 
         self.tasks = sharedDataSingleton.staffTask
-      getTask()
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -47,11 +46,10 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewWillAppear(animated: Bool) {
+        getTask()
         self.setScreeName("Task View")
     }
     
-    
-  
     func getTask() {
         let taskAPI = TaskAPI()
         
