@@ -13,6 +13,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBOutlet var searchBar: UISearchBar!
     var searchActive : Bool = false
+    var reverseSort: Bool = false
     var filtered:[Task] = []
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
@@ -151,13 +152,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
             cell.resolutionLabel.text = task.resolution
             
-            var dateString = task.created
-            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            var dateString = ""
             let formatter : NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            let date = formatter.dateFromString(subString)
             formatter.dateFormat = "EEE, MMM d, yyyy"
-            dateString = formatter.stringFromDate(date!)
+            dateString = formatter.stringFromDate(task.created)
             
             cell.dateLabel.text = dateString
         }else if tasks.count > 0 {
@@ -175,13 +174,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
             cell.resolutionLabel.text = task.resolution
             
-            var dateString = task.created
-            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            var dateString = ""
             let formatter : NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            let date = formatter.dateFromString(subString)
             formatter.dateFormat = "EEE, MMM d, yyyy"
-            dateString = formatter.stringFromDate(date!)
+            dateString = formatter.stringFromDate(task.created)
    
             cell.dateLabel.text = dateString
         } else {
@@ -306,7 +303,15 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     func sortByDate() {
 //       filtered.sort({ $0.created.compare($1.created) == NSComparisonResult.OrderedAscending })
-        self.tasks.sort({ $0.created.compare($1.created) == NSComparisonResult.OrderedDescending })
+        if reverseSort == false {
+            self.tasks.sort({ $0.created.timeIntervalSinceNow <  $1.created.timeIntervalSinceNow })
+            reverseSort = true
+        }else {
+           self.tasks.sort({ $0.created.timeIntervalSinceNow > $1.created.timeIntervalSinceNow })
+            reverseSort = false
+        }
+        
+        self.tableView.reloadData()
     }
     func displayPopOver(sender: AnyObject){
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)

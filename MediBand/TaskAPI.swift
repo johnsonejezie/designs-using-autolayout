@@ -208,9 +208,11 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                 task.care_activity_type_id = ""
             }
             if let created: String = resultDict["created"] as? String {
-                task.created = created as String
-            }else {
-                task.created = ""
+                let subString = created.substringWithRange(Range<String.Index>(start: advance(created.startIndex, 0), end: advance(created.endIndex, -9)))
+                let formatter : NSDateFormatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                let date = formatter.dateFromString(subString)
+                task.created = date!
             }
             if let id: String = resultDict["id"] as? String {
                 task.id = id as String
