@@ -11,8 +11,6 @@ import SwiftSpinner
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, NSURLConnectionDataDelegate {
     
-    
-    
     @IBOutlet var searchBar: UISearchBar!
     var searchActive : Bool = false
     var filtered:[Task] = []
@@ -111,6 +109,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             displayPopOver(sender )
         case 1:
             println("date")
+            sortByDate()
         default:
             break
         
@@ -292,12 +291,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-//        let bobPredicate = NSPredicate(format: "firstName = 'Bob'")
-//        filtered = self.tasks.filter({ (text) -> Bool in
-//            let tmp: NSString = text
-//            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-//            return range.location != NSNotFound
-//        })
+        let constants = Contants()
+        filtered = self.tasks.filter({ (aTask: Task) -> Bool in
+            let tmp: NSString = self.fetchStringValueFromArray(constants.specialist, atIndex: (aTask.specialist_id as String))
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
         if(filtered.count == 0){
             searchActive = false;
         } else {
@@ -305,7 +304,10 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         }
         self.tableView.reloadData()
     }
-    
+    func sortByDate() {
+//       filtered.sort({ $0.created.compare($1.created) == NSComparisonResult.OrderedAscending })
+        self.tasks.sort({ $0.created.compare($1.created) == NSComparisonResult.OrderedDescending })
+    }
     func displayPopOver(sender: AnyObject){
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         var contentViewController : ActivityStatusTableViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityStatusTableViewController") as! ActivityStatusTableViewController
@@ -329,6 +331,21 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 //    
     func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
         println(item)
+        let constants = Contants()
+        filtered = self.tasks.filter({ (aTask: Task) -> Bool in
+            let tmp: NSString = aTask.resolution
+            let range = tmp.rangeOfString(item, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+        
+        
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

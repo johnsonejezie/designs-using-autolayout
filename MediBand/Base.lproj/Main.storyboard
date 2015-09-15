@@ -1105,7 +1105,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="j0f-SH-GQC" kind="presentation" identifier="AddCaseNote" id="XeK-vu-mCr"/>
-                        <segue destination="mV9-vR-CxG" kind="presentation" identifier="CaseNoteDetails" id="ypt-1T-Si2"/>
+                        <segue destination="mV9-vR-CxG" kind="show" identifier="CaseNoteDetails" id="ypt-1T-Si2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HS-DQ-rMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2180,7 +2180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fI7-EL-fMr">
-                                <rect key="frame" x="49" y="252" width="201" height="28"/>
+                                <rect key="frame" x="49" y="251" width="201" height="29"/>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="70" minY="5" maxX="70" maxY="5"/>
                                 <state key="normal" title="CANCEL">
@@ -2192,7 +2192,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMy-Nv-3O3">
-                                <rect key="frame" x="49" y="26" width="201" height="28"/>
+                                <rect key="frame" x="49" y="70" width="201" height="28"/>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="13" minY="5" maxX="13" maxY="5"/>
                                 <state key="normal" title="ADD CASE NOTE DETAIL">
@@ -2204,7 +2204,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This patient was diagnosed with" translatesAutoresizingMaskIntoConstraints="NO" id="CNx-Eq-qHb">
-                                <rect key="frame" x="16" y="73" width="268" height="154"/>
+                                <rect key="frame" x="16" y="117" width="268" height="115"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -2214,13 +2214,13 @@
                         <constraints>
                             <constraint firstItem="iMy-Nv-3O3" firstAttribute="top" secondItem="90Z-NM-5K9" secondAttribute="bottom" constant="6" id="A6X-Es-Ob7"/>
                             <constraint firstItem="CNx-Eq-qHb" firstAttribute="trailing" secondItem="kIu-4q-3TR" secondAttribute="trailingMargin" id="F8d-Ti-MK6"/>
-                            <constraint firstItem="fI7-EL-fMr" firstAttribute="top" secondItem="CNx-Eq-qHb" secondAttribute="bottom" constant="25" id="GP0-l0-nve"/>
+                            <constraint firstItem="fI7-EL-fMr" firstAttribute="top" secondItem="CNx-Eq-qHb" secondAttribute="bottom" constant="19" id="GP0-l0-nve"/>
                             <constraint firstAttribute="centerX" secondItem="CNx-Eq-qHb" secondAttribute="centerX" id="StG-54-8fr"/>
                             <constraint firstItem="GDx-HE-B9Q" firstAttribute="top" secondItem="fI7-EL-fMr" secondAttribute="bottom" constant="20" id="U4G-7D-qkY"/>
                             <constraint firstItem="CNx-Eq-qHb" firstAttribute="top" secondItem="iMy-Nv-3O3" secondAttribute="bottom" constant="19" id="aOp-Ga-QmW"/>
                             <constraint firstAttribute="centerX" secondItem="iMy-Nv-3O3" secondAttribute="centerX" id="m7Q-A3-tal"/>
                             <constraint firstAttribute="height" secondItem="CNx-Eq-qHb" secondAttribute="height" id="oaw-Qb-to1"/>
-                            <constraint firstAttribute="centerY" secondItem="CNx-Eq-qHb" secondAttribute="centerY" id="tlP-U2-bcA"/>
+                            <constraint firstAttribute="centerY" secondItem="CNx-Eq-qHb" secondAttribute="centerY" constant="-24.5" id="tlP-U2-bcA"/>
                             <constraint firstAttribute="centerX" secondItem="fI7-EL-fMr" secondAttribute="centerX" id="w8q-pC-DBQ"/>
                             <constraint firstItem="CNx-Eq-qHb" firstAttribute="leading" secondItem="kIu-4q-3TR" secondAttribute="leadingMargin" id="xwO-N8-LF5"/>
                         </constraints>

@@ -41,7 +41,7 @@ class CaseDetailViewController: UIViewController {
     
     @IBAction func cancel() {
         
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
 }

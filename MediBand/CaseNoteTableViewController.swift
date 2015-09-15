@@ -96,20 +96,34 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     
     func getCaseNote(task_id:String, staff_id:String, page:String) {
-        SwiftSpinner.show("Getting Case Notes", animated: true)
-        let caseNoteAPI = CaseNoteAPI()
-        caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
-            if error == nil {
-                let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
-                self.caseNotes = taskCaseNotes
-                self.tableView.reloadData()
-                SwiftSpinner.hide(completion: nil)
-            }else {
-                SwiftSpinner.hide(completion: nil)
-                let alertView = SCLAlertView()
-                alertView.showError(self, title: "Error", subTitle: "Failed to load Case Notes", closeButtonTitle: "Cancel", duration: 2000)
+        if self.caseNotes.count == 0 {
+            SwiftSpinner.show("Getting Case Notes", animated: true)
+            let caseNoteAPI = CaseNoteAPI()
+            caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
+                if error == nil {
+                    let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
+                    self.caseNotes = taskCaseNotes
+                    self.tableView.reloadData()
+                    SwiftSpinner.hide(completion: nil)
+                }else {
+                    SwiftSpinner.hide(completion: nil)
+                    let alertView = SCLAlertView()
+                    alertView.showError(self, title: "Error", subTitle: "Failed to load Case Notes", closeButtonTitle: "Cancel", duration: 2000)
+                }
+            }
+        }else {
+            let caseNoteAPI = CaseNoteAPI()
+            caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
+                if error == nil {
+                    let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
+                    self.caseNotes = taskCaseNotes
+                    self.tableView.reloadData()
+                }else {
+                  
+                }
             }
         }
+
     }
     
     
@@ -143,7 +157,6 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
             let toViewController = segue.destinationViewController as! CaseDetailViewController
             toViewController.transitioningDelegate = self
             toViewController.caseNoteDetails = sender as! String
-            toViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         }
     }
     
