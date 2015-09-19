@@ -86,6 +86,8 @@
 		A5EB78F01BA549670054716E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78EF1BA549670054716E /* NewTaskViewController.swift */; };
 		A5EB78F21BA550F50054716E /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78F11BA550F50054716E /* UsersTableViewController.swift */; };
 		A5EB78F41BA64F140054716E /* CaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */; };
+		A5EB79001BAA960E0054716E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78FF1BAA960E0054716E /* HomeViewController.swift */; };
+		A5EB79021BAA96640054716E /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB79011BAA96640054716E /* HomeCollectionViewCell.swift */; };
 		A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */; };
 		A5ED9B0A1B89D30400E3EF49 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B091B89D30400E3EF49 /* Contants.swift */; };
 		A5ED9B1B1B8BA74400E3EF49 /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B0F1B8BA74400E3EF49 /* SCLAlertView.m */; };
@@ -221,6 +223,8 @@
 		A5EB78EF1BA549670054716E /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		A5EB78F11BA550F50054716E /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseDetailViewController.swift; sourceTree = "<group>"; };
+		A5EB78FF1BAA960E0054716E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A5EB79011BAA96640054716E /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		A5ED9B091B89D30400E3EF49 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		A5ED9B0E1B8BA74400E3EF49 /* SCLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertView.h; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 				A5EB78ED1BA40C510054716E /* NewPatientViewController.swift */,
 				A5EB78EF1BA549670054716E /* NewTaskViewController.swift */,
 				A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */,
+				A5EB78FF1BAA960E0054716E /* HomeViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				A5DFFA0E1B64C6050056C7FD /* StaffTableViewCell.swift */,
 				A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */,
 				A56D340A1B8E41F00023DB17 /* AlertView.swift */,
+				A5EB79011BAA96640054716E /* HomeCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				A5EB78F21BA550F50054716E /* UsersTableViewController.swift in Sources */,
 				A56D34091B8E23FC0023DB17 /* UIView+WebCacheOperation.m in Sources */,
 				422446A21B70C87E00C12612 /* Task.swift in Sources */,
+				A5EB79001BAA960E0054716E /* HomeViewController.swift in Sources */,
 				A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */,
 				A56E0C431B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */,
 				A55227C31B9A9E0F005A7AB1 /* CaseNote.swift in Sources */,
@@ -756,6 +763,7 @@
 				A56D34061B8E23FC0023DB17 /* UIImage+MultiFormat.m in Sources */,
 				A57B415A1B6CF839007C735F /* User.swift in Sources */,
 				A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */,
+				A5EB79021BAA96640054716E /* HomeCollectionViewCell.swift in Sources */,
 				A5EB78EC1BA4027A0054716E /* AddStaffViewController.swift in Sources */,
 				A5DED13D1B7CAB81003461D3 /* NetUploadTask.swift in Sources */,
 				A5ED9B1D1B8BA74400E3EF49 /* SCLAlertViewStyleKit.m in Sources */,

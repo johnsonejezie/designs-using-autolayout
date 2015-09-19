@@ -302,15 +302,24 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.reloadData()
     }
     func sortByDate() {
-//       filtered.sort({ $0.created.compare($1.created) == NSComparisonResult.OrderedAscending })
-        if reverseSort == false {
-            self.tasks.sort({ $0.created.timeIntervalSinceNow <  $1.created.timeIntervalSinceNow })
-            reverseSort = true
+        if searchActive == true {
+            if reverseSort == false {
+                self.filtered.sort({ $0.created.timeIntervalSinceNow <  $1.created.timeIntervalSinceNow })
+                reverseSort = true
+            }else {
+                self.filtered.sort({ $0.created.timeIntervalSinceNow > $1.created.timeIntervalSinceNow })
+                reverseSort = false
+            }
+            searchActive = true;
         }else {
-           self.tasks.sort({ $0.created.timeIntervalSinceNow > $1.created.timeIntervalSinceNow })
-            reverseSort = false
-        }
-        
+            if reverseSort == false {
+                self.tasks.sort({ $0.created.timeIntervalSinceNow <  $1.created.timeIntervalSinceNow })
+                reverseSort = true
+            }else {
+                self.tasks.sort({ $0.created.timeIntervalSinceNow > $1.created.timeIntervalSinceNow })
+                reverseSort = false
+            }
+        }        
         self.tableView.reloadData()
     }
     func displayPopOver(sender: AnyObject){
