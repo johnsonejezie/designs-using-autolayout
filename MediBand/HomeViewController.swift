@@ -64,6 +64,45 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! HomeCollectionViewCell
+        if cell.titleLabel == "Task" {
+            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }else if cell.titleLabel == "Patients" {
+            
+            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientsViewController")
+            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }else if cell.titleLabel == "New Patients" {
+            
+            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BarcodeViewController")
+            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }else if cell.titleLabel == "Staff" {
+            
+            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffViewController")
+            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }else if cell.titleLabel == "Profile" {
+            
+            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController")
+            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }else if cell.titleLabel == "Settings" {
+            
+//            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
+//            self.navigationController?.pushViewController(viewController, animated: true)
+            
+        }else if cell.titleLabel == "Outbox" {
+            
+//            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
+//            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        
+    }
+    
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5.0;
     }

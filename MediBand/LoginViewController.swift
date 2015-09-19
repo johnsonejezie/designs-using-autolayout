@@ -109,7 +109,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                     })
                 }else {
                     SwiftSpinner.hide(completion: nil)
-                    self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+                    self.performSegueWithIdentifier("LoginToHome", sender: nil)
                 }
 //
             }else {
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         loginAPI.resetPassword(email, oldPassword: oldPassword, newPassword: newPassword) { (success) -> Void in
             if success == true {
                 SwiftSpinner.show("loading patient", animated: true)
-                self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+                self.performSegueWithIdentifier("LoginToHome", sender: nil)
             }else {
                 
             }
