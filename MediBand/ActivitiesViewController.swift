@@ -35,9 +35,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.searchBar.delegate = self
 
         self.tasks = sharedDataSingleton.staffTask
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = Selector("revealToggle:")
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         

@@ -87,7 +87,7 @@ class Login {
                     user.firstName = resultDict["firstname"] as! String
                     user.general_practitioner_id = resultDict["general_practitioner_id"] as! String
                     user.id = resultDict["id"] as! String
-                    if let image: AnyObject = resultDict["image"] {
+                    if let image = resultDict["image"] as? String {
                         user.image = image
                     }
                     user.medical_facility = resultDict["medical_facility"] as! String

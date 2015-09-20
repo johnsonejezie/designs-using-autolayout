@@ -109,7 +109,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                     })
                 }else {
                     SwiftSpinner.hide(nil)
-                    self.performSegueWithIdentifier("LoginToHome", sender: nil)
+                    self.performSegueWithIdentifier("LoginTOHome", sender: nil)
                 }
 //
             }else {
@@ -151,7 +151,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         alertView.showEdit(self, title: "Password Reset", subTitle: "", closeButtonTitle: "Cancel", duration: 2000)
         
         alertView.alertIsDismissed { () -> Void in
-             self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+//             self.performSegueWithIdentifier("LoginToPatients", sender: nil)
         }
 
     }

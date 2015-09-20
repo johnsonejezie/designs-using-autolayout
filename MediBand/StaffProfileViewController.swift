@@ -27,9 +27,11 @@ class StaffProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navBar.target = self.revealViewController()
-//        navBar.action = Selector("revealToggle:")
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = Selector("revealToggle:")
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         
         if isMyProfile == true {
             sharedDataSingleton.isEditingProfile = true

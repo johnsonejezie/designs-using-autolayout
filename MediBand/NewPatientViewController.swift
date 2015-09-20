@@ -56,6 +56,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     var patientImage:UIImage?
     
   
+    @IBOutlet var navBar: UIBarButtonItem!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -167,7 +168,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         section.addFormRow(row)
         
         // Address phone
-        row = XLFormRowDescriptor(tag: "addressPhone", rowType: XLFormRowDescriptorTypeNumber)
+        row = XLFormRowDescriptor(tag: "addressPhone", rowType: XLFormRowDescriptorTypePhone)
         row.cellConfigAtConfigure["textField.placeholder"] = "Address phone"
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
@@ -176,7 +177,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         section.addFormRow(row)
         
         // Address other phone
-        row = XLFormRowDescriptor(tag: "addressOtherPhone", rowType: XLFormRowDescriptorTypeNumber)
+        row = XLFormRowDescriptor(tag: "addressOtherPhone", rowType: XLFormRowDescriptorTypePhone)
         row.cellConfigAtConfigure["textField.placeholder"] = "Address other phone"
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
@@ -314,7 +315,14 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         self.tableView.backgroundColor = UIColor.whiteColor()
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//      
+        
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
         print("patient id \(patientID)")
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         let topView:UIView = UIView(frame: CGRectMake(0, 45, view.frame.size.width, 160))
@@ -353,8 +361,8 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     
     
     @IBAction func cancel(sender: UIBarButtonItem) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -19,6 +19,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         "Scan Patient",
         "Staff",
         "My Profile",
+        "Setting",
         "Logout"
     ]
     
@@ -28,6 +29,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         "Task",
         "Scan Patient",
         "My Profile",
+        "Setting",
         "Logout"
     ]
 
@@ -61,6 +63,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         if sharedDataSingleton.user.isAdmin == true {
             switch (indexPath.row) {
             case 0:
+                performSegueWithIdentifier("GoToHome", sender: nil)
                 break
             case 1:
                 performSegueWithIdentifier("GoToPatients", sender: nil)
@@ -78,6 +81,9 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
                 performSegueWithIdentifier("GoToProfile", sender: nil)
                 break
             case 6:
+                performSegueWithIdentifier("GoToSettings", sender: nil)
+                break
+            case 7:
                 logout()
                 break
             default:
@@ -88,6 +94,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
             
             switch (indexPath.row) {
             case 0:
+                performSegueWithIdentifier("GoToHome", sender: nil)
                 break
             case 1:
                 performSegueWithIdentifier("GoToPatients", sender: nil)
@@ -102,6 +109,8 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
                 performSegueWithIdentifier("GoToProfile", sender: nil)
                 break
             case 5:
+                performSegueWithIdentifier("GoToSettings", sender: nil)
+            case 6:
                 logout()
                 break
             default:
@@ -134,6 +143,10 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! StaffProfileViewController
             controller.isMyProfile = true
+        }else if segue.identifier == "GoToStaff" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! StaffTableViewController
+            controller.sideMenuRequired = true
         }
     }
     

@@ -11,6 +11,7 @@ import Haneke
 
 class HomeViewController: UIViewController  {
     
+    @IBOutlet var navBar: UIBarButtonItem!
 
     @IBOutlet var myTaskBtn: UIButton!
     
@@ -26,6 +27,17 @@ class HomeViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if sharedDataSingleton.user.isAdmin == true {
+            staffBtn.hidden = false
+        }
+        
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
         myTaskBtn.backgroundColor = UIColor(red: 0.71, green: 0.07, blue: 0.01, alpha: 1)
         myPatientsBtn.backgroundColor = UIColor(red: 0.01, green: 0.04, blue: 0.21, alpha: 1)
         newPatientBtn.backgroundColor = UIColor(red: 0.01, green: 0.38, blue: 0.01, alpha: 1)
@@ -57,7 +69,7 @@ class HomeViewController: UIViewController  {
     
     
     @IBAction func myProfile() {
-        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! StaffProfileViewController
             viewController.isMyProfile = true
             self.navigationController?.pushViewController(viewController, animated: true)
     }
@@ -70,8 +82,9 @@ class HomeViewController: UIViewController  {
     
     @IBAction func staff() {
         
-        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffViewController")
-        self.navigationController?.pushViewController(viewController!, animated: true)
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffViewController") as! StaffTableViewController
+        viewController.sideMenuRequired = false
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
 }

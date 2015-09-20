@@ -19,20 +19,18 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     var isFirstLoad:Bool = true
     
     @IBOutlet var navBar: UIBarButtonItem!
-    @IBAction func navBar(sender: UIBarButtonItem) {
-        print("called")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        //        toggleSideMenuView()
-        
-    }
+
     var patients = sharedDataSingleton.patients
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+
         let pageNoToString:String = String(currentPageNumber)
         getPatients(pageNoToString)
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
@@ -42,7 +40,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         let patientAPI = PatientAPI()
         if sharedDataSingleton.patients.count <= 0 {
             SwiftSpinner.show("Loading Patients", animated: true)
-            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
+            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNumber) { (success) -> Void in
                 if success == true {
                     self.patients = sharedDataSingleton.patients
                     self.tableView.reloadData()
@@ -135,14 +133,17 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let selectedPatient: Patient = patients[indexPath.row]
-        sharedDataSingleton.selectedPatient = patients[indexPath.row]
-        if isExistingPatient {
-            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController")
-            self.navigationController?.pushViewController(viewController!, animated: true)
-        }else{
-            performSegueWithIdentifier("ViewPatient", sender: selectedPatient)
+        if patients.count > 0 {
+            let selectedPatient: Patient = patients[indexPath.row]
+            sharedDataSingleton.selectedPatient = patients[indexPath.row]
+            if isExistingPatient {
+                let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController")
+                self.navigationController?.pushViewController(viewController!, animated: true)
+            }else{
+                performSegueWithIdentifier("ViewPatient", sender: selectedPatient)
+            }
         }
+        
     }
     
     

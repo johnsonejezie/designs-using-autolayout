@@ -9,8 +9,9 @@
 import UIKit
 import XLForm
 import SwiftSpinner
-class SettingsViewController: XLFormViewController, UIViewControllerTransitioningDelegate {
+class SettingsViewController: XLFormViewController {
 
+    @IBOutlet var navBar: UIBarButtonItem!
     
     private enum Tags : String {
         
@@ -27,6 +28,12 @@ class SettingsViewController: XLFormViewController, UIViewControllerTransitionin
     }
     
     override func viewDidLoad() {
+        
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsetsMake(75, 0, 0, 0)
@@ -73,12 +80,12 @@ class SettingsViewController: XLFormViewController, UIViewControllerTransitionin
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: Tags.profile.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Change Profile Picture")
-        row.action.formSelector = "changeProfilePicture"
+        row.action.formSegueIdenfifier = "changeProfilePicture"
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: Tags.themeSection.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: "Show theme")
         row.hidden = "$\(Tags.HideRow.rawValue)==0"
-        row.value = 1
+        row.value = 0
         section.addFormRow(row)
         
         section = XLFormSectionDescriptor()
@@ -88,19 +95,19 @@ class SettingsViewController: XLFormViewController, UIViewControllerTransitionin
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 1")
-        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 2")
-        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: Tags.theme3.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 3")
-        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 4")
-        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
         section.addFormRow(row)
         self.form = form
     }
@@ -147,26 +154,7 @@ class SettingsViewController: XLFormViewController, UIViewControllerTransitionin
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "changeProfilePicture" {
-            let toViewController = segue.destinationViewController as! UpdateProfilePictureViewController
-            toViewController.transitioningDelegate = self
-            toViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-        }
-    }
-    
-    
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        let animationPresentationController = AnimationPresentationController()
-        
-        animationPresentationController.isPresenting = true
-        
-        return animationPresentationController
-    }
-    
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let animationPresentationController = AnimationPresentationController()
-        return animationPresentationController
+     
     }
     
 }

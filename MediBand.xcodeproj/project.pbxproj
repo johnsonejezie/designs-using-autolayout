@@ -40,8 +40,6 @@
 		A56D340B1B8E41F00023DB17 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D340A1B8E41F00023DB17 /* AlertView.swift */; };
 		A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */; };
 		A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */; };
-		A56E0C401B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
-		A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
 		A56E0C431B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */; };
 		A57B411F1B6BB686007C735F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B411E1B6BB686007C735F /* CoreData.framework */; };
 		A57B41211B6BB6A6007C735F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41201B6BB6A6007C735F /* SystemConfiguration.framework */; };
@@ -61,6 +59,7 @@
 		A5ACE5251BAEE016006358B2 /* SSASideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACE5241BAEE016006358B2 /* SSASideMenu.swift */; settings = {ASSET_TAGS = (); }; };
 		A5C5868C1BAE83B000135CB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A5C5868E1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A5CC28351BAEEA620001A62F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CC28341BAEEA620001A62F /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
 		A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A4A1B4995E400DC15AB /* ViewController.swift */; };
 		A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A4C1B4995E400DC15AB /* Main.storyboard */; };
@@ -160,8 +159,6 @@
 		A56E0BFF1B805EC50098AE9D /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = "../../../Downloads/Just-swift-2.0/build/Debug-iphoneos/Just.framework"; sourceTree = "<group>"; };
 		A56E0C011B805EE90098AE9D /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = "../../../Downloads/Just-swift-2.0/build/Debug/Just.framework"; sourceTree = "<group>"; };
 		A56E0C3D1B8085170098AE9D /* MediBandTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediBandTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarMenuTableViewController.swift; sourceTree = "<group>"; };
 		A57B41141B6BB675007C735F /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
@@ -192,6 +189,8 @@
 		A5ACE5241BAEE016006358B2 /* SSASideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSASideMenu.swift; sourceTree = "<group>"; };
 		A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfilePictureViewController.swift; sourceTree = "<group>"; };
+		A5CC28331BAEEA620001A62F /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A5CC28341BAEEA620001A62F /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		A5D15A431B4995E400DC15AB /* MediBand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediBand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D15A471B4995E400DC15AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D15A481B4995E400DC15AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -323,11 +322,11 @@
 		A57B41131B6BB675007C735F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A5CC28331BAEEA620001A62F /* SWRevealViewController.h */,
+				A5CC28341BAEEA620001A62F /* SWRevealViewController.m */,
 				A5ACE5231BAEE016006358B2 /* SSASideMenu */,
 				A56D33DE1B8E23FC0023DB17 /* SDWebImage */,
 				A5ED9B0D1B8BA74400E3EF49 /* SCLAlertView */,
-				A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */,
-				A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */,
 				A5DED12D1B7CAB81003461D3 /* Net */,
 				A57B41141B6BB675007C735F /* GAI.h */,
 				A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */,
@@ -698,7 +697,6 @@
 				A56D33FC1B8E23FC0023DB17 /* NSData+ImageContentType.m in Sources */,
 				A51D3FDD1B51C44400C77665 /* AddCaseViewController.swift in Sources */,
 				A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */,
-				A56E0C401B8085180098AE9D /* SWRevealViewController.m in Sources */,
 				A57D7D7D1B5565B500794EF5 /* PopUpTableViewController.swift in Sources */,
 				A51D3FDB1B51C00600C77665 /* AnimationPresentationController.swift in Sources */,
 				A5DED13C1B7CAB81003461D3 /* NetResponseData.swift in Sources */,
@@ -709,6 +707,7 @@
 				A56D34081B8E23FC0023DB17 /* UIImageView+WebCache.m in Sources */,
 				A56D34021B8E23FC0023DB17 /* SDWebImageManager.m in Sources */,
 				A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */,
+				A5CC28351BAEEA620001A62F /* SWRevealViewController.m in Sources */,
 				A5DED1381B7CAB81003461D3 /* NetData.swift in Sources */,
 				A5DED1371B7CAB81003461D3 /* Net.swift in Sources */,
 				A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */,
@@ -757,7 +756,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D15A5F1B4995E400DC15AB /* MediBandTests.swift in Sources */,
-				A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,6 +879,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -909,6 +908,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",

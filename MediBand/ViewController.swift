@@ -130,7 +130,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                 }
             })
             alertView.addButton("CANCEL", actionBlock: { () -> Void in
-                self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+                self.performSegueWithIdentifier("GoToHomeView", sender: nil)
             })
             alertView.showEdit(self, title: "Scan Completed", subTitle: message, closeButtonTitle: nil, duration: 2000)
         }
@@ -154,7 +154,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
             self.session.startRunning()
         })
         alertView.addButton("CANCEL", actionBlock: { () -> Void in
-            self.performSegueWithIdentifier("ExistingPatient", sender: self.isExistingPatient)
+            self.performSegueWithIdentifier("GoToHomeView", sender: nil)
         })
         alertView.showEdit(self, title: "Patient", subTitle: "Existing or New Patient?", closeButtonTitle: nil, duration: 2000)
         

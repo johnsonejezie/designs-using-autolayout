@@ -18,6 +18,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     var currentPageNumber:Int = 1
     var isRefreshing = false
     var isFirstLoad = true
+    var sideMenuRequired = false
     
     @IBOutlet var navBar: UIBarButtonItem!
     
@@ -32,10 +33,15 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if sideMenuRequired == true {
+            if self.revealViewController() != nil {
+                navBar.target = self.revealViewController()
+                navBar.action = "revealToggle:"
+                self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+
+            }
+        }
         
-//        navBar.target = self.revealViewController()
-//        navBar.action = Selector("revealToggle:")
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getStaff(pageNoToString)
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
@@ -177,9 +183,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
                 as! AddStaffViewController
             controller.delegate = self
         }else if segue.identifier == "StaffProfile" {
-            let navigationController = segue.destinationViewController
-                as! UINavigationController
-            let controller = navigationController.topViewController
+            let controller = segue.destinationViewController
                 as! StaffProfileViewController
             controller.isMyProfile = false
             controller.staff = sender as! Staff

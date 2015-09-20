@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import Haneke
 
 class UpdateProfilePictureViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -20,7 +21,11 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     var staffImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if (sharedDataSingleton.user.image != "") {
+            let URL = NSURL(string: sharedDataSingleton.user.image)!
+            
+            profileImage.hnk_setImageFromURL(URL)
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -59,6 +64,7 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
             print("done")
         })
         self.staffImage = image
+        self.profileImage.image = image
     }
     
     func update(){
@@ -68,16 +74,16 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
         let indexofA = constants.specialist.filter({$0 as! String == sharedDataSingleton.user.speciality})
         if indexofA.count == 0 {
             
-            staff.speciality_id = ""
+            staff.speciality = ""
         }else {
             var count: Int = indexofA[0] as! Int
             count = count + 1
-            staff.speciality_id = String(count)
+            staff.speciality = String(count)
         }
         
         staff.general_practional_id = sharedDataSingleton.user.general_practitioner_id
         staff.member_id = sharedDataSingleton.user.memberid
-        
+        staff.medical_facility_id = sharedDataSingleton.user.clinic_id
         let indexOfRole = constants.role.filter({$0 as! String == sharedDataSingleton.user.role})
         if indexOfRole.count == 0 {
             staff.role = ""

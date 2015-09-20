@@ -17,7 +17,7 @@ class PatientAPI {
     
     func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String, withPageNumber pageNumber:String, completionHandler:(success:Bool)-> Void) {
        
-        var patientResult = [Patient]()
+//        var patientResult = [Patient]()
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
         let parameters = [
             "medical_facility_id": medical_facility,
@@ -34,6 +34,7 @@ class PatientAPI {
             self.parseDictionary(dictionary)
             completionHandler(success: true)
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            print(error)
             completionHandler(success: false)
         }
     }
@@ -41,7 +42,7 @@ class PatientAPI {
     func createNewPatient(patient:Patient, fromMedicalFacility medical_facility:String, image:UIImage?, isCreatingNewPatient:Bool, completionHandler:(success:Bool)-> Void) {
         var url:String = ""
          getSinglePatient = true
-        var parameters:[String: AnyObject] = [
+        let parameters:[String: AnyObject] = [
             "patient_id": patient.patient_id,
             "surname": patient.surname,
             "forename":patient.forename,
@@ -74,9 +75,9 @@ class PatientAPI {
             url = "http:/iconglobalnetwork.com/mediband/api/edit_patient"
         }
         if let anImage:UIImage = image {
-            var imgData = UIImageJPEGRepresentation(image!, 0.6)
+            let imgData = UIImageJPEGRepresentation(image!, 0.6)
             let mm = NetData(data: imgData!, mimeType: MimeType.ImageJpeg, filename: "patient_picture.jpg")
-            var data:[String: AnyObject] = [
+            let data:[String: AnyObject] = [
                 "patient_id": patient.patient_id,
                 "surname": patient.surname,
                 "forename":patient.forename,
@@ -116,11 +117,19 @@ class PatientAPI {
                 
                 if (result.value != nil) {
                     if let resultDict:AnyObject = result.value {
-                        if let dict:[String: AnyObject] = resultDict["data"] as? [String: AnyObject]{
-                            self.parseDictionaryToPatient(dict)
+                        if let resultError = resultDict["success"] as? Bool {
+                            if resultError == false {
+                                completionHandler(success: false)
+                            }else {
+                                if let dict:[String: AnyObject] = resultDict["data"] as? [String: AnyObject]{
+                                    self.parseDictionaryToPatient(dict)
+                                    completionHandler(success: true)
+                                }
+                            }
                         }
+                       
                     }
-                    completionHandler(success: true)
+                    
                 }else {
                     completionHandler(success: false)
                     
@@ -320,7 +329,7 @@ class PatientAPI {
     func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
         
         // create url request to send
-        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
         //let boundaryConstant = "myRandomBoundary12345"
         let boundaryConstant = "NET-POST-boundary-\(arc4random())-\(arc4random())"
@@ -338,13 +347,13 @@ class PatientAPI {
             
             if value is NetData {
                 // add image
-                var postData = value as! NetData
+                let postData = value as! NetData
                 
                 
                 //uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(postData.filename)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
                 
                 // append content disposition
-                var filenameClause = " filename=\"\(postData.filename)\""
+                let filenameClause = " filename=\"\(postData.filename)\""
                 let contentDispositionString = "Content-Disposition: form-data; name=\"\(key)\";\(filenameClause)\r\n"
                 let contentDispositionData = contentDispositionString.dataUsingEncoding(NSUTF8StringEncoding)
                 uploadData.appendData(contentDispositionData!)

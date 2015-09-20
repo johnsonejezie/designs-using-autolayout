@@ -56,7 +56,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         var row : XLFormRowDescriptor
 
         
-        form = XLFormDescriptor(title: "Patient Form")
+        form = XLFormDescriptor(title: "Staff")
         
         section = XLFormSectionDescriptor.formSection()
         form.addFormSection(section)
