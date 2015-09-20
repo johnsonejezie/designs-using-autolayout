@@ -1327,7 +1327,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="137.5" height="92"/>
-                                                <color key="backgroundColor" patternImage="01E3BC15-0F79-461F-929B-67616572FC3A" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="25F9385A-6D1A-44D0-AD14-5452B2EFC57F" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1918,12 +1918,12 @@
                         <outlet property="lastNameLabel" destination="dzU-Vx-ern" id="YZV-VF-gcn"/>
                         <outlet property="viewHistoryButton" destination="uNe-TG-kdN" id="Y7s-SV-c4V"/>
                         <segue destination="nfE-Pd-IbE" kind="show" identifier="AddCareActivity" id="6A5-GD-K9c"/>
-                        <segue destination="BFU-he-EQ3" kind="show" identifier="EditPatient" id="7DB-M5-XLe"/>
+                        <segue destination="BFU-he-EQ3" kind="custom" identifier="EditPatient" customClass="SWRevealViewControllerSeguePushController" id="1VC-Sv-YoF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMh-HW-eDQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="2010"/>
+            <point key="canvasLocation" x="1889" y="2010"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rG8-rp-WGZ">
@@ -2146,7 +2146,7 @@
             </objects>
             <point key="canvasLocation" x="-4148" y="2778"/>
         </scene>
-        <!--Create Task-->
+        <!--Patient-->
         <scene sceneID="rxa-fJ-cTC">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="vN4-ng-2ik" customClass="NewPatientViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
@@ -2159,7 +2159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Task" id="MND-Y1-tTc">
+                    <navigationItem key="navigationItem" title="Patient" id="MND-Y1-tTc">
                         <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="r1l-VP-Nb6">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -2772,7 +2772,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="01E3BC15-0F79-461F-929B-67616572FC3A" width="512" height="512">
+        <image name="25F9385A-6D1A-44D0-AD14-5452B2EFC57F" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -20334,6 +20334,6 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAABAPEw
         <segue reference="vJu-jk-Kbb"/>
         <segue reference="ydu-Ai-6cO"/>
         <segue reference="Noq-dp-MfK"/>
-        <segue reference="KAz-gw-DPh"/>
+        <segue reference="1VC-Sv-YoF"/>
     </inferredMetricsTieBreakers>
 </document>
