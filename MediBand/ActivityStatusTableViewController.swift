@@ -32,7 +32,7 @@ class ActivityStatusTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("StatusCell", forIndexPath: indexPath) 
         
         cell.textLabel?.text = status[indexPath.row] as? String
         cell.textLabel?.textAlignment = NSTextAlignment.Center

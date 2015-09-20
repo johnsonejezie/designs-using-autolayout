@@ -52,7 +52,7 @@ class AddCaseViewController: UIViewController {
 
     @IBAction func addCaseNoteButton() {
         
-        println("add case note clicked")
+        print("add case note clicked")
     }
     
     
@@ -60,7 +60,7 @@ class AddCaseViewController: UIViewController {
     @IBAction func okayButtonAction() {
         delegate?.addCaseController(self, filledInDetails: self.noteTextView.text)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        println("ok button clicked")
+        print("ok button clicked")
     }
     
     

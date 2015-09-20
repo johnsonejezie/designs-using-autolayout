@@ -9,7 +9,7 @@ class UserCell : UITableViewCell {
 
     lazy var userImage : UIImageView = {
         let tempUserImage = UIImageView()
-        tempUserImage.setTranslatesAutoresizingMaskIntoConstraints(false)
+        tempUserImage.translatesAutoresizingMaskIntoConstraints = false
         tempUserImage.layer.masksToBounds = true
         tempUserImage.layer.cornerRadius = 10.0
         return tempUserImage
@@ -18,7 +18,7 @@ class UserCell : UITableViewCell {
     
     lazy var userName : UILabel = {
         let tempUserName = UILabel()
-        tempUserName.setTranslatesAutoresizingMaskIntoConstraints(false)
+        tempUserName.translatesAutoresizingMaskIntoConstraints = false
         tempUserName.font = UIFont.systemFontOfSize(15.0)
         return tempUserName
     }()
@@ -33,7 +33,7 @@ class UserCell : UITableViewCell {
         self.contentView.addConstraints(self.layoutConstraints())
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -44,12 +44,12 @@ class UserCell : UITableViewCell {
     
 // MARK: - Layout Constraints
 
-    func layoutConstraints() -> [AnyObject]{
+    func layoutConstraints() -> [NSLayoutConstraint]{
         let views = ["image": self.userImage, "name": self.userName ]
         let metrics = [ "imgSize": 50.0, "margin": 12.0]
         
         var result = NSLayoutConstraint.constraintsWithVisualFormat("H:|-(margin)-[image(imgSize)]-[name]", options:NSLayoutFormatOptions.AlignAllTop, metrics: metrics, views: views)
-        result += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(margin)-[image(imgSize)]", options:NSLayoutFormatOptions.allZeros, metrics:metrics, views: views)
+        result += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(margin)-[image(imgSize)]", options:NSLayoutFormatOptions(), metrics:metrics, views: views)
         return result
     }
     
@@ -76,12 +76,12 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
         super.init(style: style);
     }
     
-    override init!(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
     
     override func viewDidLoad() {
@@ -94,7 +94,7 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
         }
         
         self.tableView.registerClass(UserCell.self, forCellReuseIdentifier: self.kUserCellIdentifier)
-        self.tableView.tableFooterView = UIView(frame: CGRect.zeroRect)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "savePressed:")
     }
     
@@ -138,7 +138,7 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
                     }
                 }
             }
-            if contains(sharedDataSingleton.selectedIDs, userId) {
+            if sharedDataSingleton.selectedIDs.contains(userId) {
                 cell.accessoryType = .Checkmark
             }else {
                 cell.accessoryType = .None
@@ -183,7 +183,7 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
     
     func removeObject<T : Equatable>(object: T, inout fromArray array: [T])
     {
-        var index = find(array, object)
+        let index = array.indexOf(object)
         if let ind = index {
             array.removeAtIndex(ind)
         }

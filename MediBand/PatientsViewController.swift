@@ -20,7 +20,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet var navBar: UIBarButtonItem!
     @IBAction func navBar(sender: UIBarButtonItem) {
-        println("called")
+        print("called")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         //        toggleSideMenuView()
         
@@ -32,7 +32,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         navBar.target = self.revealViewController()
         navBar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let pageNoToString:String = String(currentPageNumber)
         getPatients(pageNoToString)
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
@@ -46,9 +46,9 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
                 if success == true {
                     self.patients = sharedDataSingleton.patients
                     self.tableView.reloadData()
-                    SwiftSpinner.hide(completion: nil)
+                    SwiftSpinner.hide(nil)
                 }else {
-                    SwiftSpinner.hide(completion: nil)
+                    SwiftSpinner.hide(nil)
                     
                 }
             }
@@ -113,7 +113,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.generalPhysicianLabel.hidden = false
             cell.patientImageView.hidden = false
             let patient = patients[indexPath.row]
-            println(patient.occupation)
+            print(patient.occupation)
             cell.patientNameLabel.text = patient.forename + " " + patient.surname
             cell.generalPhysicianLabel.text = patient.gp
             
@@ -135,10 +135,11 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        var selectedPatient: Patient = patients[indexPath.row]
+        let selectedPatient: Patient = patients[indexPath.row]
         sharedDataSingleton.selectedPatient = patients[indexPath.row]
         if isExistingPatient {
-            performSegueWithIdentifier("EditPatient", sender: selectedPatient)
+            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController")
+            self.navigationController?.pushViewController(viewController!, animated: true)
         }else{
             performSegueWithIdentifier("ViewPatient", sender: selectedPatient)
         }
@@ -170,8 +171,8 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             controller.patientID = patientID
             controller.isEditingPatient = true
         }else if segue.identifier == "ViewPatient" {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = navigationController.topViewController as! PatientProfileViewController
+//            let navigationController = segue.destinationViewController as! UINavigationControllers
+            let controller = segue.destinationViewController as! PatientProfileViewController
             controller.patient = sender as? Patient
         }
     }

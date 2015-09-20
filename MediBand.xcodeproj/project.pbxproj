@@ -40,12 +40,6 @@
 		A56D340B1B8E41F00023DB17 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D340A1B8E41F00023DB17 /* AlertView.swift */; };
 		A56E04CD1B6633D400640919 /* ActivityStatusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */; };
 		A56E04CF1B66556700640919 /* ActivitySegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */; };
-		A56E0C371B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C331B8060A60098AE9D /* Info.plist */; };
-		A56E0C381B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C331B8060A60098AE9D /* Info.plist */; };
-		A56E0C391B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C351B8060A60098AE9D /* Info.plist */; };
-		A56E0C3A1B8060A60098AE9D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56E0C351B8060A60098AE9D /* Info.plist */; };
-		A56E0C3B1B8060A60098AE9D /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C361B8060A60098AE9D /* Just.swift */; };
-		A56E0C3C1B8060A60098AE9D /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C361B8060A60098AE9D /* Just.swift */; };
 		A56E0C401B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
 		A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */; };
 		A56E0C431B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */; };
@@ -55,7 +49,6 @@
 		A57B41251B6BB6BB007C735F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41241B6BB6BB007C735F /* libsqlite3.dylib */; };
 		A57B41571B6CC132007C735F /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A57B41561B6CC132007C735F /* libGoogleAnalyticsServices.a */; };
 		A57B415A1B6CF839007C735F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41591B6CF839007C735F /* User.swift */; };
-		A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */; };
 		A57B41B21B6D205F007C735F /* Staff.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B11B6D205F007C735F /* Staff.swift */; };
 		A57B41B41B6D2073007C735F /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B31B6D2073007C735F /* Patient.swift */; };
 		A57B41B61B6D37D9007C735F /* PatientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B41B51B6D37D9007C735F /* PatientAPI.swift */; };
@@ -65,6 +58,9 @@
 		A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */; };
 		A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */; };
 		A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */; };
+		A5ACE5251BAEE016006358B2 /* SSASideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACE5241BAEE016006358B2 /* SSASideMenu.swift */; settings = {ASSET_TAGS = (); }; };
+		A5C5868C1BAE83B000135CB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A5C5868E1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
 		A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A4A1B4995E400DC15AB /* ViewController.swift */; };
 		A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A4C1B4995E400DC15AB /* Main.storyboard */; };
@@ -88,7 +84,6 @@
 		A5EB78F41BA64F140054716E /* CaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */; };
 		A5EB79001BAA960E0054716E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB78FF1BAA960E0054716E /* HomeViewController.swift */; };
 		A5EB79021BAA96640054716E /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EB79011BAA96640054716E /* HomeCollectionViewCell.swift */; };
-		A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */; };
 		A5ED9B0A1B89D30400E3EF49 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B091B89D30400E3EF49 /* Contants.swift */; };
 		A5ED9B1B1B8BA74400E3EF49 /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B0F1B8BA74400E3EF49 /* SCLAlertView.m */; };
 		A5ED9B1C1B8BA74400E3EF49 /* SCLAlertViewResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B111B8BA74400E3EF49 /* SCLAlertViewResponder.m */; };
@@ -164,9 +159,6 @@
 		A56E04CE1B66556700640919 /* ActivitySegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySegmentControl.swift; sourceTree = "<group>"; };
 		A56E0BFF1B805EC50098AE9D /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = "../../../Downloads/Just-swift-2.0/build/Debug-iphoneos/Just.framework"; sourceTree = "<group>"; };
 		A56E0C011B805EE90098AE9D /* Just.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Just.framework; path = "../../../Downloads/Just-swift-2.0/build/Debug/Just.framework"; sourceTree = "<group>"; };
-		A56E0C331B8060A60098AE9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A56E0C351B8060A60098AE9D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A56E0C361B8060A60098AE9D /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		A56E0C3D1B8085170098AE9D /* MediBandTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MediBandTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -188,7 +180,6 @@
 		A57B41561B6CC132007C735F /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		A57B41591B6CF839007C735F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A57B416D1B6D07C0007C735F /* SwiftForms.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftForms.framework; path = "Pods/../build/Debug-iphoneos/SwiftForms.framework"; sourceTree = "<group>"; };
-		A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A57B41B11B6D205F007C735F /* Staff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Staff.swift; sourceTree = "<group>"; };
 		A57B41B31B6D2073007C735F /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		A57B41B51B6D37D9007C735F /* PatientAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientAPI.swift; sourceTree = "<group>"; };
@@ -198,6 +189,9 @@
 		A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsTableViewCell.swift; sourceTree = "<group>"; };
 		A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
+		A5ACE5241BAEE016006358B2 /* SSASideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSASideMenu.swift; sourceTree = "<group>"; };
+		A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfilePictureViewController.swift; sourceTree = "<group>"; };
 		A5D15A431B4995E400DC15AB /* MediBand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediBand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D15A471B4995E400DC15AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D15A481B4995E400DC15AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -225,7 +219,6 @@
 		A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseDetailViewController.swift; sourceTree = "<group>"; };
 		A5EB78FF1BAA960E0054716E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A5EB79011BAA96640054716E /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
-		A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSAlertView.swift; sourceTree = "<group>"; };
 		A5ED9B091B89D30400E3EF49 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		A5ED9B0E1B8BA74400E3EF49 /* SCLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertView.h; sourceTree = "<group>"; };
 		A5ED9B0F1B8BA74400E3EF49 /* SCLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertView.m; sourceTree = "<group>"; };
@@ -327,40 +320,14 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		A56E0C311B8060A60098AE9D /* Just */ = {
-			isa = PBXGroup;
-			children = (
-				A56E0C321B8060A60098AE9D /* Just-iOS */,
-				A56E0C341B8060A60098AE9D /* Just-OSX */,
-				A56E0C361B8060A60098AE9D /* Just.swift */,
-			);
-			path = Just;
-			sourceTree = "<group>";
-		};
-		A56E0C321B8060A60098AE9D /* Just-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A56E0C331B8060A60098AE9D /* Info.plist */,
-			);
-			path = "Just-iOS";
-			sourceTree = "<group>";
-		};
-		A56E0C341B8060A60098AE9D /* Just-OSX */ = {
-			isa = PBXGroup;
-			children = (
-				A56E0C351B8060A60098AE9D /* Info.plist */,
-			);
-			path = "Just-OSX";
-			sourceTree = "<group>";
-		};
 		A57B41131B6BB675007C735F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A5ACE5231BAEE016006358B2 /* SSASideMenu */,
 				A56D33DE1B8E23FC0023DB17 /* SDWebImage */,
 				A5ED9B0D1B8BA74400E3EF49 /* SCLAlertView */,
 				A56E0C3E1B8085180098AE9D /* SWRevealViewController.h */,
 				A56E0C3F1B8085180098AE9D /* SWRevealViewController.m */,
-				A56E0C311B8060A60098AE9D /* Just */,
 				A5DED12D1B7CAB81003461D3 /* Net */,
 				A57B41141B6BB675007C735F /* GAI.h */,
 				A57B41151B6BB675007C735F /* GAIDictionaryBuilder.h */,
@@ -418,7 +385,6 @@
 				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
 				A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */,
 				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
-				A5ED9B071B8630FD00E3EF49 /* JSSAlertView.swift */,
 				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
 				42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */,
 				A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */,
@@ -429,6 +395,8 @@
 				A5EB78EF1BA549670054716E /* NewTaskViewController.swift */,
 				A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */,
 				A5EB78FF1BAA960E0054716E /* HomeViewController.swift */,
+				A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */,
+				A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -449,10 +417,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		A5ACE5231BAEE016006358B2 /* SSASideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A5ACE5241BAEE016006358B2 /* SSASideMenu.swift */,
+			);
+			path = SSASideMenu;
+			sourceTree = "<group>";
+		};
 		A5D15A3A1B4995E400DC15AB = {
 			isa = PBXGroup;
 			children = (
-				A57B41AF1B6D1260007C735F /* SwiftyJSON.swift */,
 				A57B41131B6BB675007C735F /* Library */,
 				A5D15A451B4995E400DC15AB /* MediBand */,
 				A5D15A5B1B4995E400DC15AB /* MediBandTests */,
@@ -593,6 +568,8 @@
 		A5D15A3B1B4995E400DC15AB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Johnson Ejezie";
 				TargetAttributes = {
@@ -630,10 +607,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56E0C371B8060A60098AE9D /* Info.plist in Resources */,
 				A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */,
 				A5D15A531B4995E400DC15AB /* LaunchScreen.xib in Resources */,
-				A56E0C391B8060A60098AE9D /* Info.plist in Resources */,
 				A5D15A501B4995E400DC15AB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -642,8 +617,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56E0C3A1B8060A60098AE9D /* Info.plist in Resources */,
-				A56E0C381B8060A60098AE9D /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +680,7 @@
 				422446A21B70C87E00C12612 /* Task.swift in Sources */,
 				A5EB79001BAA960E0054716E /* HomeViewController.swift in Sources */,
 				A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */,
+				A5ACE5251BAEE016006358B2 /* SSASideMenu.swift in Sources */,
 				A56E0C431B8085FA0098AE9D /* SideBarMenuTableViewController.swift in Sources */,
 				A55227C31B9A9E0F005A7AB1 /* CaseNote.swift in Sources */,
 				A57B41B41B6D2073007C735F /* Patient.swift in Sources */,
@@ -714,6 +688,7 @@
 				A56D34011B8E23FC0023DB17 /* SDWebImageDownloaderOperation.m in Sources */,
 				A56D34041B8E23FC0023DB17 /* UIButton+WebCache.m in Sources */,
 				A5EB78F01BA549670054716E /* NewTaskViewController.swift in Sources */,
+				A5C5868E1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift in Sources */,
 				A5DED13B1B7CAB81003461D3 /* NetRequestSerialization.swift in Sources */,
 				A57D7D7F1B55AA6300794EF5 /* LoginViewController.swift in Sources */,
 				A5DFFA0F1B64C6050056C7FD /* StaffTableViewCell.swift in Sources */,
@@ -746,14 +721,11 @@
 				A56D340B1B8E41F00023DB17 /* AlertView.swift in Sources */,
 				A5DFFA0D1B64C5D40056C7FD /* StaffTableViewController.swift in Sources */,
 				A5ED9B201B8BA74400E3EF49 /* UIImage+ImageEffects.m in Sources */,
-				A56E0C3B1B8060A60098AE9D /* Just.swift in Sources */,
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				A56D34051B8E23FC0023DB17 /* UIImage+GIF.m in Sources */,
 				A5ED9B1F1B8BA74400E3EF49 /* SCLTimerDisplay.m in Sources */,
 				4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */,
-				A57B41B01B6D1260007C735F /* SwiftyJSON.swift in Sources */,
 				A5EB78F41BA64F140054716E /* CaseDetailViewController.swift in Sources */,
-				A5ED9B081B8630FD00E3EF49 /* JSSAlertView.swift in Sources */,
 				422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
 				A57D7D811B55CCD400794EF5 /* ActivitiesViewController.swift in Sources */,
@@ -776,6 +748,7 @@
 				A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */,
 				420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */,
 				A56D33FD1B8E23FC0023DB17 /* SDImageCache.m in Sources */,
+				A5C5868C1BAE83B000135CB3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,7 +757,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D15A5F1B4995E400DC15AB /* MediBandTests.swift in Sources */,
-				A56E0C3C1B8060A60098AE9D /* Just.swift in Sources */,
 				A56E0C411B8085180098AE9D /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

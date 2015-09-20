@@ -30,10 +30,9 @@ class NewTaskViewController: XLFormViewController {
         
         super.viewDidLoad()
         getStaff()
+        self.tableView.contentInset = UIEdgeInsetsMake(75, 0, 0, 0)
         self.tableView.backgroundColor = UIColor.whiteColor()
         view.backgroundColor = UIColor.whiteColor()
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         let topView:UIView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 250))
         topView.backgroundColor = UIColor.whiteColor()
@@ -74,7 +73,7 @@ class NewTaskViewController: XLFormViewController {
         if let specialist = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formDisplayText() {
             sharedDataSingleton.specialistFilterString = specialist
         }
-        println(sharedDataSingleton.specialistFilterString)
+        print(sharedDataSingleton.specialistFilterString)
     }
     
     @IBAction func submit(sender: UIBarButtonItem) {
@@ -109,7 +108,7 @@ class NewTaskViewController: XLFormViewController {
         }
         task.patient_id = sharedDataSingleton.selectedPatient.patient_id
         
-        println(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
+        print(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
         
         
         
@@ -118,10 +117,10 @@ class NewTaskViewController: XLFormViewController {
                 
             }else {
                 if let newtask = createdtask as? Task {
-                    SwiftSpinner.hide(completion: nil)
+                    SwiftSpinner.hide(nil)
                     sharedDataSingleton.selectedIDs = []
                     self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
-                    println("this is newtask \(newtask.resolution)")
+                    print("this is newtask \(newtask.resolution)")
                 }
                 
             }
@@ -129,7 +128,7 @@ class NewTaskViewController: XLFormViewController {
         
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -141,14 +140,14 @@ class NewTaskViewController: XLFormViewController {
     
     
     func getStaff(){
-        var staffMethods = StaffNetworkCall()
+        let staffMethods = StaffNetworkCall()
         
         if sharedDataSingleton.allStaffs.count == 0 {
             staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
                 if(done){
-                    println("all staffs fetched and passed from staff table view controller")
+                    print("all staffs fetched and passed from staff table view controller")
                 }else{
-                    println("error fetching and passing all staffs from staff table view controller")
+                    print("error fetching and passing all staffs from staff table view controller")
                 }
             })
         }
@@ -258,7 +257,7 @@ class NewTaskViewController: XLFormViewController {
         // Care Type
         row = XLFormRowDescriptor(tag: "careType", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Type of Care Activity")
         row.value = XLFormOptionsObject(value: 1, displayText: "Admin Event")
-        println(row.value?.formValue())
+        print(row.value?.formValue())
         row.selectorTitle = "Admin Event"
         row.selectorOptions = [XLFormOptionsObject(value: 1, displayText:"Admin EventT"),
             XLFormOptionsObject(value: 2, displayText:"Administration Error"),
@@ -325,11 +324,11 @@ extension NewTaskViewController {
 }
 
 extension UINavigationController {
-    public override func supportedInterfaceOrientations() -> Int {
+    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if visibleViewController is NewTaskViewController {
-            return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+            return UIInterfaceOrientationMask.Portrait
         }
-        return Int(UIInterfaceOrientationMask.All.rawValue)
+        return UIInterfaceOrientationMask.All
     }
 }
 

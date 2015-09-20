@@ -36,7 +36,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         getStaff()
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.attendingProfButton.titleLabel?.numberOfLines = 1;
@@ -69,16 +68,16 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     
     func getStaff(){
-        var staffMethods = StaffNetworkCall()
+        let staffMethods = StaffNetworkCall()
         
         if sharedDataSingleton.allStaffs.count == 0 {
 //            SwiftSpinner.show("Loading Staff", animated: true)
             staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
                 if(done){
-                    println("all staffs fetched and passed from staff table view controller")
+                    print("all staffs fetched and passed from staff table view controller")
 //                    SwiftSpinner.hide(completion: nil)
                 }else{
-                    println("error fetching and passing all staffs from staff table view controller")
+                    print("error fetching and passing all staffs from staff table view controller")
 //                    SwiftSpinner.hide(completion: nil)
                 }
             })
@@ -95,7 +94,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         println(task.attending_professionals.count)
+         print(task.attending_professionals.count)
         return task.attending_professionals.count
        
     }
@@ -136,7 +135,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         let storyboard : UIStoryboard = UIStoryboard(
             name: "Main",
             bundle: nil)
-        var menuViewController: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        let menuViewController: MenuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
         menuViewController.delegate = self
         menuViewController.selectedCell = currentCell
         menuViewController.modalPresentationStyle = .Popover
@@ -163,12 +162,12 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     func fetchStringValueFromArray(constantArray:[AnyObject], atIndex indexAsString:String)->String {
         var count:Int?
-        let index = indexAsString.toInt()
+        let index = Int(indexAsString)
         if let i = index {
             count = i - 1
         }
-        println(constantArray)
-        println(count)
+        print(constantArray)
+        print(count)
         if count >= constantArray.count {
             return ""
         }else {
@@ -186,10 +185,10 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         
         patientAPI.getPatient(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.clinic_id) { (fetchedPatient:Patient?, error:NSError?) -> () in
             if error == nil {
-                SwiftSpinner.hide(completion: nil)
+                SwiftSpinner.hide(nil)
                self.performSegueWithIdentifier("viewPatient", sender: fetchedPatient)
             }else {
-                SwiftSpinner.hide(completion: nil)
+                SwiftSpinner.hide(nil)
                 let alertView = SCLAlertView()
                 alertView.showError(self, title: "Error", subTitle: "Failed to get patient. Please try again later", closeButtonTitle: "Cancel", duration: 2000)
             }
@@ -209,7 +208,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             currentCell = selectedCell;
             let resolution_id = String(currentCell + 1)
             self.updateTaskStatus(resolution_id)
-            println("choice is \(currentCell)")
+            print("choice is \(currentCell)")
     }
     
     func updateTaskStatus(resolution:String) {
@@ -227,8 +226,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "viewPatient"{
-        let destinationNavController = segue.destinationViewController as! UINavigationController
-        let destinationController   = destinationNavController.topViewController as! PatientProfileViewController
+        let destinationController   = segue.destinationViewController as! PatientProfileViewController
         destinationController.patient = sharedDataSingleton.selectedPatient
         }
     }

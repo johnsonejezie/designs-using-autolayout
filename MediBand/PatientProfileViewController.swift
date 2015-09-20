@@ -33,7 +33,8 @@ class PatientProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sharedDataSingleton.selectedIDs = []
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         addCareButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
@@ -58,6 +59,7 @@ class PatientProfileViewController: UIViewController {
     
     
     override func viewWillAppear(animated: Bool) {
+        sharedDataSingleton.selectedPatient = patient
         self.setScreeName("Patient Profile View")
     }
     
@@ -89,6 +91,7 @@ class PatientProfileViewController: UIViewController {
 
     @IBAction func viewHistoryActionButton() {
         sharedDataSingleton.selectedPatient = patient
+        
         let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
         taskViewController.isPatientTask = true
         taskViewController.patient = patient
@@ -98,13 +101,20 @@ class PatientProfileViewController: UIViewController {
         self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
     }
     @IBAction func updatePatientActionButton() {
-//        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("AddPatientViewController") as! AddPatientViewController
-//        sharedDataSingleton.selectedPatient = patient
-//        controller.isEditingPatient = true
-//        controller.patientID = patient.patient_id
-//        self.navigationController?.pushViewController(controller, animated: true)
+        sharedDataSingleton.selectedPatient = patient
+        sharedDataSingleton.patientID = patient.patient_id
+        self.performSegueWithIdentifier("EditPatient", sender: nil);
         
         self.trackEvent("UX", action: "Updating patient", label: "update patient button in patient profile view", value: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EditPatient" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! NewPatientViewController
+            controller.patientID = patient.patient_id
+            controller.isEditingPatient = true
+        }
     }
 }
 

@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftForms.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SwiftKeychainWrapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,6 +47,21 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0269CFE68F8186EFA9CC6C287644E591</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28CBA812765712589A663DEE755CEE91</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EFB58C644BF763DB8F3DEDBFA35C4A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5B9D5C5F6C9B15C2F60DD922DB351BB8</key>
 		<dict>
 			<key>primary</key>
@@ -62,27 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77A879830A9A3BD071B2288478429DFD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>796BE66B89BB38CE1A64E18C6AA9A166</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>80839DE9B01A48E0B9D7B2B6EAD74F02</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>83FCE0E351E7341F24569007F2AFE80C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8D671C2D47E013A858D1EEF107F45C28</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD4750EE740B3A4196B1DF06624F1489</key>
+		<key>A499383E4F651AF7A8C339C994CD8F87</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -30,7 +30,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         
         
         //resizable view
-        self.highlightView.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
+        self.highlightView.autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleRightMargin]
         
         //Border Colour for completed scan reticle
         self.highlightView.layer.borderColor = UIColor.redColor().CGColor
@@ -41,15 +41,16 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
         // Create a nilable NSError to hand off to the AVCaptureDeviceInput.deviceInputWithDevice method below.
-        var error : NSError? = nil
+        let error : NSError? = nil
         
         
-        let input : AVCaptureDeviceInput? = AVCaptureDeviceInput.deviceInputWithDevice(device, error: &error) as? AVCaptureDeviceInput
+//        let input : AVCaptureDeviceInput? = AVCaptureDeviceInput.deviceInputWithDevice(device) as? AVCaptureDeviceInput
+        let input : AVCaptureDeviceInput? = try! AVCaptureDeviceInput(device: device)
         
         if input != nil {
             session.addInput(input)
         }else {
-            println(error)
+            print(error)
         }
         
         let output = AVCaptureMetadataOutput()
@@ -57,7 +58,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         session.addOutput(output)
         output.metadataObjectTypes = output.availableMetadataObjectTypes
         
-        previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as! AVCaptureVideoPreviewLayer
+        previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.frame = self.view.bounds
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         self.view.layer.addSublayer(previewLayer)        
@@ -141,13 +142,13 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
 
         
         alertView.addButton("EXISTING PATIENT", actionBlock: { () -> Void in
-            println("existing")
+            print("existing")
             self.isExistingPatient = true
             self.isStartingSession = true
             self.session.startRunning()
         })
         alertView.addButton("NEW PATIENT", actionBlock: { () -> Void in
-            println("new")
+            print("new")
             self.isExistingPatient = false
             self.isStartingSession = true
             self.session.startRunning()
@@ -162,7 +163,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         }
     }
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        println("scan again button clicked")
+        print("scan again button clicked")
         if buttonIndex == 1 {
             if isExistingPatient == false {
                  sharedDataSingleton.selectedPatient = nil
@@ -175,7 +176,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "patientSegue" {
-           SwiftSpinner.hide(completion: nil)
+           SwiftSpinner.hide(nil)
             let navigationController = segue.destinationViewController as! UINavigationController
            
             let controller = navigationController.topViewController as! NewPatientViewController

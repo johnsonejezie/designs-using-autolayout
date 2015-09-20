@@ -38,7 +38,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     var isEditingMyProfile:Bool?
 
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -214,7 +214,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         super.viewDidLoad()
 //        self.tableView.backgroundColor = UIColor.whiteColor()
 //        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(65, 0, 0, 0)
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         let topView:UIView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 200))
         topView.backgroundColor = UIColor.whiteColor()
@@ -301,17 +301,17 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
             staff.firstname = forename
         }
         
-        var staffMethods = StaffNetworkCall()
+        let staffMethods = StaffNetworkCall()
         staffMethods.create(staff, image: staffImage, isCreatingNewStaff: !isUpdatingStaff) { (success) -> Void in
             if success == true {
-                SwiftSpinner.hide(completion: { () -> Void in
+                SwiftSpinner.hide({ () -> Void in
                     //                                self.delegate.addStaffViewController(self, finishedAddingStaff: self.staff)
                     let staffProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
                     staffProfileViewController.staff = sharedDataSingleton.selectedStaff
                     self.navigationController?.pushViewController(staffProfileViewController, animated: true)
                 })
             }else {
-                SwiftSpinner.hide(completion: { () -> Void in
+                SwiftSpinner.hide({ () -> Void in
                     let alertView = SCLAlertView()
                     alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
                     alertView.alertIsDismissed({ () -> Void in
@@ -330,7 +330,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     
     
     func pressed(sender: UIButton!) {
-        println("upload")
+        print("upload")
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
@@ -342,7 +342,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            println("done")
+            print("done")
         })
         self.staffImage = image
         staffImageView.image = image

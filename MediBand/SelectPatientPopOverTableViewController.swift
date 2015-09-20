@@ -46,7 +46,7 @@ class SelectPatientPopOverTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SelectPatientCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SelectPatientCell", forIndexPath: indexPath) 
 
         cell.textLabel?.text = options[indexPath.row]
 

@@ -46,7 +46,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("OptionsCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("OptionsCell", forIndexPath: indexPath) 
         cell.textLabel?.text = options[indexPath.row] as? String
         var detailsView = ActivityDetailsViewController()
         if indexPath.row == selectedCell{
@@ -57,7 +57,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("selected \(options[indexPath.row])");
+        print("selected \(options[indexPath.row])");
         self.dismissViewControllerAnimated(true, completion: nil)
         delegate?.menuViewResponse(self, didDismissPopupView: indexPath.row);
     }

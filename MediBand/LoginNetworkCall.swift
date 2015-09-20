@@ -29,7 +29,7 @@ class Login {
 //        
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!,
             responseObject: AnyObject!) -> Void in
-            println(responseObject)
+            print(responseObject)
             let dictionary:[String: AnyObject] = responseObject as! [String: AnyObject]
             if let message: String = dictionary["message"] as? String {
                 if (message == "Invalid email or password" || message == "Error incomplete inputs :email,password") {
@@ -45,7 +45,7 @@ class Login {
             }
             }) { (operation: AFHTTPRequestOperation!,
                 error: NSError!) -> Void in
-                println(error)
+                print(error)
                 completionHandler(success: false)
         }
     }
@@ -64,10 +64,10 @@ class Login {
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameter, success: { (operation:AFHTTPRequestOperation!, json:AnyObject!) -> Void in
-            println(json)
+            print(json)
             completionBlock(success: true)
             }) { (operation:AFHTTPRequestOperation, error:NSError) -> Void in
-                println(error)
+                print(error)
                 completionBlock(success: false)
         }
         
@@ -81,7 +81,7 @@ class Login {
         let user = User()
         if let resultDict: AnyObject = dictionary["data"] {
                 if let resultDict = resultDict as? [String: AnyObject] {
-                    println(resultDict)
+                    print(resultDict)
                     user.created = resultDict["created"] as! String
                     user.email = resultDict["email"] as! String
                     user.firstName = resultDict["firstname"] as! String
@@ -91,14 +91,21 @@ class Login {
                         user.image = image
                     }
                     user.medical_facility = resultDict["medical_facility"] as! String
-                    if user.medical_facility == "Teaching Hospital" {
-                        user.medical_facility = "4"
-                    }
+    
                     user.clinic_id = resultDict["clinic_id"] as! String
                     user.memberid = resultDict["member_id"] as! String
                     user.modified = resultDict["modified"] as! String
-                    user.role = resultDict["role"] as! String
-                    user.speciality = resultDict["speciality"] as! String
+                    if let role = resultDict["role"] as? String {
+                        user.role = role 
+                    }else {
+                        user.role = ""
+                    }
+                    
+                    if let speciality = resultDict["speciality"] as? String {
+                        user.speciality = speciality
+                    }else {
+                        user.speciality = ""
+                    }
                     user.surname = resultDict["surname"] as! String
                     
                     if let is_password_set: NSString = resultDict["is_password_set"] as? NSString  {

@@ -44,7 +44,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SideMenuCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SideMenuCell", forIndexPath: indexPath) 
         let sideMenuContent:[AnyObject]
         if sharedDataSingleton.user.isAdmin == true {
             sideMenuContent = sideMenuForAdmin
@@ -57,7 +57,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        println(sharedDataSingleton.user.isAdmin)
+        print(sharedDataSingleton.user.isAdmin)
         if sharedDataSingleton.user.isAdmin == true {
             switch (indexPath.row) {
             case 0:
@@ -114,8 +114,8 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
         let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
         destroy()
-        println(removeEmailSuccessful)
-        println(removePasswordSuccessful)
+        print(removeEmailSuccessful)
+        print(removePasswordSuccessful)
         performSegueWithIdentifier("LogOut", sender: nil)
     }
     
@@ -128,23 +128,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         sharedDataSingleton.patientHistory = []
         sharedDataSingleton.staffHistory = []
     }
-    
-    func displayPopOver(sender: AnyObject){
-        let height = CGFloat(88)
-        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        var contentViewController : SelectPatientPopOverTableViewController = storyboard.instantiateViewControllerWithIdentifier("SelectPatientPopOverTableViewController") as! SelectPatientPopOverTableViewController
-//        contentViewController.delegate = self
-        contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height)
-        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
-        detailPopover.sourceView = sender as! UIView
-        detailPopover.sourceRect.origin.x = 50
-        detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
-        detailPopover.delegate = self
-        presentViewController(contentViewController, animated: true, completion: nil)
         
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToProfile" {
             let navigationController = segue.destinationViewController as! UINavigationController

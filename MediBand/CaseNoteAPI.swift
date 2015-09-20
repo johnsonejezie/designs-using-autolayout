@@ -36,7 +36,7 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         isCreatingCaseNote = true
         let url = "http://iconglobalnetwork.com/mediband/api/create_casenote"
         let body = "task_id=\(caseNote.task_id)&details=\(caseNote.details)&staff_id=\(caseNote.staff_id)"
-        println(body)
+        print(body)
         makeHTTPPostRequest(Path.CREATE_CASENOTE, callback: callback, url: url, body: body)
     }
     
@@ -47,7 +47,7 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         case 201, 200, 401:
             self.responseData.length = 0
         default:
-            println("ignore")
+            print("ignore")
         }
     }
     
@@ -57,7 +57,13 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         var error: NSError?
-        var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(self.responseData, options: NSJSONReadingOptions.MutableLeaves, error: &error)
+        var json : AnyObject!
+        do {
+            json = try NSJSONSerialization.JSONObjectWithData(self.responseData, options: NSJSONReadingOptions.MutableLeaves)
+        } catch let error1 as NSError {
+            error = error1
+            json = nil
+        }
         if (error != nil) {
             callback(nil, error)
             return
@@ -73,7 +79,7 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         }
     }
     func handleGetCaseNotes(json: AnyObject)-> [CaseNote]? {
-        println("this is staff json \(json)")
+        print("this is staff json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -86,7 +92,7 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         return nil
     }
     func handleCreateCaseNote(json: AnyObject)-> CaseNote? {
-        println("this is staff json \(json)")
+        print("this is staff json \(json)")
         if let resultDict = json["data"] as? [String: AnyObject] {
             self.parseDictionaryToCaseNote(resultDict)
             return self.caseNote

@@ -9,111 +9,69 @@
 import UIKit
 import Haneke
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class HomeViewController: UIViewController  {
     
-    @IBOutlet var collectionView: UICollectionView!
+
+    @IBOutlet var myTaskBtn: UIButton!
     
-    var adminContent = [
-        ["title":"Task", "image":"task"],
-        ["title":"Patients", "image":"patient"],
-        ["title":"New Patients", "image":"newPatient"],
-        ["title":"Staff", "image":"staff"],
-        ["title":"Profile", "image":"profile"],
-        ["title":"Settings", "image":"setting"],
-        ["title":"Outbox", "image":"outbox"]
-    ]
     
-    var nonAdminContent = [
-        ["title":"Task", "image":"task"],
-        ["title":"Patients", "image":"patient"],
-        ["title":"New Patients", "image":"newPatient"],
-        ["title":"Profile", "image":"profile"],
-        ["title":"Settings", "image":"setting"],
-        ["title":"Outbox", "image":"outbox"]
-    ]
+    @IBOutlet var staffBtn: UIButton!
+    @IBOutlet var myPatientsBtn: UIButton!
+    
+    @IBOutlet var newPatientBtn: UIButton!
+    
+    
+    @IBOutlet var myProfileBtn: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        myTaskBtn.backgroundColor = UIColor(red: 0.71, green: 0.07, blue: 0.01, alpha: 1)
+        myPatientsBtn.backgroundColor = UIColor(red: 0.01, green: 0.04, blue: 0.21, alpha: 1)
+        newPatientBtn.backgroundColor = UIColor(red: 0.01, green: 0.38, blue: 0.01, alpha: 1)
+        myProfileBtn.backgroundColor = UIColor(red: 0.14, green: 0.07, blue: 0.69, alpha: 1)
+        staffBtn.backgroundColor = UIColor(red: 0.42, green: 0.78, blue: 0.78, alpha: 1)
+        
+        myTaskBtn.titleLabel?.textAlignment = NSTextAlignment.Center
+        myPatientsBtn.titleLabel?.textAlignment = NSTextAlignment.Center
+        newPatientBtn.titleLabel?.textAlignment = NSTextAlignment.Center
+        myProfileBtn.titleLabel?.textAlignment = NSTextAlignment.Center
+        staffBtn.titleLabel?.textAlignment = NSTextAlignment.Center
+        
         // Do any additional setup after loading the view.
     }
     
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if sharedDataSingleton.user.isAdmin == true {
-            return adminContent.count
-//        }else {
-//            return nonAdminContent.count
-//        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cellTitle: String = ""
-        let content = adminContent[indexPath.row]
-//        if sharedDataSingleton.user.isAdmin == true {
-            cellTitle = content["title"]!
-//        }else {
-//            cellTitle = nonAdminContent[indexPath.row]
-//        }
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("homeCollectionCell", forIndexPath: indexPath) as! HomeCollectionViewCell
-//        cell.view.backgroundColor = UIColor.greenColor()
-        cell.titleLabel.text = cellTitle
+    @IBAction func myTask() {
         
-        cell.iconImageView.image = UIImage(named: content["image"]!)
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
+        self.navigationController?.pushViewController(viewController!, animated: true)
+    }
+    
+    @IBAction func myPatients() {
         
-        return cell
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientsViewController")
+        self.navigationController?.pushViewController(viewController!, animated: true)
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! HomeCollectionViewCell
-        if cell.titleLabel == "Task" {
-            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
+    
+    
+    @IBAction func myProfile() {
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
+            viewController.isMyProfile = true
             self.navigationController?.pushViewController(viewController, animated: true)
-        }else if cell.titleLabel == "Patients" {
-            
-            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientsViewController")
-            self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if cell.titleLabel == "New Patients" {
-            
-            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BarcodeViewController")
-            self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if cell.titleLabel == "Staff" {
-            
-            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffViewController")
-            self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if cell.titleLabel == "Profile" {
-            
-            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController")
-            self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if cell.titleLabel == "Settings" {
-            
-//            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
-//            self.navigationController?.pushViewController(viewController, animated: true)
-            
-        }else if cell.titleLabel == "Outbox" {
-            
-//            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController")
-//            self.navigationController?.pushViewController(viewController, animated: true)
-        }
+    }
+    @IBAction func newPatients() {
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BarcodeViewController")
+        self.navigationController?.pushViewController(viewController!, animated: true)
+    }
+    
+    
+    
+    @IBAction func staff() {
         
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffViewController")
+        self.navigationController?.pushViewController(viewController!, animated: true)
     }
     
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5.0;
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(120, 130)
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 5.0;
-    }
-
-
 }

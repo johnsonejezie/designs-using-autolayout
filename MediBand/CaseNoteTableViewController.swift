@@ -20,7 +20,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         
         performSegueWithIdentifier("AddCaseNote", sender: nil)
         
-        println("add new note")
+        print("add new note")
     }
     
 
@@ -28,7 +28,6 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         super.viewDidLoad()
         
         tableView.rowHeight = 120
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
     
     }
     
@@ -60,7 +59,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
             cell.nameLabel.text = caseNote.name
             
             var dateString = caseNote.created
-            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            let subString = dateString.substringWithRange(Range<String.Index>(start: dateString.startIndex.advancedBy(0), end: dateString.endIndex.advancedBy(-9)))
             let formatter : NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             let date = formatter.dateFromString(subString)
@@ -104,9 +103,9 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
                     let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
                     self.caseNotes = taskCaseNotes
                     self.tableView.reloadData()
-                    SwiftSpinner.hide(completion: nil)
+                    SwiftSpinner.hide(nil)
                 }else {
-                    SwiftSpinner.hide(completion: nil)
+                    SwiftSpinner.hide(nil)
                     let alertView = SCLAlertView()
                     alertView.showError(self, title: "Error", subTitle: "Failed to load Case Notes", closeButtonTitle: "Cancel", duration: 2000)
                 }
@@ -139,7 +138,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
                 let newCaseNote:CaseNote = (createdCaseNote as? CaseNote)!
                 self.caseNotes.append(newCaseNote)
                 self.tableView.reloadData()
-                SwiftSpinner.hide(completion: { () -> Void in
+                SwiftSpinner.hide({ () -> Void in
                 })
             }else {
                 
@@ -167,7 +166,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        var animationPresentationController = AnimationPresentationController()
+        let animationPresentationController = AnimationPresentationController()
         
         animationPresentationController.isPresenting = true
         
@@ -175,7 +174,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     }
     
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        var animationPresentationController = AnimationPresentationController()
+        let animationPresentationController = AnimationPresentationController()
         return animationPresentationController
     }
 }

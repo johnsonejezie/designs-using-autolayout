@@ -15,13 +15,13 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
     var frame: CGRect!
     var y : CGFloat!
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 1
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        var toViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        var fromViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let toViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let fromViewController:UIViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         var fromViewControllerFrame = fromViewController.view.frame
 
@@ -30,7 +30,7 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
         let finalFrame = CGRectMake(32, 82, 250, 225)
         
         if isPresenting {
-            let containerView:UIView = transitionContext.containerView()
+            let containerView:UIView = transitionContext.containerView()!
             let screenBounds = UIScreen.mainScreen().bounds
             
             toViewController.view.frame = CGRectOffset(finalFrame, 0, screenBounds.size.height)
@@ -58,8 +58,8 @@ class AnimationPresentationController: NSObject, UIViewControllerAnimatedTransit
             let bounds = UIScreen.mainScreen().bounds
             
             let containerView = transitionContext.containerView()
-            containerView.addSubview(toViewController.view)
-            containerView.addSubview(fromViewController.view)
+            containerView!.addSubview(toViewController.view)
+            containerView!.addSubview(fromViewController.view)
             UIApplication.sharedApplication().keyWindow?.addSubview(toViewController.view)
             
             frame.origin.y += bounds.size.height

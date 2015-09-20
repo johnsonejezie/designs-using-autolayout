@@ -68,7 +68,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         isCreatingTask = true
         let url = "http://www.iconglobalnetwork.com/mediband/api/create_task"
         let body = "patient_id=\(task.patient_id)&care_activity_id=\(task.care_activity_id)&specialist_id=\(task.specialist_id)&care_activity_type_id=\(task.care_activity_type_id)&care_activity_category_id=1&selected_staff_ids=\(task.selected_staff_ids)&medical_facility_id=\(sharedDataSingleton.user.medical_facility)&resolution=\(task.resolution)"
-        println(body)
+        print(body)
         makeHTTPPostRequest(Path.CREATE_TASK, callback: callback, url: url, body: body)
     }
     
@@ -79,7 +79,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         case 201, 200, 401:
             self.responseData.length = 0
         default:
-            println("ignore")
+            print("ignore")
         }
     }
     
@@ -91,7 +91,13 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         var error: NSError?
-        var json : AnyObject! = NSJSONSerialization.JSONObjectWithData(self.responseData, options: NSJSONReadingOptions.MutableLeaves, error: &error)
+        var json : AnyObject!
+        do {
+            json = try NSJSONSerialization.JSONObjectWithData(self.responseData, options: NSJSONReadingOptions.MutableLeaves)
+        } catch let error1 as NSError {
+            error = error1
+            json = nil
+        }
         if (error != nil) {
             callback(nil, error)
             return
@@ -115,7 +121,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     
     func handleGetTaskByStaff(json: AnyObject)-> [Task]? {
-        println("this is all task json \(json)")
+        print("this is all task json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -130,7 +136,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleDeleteTask(json:AnyObject)->Bool? {
-        println("this is delete message \(json)")
+        print("this is delete message \(json)")
         if let resultDict = json["message"] as? String {
             if resultDict == "message Task deleted successfully!" {
                 return true
@@ -143,7 +149,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleGetTaskByPatient(json: AnyObject)-> [Task]? {
-        println("this is patient json \(json)")
+        print("this is patient json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -158,7 +164,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleCreateTask(json: AnyObject)-> Task? {
-        println("this is staff json \(json)")
+        print("this is staff json \(json)")
         if let resultDict = json["data"] as? [String: AnyObject] {
             self.parseDictionaryToTask(resultDict)
             return self.task
@@ -167,7 +173,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleUpdateTask(json: AnyObject)-> Bool? {
-        println("this is staff json \(json)")
+        print("this is staff json \(json)")
         if let resultDict = json["data"] as? [String: AnyObject]{
             if let success: Bool = resultDict["success"] as? Bool {
                 if success == true {
@@ -208,7 +214,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                 task.care_activity_type_id = ""
             }
             if let created: String = resultDict["created"] as? String {
-                let subString = created.substringWithRange(Range<String.Index>(start: advance(created.startIndex, 0), end: advance(created.endIndex, -9)))
+                let subString = created.substringWithRange(Range<String.Index>(start: created.startIndex.advancedBy(0), end: created.endIndex.advancedBy(-9)))
                 let formatter : NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
                 let date = formatter.dateFromString(subString)
@@ -256,7 +262,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             task.task_patient_name = ""
         }
             if let selected_staff_ids:AnyObject = resultDict["selected_staff_ids"] {
-                println(selected_staff_ids)
+                print(selected_staff_ids)
                 task.attending_professionals = self.parseAttendingStaff(selected_staff_ids)
             }
         if isCreatingTask == true {
@@ -272,12 +278,12 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func parseAttendingStaff(json:AnyObject?)->[Staff] {
-        println(json)
+        print(json)
         var attendingStaff = [Staff]()
         if let array:AnyObject = json {
-            println(array)
+            print(array)
             for resultDict in array as! [AnyObject] {
-                println(resultDict)
+                print(resultDict)
                 let staff = Staff()
                 if let resultDict = resultDict as? [String: AnyObject] {
                         if let image: String = resultDict["image"] as? String {
@@ -292,7 +298,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                         if let staff_id: String = resultDict["staff_id"] as? String {
                             staff.id = staff_id as String
                         }
-                    println(staff.name)
+                    print(staff.name)
                     
                 }
                 attendingStaff.append(staff)

@@ -7,12 +7,11 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'SwiftForms'
 pod 'AFNetworking', '~> 2.5'
-pod 'Alamofire', '~> 1.3'
-pod 'SwiftSpinner'
+pod 'Alamofire', '~> 2.0.0'
 pod 'SwiftValidator', '2.1.1'
-pod 'HanekeSwift'
+pod "SwiftSpinner", :git => 'https://github.com/zbeckman/SwiftSpinner.git'
+pod 'HanekeSwift', :git => 'https://github.com/meteochu/HanekeSwift.git', :branch => 'swift-2.0'
 pod 'XLForm', '~> 3.0'
 pod 'SwiftKeychainWrapper', :git => 'https://github.com/jrendel/SwiftKeychainWrapper', :branch => 'master'
 end
