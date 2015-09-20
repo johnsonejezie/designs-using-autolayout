@@ -33,10 +33,11 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if sideMenuRequired == true {
             if self.revealViewController() != nil {
-                navBar.target = self.revealViewController()
-                navBar.action = "revealToggle:"
+//                navBar.target = self.revealViewController()
+//                navBar.action = "revealToggle:"
                 self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 
             }

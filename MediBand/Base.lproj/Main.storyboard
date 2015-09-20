@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1808" y="2002"/>
+            <point key="canvasLocation" x="-1544" y="2572"/>
         </scene>
         <!--Activity Details View Controller-->
         <scene sceneID="PGf-kL-exr">
@@ -1327,7 +1327,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="137.5" height="92"/>
-                                                <color key="backgroundColor" patternImage="1F610399-E83A-4B72-9ECC-CF2313F7C75C" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="01E3BC15-0F79-461F-929B-67616572FC3A" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1438,7 +1438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7El-pH-a64" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1686" y="1243"/>
+            <point key="canvasLocation" x="-1806" y="1027"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="f5I-CJ-vnA">
@@ -2146,7 +2146,7 @@
             </objects>
             <point key="canvasLocation" x="-4148" y="2778"/>
         </scene>
-        <!--New Patient View Controller-->
+        <!--Create Task-->
         <scene sceneID="rxa-fJ-cTC">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="vN4-ng-2ik" customClass="NewPatientViewController" customModule="MediBand" customModuleProvider="target" sceneMemberID="viewController">
@@ -2159,7 +2159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="MND-Y1-tTc">
+                    <navigationItem key="navigationItem" title="Create Task" id="MND-Y1-tTc">
                         <barButtonItem key="leftBarButtonItem" image="navBarIcon" id="r1l-VP-Nb6">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -2772,7 +2772,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1F610399-E83A-4B72-9ECC-CF2313F7C75C" width="512" height="512">
+        <image name="01E3BC15-0F79-461F-929B-67616572FC3A" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -20333,7 +20333,7 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAABAPEw
         <segue reference="zbl-ez-grP"/>
         <segue reference="vJu-jk-Kbb"/>
         <segue reference="ydu-Ai-6cO"/>
-        <segue reference="Lwn-6X-HtS"/>
-        <segue reference="7DB-M5-XLe"/>
+        <segue reference="Noq-dp-MfK"/>
+        <segue reference="KAz-gw-DPh"/>
     </inferredMetricsTieBreakers>
 </document>
