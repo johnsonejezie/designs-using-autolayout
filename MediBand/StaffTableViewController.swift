@@ -18,6 +18,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     var currentPageNumber:Int = 1
     var isRefreshing = false
     var isFirstLoad = true
+    var sideMenuRequired = false
     
     @IBOutlet var navBar: UIBarButtonItem!
     
@@ -33,9 +34,15 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navBar.target = self.revealViewController()
-//        navBar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        if sideMenuRequired == true {
+            if self.revealViewController() != nil {
+//                navBar.target = self.revealViewController()
+//                navBar.action = "revealToggle:"
+                self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+
+            }
+        }
+        
         let pageNoToString:String = String(currentPageNumber)
         getStaff(pageNoToString)
         tableView.contentInset = UIEdgeInsets(top: -50, left: 0, bottom: 0, right: 0)
@@ -53,26 +60,26 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
             SwiftSpinner.show("Loading Staff", animated: true)
             staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
                 if(done){
-                    println("all staffs fetched and passed from staff table view controller")
+                    print("all staffs fetched and passed from staff table view controller")
                     self.tableView.reloadData()
-                    SwiftSpinner.hide(completion: nil)
-                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                    SwiftSpinner.hide(nil)
+                    print("staff count \(sharedDataSingleton.allStaffs.count) ")
                 }else{
-                    SwiftSpinner.hide(completion: nil)
-                    println("error fetching and passing all staffs from staff table view controller")
+                    SwiftSpinner.hide(nil)
+                    print("error fetching and passing all staffs from staff table view controller")
                     
                 }
             })
         }else {
             staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
                 if(done){
-                    println("all staffs fetched and passed from staff table view controller")
+                    print("all staffs fetched and passed from staff table view controller")
                     self.tableView.reloadData()
-                    SwiftSpinner.hide(completion: nil)
-                    println("staff count \(sharedDataSingleton.allStaffs.count) ")
+                    SwiftSpinner.hide(nil)
+                    print("staff count \(sharedDataSingleton.allStaffs.count) ")
                 }else{
-                    SwiftSpinner.hide(completion: nil)
-                    println("error fetching and passing all staffs from staff table view controller")
+                    SwiftSpinner.hide(nil)
+                    print("error fetching and passing all staffs from staff table view controller")
                     
                 }
             })
@@ -143,8 +150,8 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
             
             
             let staff = sharedDataSingleton.allStaffs[indexPath.row]
-            println("member id \(staff.member_id)")
-             println("general id \(staff.general_practional_id)")
+            print("member id \(staff.member_id)")
+             print("general id \(staff.general_practional_id)")
             cell?.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
             cell?.staffIDLabel.text = staff.id
             //            cell.staffContactLabel.text = staff["contact"]
@@ -167,20 +174,17 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func handleTap(sender:UITapGestureRecognizer){
-        println(sender)
+        print(sender)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddStaff" {
-            let navigationController = segue.destinationViewController
-                as! UINavigationController
-            let controller = navigationController.topViewController
+            sharedDataSingleton.selectedStaff = nil
+            let controller = segue.destinationViewController
                 as! AddStaffViewController
             controller.delegate = self
         }else if segue.identifier == "StaffProfile" {
-            let navigationController = segue.destinationViewController
-                as! UINavigationController
-            let controller = navigationController.topViewController
+            let controller = segue.destinationViewController
                 as! StaffProfileViewController
             controller.isMyProfile = false
             controller.staff = sender as! Staff
@@ -188,10 +192,14 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+//    func addStaffViewController(controller: AddStaffViewController, finishedAddingStaff staff: Staff) {
+//        staffs.insert(staff, atIndex: staffs.count)
+//        tableView.reloadData()
+//        println("delegate called")
+//    }
     func addStaffViewController(controller: AddStaffViewController, finishedAddingStaff staff: Staff) {
         staffs.insert(staff, atIndex: staffs.count)
         tableView.reloadData()
-        println("delegate called")
     }
 
 }

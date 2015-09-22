@@ -56,8 +56,9 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     var patientImage:UIImage?
     
   
+    @IBOutlet var navBar: UIBarButtonItem!
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -79,6 +80,13 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         
         section = XLFormSectionDescriptor.formSection()
         form.addFormSection(section)
+        
+        // Empty
+        row = XLFormRowDescriptor(tag: "empty", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = ""
+        row.required = false
+        section.addFormRow(row)
+        
         
         // Empty
         row = XLFormRowDescriptor(tag: "empty", rowType: XLFormRowDescriptorTypeText)
@@ -160,7 +168,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         section.addFormRow(row)
         
         // Address phone
-        row = XLFormRowDescriptor(tag: "addressPhone", rowType: XLFormRowDescriptorTypeText)
+        row = XLFormRowDescriptor(tag: "addressPhone", rowType: XLFormRowDescriptorTypePhone)
         row.cellConfigAtConfigure["textField.placeholder"] = "Address phone"
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
@@ -169,7 +177,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         section.addFormRow(row)
         
         // Address other phone
-        row = XLFormRowDescriptor(tag: "addressOtherPhone", rowType: XLFormRowDescriptorTypeText)
+        row = XLFormRowDescriptor(tag: "addressOtherPhone", rowType: XLFormRowDescriptorTypePhone)
         row.cellConfigAtConfigure["textField.placeholder"] = "Address other phone"
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
@@ -271,8 +279,10 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         if sharedDataSingleton.selectedPatient != nil {
             let dateString = sharedDataSingleton.selectedPatient.dob
                         let dateFormatter = NSDateFormatter()
-                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                        dateFormatter.dateFormat = "dd/MM/yyyy"
                         let date = dateFormatter.dateFromString(dateString)
+            print(dateString)
+            print(date)
             row.value = date
         }else {
           row.value = NSDate()
@@ -303,11 +313,19 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        println("patient id \(patientID)")
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        self.tableView.backgroundColor = UIColor.whiteColor()
+//      
+        
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
+        print("patient id \(patientID)")
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        let topView:UIView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 160))
+        let topView:UIView = UIView(frame: CGRectMake(0, 45, view.frame.size.width, 160))
         topView.backgroundColor = UIColor.whiteColor()
         
         patientImageView = UIImageView(frame: CGRectMake((view.frame.size.width - 220)/2, 25, 100, 100))
@@ -341,12 +359,18 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         
     }
     
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        self.navigationController?.popViewControllerAnimated(true)
+//        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         sharedDataSingleton.selectedPatient = nil
     }
     
     func pressed(sender: UIButton!) {
-        println("upload")
+        print("upload")
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
@@ -358,7 +382,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            println("done")
+            print("done")
         })
         self.patientImage = image
         patientImageView.image = image
@@ -381,13 +405,13 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             let patientAPI = PatientAPI()
             patientAPI.createNewPatient(patient, fromMedicalFacility: "4", image: self.patientImage, isCreatingNewPatient: !isEditingPatient) { (success) -> Void in
                 if success == true {
-                    SwiftSpinner.hide(completion: { () -> Void in
+                    SwiftSpinner.hide({ () -> Void in
                         let patientProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController
                         patientProfileViewController.patient = sharedDataSingleton.selectedPatient
                         self.navigationController?.pushViewController(patientProfileViewController, animated: true)
                     })
                 }else {
-                    SwiftSpinner.hide(completion: { () -> Void in
+                    SwiftSpinner.hide({ () -> Void in
                         let alertView = SCLAlertView()
                         alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
                         alertView.alertIsDismissed({ () -> Void in
@@ -412,7 +436,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         if let fullName = form.formRowWithTag(Tags.surname.rawValue)!.value as? String {
             results["name"] = fullName
         }
-        println(results)
+        print(results)
         
         let surname: String?
         if let patientSurname = form.formRowWithTag(Tags.surname.rawValue)!.value as? String {
@@ -422,9 +446,9 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             surname = ""
         }
         if let dob:NSDate = form.formRowWithTag(Tags.dateOfBirth.rawValue)!.value as? NSDate {
-            println(dob)
+            print(dob)
             let date = dob
-            var dateFormatter = NSDateFormatter()
+            let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy"
             dateString = dateFormatter.stringFromDate(date)
 //            dateString = dob
@@ -567,7 +591,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             next_of_kin_relationship = ""
         }
         
-        var newPatient = Patient()
+        let newPatient = Patient()
         newPatient.dob = dateString!
         newPatient.surname = surname!
         newPatient.forename = forename!

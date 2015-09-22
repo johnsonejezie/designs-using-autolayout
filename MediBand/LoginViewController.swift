@@ -52,7 +52,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     
     func setUpValidator(){
         validator.styleTransformers(success:{ (validationRule) -> Void in
-            println("here")
+            print("here")
             // clear error label
             validationRule.errorLabel?.hidden = true
             validationRule.errorLabel?.text = ""
@@ -60,7 +60,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
             validationRule.textField.layer.borderWidth = 0.5
             
             }, error:{ (validationError) -> Void in
-                println("error")
+                print("error")
                 validationError.errorLabel?.hidden = false
                 validationError.errorLabel?.text = validationError.errorMessage
                 validationError.textField.layer.borderColor = UIColor.redColor().CGColor
@@ -88,35 +88,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     
     func validationSuccessful() {
         resetKeychain = true
-        login(userNameTextfield.text, password: passwordTextfield.text)
+        login(userNameTextfield.text!, password: passwordTextfield.text!)
     }
     
     func login(email:String, password:String) {
         SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
         login.loginUserWith(email, andPassword: password) { (success) -> Void in
-            println("successful \(success)")
+            print("successful \(success)")
             if success == true {
                 if self.resetKeychain == true {
-                    let saveSuccessful: Bool = KeychainWrapper.setString(self.passwordTextfield.text, forKey: "password")
-                    let saveSuccessful1: Bool = KeychainWrapper.setString(self.userNameTextfield.text, forKey: "email")
-                    println("\(saveSuccessful) and \(saveSuccessful1)")
+                    let saveSuccessful: Bool = KeychainWrapper.setString(self.passwordTextfield.text!, forKey: "password")
+                    let saveSuccessful1: Bool = KeychainWrapper.setString(self.userNameTextfield.text!, forKey: "email")
+                    print("\(saveSuccessful) and \(saveSuccessful1)")
                 }
-                println(sharedDataSingleton.user.is_password_set)
+                print(sharedDataSingleton.user.is_password_set)
                 if sharedDataSingleton.user.is_password_set == false {
-                    SwiftSpinner.hide(completion: { () -> Void in
+                    SwiftSpinner.hide({ () -> Void in
                         self.loadResetPasswordAlert()
                     })
                 }else {
-                    SwiftSpinner.hide(completion: nil)
-                    self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+                    SwiftSpinner.hide(nil)
+                    self.performSegueWithIdentifier("LoginTOHome", sender: nil)
                 }
 //
             }else {
-                println("error")
+                print("error")
                 let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
                 let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
-                SwiftSpinner.hide(completion: nil)
+                SwiftSpinner.hide(nil)
                 let alertView = SCLAlertView()
                 alertView.showError(self, title: "Login Error", subTitle: "Invalid email or password", closeButtonTitle: "Cancel", duration: 2000)
             }
@@ -142,16 +142,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         let oldPasswordTextField: UITextField = alertView.addTextField("old password")
         let newPasswordTextField: UITextField = alertView.addTextField("new password")
         alertView.addButton("Reset", validationBlock: { () -> Bool in
-            let passedValidation:Bool = !emailTextField.text.isEmpty && !oldPasswordTextField.text.isEmpty && !newPasswordTextField.text.isEmpty
+            let passedValidation:Bool = !emailTextField.text!.isEmpty && !oldPasswordTextField.text!.isEmpty && !newPasswordTextField.text!.isEmpty
             return passedValidation
         }) { () -> Void in
-            println("validated")
-            self.resetPassword(emailTextField.text, oldPassword: oldPasswordTextField.text, newPassword: newPasswordTextField.text)
+            print("validated")
+            self.resetPassword(emailTextField.text!, oldPassword: oldPasswordTextField.text!, newPassword: newPasswordTextField.text!)
         }
         alertView.showEdit(self, title: "Password Reset", subTitle: "", closeButtonTitle: "Cancel", duration: 2000)
         
         alertView.alertIsDismissed { () -> Void in
-             self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+//             self.performSegueWithIdentifier("LoginToPatients", sender: nil)
         }
 
     }
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         loginAPI.resetPassword(email, oldPassword: oldPassword, newPassword: newPassword) { (success) -> Void in
             if success == true {
                 SwiftSpinner.show("loading patient", animated: true)
-                self.performSegueWithIdentifier("LoginToPatients", sender: nil)
+                self.performSegueWithIdentifier("LoginToHome", sender: nil)
             }else {
                 
             }

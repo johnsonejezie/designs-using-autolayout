@@ -63,7 +63,7 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         if isSelectingStaff == true {
             let aStaff = staff[indexPath.row]
@@ -82,7 +82,7 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func removeObject<T : Equatable>(object: T, inout fromArray array: [T])
     {
-        var index = find(array, object)
+        let index = array.indexOf(object)
         if let ind = index {
             array.removeAtIndex(ind)
         }
@@ -91,7 +91,7 @@ class PopUpTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        var row = String(indexPath.row + 1)
+        let row = String(indexPath.row + 1)
         if isSelectingStaff == true {
             if cell?.accessoryType == UITableViewCellAccessoryType.Checkmark {
                 cell?.accessoryType = UITableViewCellAccessoryType.None

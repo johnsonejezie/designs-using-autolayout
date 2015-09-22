@@ -1,13 +1,10 @@
-//
-//  AddStaffViewController.swift
-//  MediBand
-//
-//  Created by Johnson Ejezie on 7/7/15.
-//  Copyright (c) 2015 Johnson Ejezie. All rights reserved.
-//
 
-import UIKit
-import SwiftValidator
+
+
+
+
+
+import XLForm
 import SwiftSpinner
 
 
@@ -16,96 +13,238 @@ protocol addStaffControllerDelegate: class {
         finishedAddingStaff staff: Staff)
 }
 
-class AddStaffViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ValidationDelegate, UITextFieldDelegate, popUpTableViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class AddStaffViewController : XLFormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    private enum Tags : String {
+        
+        case emptyname = "emptyname"
+        case forename = "forename"
+        case surname = "surname"
+        case gpID = "gpID"
+        case memberID = "memberID"
+        case email = "email"
+        case role = "role"
+        case specialist = "specialist"
+
+    }
+
     weak var delegate: addStaffControllerDelegate!
-    let validator = Validator()
-    let constant = Contants()
-    var recognizer:UITapGestureRecognizer!
-    
-    var roleID = ""
-    var specialistID = ""
-    
-    @IBOutlet var roleView: UIView!
-    //
-    
-    @IBOutlet var specialityView: UIView!
-    @IBOutlet var navBar: UIBarButtonItem!
-    var tap:UITapGestureRecognizer!
-    var roleTap:UITapGestureRecognizer!
-    
+    let constants = Contants()
+    var staffImageView:UIImageView!
     var imagePicker = UIImagePickerController()
     var isUpdatingStaff = false
     var staff = Staff()
     var staffImage:UIImage?
+    var isEditingMyProfile:Bool?
+
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initializeForm()
+    }
     
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var topContainerView: UIView!
-    @IBOutlet weak var staffImageView: UIImageView!
-    
-    @IBOutlet weak var editPicButton: UIButton!
-    
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var generalPracIDTextView: UITextField!
-    @IBOutlet var roleIDTextView: UITextField!
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var specialityTextField: UITextField!
-    @IBOutlet weak var staffID: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
-    
-    @IBAction func editButtonAction(sender: AnyObject) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.initializeForm()
+    }
+
+
+    func initializeForm() {
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
-            println("Button capture")
-            
-            
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
-            imagePicker.allowsEditing = false
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+        let form : XLFormDescriptor
+        var section : XLFormSectionDescriptor
+        var row : XLFormRowDescriptor
+
+        
+        form = XLFormDescriptor(title: "Staff")
+        
+        section = XLFormSectionDescriptor.formSection()
+        form.addFormSection(section)
+        
+        
+        // Empty
+        row = XLFormRowDescriptor(tag: "empty", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = ""
+        row.required = false
+        section.addFormRow(row)
+        
+        // Empty
+        row = XLFormRowDescriptor(tag: "empty", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = ""
+        row.required = false
+        section.addFormRow(row)
+        
+        // Empty
+        row = XLFormRowDescriptor(tag: "empty", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = ""
+        row.required = false
+        section.addFormRow(row)
+        
+        // Empty
+        row = XLFormRowDescriptor(tag: "empty", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = ""
+        row.required = false
+        section.addFormRow(row)
+        
+        
+        // Surname
+        row = XLFormRowDescriptor(tag: "surname", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = "Surname"
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.surname
         }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.surname
+        }
+        section.addFormRow(row)
         
+        // Forename
+        row = XLFormRowDescriptor(tag: "forename", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = "Forename"
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.firstname
+        }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.firstName
+        }
+        section.addFormRow(row)
+        
+        // Email
+        row = XLFormRowDescriptor(tag: "email", rowType: XLFormRowDescriptorTypeEmail)
+        row.cellConfigAtConfigure["textField.placeholder"] = "Email"
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.email
+        }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.email
+        }
+        section.addFormRow(row)
+        
+        // GP
+        row = XLFormRowDescriptor(tag: "gpID", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = "GP"
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.general_practional_id
+        }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.general_practitioner_id
+        }
+        section.addFormRow(row)
+        
+        // staff ID
+        row = XLFormRowDescriptor(tag: "memberID", rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = "Staff ID"
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.member_id
+        }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.memberid
+        }
+        section.addFormRow(row)
+        
+        // Role Status
+        row = XLFormRowDescriptor(tag: "role", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Role")
+        row.value = XLFormOptionsObject(value: 1, displayText: "Doctor")
+        row.selectorTitle = "Doctor"
+        row.selectorOptions = [XLFormOptionsObject(value: 1, displayText:"Doctor"),
+                              XLFormOptionsObject(value: 2, displayText:"Nurse"),
+                            XLFormOptionsObject(value: 3, displayText:"Allied Health Profession"),
+            XLFormOptionsObject(value: 4, displayText:"Admin"),
+            
+        ]
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.role
+        }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.role
+        }
+        section.addFormRow(row)
+        
+        // Specialist
+        row = XLFormRowDescriptor(tag: "specialist", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Specialist")
+        row.value = constants.specialist[0]
+        row.selectorTitle = "Cardiology"
+        row.selectorOptions = [XLFormOptionsObject(value: 1, displayText:"Anaesthetics"),
+            XLFormOptionsObject(value: 2, displayText:"Cardiology"),
+            XLFormOptionsObject(value: 3, displayText:"Clinical Haematology"),
+            XLFormOptionsObject(value: 4, displayText:"Clinical Immunology and Allergy"),
+            XLFormOptionsObject(value: 5, displayText:"Clinical Oncology"),
+            XLFormOptionsObject(value: 6, displayText:"Dermatology"),
+            XLFormOptionsObject(value: 7, displayText:"Emergency"),
+            XLFormOptionsObject(value: 8, displayText:"ENT"),
+            XLFormOptionsObject(value: 9, displayText:"Gastroenterology"),
+            XLFormOptionsObject(value: 10, displayText:"General Medicine"),
+            XLFormOptionsObject(value: 11, displayText:"General Surgery"),
+            XLFormOptionsObject(value: 12, displayText:"Geriatric Medicine"),
+            XLFormOptionsObject(value: 13, displayText:"Gynaecology"),
+            XLFormOptionsObject(value: 14, displayText:"Medical Oncology"),
+            XLFormOptionsObject(value: 15, displayText:"Nephrology"),
+            XLFormOptionsObject(value: 16, displayText:"Neurology"),
+            XLFormOptionsObject(value: 17, displayText:"Ophthalmology"),
+            XLFormOptionsObject(value: 18, displayText:"Oral & Maxillo Facial Surgery"),
+            XLFormOptionsObject(value: 19, displayText:"Oral Surgery"),
+            XLFormOptionsObject(value: 20, displayText:"Paediatrics"),
+            XLFormOptionsObject(value: 21, displayText:"Radiology"),
+            XLFormOptionsObject(value: 22, displayText:"Rehabilitation"),
+            XLFormOptionsObject(value: 23, displayText:"Respiratory Medicine"),
+            XLFormOptionsObject(value: 24, displayText:"Rheumatology"),
+            XLFormOptionsObject(value: 25, displayText:"Trauma & Orthopaedics"),
+            XLFormOptionsObject(value: 26, displayText:"Urology")
+        ]
+        row.required = true
+        if sharedDataSingleton.selectedStaff != nil {
+            row.value = sharedDataSingleton.selectedStaff.speciality
+        }
+        if sharedDataSingleton.isEditingProfile == true {
+            row.value = sharedDataSingleton.user.speciality
+        }
+        section.addFormRow(row)
+        
+        self.form = form
     }
-    
-    @IBAction func saveButtonAction(sender: AnyObject) {
-        validator.validate(self)
-    }
-    
-    override func viewDidLoad() {
+
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+//        self.tableView.backgroundColor = UIColor.whiteColor()
+//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.tableView.contentInset = UIEdgeInsetsMake(65, 0, 0, 0)
+        self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        let topView:UIView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 200))
+        topView.backgroundColor = UIColor.whiteColor()
         
+        staffImageView = UIImageView()
+        staffImageView.frame.size = CGSizeMake(120, 120)
+        staffImageView.center.y = topView.center.y - 20
+        staffImageView.center.x = topView.center.x
         
-        if isUpdatingStaff == true {
-            
-            let array:[String] = constant.role as! [String]
-            if let i = find(array, staff.role) {
-                println("Jason is at index \(i)")
-                let index = i + 1
-                self.roleID = String(index)
-            } else {
-                println("Jason isn't in the array")
-            }
-            
-            let array1:[String] = constant.specialist as! [String]
-            if let i = find(array1, staff.speciality) {
-                println("Jason is at index \(i)")
-                let index = i + 1
-                self.specialistID = String(index)
-            } else {
-                println("Jason isn't in the array")
-            }
-            
-            
-            firstNameTextField.text = staff.firstname
-            lastNameTextField.text = staff.surname
-            emailTextField.text = staff.email
-            roleIDTextView.text = staff.role
-            generalPracIDTextView.text = staff.general_practional_id
-            specialityTextField.text = staff.speciality
-            staffID.text = staff.member_id
-            if staff.image != "" {
+        staffImageView.clipsToBounds = true
+        staffImageView.layer.cornerRadius = 120/2
+        staffImageView.image = UIImage(named: "defaultImage")
+        topView.addSubview(staffImageView)
+        
+        let uploadImgBtn:UIButton = UIButton()
+        uploadImgBtn.frame.size = CGSizeMake(120, 30)
+        uploadImgBtn.frame.origin.y = staffImageView.frame.size.height + 40
+        uploadImgBtn.center.x = staffImageView.center.x
+        uploadImgBtn.setTitle("UPLOAD PIC", forState: UIControlState.Normal)
+        uploadImgBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        uploadImgBtn.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        uploadImgBtn.backgroundColor = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1)
+        uploadImgBtn.layer.cornerRadius = 5
+        uploadImgBtn.clipsToBounds = true
+        
+        topView.addSubview(uploadImgBtn)
+        self.tableView.addSubview(topView)
+        
+        if sharedDataSingleton.selectedStaff != nil {
+            if sharedDataSingleton.selectedStaff.image != "" {
                 let URL = NSURL(string: staff.image)!
                 staffImageView.hnk_setImageFromURL(URL)
             }else {
@@ -113,185 +252,16 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
             }
         }
         
-        firstNameTextField.delegate = self
-        emailTextField.delegate = self
-        roleIDTextView.delegate = self
-        generalPracIDTextView.delegate = self
-        lastNameTextField.delegate = self
-        specialityTextField.delegate = self
-        staffID.delegate = self
-        
-        validator.styleTransformers(success:{ (validationRule) -> Void in
-            // clear error label
-            validationRule.errorLabel?.hidden = true
-            validationRule.errorLabel?.text = ""
-            validationRule.textField.layer.borderColor = UIColor.greenColor().CGColor
-            validationRule.textField.layer.borderWidth = 0.5
-            
-            }, error:{ (validationError) -> Void in
-                println("error")
-                validationError.errorLabel?.hidden = false
-                validationError.errorLabel?.text = validationError.errorMessage
-                validationError.textField.layer.borderColor = UIColor.redColor().CGColor
-                validationError.textField.layer.borderWidth = 1.0
-        })
-        
-        
-        
-        validator.registerField(firstNameTextField, rules: [RequiredRule(), FullNameRule()])
-        validator.registerField(lastNameTextField, rules: [RequiredRule(), FullNameRule()])
-        validator.registerField(specialityTextField, rules: [RequiredRule(), FullNameRule()])
-        validator.registerField(emailTextField, rules: [RequiredRule(), EmailRule()])
-        validator.registerField(generalPracIDTextView, rules: [RequiredRule(), FullNameRule()])
-        //        validator.registerField(roleIDTextView, rules: [RequiredRule(), FullNameRule()])
-        validator.registerField(staffID, rules: [RequiredRule(), FullNameRule()])
-        
-        
-//        
-//        navBar.target = self.revealViewController()
-//        navBar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
-        recognizer = UITapGestureRecognizer(target: self, action: "popUp:")
-        recognizer.cancelsTouchesInView = false
-        specialityView.addGestureRecognizer(recognizer)
-        
-        roleTap = UITapGestureRecognizer(target: self, action: "popUp:")
-        roleView.addGestureRecognizer(roleTap)
-        
-        tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-        
-        firstNameTextField.layer.cornerRadius = 5
-        emailTextField.layer.cornerRadius = 5
-        roleView.layer.cornerRadius = 5
-        
-        roleIDTextView.layer.cornerRadius = 5
-        generalPracIDTextView.layer.cornerRadius = 5
-        lastNameTextField.layer.cornerRadius = 5
-        specialityView.layer.cornerRadius = 5
-        
-        specialityTextField.layer.cornerRadius = 5
-        staffID.layer.cornerRadius = 5
-        
-        firstNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        lastNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        specialityTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        generalPracIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        roleIDTextView.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        staffID.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        
-        
-        
-        saveButton.layer.cornerRadius = 4
-        
-        // Do any additional setup after loading the view.
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-        
-        
+        self.setScreeName("Add Staff View");
         
     }
     
-    func popUp(sender:UITapGestureRecognizer) {
-        if sender.view == self.roleView {
-            self.displayPopOver(roleView)
-        }else {
-            self.displayPopOver(self.specialityView)
-        }
+    override func viewWillDisappear(animated: Bool) {
+        sharedDataSingleton.isEditingProfile = false
+        sharedDataSingleton.selectedStaff = nil
     }
     
-    
-    func displayPopOver(sender: UIView){
-        
-        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        var contentViewController : PopUpTableViewController = storyboard.instantiateViewControllerWithIdentifier("PopUpTableViewController") as! PopUpTableViewController
-        
-        let height:CGFloat?
-        
-        if sender == self.roleView{
-            contentViewController.list = constant.role
-            height = 44 *  CGFloat(constant.role.count)
-        }else {
-            contentViewController.list = constant.specialist
-            height = 44 *  CGFloat(constant.specialist.count)
-        }
-        
-        contentViewController.delegate = self
-        contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height!)
-        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
-        detailPopover.sourceView = sender
-        detailPopover.sourceRect.origin.x = 50
-        detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
-        detailPopover.delegate = self
-        presentViewController(contentViewController, animated: true, completion: nil)
-        
-    }
-    
-    func popUpTableViewControllerDidCancel(controller: PopUpTableViewController) {
-        
-    }
-    
-    func popUpTableViewController(controller: PopUpTableViewController, didSelectItem item: String, inRow: String, fromArray: [AnyObject]) {
-        if fromArray[0] === self.constant.specialist[0] {
-            self.specialityTextField.text = item
-            self.specialistID = inRow
-            println(inRow)
-        }else {
-            self.roleID = inRow
-            println(inRow)
-            roleIDTextView.text = item
-        }
-        
-        
-    }
-
-    func popUpTableViewwController(controller: PopUpTableViewController, selectedStaffs staff: [Staff], withIDs ids: [String], andName name: String) {
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        setScreeName("Add staff")
-    }
-    
-    override func viewWillLayoutSubviews() {
-        staffImageView.layer.masksToBounds = false
-        staffImageView.layer.cornerRadius = staffImageView.frame.size.width / 2
-        staffImageView.clipsToBounds = true
-    }
-    
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            println("done")
-        })
-        staffImageView.image = image
-        self.staffImage = image
-    }
-    
-    
-    func handleSingleTap(sender:UITapGestureRecognizer){
-        self.view.endEditing(true)
-    }
-    
-    func validationFailed(errors: [UITextField : ValidationError]) {
-        setErrors()
-    }
-    
-    private func setErrors(){
-        for (field, error) in validator.errors {
-            field.layer.borderColor = UIColor.redColor().CGColor
-            field.layer.borderWidth = 1.0
-            error.errorLabel?.text = error.errorMessage
-            error.errorLabel?.hidden = false
-        }
-    }
-    
-    func validationSuccessful() {
-        // submit the form
+    @IBAction func submit(sender: UIBarButtonItem) {
         
         var message:String = ""
         if isUpdatingStaff == true {
@@ -302,34 +272,46 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         SwiftSpinner.show(message, animated: true)
         
-        var firstname:String = firstNameTextField.text!
-        var surname:String = lastNameTextField.text!
-        var gpID:String = generalPracIDTextView.text!
-        var specialityID:String = specialistID
-        var member_id:String = staffID.text!
-        var role_id:String = self.roleID
-        var email:String = emailTextField.text!
+        staff.medical_facility_id = sharedDataSingleton.user.clinic_id
         
-        staff.medical_facility_id = sharedDataSingleton.user.medical_facility
-        staff.speciality = specialityID
-        staff.general_practional_id = gpID
-        staff.member_id = member_id
-        staff.role = role_id
-        staff.email = email
-        staff.surname=surname
-        staff.firstname = firstname
+        if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
+            staff.speciality = String(specialist_id)
+        }
         
-        var staffMethods = StaffNetworkCall()
+        if let general_practional_id = form.formRowWithTag(Tags.gpID.rawValue)!.value as? String {
+            staff.general_practional_id = general_practional_id
+            
+        }
+        
+        if let member_id = form.formRowWithTag(Tags.memberID.rawValue)!.value as? String {
+            staff.member_id = member_id
+        }
+        
+        if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
+            staff.role = String(role)
+        }
+        
+        if let email = form.formRowWithTag(Tags.email.rawValue)!.value as? String {
+            staff.email = email
+        }
+        if let surname = form.formRowWithTag(Tags.surname.rawValue)!.value as? String {
+            staff.surname = surname
+        }
+        if let forename = form.formRowWithTag(Tags.forename.rawValue)!.value as? String {
+            staff.firstname = forename
+        }
+        
+        let staffMethods = StaffNetworkCall()
         staffMethods.create(staff, image: staffImage, isCreatingNewStaff: !isUpdatingStaff) { (success) -> Void in
             if success == true {
-                SwiftSpinner.hide(completion: { () -> Void in
+                SwiftSpinner.hide({ () -> Void in
                     //                                self.delegate.addStaffViewController(self, finishedAddingStaff: self.staff)
                     let staffProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StaffProfileViewController") as! StaffProfileViewController
                     staffProfileViewController.staff = sharedDataSingleton.selectedStaff
                     self.navigationController?.pushViewController(staffProfileViewController, animated: true)
                 })
             }else {
-                SwiftSpinner.hide(completion: { () -> Void in
+                SwiftSpinner.hide({ () -> Void in
                     let alertView = SCLAlertView()
                     alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
                     alertView.alertIsDismissed({ () -> Void in
@@ -342,28 +324,45 @@ class AddStaffViewController: UIViewController, UINavigationControllerDelegate, 
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
         
+        
+    }
+    
+    
+    
+    func pressed(sender: UIButton!) {
+        print("upload")
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
+            imagePicker.allowsEditing = false
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            print("done")
+        })
+        self.staffImage = image
+        staffImageView.image = image
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
     {
         return UIModalPresentationStyle.None
     }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y -= keyboardSize.height/1.8
-        }
-        
+
+// MARK: XLFormDescriptorDelegate
+
+    override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
+        super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
+
+
     }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y += keyboardSize.height/1.8
-        }
-    }
-    
-    
+
+
+
 }
 
 extension AddStaffViewController {
@@ -389,8 +388,3 @@ extension AddStaffViewController {
     
     
 }
-
-
-
-
-

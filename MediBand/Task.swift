@@ -18,7 +18,7 @@ class Task{
     var care_activity_category_id:String = ""
     var selected_staff_ids:[String] = [];
     var medical_facility:String = ""
-    var created:String = ""
+    var created:NSDate = NSDate()
     var modified:String = ""
     var id:String = ""
     var resolution:String = ""

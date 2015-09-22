@@ -12,11 +12,11 @@ class ActivitySegmentControl: UISegmentedControl {
 
     @IBInspectable var allowReselection: Bool = true
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let previousSelectedSegmentIndex = self.selectedSegmentIndex
         super.touchesEnded(touches, withEvent: event)
         if allowReselection && previousSelectedSegmentIndex == self.selectedSegmentIndex {
-            if let touch = touches.first as? UITouch {
+            if let touch = touches.first {
                 let touchLocation = touch.locationInView(self)
                 if CGRectContainsPoint(bounds, touchLocation) {
                     self.sendActionsForControlEvents(.ValueChanged)

@@ -25,15 +25,14 @@ class NewTaskViewController: XLFormViewController {
         case resolution = "resolution"
         case selectedStaff = "selectedStaff"
     }
-
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         getStaff()
+        self.tableView.contentInset = UIEdgeInsetsMake(75, 0, 0, 0)
         self.tableView.backgroundColor = UIColor.whiteColor()
         view.backgroundColor = UIColor.whiteColor()
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         let topView:UIView = UIView(frame: CGRectMake(0, 0, view.frame.size.width, 250))
         topView.backgroundColor = UIColor.whiteColor()
@@ -60,29 +59,34 @@ class NewTaskViewController: XLFormViewController {
         label.frame.origin.y = patientImageView.frame.height + 60
         label.center.x = patientImageView.center.x
         label.textAlignment = NSTextAlignment.Center
-//        label.text = sharedDataSingleton.selectedPatient.forename + " " + sharedDataSingleton.selectedPatient.surname
-
+        label.text = sharedDataSingleton.selectedPatient.forename + " " + sharedDataSingleton.selectedPatient.surname
+        
         topView.addSubview(label)
         
         self.tableView.addSubview(topView)
-
+        
         // Do any additional setup after loading the view.
     }
     
-    
+    override func viewDidAppear(animated: Bool) {
+        self.setScreeName("Create Task View")
+        if let specialist = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formDisplayText() {
+            sharedDataSingleton.specialistFilterString = specialist
+        }
+        print(sharedDataSingleton.specialistFilterString)
+    }
     
     @IBAction func submit(sender: UIBarButtonItem) {
         
         
         self.trackEvent("UX", action: "New Task created", label: "Save button to create new task", value: nil)
-//        SwiftSpinner.show("Creating Task", animated: true)
+        SwiftSpinner.show("Creating Task", animated: true)
         let task = Task()
         let taskAPI = TaskAPI()
         var results = [String:AnyObject]()
         if let care_activity_id = form.formRowWithTag(Tags.careActivity.rawValue)!.value?.formValue() as? Int {
             task.care_activity_id = String(care_activity_id)
-           results["care_activity_id"] = care_activity_id
-            println(care_activity_id)
+            results["care_activity_id"] = care_activity_id
         }
         
         if let care_activity_type_id = form.formRowWithTag(Tags.careType.rawValue)!.value?.formValue() as? Int {
@@ -97,25 +101,34 @@ class NewTaskViewController: XLFormViewController {
             task.specialist_id = String(specialist_id)
         }
         
-        if let staff_ids = form.formRowWithTag(Tags.specialist.rawValue)!.value as? Int {
-//            task.specialist_id = String(specialist_id)
+        if let staff_ids = form.formRowWithTag(Tags.selectedStaff.rawValue)!.value as? [String] {
+            
+            task.selected_staff_ids = staff_ids
+            
         }
+        task.patient_id = sharedDataSingleton.selectedPatient.patient_id
         
-
+        print(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
+        
+        
+        
         taskAPI.createTask(task, callback: { (createdtask:AnyObject?, error:NSError?) -> () in
             if error != nil {
                 
             }else {
-                let newtask = createdtask as! Task
-                SwiftSpinner.hide(completion: nil)
-                self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
-                println("this is newtask \(newtask.resolution)")
+                if let newtask = createdtask as? Task {
+                    SwiftSpinner.hide(nil)
+                    sharedDataSingleton.selectedIDs = []
+                    self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
+                    print("this is newtask \(newtask.resolution)")
+                }
+                
             }
         })
         
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -127,21 +140,21 @@ class NewTaskViewController: XLFormViewController {
     
     
     func getStaff(){
-        var staffMethods = StaffNetworkCall()
+        let staffMethods = StaffNetworkCall()
         
-//        if sharedDataSingleton.allStaffs.count == 0 {
-//            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
-//                if(done){
-//                    println("all staffs fetched and passed from staff table view controller")
-//                }else{
-//                    println("error fetching and passing all staffs from staff table view controller")
-//                }
-//            })
-//        }
+        if sharedDataSingleton.allStaffs.count == 0 {
+            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
+                if(done){
+                    print("all staffs fetched and passed from staff table view controller")
+                }else{
+                    print("error fetching and passing all staffs from staff table view controller")
+                }
+            })
+        }
     }
     
     @IBAction func saveActionButton() {
-
+        
     }
     
     func initializeForm() {
@@ -240,11 +253,11 @@ class NewTaskViewController: XLFormViewController {
         ]
         row.required = true
         section.addFormRow(row)
-    
+        
         // Care Type
         row = XLFormRowDescriptor(tag: "careType", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Type of Care Activity")
         row.value = XLFormOptionsObject(value: 1, displayText: "Admin Event")
-        println(row.value?.formValue())
+        print(row.value?.formValue())
         row.selectorTitle = "Admin Event"
         row.selectorOptions = [XLFormOptionsObject(value: 1, displayText:"Admin EventT"),
             XLFormOptionsObject(value: 2, displayText:"Administration Error"),
@@ -283,8 +296,8 @@ class NewTaskViewController: XLFormViewController {
         
         self.form = form
     }
-
-
+    
+    
 }
 
 extension NewTaskViewController {
@@ -311,11 +324,11 @@ extension NewTaskViewController {
 }
 
 extension UINavigationController {
-    public override func supportedInterfaceOrientations() -> Int {
-        if visibleViewController is NewCareActivityViewController {
-            return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if visibleViewController is NewTaskViewController {
+            return UIInterfaceOrientationMask.Portrait
         }
-        return Int(UIInterfaceOrientationMask.All.rawValue)
+        return UIInterfaceOrientationMask.All
     }
 }
 

@@ -11,10 +11,9 @@ import SwiftSpinner
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, NSURLConnectionDataDelegate {
     
-    
-    
     @IBOutlet var searchBar: UISearchBar!
     var searchActive : Bool = false
+    var reverseSort: Bool = false
     var filtered:[Task] = []
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
@@ -36,10 +35,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.searchBar.delegate = self
 
         self.tasks = sharedDataSingleton.staffTask
-      getTask()
-        navBar.target = self.revealViewController()
-        navBar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        if self.revealViewController() != nil {
+            navBar.target = self.revealViewController()
+            navBar.action = Selector("revealToggle:")
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+
         tableView.contentInset = UIEdgeInsets(top: -40, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
@@ -47,11 +48,10 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewWillAppear(animated: Bool) {
+        getTask()
         self.setScreeName("Task View")
     }
     
-    
-  
     func getTask() {
         let taskAPI = TaskAPI()
         
@@ -70,7 +70,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 //                    self.tasks = sharedDataSingleton.tasks\
                     self.tasks = sharedDataSingleton.patientTask
                     self.tableView.reloadData()
-                    SwiftSpinner.hide(completion: nil)
+                    SwiftSpinner.hide(nil)
                 })
                 
             }
@@ -98,7 +98,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
                 self.tasks = sharedDataSingleton.staffTask
 //                self.tasks = sharedDataSingleton.tasks
                 self.tableView.reloadData()
-                SwiftSpinner.hide(completion: nil)
+                SwiftSpinner.hide(nil)
             })
             
         }
@@ -112,7 +112,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         case 0:
             displayPopOver(sender )
         case 1:
-            println("date")
+            print("date")
+            sortByDate()
         default:
             break
         
@@ -131,9 +132,9 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         return count
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        println(touches)
+        print(touches)
         self.view.endEditing(true)
     }
     
@@ -154,13 +155,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
             cell.resolutionLabel.text = task.resolution
             
-            var dateString = task.created
-            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            var dateString = ""
             let formatter : NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            let date = formatter.dateFromString(subString)
             formatter.dateFormat = "EEE, MMM d, yyyy"
-            dateString = formatter.stringFromDate(date!)
+            dateString = formatter.stringFromDate(task.created)
             
             cell.dateLabel.text = dateString
         }else if tasks.count > 0 {
@@ -178,13 +177,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
             cell.resolutionLabel.text = task.resolution
             
-            var dateString = task.created
-            let subString = dateString.substringWithRange(Range<String.Index>(start: advance(dateString.startIndex, 0), end: advance(dateString.endIndex, -9)))
+            var dateString = ""
             let formatter : NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            let date = formatter.dateFromString(subString)
             formatter.dateFormat = "EEE, MMM d, yyyy"
-            dateString = formatter.stringFromDate(date!)
+            dateString = formatter.stringFromDate(task.created)
    
             cell.dateLabel.text = dateString
         } else {
@@ -243,7 +240,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 //            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id)
             taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id, callback: { (success, error) -> () in
                 if error == nil {
-                    println(success)
+                    print(success)
                 }
             })
             // Note that indexPath is wrapped in an array:  [indexPath]
@@ -262,12 +259,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
     func fetchStringValueFromArray(constantArray:[AnyObject], atIndex indexAsString:String)->String {
         var count:Int?
-       let index = indexAsString.toInt()
+       let index = Int(indexAsString)
         if let i = index {
             count = i - 1
         }
-        println(constantArray)
-        println(count)
+        print(constantArray)
+        print(count)
         if count >= constantArray.count {
             return ""
         }else {
@@ -294,12 +291,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-//        let bobPredicate = NSPredicate(format: "firstName = 'Bob'")
-//        filtered = self.tasks.filter({ (text) -> Bool in
-//            let tmp: NSString = text
-//            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-//            return range.location != NSNotFound
-//        })
+        let constants = Contants()
+        filtered = self.tasks.filter({ (aTask: Task) -> Bool in
+            let tmp: NSString = self.fetchStringValueFromArray(constants.specialist, atIndex: (aTask.specialist_id as String))
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
         if(filtered.count == 0){
             searchActive = false;
         } else {
@@ -307,14 +304,34 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         }
         self.tableView.reloadData()
     }
-    
+    func sortByDate() {
+        if searchActive == true {
+            if reverseSort == false {
+                self.filtered.sortInPlace({ $0.created.timeIntervalSinceNow <  $1.created.timeIntervalSinceNow })
+                reverseSort = true
+            }else {
+                self.filtered.sortInPlace({ $0.created.timeIntervalSinceNow > $1.created.timeIntervalSinceNow })
+                reverseSort = false
+            }
+            searchActive = true;
+        }else {
+            if reverseSort == false {
+                self.tasks.sortInPlace({ $0.created.timeIntervalSinceNow <  $1.created.timeIntervalSinceNow })
+                reverseSort = true
+            }else {
+                self.tasks.sortInPlace({ $0.created.timeIntervalSinceNow > $1.created.timeIntervalSinceNow })
+                reverseSort = false
+            }
+        }        
+        self.tableView.reloadData()
+    }
     func displayPopOver(sender: AnyObject){
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        var contentViewController : ActivityStatusTableViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityStatusTableViewController") as! ActivityStatusTableViewController
+        let contentViewController : ActivityStatusTableViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityStatusTableViewController") as! ActivityStatusTableViewController
         contentViewController.delegate = self
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
         contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, 396)
-        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
+        let detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
         detailPopover.sourceView = sender as! UIView
         detailPopover.sourceRect.origin.x = 50
         detailPopover.sourceRect.origin.y = sender.frame.size.height
@@ -330,13 +347,28 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 //    }
 //    
     func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
-        println(item)
+        print(item)
+        let constants = Contants()
+        filtered = self.tasks.filter({ (aTask: Task) -> Bool in
+            let tmp: NSString = aTask.resolution
+            let range = tmp.rangeOfString(item, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+        
+        
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "viewActivity" {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = navigationController.topViewController as! ActivityDetailsViewController
+
+            let controller = segue.destinationViewController as! ActivityDetailsViewController
             controller.task = sender as! Task
         }
     }

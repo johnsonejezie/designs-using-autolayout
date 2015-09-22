@@ -19,7 +19,7 @@ class User {
     var speciality: String = ""
     var id : String = ""
     var general_practitioner_id: String = ""
-    var image:AnyObject = ""
+    var image:String = ""
     var created: String = ""
     var modified: String = ""
     var is_password_set:Bool = true

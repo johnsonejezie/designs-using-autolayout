@@ -22,7 +22,7 @@ class StaffNetworkCall{
     func create(staff:Staff, image:UIImage?, isCreatingNewStaff:Bool, completionBlock:(success:Bool)->Void){
         isCreatingStaff = true
         var url:String = ""
-        println("this is staff obj \(staff)")
+        print("this is staff obj \(staff)")
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
@@ -37,6 +37,8 @@ class StaffNetworkCall{
             "firstname":staff.firstname
         ];
         
+        print("this is staff obj \(data)")
+        
         if isCreatingNewStaff == true {
             url = "http://iconglobalnetwork.com/mediband/api/create_staff"
         }else {
@@ -44,7 +46,7 @@ class StaffNetworkCall{
         }
         if let anImage:UIImage = image {
             let imageData = UIImageJPEGRepresentation(image!, 0.6)
-            let mm = NetData(data: imageData, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
+            let mm = NetData(data: imageData!, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
             var parameters : [String:AnyObject] = [
                 "medical_facility_id":staff.medical_facility_id,
                 "speciality_id":staff.speciality,
@@ -57,31 +59,35 @@ class StaffNetworkCall{
                 "image":mm
             ]
             
-            println("this is staff obj \(data)")
+            print("this is staff obj \(data)")
             let urlRequest = self.urlRequestWithComponents(url, parameters: parameters)
             Alamofire.upload(urlRequest.0, data: urlRequest.1)
                 .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                    println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-                }
-                .responseJSON { (request, response, JSON, error) in
-                    if error != nil {
-                        completionBlock(success: false)
-                    }else {
-                        if let result:AnyObject = JSON {
-                            if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
-                                self.parseDict(dict)
-                            }
+                    print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                }.responseJSON { _, _, result in
+                    print("this is \(result.value)")
+                    debugPrint(result)
+                    
+                    if (result.value != nil) {
+                        if let resultDict:AnyObject = result.value {
+                        if let dict:[String: AnyObject] = resultDict["data"] as? [String: AnyObject]{
+                          self.parseDict(dict)
                         }
-                        completionBlock(success: true)
                     }
-                    println("REQUEST \(request)")
-                    println("RESPONSE \(response)")
-                    println("JSON \(JSON)")
-                    println("ERROR \(error)")
+                        completionBlock(success: true)
+                    }else {
+                        completionBlock(success: false)
+                        
+                    }
+                    
+                    
+                    
             }
+
+//            }
         }else {
             self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
-                println(responseObject)
+                print(responseObject)
                 let result:AnyObject = responseObject
                     if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
                         self.parseDict(dict)
@@ -89,7 +95,7 @@ class StaffNetworkCall{
                 completionBlock(success: true)
                 }, failure:{ (requestOperation, error) -> Void in
                     completionBlock(success: false)
-                    println(error)
+                    print(error)
             })
         }
 
@@ -100,9 +106,9 @@ class StaffNetworkCall{
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         self.operationManger.POST("http://iconglobalnetwork.com/mediband/api/edit_staff", parameters: staff, success: { (requestOperation, responseObject) -> Void in
-            println(responseObject)
+            print(responseObject)
             }, failure:{ (requestOperation, error) -> Void in
-                println(error)
+                print(error)
         })
         
     }
@@ -115,9 +121,9 @@ class StaffNetworkCall{
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         let data : [String:String] = ["email":email]
         self.operationManger.POST("http://iconglobalnetwork.com/mediband/api/view_staff", parameters: data, success: { (requestOperation, responseObject) -> Void in
-            println(" view staff :: \(responseObject)")
+            print(" view staff :: \(responseObject)")
             }, failure:{ (requestOperation, error) -> Void in
-            println(" view staff :: \(error)")
+            print(" view staff :: \(error)")
         })
     }
     
@@ -128,21 +134,21 @@ class StaffNetworkCall{
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         let data : [String:String] = ["medical_facility_id":medical_facility_id]
         self.operationManger.POST("http://www.iconglobalnetwork.com/mediband/api/get_staff", parameters: data, success: { (requestOperation, responseObject) -> Void in
-            println(responseObject)
+            print(responseObject)
             
             let responseDicts = responseObject as! [String:AnyObject]
             if let arrayDict:AnyObject = responseDicts["data"]{
             
                 self.parseStaffs(arrayDict as! [AnyObject], completionBlock: { (done) -> Void in
                     if (done) {
-                        println("all staffs parsed")
+                        print("all staffs parsed")
                         sharedDataSingleton.allStaffs = self.allStaff
                          completionBlock(done:true)
                     }
                 })
             }
             }, failure:{ (requestOperation, error) -> Void in
-                println(error)
+                print(error)
              
                   completionBlock(done:false)
         })
@@ -158,12 +164,12 @@ class StaffNetworkCall{
             }
         }
 //        sharedDataSingleton.allStaffs = result
-         println("staff count 1 \(sharedDataSingleton.allStaffs.count) ")
+         print("staff count 1 \(sharedDataSingleton.allStaffs.count) ")
         completionBlock(done:true)
     }
     
     func parseDict(dict:[String:AnyObject]) {
-        var staffData = Staff()
+        let staffData = Staff()
         staffData.id = dict["id"] as! String
         if let general_practional_id:String = dict["general_practitioner_id"]  as? String{
             staffData.general_practional_id = general_practional_id;
@@ -196,7 +202,7 @@ class StaffNetworkCall{
         }
         staffData.email = dict["email"] as! String
         
-        print(staffData)
+        print(staffData, terminator: "")
         if isCreatingStaff == true {
             sharedDataSingleton.selectedStaff = staffData
         }

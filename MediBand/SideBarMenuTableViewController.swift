@@ -19,6 +19,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         "Scan Patient",
         "Staff",
         "My Profile",
+        "Setting",
         "Logout"
     ]
     
@@ -28,6 +29,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         "Task",
         "Scan Patient",
         "My Profile",
+        "Setting",
         "Logout"
     ]
 
@@ -44,7 +46,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SideMenuCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SideMenuCell", forIndexPath: indexPath) 
         let sideMenuContent:[AnyObject]
         if sharedDataSingleton.user.isAdmin == true {
             sideMenuContent = sideMenuForAdmin
@@ -57,10 +59,11 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        println(sharedDataSingleton.user.isAdmin)
+        print(sharedDataSingleton.user.isAdmin)
         if sharedDataSingleton.user.isAdmin == true {
             switch (indexPath.row) {
             case 0:
+                performSegueWithIdentifier("GoToHome", sender: nil)
                 break
             case 1:
                 performSegueWithIdentifier("GoToPatients", sender: nil)
@@ -78,6 +81,9 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
                 performSegueWithIdentifier("GoToProfile", sender: nil)
                 break
             case 6:
+                performSegueWithIdentifier("GoToSettings", sender: nil)
+                break
+            case 7:
                 logout()
                 break
             default:
@@ -88,6 +94,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
             
             switch (indexPath.row) {
             case 0:
+                performSegueWithIdentifier("GoToHome", sender: nil)
                 break
             case 1:
                 performSegueWithIdentifier("GoToPatients", sender: nil)
@@ -102,6 +109,8 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
                 performSegueWithIdentifier("GoToProfile", sender: nil)
                 break
             case 5:
+                performSegueWithIdentifier("GoToSettings", sender: nil)
+            case 6:
                 logout()
                 break
             default:
@@ -114,8 +123,8 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
         let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
         destroy()
-        println(removeEmailSuccessful)
-        println(removePasswordSuccessful)
+        print(removeEmailSuccessful)
+        print(removePasswordSuccessful)
         performSegueWithIdentifier("LogOut", sender: nil)
     }
     
@@ -128,28 +137,16 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         sharedDataSingleton.patientHistory = []
         sharedDataSingleton.staffHistory = []
     }
-    
-    func displayPopOver(sender: AnyObject){
-        let height = CGFloat(88)
-        let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        var contentViewController : SelectPatientPopOverTableViewController = storyboard.instantiateViewControllerWithIdentifier("SelectPatientPopOverTableViewController") as! SelectPatientPopOverTableViewController
-//        contentViewController.delegate = self
-        contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, height)
-        var detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
-        detailPopover.sourceView = sender as! UIView
-        detailPopover.sourceRect.origin.x = 50
-        detailPopover.permittedArrowDirections = UIPopoverArrowDirection.Any
-        detailPopover.delegate = self
-        presentViewController(contentViewController, animated: true, completion: nil)
         
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "GoToProfile" {
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! StaffProfileViewController
             controller.isMyProfile = true
+        }else if segue.identifier == "GoToStaff" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! StaffTableViewController
+            controller.sideMenuRequired = true
         }
     }
     

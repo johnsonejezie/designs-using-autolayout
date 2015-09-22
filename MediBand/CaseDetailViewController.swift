@@ -2,87 +2,46 @@
 //  CaseDetailViewController.swift
 //  MediBand
 //
-//  Created by Johnson Ejezie on 7/11/15.
+//  Created by Johnson Ejezie on 9/14/15.
 //  Copyright (c) 2015 Johnson Ejezie. All rights reserved.
 //
 
 import UIKit
 
-protocol caseDetailsControllerDelegate: class {
-    func caseDetailsController(controller: CaseDetailViewController,
-        filledInDetails details: String)
-}
-
 class CaseDetailViewController: UIViewController {
-    
+
     
     var tap:UITapGestureRecognizer!
+    var caseNoteDetails = ""
     
     @IBOutlet weak var addCaseNote: UIButton!
     
     @IBOutlet weak var cancelButton: UIButton!
-    weak var delegate: caseDetailsControllerDelegate!
-    
-    
-    @IBOutlet weak var okButton: UIButton!
     
     @IBOutlet weak var noteTextView: UITextView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addCaseNote.layer.cornerRadius = 5
         cancelButton.layer.cornerRadius = 4
-        okButton.layer.cornerRadius = 4
         noteTextView.layer.cornerRadius = 5
+        
+        noteTextView.text = caseNoteDetails
         
         tap = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-
         // Do any additional setup after loading the view.
     }
     
     func handleSingleTap(sender:UITapGestureRecognizer){
         self.view.endEditing(true)
     }
-
-
-    @IBAction func addCaseNoteButton() {
-        
-        println("add case note clicked")
-    }
-    
-    
-    
-    @IBAction func okayButtonAction() {
-        delegate?.caseDetailsController(self, filledInDetails: self.noteTextView.text)
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        println("ok button clicked")
-    }
-    
     
     @IBAction func cancel() {
         
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y -= keyboardSize.height/2
-        }
-        
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y += keyboardSize.height/2
-        }
-    }
-    
-    
 
 }
