@@ -127,11 +127,16 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     
     func createCaseNote(task_id:String) {
-        SwiftSpinner.show("Creating Case Note", animated: true)
         let caseNote = CaseNote()
         caseNote.task_id = task_id
         caseNote.staff_id = sharedDataSingleton.user.id
         caseNote.details = self.caseNoteDetails
+        if !Reachability.connectedToNetwork() {
+            let dictionary: Dictionary<String, Any> = ["requestType": "createCaseNote", "caseNote": caseNote]
+            sharedDataSingleton.outbox.append(dictionary)
+            return
+        }
+        SwiftSpinner.show("Creating Case Note", animated: true)
         let caseNoteAPI = CaseNoteAPI()
         caseNoteAPI.createCaseNote(caseNote, callback: { (createdCaseNote, error) -> () in
             if error == nil {

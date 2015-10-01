@@ -26,6 +26,7 @@ class DataSingleton {
     var selectedIDs = [String]()
     var isEditingProfile = false
     var specialistFilterString = ""
+    var outbox = [[String: Any]]()
 }
 
 let sharedDataSingleton = DataSingleton()

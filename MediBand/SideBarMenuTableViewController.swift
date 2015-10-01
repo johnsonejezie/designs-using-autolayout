@@ -20,6 +20,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         "Staff",
         "My Profile",
         "Setting",
+        "Outbox",
         "Logout"
     ]
     
@@ -30,6 +31,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         "Scan Patient",
         "My Profile",
         "Setting",
+        "Outbox",
         "Logout"
     ]
 
@@ -84,6 +86,8 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
                 performSegueWithIdentifier("GoToSettings", sender: nil)
                 break
             case 7:
+                performSegueWithIdentifier("GoToOutbox", sender: nil)
+            case 8:
                 logout()
                 break
             default:
@@ -111,6 +115,8 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
             case 5:
                 performSegueWithIdentifier("GoToSettings", sender: nil)
             case 6:
+                performSegueWithIdentifier("GoToOutbox", sender: nil)
+            case 7:
                 logout()
                 break
             default:

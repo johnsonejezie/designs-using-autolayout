@@ -212,6 +212,12 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     }
     
     func updateTaskStatus(resolution:String) {
+        if !Reachability.connectedToNetwork() {
+            let dictionary: Dictionary<String, Any> = ["requestType": "UpdateTaskStatus", "taskID": self.task.id, "staffID": sharedDataSingleton.user.id, "resolutionID": resolution]
+            sharedDataSingleton.outbox.append(dictionary)
+            SCLAlertView().showInfo("Network Unavilable", subTitle: "Your request has been save to the Outbox", closeButtonTitle: "Ok", duration: 200)
+            return
+        }
         let taskAPI = TaskAPI()
         taskAPI.updateTaskStatus(self.task.id, staff_id: sharedDataSingleton.user.id, resolution_id: resolution) { (updatedTask:AnyObject?, error:NSError?) -> () in
             if error != nil {

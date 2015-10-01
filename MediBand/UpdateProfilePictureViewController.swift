@@ -68,7 +68,6 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     }
     
     func update(){
-//      
         let constants = Contants()
         
         let indexofA = constants.specialist.filter({$0 as! String == sharedDataSingleton.user.speciality})
@@ -95,6 +94,12 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
             staff.email = sharedDataSingleton.user.email
             staff.surname = sharedDataSingleton.user.surname
             staff.firstname = sharedDataSingleton.user.firstName
+        
+        if !Reachability.connectedToNetwork() {
+            let dictionary: Dictionary<String, Any> = ["requestType": "UpdateStaff", "staff": self.staff, "image": self.staffImage, "isCreatingNewStaff": false]
+            sharedDataSingleton.outbox.append(dictionary)
+            return
+        }
 //
 //        
         let staffMethods = StaffNetworkCall()

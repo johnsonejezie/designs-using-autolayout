@@ -78,11 +78,10 @@ class NewTaskViewController: XLFormViewController {
     
     @IBAction func submit(sender: UIBarButtonItem) {
         
+        let task = Task()
         
         self.trackEvent("UX", action: "New Task created", label: "Save button to create new task", value: nil)
-        SwiftSpinner.show("Creating Task", animated: true)
-        let task = Task()
-        let taskAPI = TaskAPI()
+        
         var results = [String:AnyObject]()
         if let care_activity_id = form.formRowWithTag(Tags.careActivity.rawValue)!.value?.formValue() as? Int {
             task.care_activity_id = String(care_activity_id)
@@ -110,11 +109,16 @@ class NewTaskViewController: XLFormViewController {
         
         print(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
         
-        
-        
+        if !Reachability.connectedToNetwork() {
+            let dictionary: Dictionary<String, Any> = ["requestType": "CreateTask", "task": task]
+            sharedDataSingleton.outbox.append(dictionary)
+            return
+        }
+        SwiftSpinner.show("Creating Task", animated: true)
+        let taskAPI = TaskAPI()
         taskAPI.createTask(task, callback: { (createdtask:AnyObject?, error:NSError?) -> () in
             if error != nil {
-                
+
             }else {
                 if let newtask = createdtask as? Task {
                     SwiftSpinner.hide(nil)

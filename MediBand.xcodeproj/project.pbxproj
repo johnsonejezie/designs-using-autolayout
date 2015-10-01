@@ -13,6 +13,8 @@
 		422446A61B70D62B00C12612 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422446A51B70D62B00C12612 /* TaskAPI.swift */; };
 		4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4233C33B1B66588E00F8337E /* MenuViewController.swift */; };
 		42986A2C1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */; };
+		852681BA1BBD28B1009A86D0 /* OutboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852681B91BBD28B1009A86D0 /* OutboxViewController.swift */; };
+		85A5B6C21BBC4AB70033EBE1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A5B6C11BBC4AB70033EBE1 /* Reachability.swift */; };
 		A51D3FCB1B51060500C77665 /* PatientProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FCA1B51060500C77665 /* PatientProfileViewController.swift */; };
 		A51D3FD51B51653600C77665 /* CaseNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */; };
 		A51D3FD71B5184EC00C77665 /* CaseNoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */; };
@@ -42,9 +44,9 @@
 		A57D7D831B561E4100794EF5 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D821B561E4100794EF5 /* ActivityTableViewCell.swift */; };
 		A57D7D8B1B5670CF00794EF5 /* PatientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8A1B5670CF00794EF5 /* PatientsTableViewCell.swift */; };
 		A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */; };
-		A5C5868C1BAE83B000135CB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		A5C5868E1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		A5CC28351BAEEA620001A62F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CC28341BAEEA620001A62F /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A5C5868C1BAE83B000135CB3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */; };
+		A5C5868E1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */; };
+		A5CC28351BAEEA620001A62F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CC28341BAEEA620001A62F /* SWRevealViewController.m */; };
 		A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A481B4995E400DC15AB /* AppDelegate.swift */; };
 		A5D15A4B1B4995E400DC15AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D15A4A1B4995E400DC15AB /* ViewController.swift */; };
 		A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5D15A4C1B4995E400DC15AB /* Main.storyboard */; };
@@ -98,6 +100,8 @@
 		4233C33B1B66588E00F8337E /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailsViewController.swift; sourceTree = "<group>"; };
 		8139F1F108DEE0889D162C80 /* Pods-MediBand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediBand.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediBand/Pods-MediBand.release.xcconfig"; sourceTree = "<group>"; };
+		852681B91BBD28B1009A86D0 /* OutboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutboxViewController.swift; sourceTree = "<group>"; };
+		85A5B6C11BBC4AB70033EBE1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A51D3FCA1B51060500C77665 /* PatientProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientProfileViewController.swift; sourceTree = "<group>"; };
 		A51D3FD41B51653600C77665 /* CaseNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseNoteTableViewCell.swift; sourceTree = "<group>"; };
 		A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseNoteTableViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 				422446A51B70D62B00C12612 /* TaskAPI.swift */,
 				A52144711B78C8E500B65E22 /* LoginNetworkCall.swift */,
 				A55227C41B9A9FFA005A7AB1 /* CaseNoteAPI.swift */,
+				85A5B6C11BBC4AB70033EBE1 /* Reachability.swift */,
 			);
 			name = networkCalls;
 			sourceTree = "<group>";
@@ -289,30 +294,31 @@
 		A57B41E61B6FA3F1007C735F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A5EB78F11BA550F50054716E /* UsersTableViewController.swift */,
-				A5EB78EB1BA4027A0054716E /* AddStaffViewController.swift */,
-				A5D15A4A1B4995E400DC15AB /* ViewController.swift */,
-				420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */,
-				A51D3FCA1B51060500C77665 /* PatientProfileViewController.swift */,
-				A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */,
-				A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */,
-				A51D3FDC1B51C44400C77665 /* AddCaseViewController.swift */,
-				A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */,
-				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
 				A57D7D801B55CCD400794EF5 /* ActivitiesViewController.swift */,
-				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
-				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
 				42986A2B1B63C8FC00E50CC2 /* ActivityDetailsViewController.swift */,
 				A56E04CC1B6633D400640919 /* ActivityStatusTableViewController.swift */,
+				A51D3FDC1B51C44400C77665 /* AddCaseViewController.swift */,
+				A5EB78EB1BA4027A0054716E /* AddStaffViewController.swift */,
+				A51D3FDA1B51C00600C77665 /* AnimationPresentationController.swift */,
+				A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */,
+				A51D3FD61B5184EC00C77665 /* CaseNoteTableViewController.swift */,
+				A5EB78FF1BAA960E0054716E /* HomeViewController.swift */,
+				A57D7D7E1B55AA6300794EF5 /* LoginViewController.swift */,
 				4233C33B1B66588E00F8337E /* MenuViewController.swift */,
-				A521446D1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift */,
-				A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */,
 				A5EB78ED1BA40C510054716E /* NewPatientViewController.swift */,
 				A5EB78EF1BA549670054716E /* NewTaskViewController.swift */,
-				A5EB78F31BA64F140054716E /* CaseDetailViewController.swift */,
-				A5EB78FF1BAA960E0054716E /* HomeViewController.swift */,
+				A51D3FCA1B51060500C77665 /* PatientProfileViewController.swift */,
+				A57D7D8C1B56718600794EF5 /* PatientsViewController.swift */,
+				A57D7D7C1B5565B500794EF5 /* PopUpTableViewController.swift */,
+				A521446D1B77945100B65E22 /* SelectPatientPopOverTableViewController.swift */,
 				A5C5868B1BAE83B000135CB3 /* SettingsViewController.swift */,
+				A56E0C421B8085FA0098AE9D /* SideBarMenuTableViewController.swift */,
+				420F45F81B4BCF1B00CC9016 /* StaffProfileViewController.swift */,
+				A5DFFA0C1B64C5D40056C7FD /* StaffTableViewController.swift */,
 				A5C5868D1BAEBEDE00135CB3 /* UpdateProfilePictureViewController.swift */,
+				A5EB78F11BA550F50054716E /* UsersTableViewController.swift */,
+				A5D15A4A1B4995E400DC15AB /* ViewController.swift */,
+				852681B91BBD28B1009A86D0 /* OutboxViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -621,6 +627,7 @@
 				A57D7D8D1B56718600794EF5 /* PatientsViewController.swift in Sources */,
 				A5ED9B1F1B8BA74400E3EF49 /* SCLTimerDisplay.m in Sources */,
 				4233C33C1B66588E00F8337E /* MenuViewController.swift in Sources */,
+				85A5B6C21BBC4AB70033EBE1 /* Reachability.swift in Sources */,
 				A5EB78F41BA64F140054716E /* CaseDetailViewController.swift in Sources */,
 				422446A41B70D61500C12612 /* StaffNetworkCall.swift in Sources */,
 				A5D15A491B4995E400DC15AB /* AppDelegate.swift in Sources */,
@@ -640,6 +647,7 @@
 				A57B41B21B6D205F007C735F /* Staff.swift in Sources */,
 				A57B41B61B6D37D9007C735F /* PatientAPI.swift in Sources */,
 				A52144721B78C8E500B65E22 /* LoginNetworkCall.swift in Sources */,
+				852681BA1BBD28B1009A86D0 /* OutboxViewController.swift in Sources */,
 				420F45F91B4BCF1B00CC9016 /* StaffProfileViewController.swift in Sources */,
 				A5C5868C1BAE83B000135CB3 /* SettingsViewController.swift in Sources */,
 			);

@@ -270,8 +270,6 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
             message = "Creating Staff"
         }
         
-        SwiftSpinner.show(message, animated: true)
-        
         staff.medical_facility_id = sharedDataSingleton.user.clinic_id
         
         if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
@@ -300,6 +298,14 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         if let forename = form.formRowWithTag(Tags.forename.rawValue)!.value as? String {
             staff.firstname = forename
         }
+        
+        if !Reachability.connectedToNetwork() {
+            let dictionary: Dictionary<String, Any> = ["requestType": "CreateStaff", "staff": staff, "image": staffImage, "isCreatingNewStaff": !isUpdatingStaff]
+            sharedDataSingleton.outbox.append(dictionary)
+            return
+        }
+        
+        SwiftSpinner.show(message, animated: true)
         
         let staffMethods = StaffNetworkCall()
         staffMethods.create(staff, image: staffImage, isCreatingNewStaff: !isUpdatingStaff) { (success) -> Void in

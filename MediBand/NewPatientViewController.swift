@@ -401,6 +401,13 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             }else {
                 message = "Creating patient record"
             }
+            
+            if !Reachability.connectedToNetwork() {
+                let dictionary: Dictionary<String, Any> = ["requestType": "CreateNewPatient", "patient": patient, "fromMedicalFacility": 4, "image": patientImage, "isCreatingNewPatient": !isEditingPatient]
+                sharedDataSingleton.outbox.append(dictionary)
+                return
+            }
+            
             SwiftSpinner.show(message, animated: true)
             let patientAPI = PatientAPI()
             patientAPI.createNewPatient(patient, fromMedicalFacility: "4", image: self.patientImage, isCreatingNewPatient: !isEditingPatient) { (success) -> Void in
