@@ -302,6 +302,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         if !Reachability.connectedToNetwork() {
             let dictionary: Dictionary<String, Any> = ["requestType": "CreateStaff", "staff": staff, "image": staffImage, "isCreatingNewStaff": !isUpdatingStaff]
             sharedDataSingleton.outbox.append(dictionary)
+            presentViewController(Alert.outbox(), animated: false, completion: nil)
             return
         }
         

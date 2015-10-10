@@ -16,8 +16,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     var reverseSort: Bool = false
     var filtered:[Task] = []
     @IBOutlet weak var segmentControl: UISegmentedControl!
-    
-    
+    var currentPageNumber:Int = 1
+    let taskAPI = TaskAPI()
     
     @IBOutlet var navBar: UIBarButtonItem!
 
@@ -48,12 +48,12 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewWillAppear(animated: Bool) {
-        getTask()
+        let pageNoToString:String = String(currentPageNumber)
+        getTask(pageNoToString)
         self.setScreeName("Task View")
     }
     
-    func getTask() {
-        let taskAPI = TaskAPI()
+    func getTask(pageNo: String) {
         
         if isPatientTask == true {
             if let patient_id = patientID {
@@ -61,7 +61,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
                 if sharedDataSingleton.patientTask.count == 0 {
                     SwiftSpinner.show("Loading Task", animated: true)
                 }
-                taskAPI.getTaskByPatient(patient_id, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+                taskAPI.getTaskByPatient(patient_id, page: pageNo, callback: { (task:AnyObject?, error:NSError?) -> () in
                     if error != nil {
                         
                     }else {
@@ -89,7 +89,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             }
             
             
-            taskAPI.getTaskByStaff(staffID, page: "1", callback: { (task:AnyObject?, error:NSError?) -> () in
+            taskAPI.getTaskByStaff(staffID, page: pageNo, callback: { (task:AnyObject?, error:NSError?) -> () in
                 if error != nil {
             
                 }else {
@@ -384,6 +384,45 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             return navController
     }
 
+}
+
+extension ActivitiesViewController {
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == (tasks.count - 1) {
+            print("end of table")
+            ++currentPageNumber
+            let pageNoToString = String(currentPageNumber)
+            print("page number \(pageNoToString)")
+            if isPatientTask == true {
+                if let patient_id = patientID {
+                    taskAPI.getTaskByPatient(patient_id, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in
+                        if error == nil {
+                            self.tasks = sharedDataSingleton.patientTask
+                            self.tableView.reloadData()
+                        }
+                    })
+                    
+                }
+            }else {
+                var staffID :String
+                if srcViewStaffID != "" {
+                    staffID = srcViewStaffID
+                    srcViewStaffID = ""
+                }else{
+                    staffID = sharedDataSingleton.user.id
+                }
+                taskAPI.getTaskByStaff(staffID, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in
+                    if error == nil {
+                        self.tasks = sharedDataSingleton.staffTask
+                        self.tableView.reloadData()
+                    }
+                })
+                
+            }
+        }
+    }
+    
 }
 
 extension ActivitiesViewController {

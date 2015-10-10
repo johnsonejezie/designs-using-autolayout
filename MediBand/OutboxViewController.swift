@@ -8,6 +8,15 @@
 
 import UIKit
 
+class Alert {
+    class func outbox() -> UIAlertController {
+        let alert = UIAlertController(title: "Network Unavilable", message: "Your request has been save to the Outbox" , preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        return alert
+    }
+}
+
 class OutboxViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var navBar: UIBarButtonItem!
@@ -18,7 +27,7 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
             let requestType = value["requestType"] as! String
             switch requestType {
                 case "CreateStaff", "UpdateStaff":
-                    createUpdateStaff(value["staff"] as! Staff, staffImage: value["image"] as! UIImage, isCreatingNewStaff: value["isCreatingNewStaff"] as! Bool, index: index)
+                    createUpdateStaff(value["staff"] as! Staff, staffImage: value["image"] as? UIImage, isCreatingNewStaff: value["isCreatingNewStaff"] as! Bool, index: index)
                 case "CreateTask":
                     createTask(value["task"] as! Task, index: index)
                 case "CreateNewPatient":
@@ -34,7 +43,7 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    func createUpdateStaff(staff: Staff, staffImage: UIImage, isCreatingNewStaff: Bool, index: Int) {
+    func createUpdateStaff(staff: Staff, staffImage: UIImage?, isCreatingNewStaff: Bool, index: Int) {
         StaffNetworkCall().create(staff, image: staffImage, isCreatingNewStaff: isCreatingNewStaff) { [unowned self] in
             if $0 {
                 sharedDataSingleton.outbox.removeAtIndex(index)

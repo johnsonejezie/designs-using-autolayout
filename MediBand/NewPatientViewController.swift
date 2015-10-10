@@ -405,6 +405,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             if !Reachability.connectedToNetwork() {
                 let dictionary: Dictionary<String, Any> = ["requestType": "CreateNewPatient", "patient": patient, "fromMedicalFacility": 4, "image": patientImage, "isCreatingNewPatient": !isEditingPatient]
                 sharedDataSingleton.outbox.append(dictionary)
+                presentViewController(Alert.outbox(), animated: false, completion: nil)
                 return
             }
             

@@ -16,6 +16,9 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     var caseNoteDetails = ""
     var task: Task!
     var caseNotes = [CaseNote]()
+    var currentPageNumber:Int = 1
+    let caseNoteAPI = CaseNoteAPI()
+    
     @IBAction func addCaseNote(sender: AnyObject) {
         
         performSegueWithIdentifier("AddCaseNote", sender: nil)
@@ -33,7 +36,8 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Case Notes View")
-        getCaseNote(task.id, staff_id: sharedDataSingleton.user.id, page: "1")
+        let pageNoToString:String = String(currentPageNumber)
+        getCaseNote(task.id, staff_id: sharedDataSingleton.user.id, page: pageNoToString)
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -97,7 +101,6 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     func getCaseNote(task_id:String, staff_id:String, page:String) {
         if self.caseNotes.count == 0 {
             SwiftSpinner.show("Getting Case Notes", animated: true)
-            let caseNoteAPI = CaseNoteAPI()
             caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
                 if error == nil {
                     let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
@@ -111,7 +114,6 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
                 }
             }
         }else {
-            let caseNoteAPI = CaseNoteAPI()
             caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
                 if error == nil {
                     let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
@@ -182,6 +184,26 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         let animationPresentationController = AnimationPresentationController()
         return animationPresentationController
     }
+}
+
+extension CaseNoteTableViewController {
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == (caseNotes.count - 1) {
+            print("end of table")
+            ++currentPageNumber
+            let pageNoToString = String(currentPageNumber)
+            print("page number \(pageNoToString)")
+            caseNoteAPI.getCaseNotes(task.id, staff_id: sharedDataSingleton.user.id, page: pageNoToString) { (allCaseNotes, error) -> () in
+                if error == nil {
+                    let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!
+                    self.caseNotes += taskCaseNotes
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
 }
 
 extension CaseNoteTableViewController {

@@ -29,7 +29,7 @@ class PatientAPI {
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-            print("patiens response object \(responseObject)")
+            //print("patiens response object \(responseObject)")
             let dictionary = responseObject as! [String:AnyObject]
             self.parseDictionary(dictionary)
             completionHandler(success: true)

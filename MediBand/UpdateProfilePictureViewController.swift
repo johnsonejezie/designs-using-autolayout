@@ -98,6 +98,7 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
         if !Reachability.connectedToNetwork() {
             let dictionary: Dictionary<String, Any> = ["requestType": "UpdateStaff", "staff": self.staff, "image": self.staffImage, "isCreatingNewStaff": false]
             sharedDataSingleton.outbox.append(dictionary)
+            presentViewController(Alert.outbox(), animated: false, completion: nil)
             return
         }
 //

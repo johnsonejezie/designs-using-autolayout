@@ -215,7 +215,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         if !Reachability.connectedToNetwork() {
             let dictionary: Dictionary<String, Any> = ["requestType": "UpdateTaskStatus", "taskID": self.task.id, "staffID": sharedDataSingleton.user.id, "resolutionID": resolution]
             sharedDataSingleton.outbox.append(dictionary)
-            SCLAlertView().showInfo("Network Unavilable", subTitle: "Your request has been save to the Outbox", closeButtonTitle: "Ok", duration: 200)
+            presentViewController(Alert.outbox(), animated: false, completion: nil)
             return
         }
         let taskAPI = TaskAPI()

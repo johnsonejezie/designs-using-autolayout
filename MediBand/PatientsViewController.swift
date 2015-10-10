@@ -17,6 +17,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     var currentPageNumber:Int = 1
     var isRefreshing:Bool = false
     var isFirstLoad:Bool = true
+    let patientAPI = PatientAPI()
     
     @IBOutlet var navBar: UIBarButtonItem!
 
@@ -37,7 +38,6 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getPatients(pageNumber:String) {
-        let patientAPI = PatientAPI()
         if sharedDataSingleton.patients.count <= 0 {
             SwiftSpinner.show("Loading Patients", animated: true)
             patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNumber) { (success) -> Void in
@@ -111,7 +111,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.generalPhysicianLabel.hidden = false
             cell.patientImageView.hidden = false
             let patient = patients[indexPath.row]
-            print(patient.occupation)
+            //print(patient.occupation)
             cell.patientNameLabel.text = patient.forename + " " + patient.surname
             cell.generalPhysicianLabel.text = patient.gp
             
@@ -199,6 +199,25 @@ extension PatientsViewController {
         let tracker = GAI.sharedInstance().defaultTracker
         let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
         tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
+}
+
+extension PatientsViewController {
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == (patients.count - 1) {
+            print("end of table")
+            ++currentPageNumber
+            let pageNoToString = String(currentPageNumber)
+            print("page number \(pageNoToString)")
+            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNoToString) { (success) -> Void in
+                if success == true {
+                    self.patients = sharedDataSingleton.patients
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
 }
