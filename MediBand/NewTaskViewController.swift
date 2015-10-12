@@ -212,7 +212,7 @@ class NewTaskViewController: XLFormViewController {
         section.addFormRow(row)
         
         // Specialist
-        row = XLFormRowDescriptor(tag: "specialist", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Specialist")
+        row = XLFormRowDescriptor(tag: "specialist", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Specialty")
         row.value = XLFormOptionsObject(value: 1, displayText: "Anaesthetics")
         row.selectorTitle = "Anaesthetics"
         row.selectorOptions = [XLFormOptionsObject(value: 1, displayText:"Anaesthetics"),

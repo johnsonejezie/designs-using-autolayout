@@ -38,11 +38,11 @@ class HomeViewController: UIViewController  {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        myTaskBtn.backgroundColor = UIColor(red: 0.71, green: 0.07, blue: 0.01, alpha: 1)
-        myPatientsBtn.backgroundColor = UIColor(red: 0.01, green: 0.04, blue: 0.21, alpha: 1)
-        newPatientBtn.backgroundColor = UIColor(red: 0.01, green: 0.38, blue: 0.01, alpha: 1)
-        myProfileBtn.backgroundColor = UIColor(red: 0.14, green: 0.07, blue: 0.69, alpha: 1)
-        staffBtn.backgroundColor = UIColor(red: 0.42, green: 0.78, blue: 0.78, alpha: 1)
+        myTaskBtn.backgroundColor = UIColor(red: 206/255, green: 73/255, blue: 54/255, alpha: 1)
+        myPatientsBtn.backgroundColor = UIColor(red: 0.00, green: 51/255, blue: 102/255, alpha: 1)
+        newPatientBtn.backgroundColor = UIColor(red: 51/255, green: 152/255, blue: 0.00, alpha: 1)
+        myProfileBtn.backgroundColor = UIColor(red: 102/255, green: 0.00, blue: 204/255, alpha: 1)
+        staffBtn.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         
         myTaskBtn.titleLabel?.textAlignment = NSTextAlignment.Center
         myPatientsBtn.titleLabel?.textAlignment = NSTextAlignment.Center

@@ -20,14 +20,16 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
     var highlightView:UIView = UIView()
     var patientID: String = ""
     
-    @IBAction func slideMenuToggle(sender: UIBarButtonItem) {
-        
-    }
+    @IBOutlet var navBar: UIBarButtonItem!
+
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if ((self.revealViewController()) != nil){
+            self.navBar.target = self.revealViewController()
+            self.navBar.action = "revealToggle:"
+        }
         
         //resizable view
         self.highlightView.autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleRightMargin]

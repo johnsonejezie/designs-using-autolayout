@@ -16,19 +16,18 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 
     
     @IBOutlet var taskCareActivityLabel: UILabel!
-    @IBOutlet var assignedStaffLabel: UILabel!
-    @IBOutlet var taskResolutionLabel: UILabel!
-    @IBOutlet var taskSpecialistLabel: UILabel!
-    @IBOutlet var taskPatientImageView: UIImageView!
 
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var assignedByLabel: UILabel!
+    @IBOutlet var careTypeLabel: UILabel!
+
+    @IBOutlet var specialityLabel: UILabel!
     var currentCell : Int = 1;
     
     @IBOutlet var navBar: UIBarButtonItem!
-    @IBOutlet var attendingProfButton: UIButton!
     @IBOutlet var updateActivityButton: UIButton!
     @IBOutlet var viewCaseNoteButton: UIButton!
     @IBOutlet var viewPatientButton: UIButton!
-    @IBOutlet var patientProfilePic: UIImageView!
     @IBOutlet var attendingProfCollectionView: UICollectionView!
 
     var task:Task!
@@ -36,10 +35,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         getStaff()
-        
-        self.attendingProfButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        self.attendingProfButton.titleLabel?.numberOfLines = 1;
-        self.attendingProfButton.layer.cornerRadius = 5.0;
+
         self.updateActivityButton.layer.cornerRadius = 5.0;
         self.viewCaseNoteButton.layer.cornerRadius = 5.0;
         self.viewPatientButton.layer.cornerRadius = 5.0;
@@ -47,19 +43,19 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         self.attendingProfCollectionView.delegate = self
         
         let constants = Contants()
-        taskSpecialistLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+        specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
         taskCareActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
-        taskResolutionLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.specialist_id as String))
+        careTypeLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.care_activity_type_id as String))
         taskPatientNameLabel.text = task.task_patient_name
-        if task.task_patient_image != "" {
-            let URL = NSURL(string: task.task_patient_image)!
-            self.taskPatientImageView.hnk_setImageFromURL(URL)
-        }else {
-            self.taskPatientImageView.image = UIImage(named: "defaultImage")
-        }
-        let assignedStaff = task.attending_professionals[0]
-        assignedStaffLabel.text = assignedStaff.name
         
+        var dateString = ""
+        let formatter : NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "EEE, MMM d, yyyy"
+        dateString = formatter.stringFromDate(task.created)
+        dateLabel.text = dateString
+        
+        updateActivityButton.setTitle(task.resolution, forState: UIControlState.Normal)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -83,15 +79,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             })
         }
     }
-    
-    override func viewWillLayoutSubviews() {
-        self.patientProfilePic.layer.borderWidth = 1.0;
-        self.patientProfilePic.layer.borderColor = UIColor.blackColor().CGColor;
-        self.patientProfilePic.layer.cornerRadius = self.patientProfilePic.layer.frame.height/2;
-        //        userImageView.maskView = ;
-        self.patientProfilePic.clipsToBounds = true
-    }
-
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          print(task.attending_professionals.count)
@@ -206,7 +193,9 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     func menuViewResponse(controller: MenuViewController,
         didDismissPopupView selectedCell: Int){
             currentCell = selectedCell;
+            
             let resolution_id = String(currentCell + 1)
+            updateActivityButton.setTitle(self.fetchStringValueFromArray(Contants().resolution, atIndex: resolution_id), forState: UIControlState.Normal)
             self.updateTaskStatus(resolution_id)
             print("choice is \(currentCell)")
     }
@@ -218,12 +207,15 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             presentViewController(Alert.outbox(), animated: false, completion: nil)
             return
         }
+        SwiftSpinner.show("Updating resolution")
         let taskAPI = TaskAPI()
         taskAPI.updateTaskStatus(self.task.id, staff_id: sharedDataSingleton.user.id, resolution_id: resolution) { (updatedTask:AnyObject?, error:NSError?) -> () in
             if error != nil {
+                SwiftSpinner.hide()
                 let alertView = SCLAlertView()
                 alertView.showError(self, title: "Error", subTitle: "Failed to update task status. Try again later", closeButtonTitle: "Cancel", duration: 20000)
             }else {
+                SwiftSpinner.hide()
                 let alertView = SCLAlertView()
                 alertView.showEdit(self, title: "Success", subTitle: "Task Status Updated", closeButtonTitle: "Cancel", duration: 20000)
             }

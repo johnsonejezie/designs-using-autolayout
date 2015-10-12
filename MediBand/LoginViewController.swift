@@ -92,6 +92,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     }
     
     func login(email:String, password:String) {
+        if !Reachability.connectedToNetwork() {
+            let alertView = SCLAlertView()
+            alertView.showEdit(self, title: "Network Failure", subTitle: "Device is not connected to any network", closeButtonTitle: "Cancel", duration: 2000)
+            return
+        }
         SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
         login.loginUserWith(email, andPassword: password) { (success) -> Void in

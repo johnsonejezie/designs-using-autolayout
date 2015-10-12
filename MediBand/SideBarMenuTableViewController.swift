@@ -37,6 +37,7 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sharedDataSingleton.user.isAdmin == true {
