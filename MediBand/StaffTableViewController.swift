@@ -85,32 +85,6 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        println("table scrolling")
-//        if isFirstLoad == true {
-//            isFirstLoad = false
-//            return
-//        }
-//        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-//            if isRefreshing == false {
-//                isRefreshing = true
-//                SwiftSpinner.show("loading more Staff", animated: true)
-//                currentPageNumber = currentPageNumber + 1
-//                let pageNumber:String = String(currentPageNumber)
-//                let staffNetworkCall = StaffNetworkCall()
-//                staffNetworkCall.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
-//                    if done == true {
-//                        self.tableView.reloadData()
-//                        SwiftSpinner.hide(completion: nil)
-//                    }else {
-//                        self.currentPageNumber--
-//                        SwiftSpinner.hide(completion: nil)
-//                    }
-//                })
-//
-//            }
-//        }
-//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count:Int = 1
@@ -142,7 +116,6 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
             
             let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
             tap.numberOfTapsRequired = 1
-            
             cell?.flagImageView.userInteractionEnabled = true
             cell?.flagImageView.tag = indexPath.row
             cell?.flagImageView.addGestureRecognizer(tap)
@@ -172,7 +145,8 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
         self.performSegueWithIdentifier("StaffProfile", sender: staff);
     }
     
-    func handleTap(sender:UITapGestureRecognizer, andStaff staff:Staff){
+    func handleTap(sender:UITapGestureRecognizer){
+        let staff = sharedDataSingleton.allStaffs[(sender.view?.tag)!];
         let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
         taskViewController.isPatientTask = false
         taskViewController.srcViewStaffID = staff.id

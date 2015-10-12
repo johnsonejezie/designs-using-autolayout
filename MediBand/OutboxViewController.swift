@@ -21,6 +21,8 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var navBar: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    var deleteTaskIndexPath: NSIndexPath? = nil
+
     
     @IBAction func refresh(sender: UIBarButtonItem) {
         for (index, value) in sharedDataSingleton.outbox.enumerate() {
@@ -112,5 +114,44 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sharedDataSingleton.outbox.count
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            deleteTaskIndexPath = indexPath
+            let taskToDelete = sharedDataSingleton.outbox[indexPath.row]
+            confirmDelete(taskToDelete)
+        }
+    }
+    
+    func confirmDelete(task: [String:Any]) {
+        let alert = UIAlertController(title: "Delete Task", message: "Are you sure you want to permanently delete this transaction?", preferredStyle: .ActionSheet)
+        
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteTask)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDelete)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func handleDeleteTask(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteTaskIndexPath {
+            tableView.beginUpdates()
+            
+            sharedDataSingleton.outbox.removeAtIndex(indexPath.row)
+            // Note that indexPath is wrapped in an array:  [indexPath]
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            deleteTaskIndexPath = nil
+            tableView.endUpdates()
+            
+        }
+    }
+    
+    func cancelDelete(alertAction: UIAlertAction!) {
+        deleteTaskIndexPath = nil
+    }
+
 
 }
