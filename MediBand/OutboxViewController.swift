@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class Alert {
     class func outbox() -> UIAlertController {
@@ -26,6 +27,7 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func refresh(sender: UIBarButtonItem) {
         for (index, value) in sharedDataSingleton.outbox.enumerate() {
+            SwiftSpinner.show("Updating Offline Transactions")
             let requestType = value["requestType"] as! String
             switch requestType {
                 case "CreateStaff", "UpdateStaff":
@@ -43,6 +45,7 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
                     break
             }
         }
+        SwiftSpinner.hide()
     }
     
     func createUpdateStaff(staff: Staff, staffImage: UIImage?, isCreatingNewStaff: Bool, index: Int) {

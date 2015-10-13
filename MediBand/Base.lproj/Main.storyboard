@@ -1313,7 +1313,7 @@
                                     <action selector="forgotPasswordActionButton" destination="fJp-FR-f4Q" eventType="touchUpInside" id="Lbl-t3-yOx"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mediBandLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Gur-bZ-aIy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Gur-bZ-aIy">
                                 <rect key="frame" x="239" y="144" width="120" height="60"/>
                                 <animations/>
                                 <constraints>
@@ -1454,7 +1454,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="138" height="92"/>
                                                 <animations/>
-                                                <color key="backgroundColor" patternImage="C8EABAF2-9C19-44CA-9617-1308854C3415" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="975EC186-B775-463C-9683-EA439A8265D7" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -3079,7 +3079,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C8EABAF2-9C19-44CA-9617-1308854C3415" width="512" height="512">
+        <image name="975EC186-B775-463C-9683-EA439A8265D7" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -20633,15 +20633,14 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAABAPEw
         <image name="Solid-Color-White-Flag-3-icon" width="256" height="256"/>
         <image name="arrow" width="25" height="25"/>
         <image name="defaultImage" width="300" height="300"/>
-        <image name="mediBandLogo" width="76" height="76"/>
         <image name="navBarIcon" width="36" height="36"/>
         <image name="newLogo" width="800" height="183"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KAz-gw-DPh"/>
         <segue reference="QC8-sU-1qt"/>
         <segue reference="Noq-dp-MfK"/>
-        <segue reference="vJu-jk-Kbb"/>
+        <segue reference="KAz-gw-DPh"/>
+        <segue reference="dac-79-ZNL"/>
         <segue reference="zbl-ez-grP"/>
     </inferredMetricsTieBreakers>
 </document>

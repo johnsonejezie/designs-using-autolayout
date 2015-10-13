@@ -47,6 +47,8 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         taskCareActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
         careTypeLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.care_activity_type_id as String))
         taskPatientNameLabel.text = task.task_patient_name
+        let aStaff = task.attending_professionals[0]
+        assignedByLabel.text = aStaff.name
         
         var dateString = ""
         let formatter : NSDateFormatter = NSDateFormatter()
