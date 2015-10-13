@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     var tap:UITapGestureRecognizer!
     let validator = Validator()
     var resetKeychain:Bool = false;
+    var keyboardPresented = false;
     
     @IBOutlet weak var userNameTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
@@ -43,11 +44,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
 
         // Do any additional setup after loading the view.
         setUpValidator()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
 
     }
     
     override func viewWillAppear(animated: Bool) {
         setScreeName("LoginView")
+    }
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func setUpValidator(){
@@ -200,6 +207,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         
         self.presentViewController(alertController, animated: true) {
             // ...
+        }
+    }
+    
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if self.keyboardPresented == true {
+            return
+        }
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y -= keyboardSize.height/2
+            self.keyboardPresented = true
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y += keyboardSize.height/2
+            self.keyboardPresented = false
         }
     }
     

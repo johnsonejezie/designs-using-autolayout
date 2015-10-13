@@ -48,6 +48,11 @@ class AddCaseViewController: UIViewController {
     func handleSingleTap(sender:UITapGestureRecognizer){
         self.view.endEditing(true)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
 
 
     @IBAction func addCaseNoteButton() {

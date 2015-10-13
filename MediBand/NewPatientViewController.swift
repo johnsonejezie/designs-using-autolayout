@@ -271,6 +271,8 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
             row.value = sharedDataSingleton.selectedPatient.ischild
+        }else {
+            row.value = false
         }
         section.addFormRow(row)
         
