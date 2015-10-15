@@ -26,6 +26,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+          UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         if self.revealViewController() != nil {
             navBar.target = self.revealViewController()
             navBar.action = "revealToggle:"

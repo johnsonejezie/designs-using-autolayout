@@ -27,6 +27,10 @@ class CaseNoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func layoutSubviews() {
+        cardView.backgroundColor = sharedDataSingleton.theme
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

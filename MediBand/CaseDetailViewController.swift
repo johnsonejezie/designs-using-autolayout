@@ -34,6 +34,11 @@ class CaseDetailViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(animated: Bool) {
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        addCaseNote.backgroundColor = sharedDataSingleton.theme
+        cancelButton.backgroundColor = sharedDataSingleton.theme
+    }
     
     func handleSingleTap(sender:UITapGestureRecognizer){
         self.view.endEditing(true)

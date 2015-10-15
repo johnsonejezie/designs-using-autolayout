@@ -27,6 +27,7 @@ class DataSingleton {
     var isEditingProfile = false
     var specialistFilterString = ""
     var outbox = [[String: Any]]()
+    var theme:UIColor?
 }
 
 let sharedDataSingleton = DataSingleton()

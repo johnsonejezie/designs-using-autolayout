@@ -41,6 +41,7 @@ class ActivityTableViewCell: UITableViewCell {
         cardView.alpha = 1
         cardView.layer.masksToBounds = false
         cardView.layer.cornerRadius = 10
+        cardView.backgroundColor = sharedDataSingleton.theme
         
     }
     

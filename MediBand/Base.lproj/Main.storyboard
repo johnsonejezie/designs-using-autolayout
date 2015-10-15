@@ -343,6 +343,7 @@
                         <outlet property="attendingProfCollectionView" destination="fTx-au-Byi" id="Tdt-ar-lsJ"/>
                         <outlet property="careTypeLabel" destination="KaS-i4-Sxs" id="j1m-sp-3Gu"/>
                         <outlet property="dateLabel" destination="quB-3E-s7J" id="D6i-wB-5Gg"/>
+                        <outlet property="lineView" destination="Lsr-iP-zun" id="XIN-4M-lSf"/>
                         <outlet property="specialityLabel" destination="JxD-fr-cEO" id="exZ-4G-tEW"/>
                         <outlet property="taskCareActivityLabel" destination="8G2-Ni-goJ" id="VLa-G7-p2P"/>
                         <outlet property="taskPatientNameLabel" destination="7hT-1b-K0T" id="XNj-bf-75v"/>
@@ -743,6 +744,7 @@
                     <connections>
                         <outlet property="generalPractitionerIDLabel" destination="0Yq-cs-f9r" id="Rvw-kF-kYA"/>
                         <outlet property="generlPracticeLabel" destination="Dw0-f4-N2l" id="P9Y-41-c8k"/>
+                        <outlet property="lineView" destination="3Dt-wb-uhi" id="Ge4-9W-cMl"/>
                         <outlet property="navBar" destination="3dj-o3-a1X" id="ki1-Ie-x4q"/>
                         <outlet property="specialityLabel" destination="n9d-Wx-AZz" id="CWw-2i-R8Q"/>
                         <outlet property="staffIDLabel" destination="PH2-m4-aVI" id="p6p-ac-Biq"/>
@@ -816,7 +818,7 @@
                                                             <rect key="frame" x="8" y="41" width="568" height="21"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -930,14 +932,14 @@
                                                             <rect key="frame" x="8" y="28" width="104" height="21"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STAFF ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exv-cn-sIe">
                                                             <rect key="frame" x="8" y="56" width="72" height="21"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="oCX-W0-i9A">
@@ -955,7 +957,7 @@
                                                             <rect key="frame" x="8" y="41" width="568" height="21"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1454,7 +1456,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="138" height="92"/>
                                                 <animations/>
-                                                <color key="backgroundColor" patternImage="975EC186-B775-463C-9683-EA439A8265D7" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="3686F19F-F97D-4905-AE13-909D561E2D9F" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2134,6 +2136,7 @@
                         <outlet property="generalPhysicianLabel" destination="Ne4-55-cWE" id="zdA-fZ-8Ur"/>
                         <outlet property="imageView" destination="HcV-Q2-nq0" id="Zn5-pn-aJP"/>
                         <outlet property="lastNameLabel" destination="dzU-Vx-ern" id="YZV-VF-gcn"/>
+                        <outlet property="lineView" destination="cAw-ej-pMV" id="u3z-cH-qBR"/>
                         <outlet property="viewHistoryButton" destination="uNe-TG-kdN" id="Y7s-SV-c4V"/>
                         <segue destination="nfE-Pd-IbE" kind="show" identifier="AddCareActivity" id="6A5-GD-K9c"/>
                         <segue destination="BFU-he-EQ3" kind="custom" identifier="EditPatient" customClass="SWRevealViewControllerSeguePushController" id="1VC-Sv-YoF"/>
@@ -2228,7 +2231,7 @@
                                                             <rect key="frame" x="8" y="73" width="552" height="21"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -3079,7 +3082,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="975EC186-B775-463C-9683-EA439A8265D7" width="512" height="512">
+        <image name="3686F19F-F97D-4905-AE13-909D561E2D9F" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -20638,9 +20641,9 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAABAPEw
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QC8-sU-1qt"/>
-        <segue reference="Noq-dp-MfK"/>
-        <segue reference="KAz-gw-DPh"/>
         <segue reference="dac-79-ZNL"/>
         <segue reference="zbl-ez-grP"/>
+        <segue reference="Lwn-6X-HtS"/>
+        <segue reference="1VC-Sv-YoF"/>
     </inferredMetricsTieBreakers>
 </document>

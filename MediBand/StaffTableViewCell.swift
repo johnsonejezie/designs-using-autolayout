@@ -40,7 +40,7 @@ class StaffTableViewCell: UITableViewCell {
         cardView.alpha = 1
         cardView.layer.masksToBounds = false
         cardView.layer.cornerRadius = 5
-        
+        cardView.backgroundColor = sharedDataSingleton.theme
         staffImageView.clipsToBounds = true
         staffImageView.layer.cornerRadius = staffImageView.frame.size.height/2
         

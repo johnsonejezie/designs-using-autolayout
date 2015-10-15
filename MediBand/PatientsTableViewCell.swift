@@ -42,6 +42,7 @@ class PatientsTableViewCell: UITableViewCell {
         patientImageView.layer.cornerRadius = patientImageView.frame.size.height/2
         patientImageView.clipsToBounds = true
         cardView.alpha = 1
+        cardView.backgroundColor = sharedDataSingleton.theme
         cardView.layer.masksToBounds = false
         cardView.layer.cornerRadius = 10
         

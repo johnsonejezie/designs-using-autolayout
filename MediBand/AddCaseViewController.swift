@@ -48,6 +48,12 @@ class AddCaseViewController: UIViewController {
     func handleSingleTap(sender:UITapGestureRecognizer){
         self.view.endEditing(true)
     }
+    override func viewWillAppear(animated: Bool) {
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        addCaseNote.backgroundColor = sharedDataSingleton.theme
+        cancelButton.backgroundColor = sharedDataSingleton.theme
+        okButton.backgroundColor = sharedDataSingleton.theme
+    }
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)

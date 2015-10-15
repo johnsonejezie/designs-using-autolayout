@@ -317,8 +317,8 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         self.tableView.backgroundColor = UIColor.whiteColor()
-//      
         
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         if self.revealViewController() != nil {
             navBar.target = self.revealViewController()
             navBar.action = "revealToggle:"
@@ -355,6 +355,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         uploadImgBtn.backgroundColor = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1)
         uploadImgBtn.layer.cornerRadius = 5
         uploadImgBtn.clipsToBounds = true
+        uploadImgBtn.backgroundColor = sharedDataSingleton.theme
         
         topView.addSubview(uploadImgBtn)
         self.tableView.addSubview(topView)

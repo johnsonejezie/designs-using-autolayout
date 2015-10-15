@@ -18,6 +18,7 @@ class StaffProfileViewController: UIViewController {
     @IBOutlet weak var generlPracticeLabel: UILabel!
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
 
+    @IBOutlet var lineView: UIView!
     var staff = Staff()
     var isMyProfile:Bool?
     
@@ -32,6 +33,7 @@ class StaffProfileViewController: UIViewController {
             navBar.action = Selector("revealToggle:")
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        lineView.backgroundColor = sharedDataSingleton.theme
         
         if isMyProfile == true {
             sharedDataSingleton.isEditingProfile = true
@@ -64,9 +66,7 @@ class StaffProfileViewController: UIViewController {
             }
         }
     }
-    override func viewWillAppear(animated: Bool) {
-        self.setScreeName("Staff Profile")
-    }
+
     
     override func viewDidLayoutSubviews() {
         staffImageView.clipsToBounds = true
@@ -80,6 +80,14 @@ class StaffProfileViewController: UIViewController {
     @IBOutlet var viewHistoryButton: UIButton!
     
     @IBOutlet var updateStaffButton: UIButton!
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        self.setScreeName("Staff Profile")
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        viewHistoryButton.backgroundColor = sharedDataSingleton.theme
+        updateStaffButton.backgroundColor = sharedDataSingleton.theme
+    }
     @IBAction func updateStaff() {
         let addStaffViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddStaffViewController") as! AddStaffViewController
         addStaffViewController.isUpdatingStaff = true

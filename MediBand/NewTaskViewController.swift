@@ -29,7 +29,9 @@ class NewTaskViewController: XLFormViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+         UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         getStaff()
+        
         self.tableView.contentInset = UIEdgeInsetsMake(75, 0, 0, 0)
         self.tableView.backgroundColor = UIColor.whiteColor()
         view.backgroundColor = UIColor.whiteColor()

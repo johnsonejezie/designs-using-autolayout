@@ -53,6 +53,10 @@ class HomeViewController: UIViewController  {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+    }
+    
     
     @IBAction func myTask() {
         

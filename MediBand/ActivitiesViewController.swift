@@ -51,6 +51,8 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         let pageNoToString:String = String(currentPageNumber)
         getTask(pageNoToString)
         self.setScreeName("Task View")
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        segmentControl.tintColor = sharedDataSingleton.theme
     }
     
     func getTask(pageNo: String) {

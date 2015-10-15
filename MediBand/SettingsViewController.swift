@@ -43,10 +43,13 @@ class SettingsViewController: XLFormViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.setScreeName("Create Task View")
+        self.setScreeName("Settings")
    
     }
     
+    override func viewWillAppear(animated: Bool) {
+          UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
@@ -94,27 +97,48 @@ class SettingsViewController: XLFormViewController {
         section.hidden = "$\(Tags.themeSection.rawValue)==0"
         form.addFormSection(section)
         
-        row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 1")
-//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+        row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Purple")
+        row.action.formSelector = "purpleColor"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 2")
-//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+        row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Orange")
+        row.action.formSelector = "orangeColor"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme3.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 3")
-//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+        row = XLFormRowDescriptor(tag: Tags.theme3.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Sky Blue")
+        row.action.formSelector = "skyblue"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Theme 4")
-//        row.action.formSegueIdenfifier = "ValidationExamplesFormViewControllerSegue"
+        row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Brown")
+        row.action.formSelector = "brownColor"
         section.addFormRow(row)
         self.form = form
     }
-    
-    
-    func changeProfilePicture(){
         
+    func purpleColor(){
+        NSUserDefaults.standardUserDefaults().setColor(UIColor.purpleColor(), forKey: "themeColor");
+        sharedDataSingleton.theme = UIColor.purpleColor()
+        self.viewDidLoad()
+        self.viewWillAppear(true)
+    }
+    
+    func orangeColor(){
+        NSUserDefaults.standardUserDefaults().setColor(UIColor.orangeColor(), forKey: "themeColor");
+        sharedDataSingleton.theme = UIColor.orangeColor()
+        self.viewDidLoad()
+        self.viewWillAppear(true)
+    }
+    func skyblue(){
+        NSUserDefaults.standardUserDefaults().setColor(UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0), forKey: "themeColor");
+        sharedDataSingleton.theme = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0)
+        self.viewDidLoad()
+        self.viewWillAppear(true)
+    }
+    func brownColor(){
+        NSUserDefaults.standardUserDefaults().setColor(UIColor.brownColor(), forKey: "themeColor");
+        sharedDataSingleton.theme = UIColor.brownColor()
+        self.viewDidLoad()
+        self.viewWillAppear(true)
     }
     
     
@@ -155,6 +179,26 @@ class SettingsViewController: XLFormViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      
+    }
+    
+}
+
+extension NSUserDefaults {
+    
+    func colorForKey(key: String) -> UIColor? {
+        var color: UIColor?
+        if let colorData = dataForKey(key) {
+            color = NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor
+        }
+        return color
+    }
+    
+    func setColor(color: UIColor?, forKey key: String) {
+        var colorData: NSData?
+        if let color = color {
+            colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
+        }
+        setObject(colorData, forKey: key)
     }
     
 }

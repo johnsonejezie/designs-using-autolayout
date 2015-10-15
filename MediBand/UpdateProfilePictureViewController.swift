@@ -21,6 +21,8 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     var staffImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        uploadBtn.backgroundColor = sharedDataSingleton.theme
+        cancelBtn.backgroundColor = sharedDataSingleton.theme
         if (sharedDataSingleton.user.image != "") {
             let URL = NSURL(string: sharedDataSingleton.user.image)!
             

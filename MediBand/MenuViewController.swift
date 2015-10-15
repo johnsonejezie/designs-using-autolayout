@@ -23,6 +23,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         self.optionsTable.delegate = self
         self.optionsTable.dataSource = self
+        self.optionsTable.backgroundColor = sharedDataSingleton.theme
         
         // Do any additional setup after loading the view.
     }

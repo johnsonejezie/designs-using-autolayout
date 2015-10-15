@@ -98,6 +98,7 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         navBar.target = self.revealViewController()
         navBar.action = "revealToggle:"
+            UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
     }
 
     override func didReceiveMemoryWarning() {

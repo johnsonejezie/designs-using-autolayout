@@ -51,6 +51,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     
     override func viewWillAppear(animated: Bool) {
         setScreeName("LoginView")
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        loginButton.backgroundColor = sharedDataSingleton.theme
     }
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)

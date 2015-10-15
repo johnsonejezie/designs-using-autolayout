@@ -35,9 +35,11 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     }
     
     override func viewWillAppear(animated: Bool) {
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         self.setScreeName("Case Notes View")
         let pageNoToString:String = String(currentPageNumber)
         getCaseNote(task.id, staff_id: sharedDataSingleton.user.id, page: pageNoToString)
+        
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

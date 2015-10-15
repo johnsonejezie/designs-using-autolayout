@@ -24,6 +24,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     @IBOutlet var specialityLabel: UILabel!
     var currentCell : Int = 1;
     
+    @IBOutlet var lineView: UIView!
     @IBOutlet var navBar: UIBarButtonItem!
     @IBOutlet var updateActivityButton: UIButton!
     @IBOutlet var viewCaseNoteButton: UIButton!
@@ -62,6 +63,11 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     override func viewWillAppear(animated: Bool) {
         setScreeName("Task Detail View")
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        viewCaseNoteButton.backgroundColor = sharedDataSingleton.theme
+        viewPatientButton.backgroundColor = sharedDataSingleton.theme
+        updateActivityButton.setTitleColor(sharedDataSingleton.theme, forState: UIControlState.Normal)
+        lineView.backgroundColor = sharedDataSingleton.theme
     }
     
     

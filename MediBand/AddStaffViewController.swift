@@ -253,8 +253,12 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         }
         
         self.setScreeName("Add Staff View");
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+        uploadImgBtn.backgroundColor = sharedDataSingleton.theme
         
     }
+    
+    
     
     override func viewWillDisappear(animated: Bool) {
         sharedDataSingleton.isEditingProfile = false

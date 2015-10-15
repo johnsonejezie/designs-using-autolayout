@@ -19,6 +19,7 @@ class PatientProfileViewController: UIViewController {
     
     @IBOutlet var firstNameLabel: UILabel!
     
+    @IBOutlet var lineView: UIView!
     @IBOutlet weak var addressLabel: UILabel!
     
     @IBOutlet var lastNameLabel: UILabel!
@@ -33,14 +34,17 @@ class PatientProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sharedDataSingleton.selectedIDs = []
-        
+          UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
 //        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         addCareButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
         UpdatePatientButton.layer.cornerRadius = 4
-        
-    
+        addCareButton.backgroundColor = sharedDataSingleton.theme
+        UpdatePatientButton.backgroundColor = sharedDataSingleton.theme
+        viewHistoryButton.backgroundColor = sharedDataSingleton.theme
+        lineView.backgroundColor = sharedDataSingleton.theme
+       
         firstNameLabel.text = patient.forename.uppercaseString
         lastNameLabel.text = patient.surname.uppercaseString
         contactLabel.text = patient.addressphone
