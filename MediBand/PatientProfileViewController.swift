@@ -96,13 +96,13 @@ class PatientProfileViewController: UIViewController {
     @IBAction func viewHistoryActionButton() {
         sharedDataSingleton.selectedPatient = patient
         
-//        let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
-//        taskViewController.isPatientTask = true
-//        taskViewController.patient = patient
-//        taskViewController.patientID = patient.patient_id
-//        sharedDataSingleton.isCheckingNewPatientID = true
-//        self.navigationController?.pushViewController(taskViewController, animated: true)
-//        self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
+        let taskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TaskViewController") as! ActivitiesViewController
+        taskViewController.isPatientTask = true
+        taskViewController.patient = patient
+        taskViewController.patientID = patient.patient_id
+        sharedDataSingleton.isCheckingNewPatientID = true
+        self.navigationController?.pushViewController(taskViewController, animated: true)
+        self.trackEvent("UX", action: "View Patient History", label: "view history button in patient profile", value: nil)
         
 //        trackEvent("UX", action: "View Case Note", label: "View case note from task detail  view", value: nil)
 //        let caseNoteTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CaseNoteTableViewController") as! CaseNoteTableViewController

@@ -104,8 +104,15 @@ class NewTaskViewController: XLFormViewController {
         
         if let staff_ids = form.formRowWithTag(Tags.selectedStaff.rawValue)!.value as? [String] {
             
-            task.selected_staff_ids = staff_ids
+            print(staff_ids)
             
+               task.selected_staff_ids = staff_ids
+            
+            
+        }else {
+            let alertView = UIAlertView(title: "Form Error", message: "Select a staff for this task", delegate: self, cancelButtonTitle: "OK")
+            alertView.show()
+            return
         }
         task.patient_id = sharedDataSingleton.selectedPatient.patient_id
         
@@ -149,7 +156,7 @@ class NewTaskViewController: XLFormViewController {
         let staffMethods = StaffNetworkCall()
         
         if sharedDataSingleton.allStaffs.count == 0 {
-            staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
+            staffMethods.getStaffs(sharedDataSingleton.user.clinic_id, inPageNumber: "1", completionBlock: { (done) -> Void in
                 if(done){
                     print("all staffs fetched and passed from staff table view controller")
                 }else{

@@ -90,7 +90,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
              staffID = sharedDataSingleton.user.id
             }
             
-            
             taskAPI.getTaskByStaff(staffID, page: pageNo, callback: { (task:AnyObject?, error:NSError?) -> () in
                 if error != nil {
             
