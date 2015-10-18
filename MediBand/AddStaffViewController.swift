@@ -203,8 +203,6 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         ]
         row.required = true
         if sharedDataSingleton.selectedStaff != nil {
-//            var id = (constant.specialist as! [String]).indexOf(sharedDataSingleton.selectedStaff.speciality)
-//            id = id! + 1
             row.value = sharedDataSingleton.selectedStaff.speciality
         }
         if sharedDataSingleton.isEditingProfile == true {
@@ -267,7 +265,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     
     
     override func viewWillDisappear(animated: Bool) {
-        sharedDataSingleton.isEditingProfile = false
+//        sharedDataSingleton.isEditingProfile = false
         sharedDataSingleton.selectedStaff = nil
     }
     
@@ -279,8 +277,6 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         }else {
             message = "Creating Staff"
         }
-        
-//        staff.medical_facility_id = sharedDataSingleton.user.clinic_id
         if sharedDataSingleton.selectedStaff != nil {
             if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value {
                 print(specialist)
@@ -291,7 +287,18 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                 }
                
             }
-        }else if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
+        }else if isEditingMyProfile == true{
+            if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value {
+                print(specialist)
+                if let index = Contants().specialist.indexOf(specialist as! String) {
+                    let id = index + 1
+                    staff.speciality = String(id)
+                    print(id)
+                }
+                
+            }
+        }
+        else if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
             staff.speciality = String(specialist_id)
         }
         
@@ -313,7 +320,18 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                     print(id)
                 }
             }
-        }else if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
+        }else if isEditingMyProfile == true{
+            if let role = form.formRowWithTag(Tags.role.rawValue)?.value {
+                print(role )
+                if let index = Contants().role.indexOf(role as! String) {
+                    let id = index + 1
+                    staff.role = String(id)
+                    print(id)
+                }
+                
+            }
+        }
+        else if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
             staff.role = String(role)
         }
         

@@ -81,7 +81,6 @@ class StaffNetworkCall{
                     }
             }
 
-//            }
         }else {
             self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
                 print(responseObject)
@@ -97,21 +96,7 @@ class StaffNetworkCall{
         }
 
     }
-    
-    func edit(staff:Staff){
-        self.operationManger.requestSerializer = AFJSONRequestSerializer()
-        self.operationManger.responseSerializer = AFJSONResponseSerializer()
-        self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
-        self.operationManger.POST("http://iconglobalnetwork.com/mediband/api/edit_staff", parameters: staff, success: { (requestOperation, responseObject) -> Void in
-            print(responseObject)
-            }, failure:{ (requestOperation, error) -> Void in
-                print(error)
-        })
-        
-    }
-    
-    
-    func viewStaff(email:String!){
+    func viewStaff(email:String!, completionBlock:(Staff?, NSError?)->()){
        
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
@@ -119,6 +104,10 @@ class StaffNetworkCall{
         let data : [String:String] = ["email":email]
         self.operationManger.POST("http://iconglobalnetwork.com/mediband/api/view_staff", parameters: data, success: { (requestOperation, responseObject) -> Void in
             print(" view staff :: \(responseObject)")
+            let result:AnyObject = responseObject
+            if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
+                self.parseDict(dict)
+            }
             }, failure:{ (requestOperation, error) -> Void in
             print(" view staff :: \(error)")
         })

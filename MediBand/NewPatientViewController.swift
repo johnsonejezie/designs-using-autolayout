@@ -278,6 +278,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         
         //Date of Birth
         row = XLFormRowDescriptor(tag: "dateOfBirth", rowType: XLFormRowDescriptorTypeDateInline, title: "Date of Birth")
+        row.required = true
         if sharedDataSingleton.selectedPatient != nil {
             let dateString = sharedDataSingleton.selectedPatient.dob
                         let dateFormatter = NSDateFormatter()

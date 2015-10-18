@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class StaffProfileViewController: UIViewController {
     
@@ -19,7 +20,7 @@ class StaffProfileViewController: UIViewController {
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
 
     var staff = Staff()
-    var isMyProfile:Bool?
+    var isMyProfile:Bool = false
     
     
     @IBOutlet var navBar: UIBarButtonItem!
@@ -83,6 +84,18 @@ class StaffProfileViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")
+        print(isMyProfile)
+        if isMyProfile == true {
+            let emailString: String? = KeychainWrapper.stringForKey("email")
+            let passwordString: String? = KeychainWrapper.stringForKey("password")
+            
+            if (emailString != nil && passwordString != nil) {
+                let login = Login()
+                login.loginUserWith(emailString!, andPassword: passwordString!, completionHandler: { (success) -> Void in
+                    
+                })
+            }
+        }
         UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         viewHistoryButton.backgroundColor = sharedDataSingleton.theme
         updateStaffButton.backgroundColor = sharedDataSingleton.theme
@@ -94,7 +107,7 @@ class StaffProfileViewController: UIViewController {
         addStaffViewController.staff = self.staff
         if isMyProfile == true {
             sharedDataSingleton.isEditingProfile = true
-            isMyProfile = false
+//            isMyProfile = false
             addStaffViewController.isEditingMyProfile = true
         }else {
            sharedDataSingleton.selectedStaff = self.staff 
