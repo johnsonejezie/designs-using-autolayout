@@ -18,7 +18,6 @@ class StaffProfileViewController: UIViewController {
     @IBOutlet weak var generlPracticeLabel: UILabel!
     @IBOutlet weak var generalPractitionerIDLabel: UILabel!
 
-    @IBOutlet var lineView: UIView!
     var staff = Staff()
     var isMyProfile:Bool?
     
@@ -33,7 +32,7 @@ class StaffProfileViewController: UIViewController {
             navBar.action = Selector("revealToggle:")
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        lineView.backgroundColor = sharedDataSingleton.theme
+        
         
         if isMyProfile == true {
             sharedDataSingleton.isEditingProfile = true
@@ -87,6 +86,7 @@ class StaffProfileViewController: UIViewController {
         UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         viewHistoryButton.backgroundColor = sharedDataSingleton.theme
         updateStaffButton.backgroundColor = sharedDataSingleton.theme
+//        lineView.backgroundColor = sharedDataSingleton.theme
     }
     @IBAction func updateStaff() {
         let addStaffViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddStaffViewController") as! AddStaffViewController

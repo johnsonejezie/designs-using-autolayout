@@ -114,7 +114,7 @@ class SettingsViewController: XLFormViewController {
         section.addFormRow(row)
         self.form = form
     }
-        
+    
     func purpleColor(){
         NSUserDefaults.standardUserDefaults().setColor(UIColor.purpleColor(), forKey: "themeColor");
         sharedDataSingleton.theme = UIColor.purpleColor()

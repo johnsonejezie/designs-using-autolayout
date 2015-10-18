@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class Contants {
-    let specialist:[AnyObject] = [
+    let specialist:[String] = [
         "Anaesthetics",
         "Cardiology",
         "Clinical Haematology",
@@ -81,7 +81,7 @@ class Contants {
     ]
     
     
-    let role:[AnyObject] = [
+    let role:[String] = [
         
         "Doctor",
         

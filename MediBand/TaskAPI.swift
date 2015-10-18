@@ -42,14 +42,14 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     func deleteTask(task_id:String, staff_id:String, callback: APICallback) {
         let url = "http://www.iconglobalnetwork.com/mediband/api/delete_task"
         let body = "task_id=\(task_id)&staff_id=\(staff_id)"
-        makeHTTPPostRequest(Path.UPDATE_TASK_STATUS, callback: callback, url: url, body: body)
+        makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
         
     }
     
     func updateTaskStatus(task_id:String, staff_id:String, resolution_id:String, callback: APICallback) {
         let url = "http:/www.iconglobalnetwork.com/mediband/api/update_task_status"
         let body = "staff_id=\(staff_id)&task_id=\(task_id)&resolution_id=\(resolution_id)"
-        makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
+        makeHTTPPostRequest(Path.UPDATE_TASK_STATUS, callback: callback, url: url, body: body)
     }
     
     func getTaskByPatient(patient_id: String, page:String, callback: APICallback) {

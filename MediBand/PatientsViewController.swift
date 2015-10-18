@@ -52,7 +52,7 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }else {
-            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber:pageNumber) { (success) -> Void in
+            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNumber) { (success) -> Void in
                 if success == true {
                     self.patients = sharedDataSingleton.patients
                     self.tableView.reloadData()
@@ -62,32 +62,6 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
-    
-    //    func scrollViewDidScroll(scrollView: UIScrollView) {
-    //        println("table scrolling")
-    //        if isFirstLoad == true {
-    //            isFirstLoad = false
-    //            return
-    //        }
-    //        if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
-    //            if isRefreshing == false {
-    //                isRefreshing = true
-    //                SwiftSpinner.show("loading more patient", animated: true)
-    //                currentPageNumber = currentPageNumber + 1
-    //                let pageNumber:String = String(currentPageNumber)
-    //                let patientAPI = PatientAPI()
-    //                patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.medical_facility, withPageNumber: pageNumber, completionHandler: { (success) -> Void in
-    //                    if success == true {
-    //                        self.tableView.reloadData()
-    //                    }else {
-    //                        self.isRefreshing = false
-    //                        self.currentPageNumber--
-    //                    }
-    //                })
-    //            }
-    //        }
-    //    }
-    
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Patients List View")
     }

@@ -744,7 +744,6 @@
                     <connections>
                         <outlet property="generalPractitionerIDLabel" destination="0Yq-cs-f9r" id="Rvw-kF-kYA"/>
                         <outlet property="generlPracticeLabel" destination="Dw0-f4-N2l" id="P9Y-41-c8k"/>
-                        <outlet property="lineView" destination="3Dt-wb-uhi" id="Ge4-9W-cMl"/>
                         <outlet property="navBar" destination="3dj-o3-a1X" id="ki1-Ie-x4q"/>
                         <outlet property="specialityLabel" destination="n9d-Wx-AZz" id="CWw-2i-R8Q"/>
                         <outlet property="staffIDLabel" destination="PH2-m4-aVI" id="p6p-ac-Biq"/>
@@ -1456,7 +1455,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="138" height="92"/>
                                                 <animations/>
-                                                <color key="backgroundColor" patternImage="3686F19F-F97D-4905-AE13-909D561E2D9F" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="39522ACC-2548-4E31-AC99-E394B636B810" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -3082,7 +3081,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3686F19F-F97D-4905-AE13-909D561E2D9F" width="512" height="512">
+        <image name="39522ACC-2548-4E31-AC99-E394B636B810" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

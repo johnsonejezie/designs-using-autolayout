@@ -27,7 +27,7 @@ class StaffNetworkCall{
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         var data : [String:AnyObject] = [
-            "medical_facility_id":staff.medical_facility_id,
+            "medical_facility_id":sharedDataSingleton.user.clinic_id,
             "speciality_id":staff.speciality,
             "general_practitioner_id":staff.general_practional_id,
             "member_id":staff.member_id,
@@ -48,7 +48,7 @@ class StaffNetworkCall{
             let imageData = UIImageJPEGRepresentation(image!, 0.6)
             let mm = NetData(data: imageData!, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
             var parameters : [String:AnyObject] = [
-                "medical_facility_id":staff.medical_facility_id,
+                "medical_facility_id":sharedDataSingleton.user.clinic_id,
                 "speciality_id":staff.speciality,
                 "general_practitioner_id":staff.general_practional_id,
                 "member_id":staff.member_id,
