@@ -64,10 +64,11 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
                     SwiftSpinner.show("Loading Task", animated: true)
                 }
                 taskAPI.getTaskByPatient(patient_id, page: pageNo, callback: { (task:AnyObject?, error:NSError?) -> () in
+                    
+                    
                     if error != nil {
-                        
+                        SwiftSpinner.hide()
                     }else {
-//                       sharedDataSingleton.tasks = task as! [Task]
                     }
 //                    self.tasks = sharedDataSingleton.tasks\
                     self.tasks = sharedDataSingleton.patientTask
@@ -92,7 +93,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             
             taskAPI.getTaskByStaff(staffID, page: pageNo, callback: { (task:AnyObject?, error:NSError?) -> () in
                 if error != nil {
-            
+                    SwiftSpinner.hide()
                 }else {
 //                    sharedDataSingleton.tasks = task as! [Task]
                 }
@@ -394,44 +395,44 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 
 }
 
-extension ActivitiesViewController {
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == (tasks.count - 1) {
-            print("end of table")
-            ++currentPageNumber
-            let pageNoToString = String(currentPageNumber)
-            print("page number \(pageNoToString)")
-            if isPatientTask == true {
-                if let patient_id = patientID {
-                    taskAPI.getTaskByPatient(patient_id, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in
-                        if error == nil {
-                            self.tasks = sharedDataSingleton.patientTask
-                            self.tableView.reloadData()
-                        }
-                    })
-                    
-                }
-            }else {
-                var staffID :String
-                if srcViewStaffID != "" {
-                    staffID = srcViewStaffID
-                    srcViewStaffID = ""
-                }else{
-                    staffID = sharedDataSingleton.user.id
-                }
-                taskAPI.getTaskByStaff(staffID, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in
-                    if error == nil {
-                        self.tasks = sharedDataSingleton.staffTask
-                        self.tableView.reloadData()
-                    }
-                })
-                
-            }
-        }
-    }
-    
-}
+//extension ActivitiesViewController {
+//    
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if indexPath.row == (tasks.count - 1) {
+//            print("end of table")
+//            ++currentPageNumber
+//            let pageNoToString = String(currentPageNumber)
+//            print("page number \(pageNoToString)")
+//            if isPatientTask == true {
+//                if let patient_id = patientID {
+//                    taskAPI.getTaskByPatient(patient_id, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in
+//                        if error == nil {
+//                            self.tasks = sharedDataSingleton.patientTask
+//                            self.tableView.reloadData()
+//                        }
+//                    })
+//                    
+//                }
+//            }else {
+//                var staffID :String
+//                if srcViewStaffID != "" {
+//                    staffID = srcViewStaffID
+//                    srcViewStaffID = ""
+//                }else{
+//                    staffID = sharedDataSingleton.user.id
+//                }
+//                taskAPI.getTaskByStaff(staffID, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in
+//                    if error == nil {
+//                        self.tasks = sharedDataSingleton.staffTask
+//                        self.tableView.reloadData()
+//                    }
+//                })
+//                
+//            }
+//        }
+//    }
+//    
+//}
 
 extension ActivitiesViewController {
     

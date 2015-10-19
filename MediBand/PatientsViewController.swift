@@ -178,21 +178,21 @@ extension PatientsViewController {
     
 }
 
-extension PatientsViewController {
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == (patients.count - 1) {
-            print("end of table")
-            ++currentPageNumber
-            let pageNoToString = String(currentPageNumber)
-            print("page number \(pageNoToString)")
-            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNoToString) { (success) -> Void in
-                if success == true {
-                    self.patients = sharedDataSingleton.patients
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-    
-}
+//extension PatientsViewController {
+//    
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if indexPath.row == (patients.count - 1) {
+//            print("end of table")
+//            ++currentPageNumber
+//            let pageNoToString = String(currentPageNumber)
+//            print("page number \(pageNoToString)")
+//            patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNoToString) { (success) -> Void in
+//                if success == true {
+//                    self.patients = sharedDataSingleton.patients
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+//    }
+//    
+//}

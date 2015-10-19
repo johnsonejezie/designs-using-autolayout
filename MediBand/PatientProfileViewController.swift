@@ -47,10 +47,14 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
             "Next of Kin": patient.next_of_kin,
             "Next of kin contact": patient.next_of_kin_contact
         ]
+        
+        
+        
         arrayOfKeys = patientDict.allKeys
         arrayOfValues = patientDict.allValues
         
-        
+        print(patientDict)
+        print(arrayOfValues)
         
           UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
 //        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -95,10 +99,22 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
             tableView.rowHeight = 48
             let cell = tableView.dequeueReusableCellWithIdentifier("PatientCell", forIndexPath: indexPath)
             let keyLabel:UILabel = cell.viewWithTag(100) as! UILabel
-            let valueLabel : UILabel = cell.viewWithTag(101) as! UILabel
-            
             keyLabel.text = arrayOfKeys[indexPath.row] as? String
-            valueLabel.text = arrayOfValues[indexPath.row] as? String
+            let valueLabel : UILabel = cell.viewWithTag(101) as! UILabel
+            if keyLabel.text == "Is patient a child?" {
+                if arrayOfValues[indexPath.row] as! NSObject == false {
+                    valueLabel.text = "false"
+                }else {
+                    valueLabel.text = "true"
+                }
+            }else {
+                valueLabel.text = arrayOfValues[indexPath.row] as? String
+            }
+            
+            
+            
+            
+            
             
             return cell
         }
