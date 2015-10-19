@@ -20,7 +20,7 @@ class PatientAPI {
 //        var patientResult = [Patient]()
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
         let parameters = [
-            "medical_facility_id": medical_facility,
+            "medical_facility_id": sharedDataSingleton.user.clinic_id,
             "staff_id": assigned_staff
         ]
 
@@ -29,7 +29,7 @@ class PatientAPI {
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-            //print("patiens response object \(responseObject)")
+            print("patiens response object \(responseObject)")
             let dictionary = responseObject as! [String:AnyObject]
             self.parseDictionary(dictionary)
             completionHandler(success: true)

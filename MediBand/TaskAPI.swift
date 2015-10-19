@@ -48,7 +48,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     func updateTaskStatus(task_id:String, staff_id:String, resolution_id:String, callback: APICallback) {
         let url = "http:/www.iconglobalnetwork.com/mediband/api/update_task_status"
-        let body = "staff_id=\(staff_id)&task_id=\(task_id)&resolution_id=\(resolution_id)"
+        let body = "staff_id=\(staff_id)&task_id=\(task_id)&resolution_id=\(resolution_id)&medical_facility_id=\(sharedDataSingleton.user.clinic_id)"
         makeHTTPPostRequest(Path.UPDATE_TASK_STATUS, callback: callback, url: url, body: body)
     }
     
@@ -59,7 +59,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             patientTasks = []
         }
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_task_by_patient_id"
-        let body = "patient_id=\(patient_id)&page=\(page)"
+        let body = "patient_id=\(patient_id)&medical_facility_id=\(sharedDataSingleton.user.clinic_id)&page=\(page)"
         makeHTTPPostRequest(Path.GET_TASK_BY_PATIENT, callback: callback, url: url, body: body)
 //        isPatientTask = false
     }
@@ -113,6 +113,8 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             callback(self.handleDeleteTask(json), nil)
         case (200, Path.UPDATE_TASK_STATUS):
             callback(self.handleUpdateTask(json), nil)
+        case (200, Path.DELETE_TASK):
+            callback(self.handleDeleteTask(json), nil)
         default:
             // Unknown Error
             callback(nil, nil)

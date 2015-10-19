@@ -11,7 +11,7 @@ import SwiftSpinner
 
 class Alert {
     class func outbox() -> UIAlertController {
-        let alert = UIAlertController(title: "Network Unavilable", message: "Your request has been save to the Outbox" , preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Network Unavilable", message: "Saved to the Outbox" , preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
         alert.addAction(cancelAction)
         return alert

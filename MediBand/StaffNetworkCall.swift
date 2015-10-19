@@ -44,6 +44,8 @@ class StaffNetworkCall{
         }else {
             url = "http://iconglobalnetwork.com/mediband/api/edit_staff"
         }
+        
+         print("this is staff obj \(data)")
         if let anImage:UIImage = image {
             let imageData = UIImageJPEGRepresentation(image!, 0.6)
             let mm = NetData(data: imageData!, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
@@ -59,7 +61,7 @@ class StaffNetworkCall{
                 "image":mm
             ]
             
-            print("this is staff obj \(data)")
+           
             let urlRequest = self.urlRequestWithComponents(url, parameters: parameters)
             Alamofire.upload(urlRequest.0, data: urlRequest.1)
                 .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in

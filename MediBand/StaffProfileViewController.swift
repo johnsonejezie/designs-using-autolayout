@@ -49,6 +49,13 @@ class StaffProfileViewController: UIViewController {
             specialityLabel.text = sharedDataSingleton.user.speciality
             generalPractitionerIDLabel.text = sharedDataSingleton.user.general_practitioner_id
             generlPracticeLabel.text = sharedDataSingleton.user.email
+            
+            if sharedDataSingleton.user.image != "" {
+                let URL = NSURL(string: sharedDataSingleton.user.image)!
+                staffImageView.hnk_setImageFromURL(URL)
+            }else {
+                staffImageView.image = UIImage(named: "defaultImage")
+            }
         }else {
             sharedDataSingleton.selectedStaff = staff
             self.navigationItem.setLeftBarButtonItem(nil, animated: true)

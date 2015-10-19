@@ -121,7 +121,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                             if let aPatient = scannedPatient {
                                 sharedDataSingleton.selectedPatient = aPatient
                             }
-                            self.performSegueWithIdentifier("patientSegue", sender: self.isExistingPatient)
+                            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController
+                            controller.patient = sharedDataSingleton.selectedPatient
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }else {
                            let alertView = SCLAlertView()
                             alertView.showEdit(self, title: "Notice", subTitle: "Patient doesn't exist", closeButtonTitle: "Cancel", duration: 20000)

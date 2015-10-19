@@ -278,7 +278,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
             message = "Creating Staff"
         }
         if sharedDataSingleton.selectedStaff != nil {
-            if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value {
+            if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
                 print(specialist)
                 if let index = Contants().specialist.indexOf(specialist as! String) {
                     let id = index + 1
@@ -288,7 +288,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                
             }
         }else if isEditingMyProfile == true{
-            if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value {
+            if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
                 print(specialist)
                 if let index = Contants().specialist.indexOf(specialist as! String) {
                     let id = index + 1
@@ -297,10 +297,23 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                 }
                 
             }
+        }else {
+            if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
+                print(specialist)
+                if let index = Contants().specialist.indexOf(specialist as! String) {
+                    let id = index + 1
+                    staff.speciality = String(id)
+                    print(id)
+                }
+            }
+            
+//            if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
+//                staff.speciality = String(specialist_id)
+//            }
         }
-        else if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
-            staff.speciality = String(specialist_id)
-        }
+//        else if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
+//            staff.speciality = String(specialist_id)
+//        }
         
         if let general_practional_id = form.formRowWithTag(Tags.gpID.rawValue)!.value as? String {
             staff.general_practional_id = general_practional_id
@@ -312,7 +325,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         }
         
         if sharedDataSingleton.selectedStaff != nil {
-            if let role = form.formRowWithTag(Tags.role.rawValue)?.value {
+            if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
                 print(role)
                 if let index = Contants().role.indexOf(role as! String) {
                     let id = index + 1
@@ -321,7 +334,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                 }
             }
         }else if isEditingMyProfile == true{
-            if let role = form.formRowWithTag(Tags.role.rawValue)?.value {
+            if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
                 print(role )
                 if let index = Contants().role.indexOf(role as! String) {
                     let id = index + 1
@@ -330,10 +343,24 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                 }
                 
             }
+        }else {
+//            if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
+//                staff.role = String(role)
+//            }
+            if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
+                print(role )
+                if let index = Contants().role.indexOf(role as! String) {
+                    let id = index + 1
+                    staff.role = String(id)
+                    print(id)
+                }
+                
+            }
+
         }
-        else if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
-            staff.role = String(role)
-        }
+//        else if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
+//            staff.role = String(role)
+//        }
         
         if let email = form.formRowWithTag(Tags.email.rawValue)!.value as? String {
             staff.email = email
@@ -376,7 +403,6 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         }
         
         self.trackEvent("UX", action: "Create new staff", label: "Save button: create new staff", value: nil)
-        
         
     }
     

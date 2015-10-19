@@ -181,7 +181,10 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         patientAPI.getPatient(task.patient_id, fromMedicalFacility: sharedDataSingleton.user.clinic_id) { (fetchedPatient:Patient?, error:NSError?) -> () in
             if error == nil {
                 SwiftSpinner.hide(nil)
-               self.performSegueWithIdentifier("viewPatient", sender: fetchedPatient)
+//               self.performSegueWithIdentifier("viewPatient", sender: fetchedPatient)
+                let patientProfile = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController
+                patientProfile.patient = fetchedPatient
+                self.navigationController?.pushViewController(patientProfile, animated: true)
             }else {
                 SwiftSpinner.hide(nil)
                 let alertView = SCLAlertView()

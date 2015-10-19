@@ -9,7 +9,7 @@
 import UIKit
 import XLForm
 import SwiftSpinner
-class SettingsViewController: XLFormViewController {
+class SettingsViewController: XLFormViewController, UIAlertViewDelegate {
 
     @IBOutlet var navBar: UIBarButtonItem!
     
@@ -26,6 +26,8 @@ class SettingsViewController: XLFormViewController {
         case theme4 = "theme4"
         case theme5 = "theme5"
     }
+    
+    var color : UIColor?
     
     override func viewDidLoad() {
         
@@ -97,50 +99,53 @@ class SettingsViewController: XLFormViewController {
         section.hidden = "$\(Tags.themeSection.rawValue)==0"
         form.addFormSection(section)
         
-        row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Purple")
+        row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Lime")
         row.action.formSelector = "purpleColor"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Orange")
-        row.action.formSelector = "orangeColor"
+        row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Coffe")
+        row.action.formSelector = "coffeColor"
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: Tags.theme3.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Sky Blue")
         row.action.formSelector = "skyblue"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Brown")
+        row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "WaterMelon")
         row.action.formSelector = "brownColor"
         section.addFormRow(row)
         self.form = form
     }
     
     func purpleColor(){
-        NSUserDefaults.standardUserDefaults().setColor(UIColor.purpleColor(), forKey: "themeColor");
-        sharedDataSingleton.theme = UIColor.purpleColor()
-        self.viewDidLoad()
-        self.viewWillAppear(true)
+        resetApp(UIColor(red: 0.56, green: 0.69, blue: 0.13, alpha: 1))
     }
     
-    func orangeColor(){
-        NSUserDefaults.standardUserDefaults().setColor(UIColor.orangeColor(), forKey: "themeColor");
-        sharedDataSingleton.theme = UIColor.orangeColor()
-        self.viewDidLoad()
-        self.viewWillAppear(true)
+    func coffeColor(){
+        resetApp(UIColor(red: 0.56, green: 0.45, blue: 0.37, alpha: 1))
     }
     func skyblue(){
-        NSUserDefaults.standardUserDefaults().setColor(UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0), forKey: "themeColor");
-        sharedDataSingleton.theme = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0)
-        self.viewDidLoad()
-        self.viewWillAppear(true)
+        resetApp(UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0))
     }
     func brownColor(){
-        NSUserDefaults.standardUserDefaults().setColor(UIColor.brownColor(), forKey: "themeColor");
-        sharedDataSingleton.theme = UIColor.brownColor()
-        self.viewDidLoad()
-        self.viewWillAppear(true)
+        resetApp(UIColor(red: 0.85, green: 0.33, blue: 0.35, alpha: 1))
     }
     
+    func resetApp(color:UIColor) {
+        self.color = color
+        let alertView = UIAlertView(title: "Notice", message: "Changing theme will restart the application", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
+        alertView.show()
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+          sharedDataSingleton.theme = self.color
+            UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
+            NSUserDefaults.standardUserDefaults().setColor(self.color!, forKey: "themeColor");
+            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("homeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
     
     func loadResetPasswordAlert(){
         let alertView = SCLAlertView()
