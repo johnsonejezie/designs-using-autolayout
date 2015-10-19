@@ -148,21 +148,26 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
             cell.dateLabel.hidden = false
             cell.activityTypeLabel.hidden = false
             cell.emptyLabel.hidden = true
+            if self.filtered.isEmpty {
+                return cell
+            }else {
+                let constants = Contants()
+                let task = self.filtered[indexPath.row]
+                cell.specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
+                cell.careActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
+                cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
+                cell.resolutionLabel.text = task.resolution
+                
+                var dateString = ""
+                let formatter : NSDateFormatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                formatter.dateFormat = "EEE, MMM d, yyyy"
+                dateString = formatter.stringFromDate(task.created)
+                
+                cell.dateLabel.text = dateString
+            }
             
-            let constants = Contants()
-            let task = self.filtered[indexPath.row]
-            cell.specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
-            cell.careActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
-            cell.activityTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
-            cell.resolutionLabel.text = task.resolution
             
-            var dateString = ""
-            let formatter : NSDateFormatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            formatter.dateFormat = "EEE, MMM d, yyyy"
-            dateString = formatter.stringFromDate(task.created)
-            
-            cell.dateLabel.text = dateString
         }else if tasks.count > 0 {
             cell.specialityLabel.hidden = false
             cell.careActivityLabel.hidden = false
@@ -223,7 +228,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         let alert = UIAlertController(title: "Delete Task", message: "Are you sure you want to permanently delete this task?", preferredStyle: .ActionSheet)
         
         let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: handleDeleteTask)
-        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDeletePlanet)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelDelete)
         
         alert.addAction(DeleteAction)
         alert.addAction(CancelAction)
@@ -253,7 +258,7 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    func cancelDeletePlanet(alertAction: UIAlertAction!) {
+    func cancelDelete(alertAction: UIAlertAction!) {
         deleteTaskIndexPath = nil
     }
     
@@ -327,11 +332,13 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.reloadData()
     }
     func displayPopOver(sender: AnyObject){
+        let count = Contants().resolution.count + 1
+        let height = count * 44
         let storyboard : UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         let contentViewController : ActivityStatusTableViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityStatusTableViewController") as! ActivityStatusTableViewController
         contentViewController.delegate = self
         contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, 396)
+        contentViewController.preferredContentSize = CGSizeMake(self.view.frame.size.width * 0.6, CGFloat(height))
         let detailPopover: UIPopoverPresentationController = contentViewController.popoverPresentationController!
         detailPopover.sourceView = sender as! UIView
         detailPopover.sourceRect.origin.x = 50
@@ -342,21 +349,21 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-//        searchBar.resignFirstResponder()
-//       println("The search text is: '\(searchBar.text)'")
-//    }
 //    
     func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
         print(item)
-        let constants = Contants()
+        if item == "All" {
+            searchActive = false
+            tableView.reloadData()
+            return
+        }
         filtered = self.tasks.filter({ (aTask: Task) -> Bool in
             let tmp: NSString = aTask.resolution
             let range = tmp.rangeOfString(item, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
         if(filtered.count == 0){
-            searchActive = false;
+            searchActive = true;
         } else {
             searchActive = true;
         }

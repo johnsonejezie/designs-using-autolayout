@@ -22,6 +22,7 @@ class ActivityStatusTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        status.insert("All", atIndex: 0)
     }
 
 
