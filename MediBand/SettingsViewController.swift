@@ -133,7 +133,7 @@ class SettingsViewController: XLFormViewController, UIAlertViewDelegate {
     
     func resetApp(color:UIColor) {
         self.color = color
-        let alertView = UIAlertView(title: "Notice", message: "Changing theme will restart the application", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
+        let alertView = UIAlertView(title: "Notice", message: "Theme will take effect once the app leaves this view", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
         alertView.show()
     }
     
@@ -142,8 +142,8 @@ class SettingsViewController: XLFormViewController, UIAlertViewDelegate {
           sharedDataSingleton.theme = self.color
             UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
             NSUserDefaults.standardUserDefaults().setColor(self.color!, forKey: "themeColor");
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("homeViewController") as! HomeViewController
-            self.navigationController?.pushViewController(controller, animated: true)
+//            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("homeViewController") as! HomeViewController
+//            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     

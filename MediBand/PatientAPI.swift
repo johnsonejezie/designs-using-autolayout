@@ -189,6 +189,12 @@ class PatientAPI {
                     self.parseDictionaryToPatient(resultDict)
                 }
             }
+            if let pageNo = dictionary["page_no"] as? String {
+                sharedDataSingleton.patientsCurrentPage = Int(pageNo)!
+            }
+            if let totalPage = dictionary["total_page"] as? Int {
+                sharedDataSingleton.patientsTotalPage = totalPage
+            }
            sharedDataSingleton.patients = self.patients
         }
         return patients

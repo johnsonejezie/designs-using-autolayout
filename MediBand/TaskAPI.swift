@@ -130,6 +130,12 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                     self.parseDictionaryToTask(resultDict)
                 }
             }
+            if let pageNo = json["page_no"] as? String {
+                sharedDataSingleton.taskCurrentPage = Int(pageNo)!
+            }
+            if let totalPage = json["total_page"] as? Int {
+                sharedDataSingleton.taskTotalPage = totalPage
+            }
             sharedDataSingleton.staffTask = staffTasks
             return sharedDataSingleton.staffTask
         }
@@ -157,6 +163,12 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                 if let resultDict = resultDict as? [String: AnyObject] {
                     self.parseDictionaryToTask(resultDict)
                 }
+            }
+            if let pageNo = json["page_no"] as? String {
+                sharedDataSingleton.taskCurrentPage = Int(pageNo)!
+            }
+            if let totalPage = json["total_page"] as? Int {
+                sharedDataSingleton.taskTotalPage = totalPage
             }
             isPatientTask = false
             sharedDataSingleton.patientTask = patientTasks

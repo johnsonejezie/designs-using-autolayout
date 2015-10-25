@@ -191,7 +191,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
 extension CaseNoteTableViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == (caseNotes.count - 1) {
+        if indexPath.row == (caseNotes.count - 1) && (sharedDataSingleton.caseNotesCurrentPage < sharedDataSingleton.caseNotesTotalPage) {
             print("end of table")
             ++currentPageNumber
             let pageNoToString = String(currentPageNumber)

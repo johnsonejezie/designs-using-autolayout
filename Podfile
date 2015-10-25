@@ -13,6 +13,7 @@ pod 'SwiftValidator', '2.1.1'
 pod "SwiftSpinner", :git => 'https://github.com/zbeckman/SwiftSpinner.git'
 pod 'HanekeSwift', :git => 'https://github.com/meteochu/HanekeSwift.git', :branch => 'swift-2.0'
 pod 'XLForm', '~> 3.0'
+pod 'JLToast', '~> 1.3'
 pod 'SwiftKeychainWrapper', :git => 'https://github.com/jrendel/SwiftKeychainWrapper', :branch => 'master'
 end
 

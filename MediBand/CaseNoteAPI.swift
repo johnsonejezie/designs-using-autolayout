@@ -86,6 +86,12 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
                     self.parseDictionaryToCaseNote(resultDict)
                 }
             }
+            if let pageNo = json["page_no"] as? String {
+                sharedDataSingleton.caseNotesCurrentPage = Int(pageNo)!
+            }
+            if let totalPage = json["total_page"] as? Int {
+                sharedDataSingleton.caseNotesTotalPage = totalPage
+            }
             return caseNotes
         }
         

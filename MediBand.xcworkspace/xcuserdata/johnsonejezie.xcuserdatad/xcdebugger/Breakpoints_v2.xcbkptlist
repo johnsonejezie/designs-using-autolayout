@@ -78,12 +78,12 @@
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.983757"
+                  timestampString = "467486683.970282"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
                   endingLineNumber = "89"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "24">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -93,12 +93,12 @@
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.984029"
+                  timestampString = "467486683.970578"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "90"
                   endingLineNumber = "90"
-                  offsetFromSymbolStart = "27">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -122,31 +122,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "MediBand.OutboxViewController.createPatient (MediBand.OutboxViewController)(MediBand.Patient, fromMedicalFacility : Swift.String, image : ObjectiveC.UIImage, isCreatingNewPatient : Swift.Bool, index : Swift.Int) -&gt; ()"
+                  symbolName = "MediBand.OutboxViewController.createPatient (MediBand.OutboxViewController)(MediBand.Patient, fromMedicalFacility : Swift.String, image : __ObjC.UIImage, isCreatingNewPatient : Swift.Bool, index : Swift.Int) -&gt; ()"
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.985119"
+                  timestampString = "467486683.972423"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
                   endingLineNumber = "70"
-                  offsetFromSymbolStart = "59">
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "MediBand.OutboxViewController.(createPatient (MediBand.OutboxViewController) -&gt; (MediBand.Patient, fromMedicalFacility : Swift.String, image : ObjectiveC.UIImage, isCreatingNewPatient : Swift.Bool, index : Swift.Int) -&gt; ()).(closure #1)"
+                  symbolName = "MediBand.OutboxViewController.(createPatient (MediBand.OutboxViewController) -&gt; (MediBand.Patient, fromMedicalFacility : Swift.String, image : __ObjC.UIImage, isCreatingNewPatient : Swift.Bool, index : Swift.Int) -&gt; ()).(closure #1)"
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.985279"
+                  timestampString = "467486683.97276"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "71"
                   endingLineNumber = "71"
-                  offsetFromSymbolStart = "30">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -174,12 +174,12 @@
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.997586"
+                  timestampString = "467486683.97488"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "24">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -189,12 +189,12 @@
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.998013"
+                  timestampString = "467486683.975329"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
                   endingLineNumber = "62"
-                  offsetFromSymbolStart = "27">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -218,11 +218,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "MediBand.OutboxViewController.createUpdateStaff (MediBand.OutboxViewController)(MediBand.Staff, staffImage : Swift.Optional&lt;ObjectiveC.UIImage&gt;, isCreatingNewStaff : Swift.Bool, index : Swift.Int) -&gt; ()"
+                  symbolName = "MediBand.OutboxViewController.createUpdateStaff (MediBand.OutboxViewController)(MediBand.Staff, staffImage : Swift.Optional&lt;__ObjC.UIImage&gt;, isCreatingNewStaff : Swift.Bool, index : Swift.Int) -&gt; ()"
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.999499"
+                  timestampString = "467486683.980878"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "52"
@@ -233,16 +233,16 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "MediBand.OutboxViewController.(createUpdateStaff (MediBand.OutboxViewController) -&gt; (MediBand.Staff, staffImage : Swift.Optional&lt;ObjectiveC.UIImage&gt;, isCreatingNewStaff : Swift.Bool, index : Swift.Int) -&gt; ()).(closure #1)"
+                  symbolName = "MediBand.OutboxViewController.(createUpdateStaff (MediBand.OutboxViewController) -&gt; (MediBand.Staff, staffImage : Swift.Optional&lt;__ObjC.UIImage&gt;, isCreatingNewStaff : Swift.Bool, index : Swift.Int) -&gt; ()).(closure #1)"
                   moduleName = "MediBand"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johnsonejezie/Desktop/xcode/Swift/designs-using-autolayout/MediBand/OutboxViewController.swift"
-                  timestampString = "466959939.99967"
+                  timestampString = "467486683.981258"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
                   endingLineNumber = "53"
-                  offsetFromSymbolStart = "30">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -270,108 +270,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MediBand/ActivitiesViewController.swift"
-            timestampString = "466959879.158982"
+            timestampString = "467486373.228594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "getTask(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MediBand/ActivitiesViewController.swift"
-            timestampString = "466959879.158982"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "getTask(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MediBand/ActivitiesViewController.swift"
-            timestampString = "466959846.880076"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "getTask(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MediBand/ActivitiesViewController.swift"
-            timestampString = "466959869.407771"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "getTask(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MediBand/TaskAPI.swift"
-            timestampString = "466959903.476097"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "getTaskByPatient(_:page:callback:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MediBand/TaskAPI.swift"
-            timestampString = "466959914.625558"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "handleGetTaskByPatient(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MediBand/TaskAPI.swift"
-            timestampString = "466959934.627212"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "handleGetTaskByPatient(_:)"
+            startingLineNumber = "405"
+            endingLineNumber = "405"
+            landmarkName = "tableView(_:willDisplayCell:forRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

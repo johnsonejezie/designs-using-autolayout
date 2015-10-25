@@ -28,6 +28,12 @@ class DataSingleton {
     var specialistFilterString = ""
     var outbox = [[String: Any]]()
     var theme:UIColor?
+    var taskCurrentPage:Int = 1
+    var taskTotalPage:Int = 1
+    var patientsCurrentPage:Int = 1
+    var patientsTotalPage:Int = 1
+    var caseNotesTotalPage:Int = 1
+    var caseNotesCurrentPage :Int = 1
 }
 
 let sharedDataSingleton = DataSingleton()
