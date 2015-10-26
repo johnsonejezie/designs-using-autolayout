@@ -118,6 +118,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                     let patientAPI = PatientAPI()
                     patientAPI.getPatient(self.patientID, fromMedicalFacility: sharedDataSingleton.user.clinic_id, completionHandler: { (scannedPatient:Patient?, error:NSError?) -> () in
                         if error == nil {
+                            SwiftSpinner.hide()
                             if let aPatient = scannedPatient {
                                 sharedDataSingleton.selectedPatient = aPatient
                             }
@@ -125,6 +126,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                             controller.patient = sharedDataSingleton.selectedPatient
                             self.navigationController?.pushViewController(controller, animated: true)
                         }else {
+                             SwiftSpinner.hide()
                            let alertView = SCLAlertView()
                             alertView.showEdit(self, title: "Notice", subTitle: "Patient doesn't exist", closeButtonTitle: "Cancel", duration: 20000)
                         }
