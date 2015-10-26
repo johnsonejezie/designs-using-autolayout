@@ -16,6 +16,7 @@ class CaseNoteTableViewCell: UITableViewCell {
     @IBOutlet var addedByLabel: UILabel!
     @IBOutlet var caseNoteDetails: UILabel!
 
+    @IBOutlet var containerView: UIView!
     @IBOutlet var emptyLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,6 +31,7 @@ class CaseNoteTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         cardView.backgroundColor = sharedDataSingleton.theme
+        containerView.backgroundColor = sharedDataSingleton.theme
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

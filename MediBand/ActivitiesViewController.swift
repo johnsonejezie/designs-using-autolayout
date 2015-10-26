@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import JLToast
 
 class ActivitiesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, activityStatusTableViewControllerDelegate, UIPopoverPresentationControllerDelegate, NSURLConnectionDataDelegate {
     
@@ -56,6 +57,10 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func getTask(pageNo: String) {
+        if !Reachability.connectedToNetwork() {
+            JLToast.makeText("No Internet Connection").show()
+            return
+        }
         
         if isPatientTask == true {
             if let patient_id = patientID {

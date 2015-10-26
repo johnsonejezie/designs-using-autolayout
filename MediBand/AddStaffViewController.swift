@@ -6,6 +6,7 @@
 
 import XLForm
 import SwiftSpinner
+import JLToast
 
 
 protocol addStaffControllerDelegate: class {
@@ -271,12 +272,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     
     @IBAction func submit(sender: UIBarButtonItem) {
         
-        var message:String = ""
-        if isUpdatingStaff == true {
-            message = "Updating Staff"
-        }else {
-            message = "Creating Staff"
-        }
+
         if sharedDataSingleton.selectedStaff != nil {
             if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
                 print(specialist)
@@ -307,13 +303,9 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                 }
             }
             
-//            if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
-//                staff.speciality = String(specialist_id)
-//            }
+
         }
-//        else if let specialist_id = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formValue() as? Int {
-//            staff.speciality = String(specialist_id)
-//        }
+
         
         if let general_practional_id = form.formRowWithTag(Tags.gpID.rawValue)!.value as? String {
             staff.general_practional_id = general_practional_id
@@ -344,9 +336,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
                 
             }
         }else {
-//            if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
-//                staff.role = String(role)
-//            }
+
             if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
                 print(role )
                 if let index = Contants().role.indexOf(role as! String) {
@@ -358,9 +348,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
             }
 
         }
-//        else if let role = form.formRowWithTag(Tags.role.rawValue)!.value?.formValue() as? Int {
-//            staff.role = String(role)
-//        }
+
         
         if let email = form.formRowWithTag(Tags.email.rawValue)!.value as? String {
             staff.email = email
@@ -371,11 +359,20 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         if let forename = form.formRowWithTag(Tags.forename.rawValue)!.value as? String {
             staff.firstname = forename
         }
+        var message:String = ""
+        var outboxDescription:String = ""
+        if isUpdatingStaff == true {
+            message = "Updating Staff"
+            outboxDescription = "Update staff with ID \(staff.member_id)"
+        }else {
+            message = "Creating Staff"
+            outboxDescription = "Create staff with ID \(staff.member_id)"
+        }
         
         if !Reachability.connectedToNetwork() {
-            let dictionary: Dictionary<String, Any> = ["requestType": "CreateStaff", "staff": staff, "image": staffImage, "isCreatingNewStaff": !isUpdatingStaff]
+            let dictionary: Dictionary<String, Any> = ["requestType": "CreateStaff", "value": staff, "image": staffImage, "isCreatingNewStaff": !isUpdatingStaff, "description":outboxDescription]
             sharedDataSingleton.outbox.append(dictionary)
-            presentViewController(Alert.outbox(), animated: false, completion: nil)
+            JLToast.makeText("Saved to Outbox").show()
             return
         }
         

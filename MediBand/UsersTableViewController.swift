@@ -132,9 +132,11 @@ class UsersTableViewController : UITableViewController, XLFormRowDescriptorViewC
                 
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-                    let getImage =  UIImage(data: NSData(contentsOfURL:URL)!)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.userImage.image = getImage
+                    if let getImage =  UIImage(data: NSData(contentsOfURL:URL)!) {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.userImage.image = getImage
+                    }
+                   
                     }
                 }
             }

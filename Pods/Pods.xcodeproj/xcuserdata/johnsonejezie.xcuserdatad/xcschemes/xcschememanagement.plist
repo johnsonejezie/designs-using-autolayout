@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JLToast.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MediBand.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,11 +39,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftValidator.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>XLForm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,12 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0269CFE68F8186EFA9CC6C287644E591</key>
+		<key>11868AB21F3E89D441C2F4993832944A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28CBA812765712589A663DEE755CEE91</key>
+		<key>2B61AD90636C648D448FA9C28DEB8520</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,17 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83FCE0E351E7341F24569007F2AFE80C</key>
+		<key>83CDD5FFDE751F28A7391B1051A38538</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>886AA3D9C2A6F3EB19F42F307E3D4B99</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9F33C891FB542C344C962F1886B1CB67</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A499383E4F651AF7A8C339C994CD8F87</key>
 		<dict>
 			<key>primary</key>
 			<true/>

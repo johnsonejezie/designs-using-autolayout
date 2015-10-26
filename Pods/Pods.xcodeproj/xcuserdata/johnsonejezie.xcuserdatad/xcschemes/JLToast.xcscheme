@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D49D59B083A768B409216459"
-               BuildableName = "SwiftValidator.framework"
-               BlueprintName = "SwiftValidator"
+               BlueprintIdentifier = "139829E9B1F2E8E735F344FB"
+               BuildableName = "JLToast.framework"
+               BlueprintName = "JLToast"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

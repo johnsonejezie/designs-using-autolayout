@@ -27,6 +27,7 @@ class DataSingleton {
     var isEditingProfile = false
     var specialistFilterString = ""
     var outbox = [[String: Any]]()
+    var outboxFileArray:NSMutableDictionary = ["XInitializerItem": "DoNotEverChangeMe"]
     var theme:UIColor?
     var taskCurrentPage:Int = 1
     var taskTotalPage:Int = 1

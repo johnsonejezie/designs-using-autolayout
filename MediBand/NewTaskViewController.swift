@@ -9,6 +9,7 @@
 import UIKit
 import XLForm
 import SwiftSpinner
+import JLToast
 
 
 
@@ -119,8 +120,9 @@ class NewTaskViewController: XLFormViewController {
         print(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
         
         if !Reachability.connectedToNetwork() {
-            let dictionary: Dictionary<String, Any> = ["requestType": "CreateTask", "task": task]
+            let dictionary: Dictionary<String, Any> = ["requestType": "CreateTask", "description":"Create task for patient with ID \(task.patient_id)", "value": task]
             sharedDataSingleton.outbox.append(dictionary)
+            JLToast.makeText("Saved to Outbox").show()
             return
         }
         SwiftSpinner.show("Creating Task", animated: true)

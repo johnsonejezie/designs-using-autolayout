@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import JLToast
 
 class CaseNoteTableViewController: UITableViewController, UIViewControllerTransitioningDelegate, addCaseControllerDelegate {
 
@@ -131,13 +132,18 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     
     func createCaseNote(task_id:String) {
+        if !Reachability.connectedToNetwork() {
+            JLToast.makeText("No Internet Connection").show()
+            return
+        }
         let caseNote = CaseNote()
         caseNote.task_id = task_id
         caseNote.staff_id = sharedDataSingleton.user.id
         caseNote.details = self.caseNoteDetails
         if !Reachability.connectedToNetwork() {
-            let dictionary: Dictionary<String, Any> = ["requestType": "createCaseNote", "caseNote": caseNote]
+            let dictionary: Dictionary<String, Any> = ["requestType": "createCaseNote", "value": caseNote, "description":"Create case note for task ID"]
             sharedDataSingleton.outbox.append(dictionary)
+            JLToast.makeText("Saved to Outbox").show()
             return
         }
         SwiftSpinner.show("Creating Case Note", animated: true)

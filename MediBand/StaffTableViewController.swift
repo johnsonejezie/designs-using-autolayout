@@ -9,7 +9,7 @@
 import UIKit
 import SwiftSpinner
 import Haneke
-
+import JLToast
 
 class StaffTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addStaffControllerDelegate {
 
@@ -54,6 +54,10 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func getStaff(pageNumber:String){
+        if !Reachability.connectedToNetwork() {
+            JLToast.makeText("No Internet Connection").show()
+            return
+        }
         var staffMethods = StaffNetworkCall()
         if sharedDataSingleton.allStaffs.count <= 0 {
             SwiftSpinner.show("Loading Staff", animated: true)

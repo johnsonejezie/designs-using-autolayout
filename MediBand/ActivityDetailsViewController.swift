@@ -9,6 +9,7 @@
 import UIKit
 import Haneke
 import SwiftSpinner
+import JLToast
 class ActivityDetailsViewController: UIViewController , UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate, menuViewControllerDelegate{
     
     
@@ -174,6 +175,10 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     
     @IBAction func viewPatientActionButton() {
+        if !Reachability.connectedToNetwork() {
+            JLToast.makeText("No Internet Connection").show()
+            return
+        }
         SwiftSpinner.show("Loading...", animated: true)
         trackEvent("UX", action: "View Patient", label: "view patient button from task detail view", value: nil)
         let patientAPI = PatientAPI()
@@ -213,9 +218,9 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     
     func updateTaskStatus(resolution:String) {
         if !Reachability.connectedToNetwork() {
-            let dictionary: Dictionary<String, Any> = ["requestType": "UpdateTaskStatus", "taskID": self.task.id, "staffID": sharedDataSingleton.user.id, "resolutionID": resolution]
+            let dictionary: Dictionary<String, Any> = ["requestType": "UpdateTaskStatus", "taskID": self.task.id, "staffID": sharedDataSingleton.user.id, "resolutionID": resolution, "description":"Update resolution for task with ID \(task.id)"]
             sharedDataSingleton.outbox.append(dictionary)
-            presentViewController(Alert.outbox(), animated: false, completion: nil)
+            JLToast.makeText("Saved to Outbox").show()
             return
         }
         SwiftSpinner.show("Updating resolution")

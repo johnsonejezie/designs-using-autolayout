@@ -10,6 +10,7 @@ import UIKit
 import XLForm
 import SwiftSpinner
 import Haneke
+import JLToast
 protocol addPatientControllerDelegate: class {
     func addPatientViewController(controller: NewPatientViewController,
         didFinishedAddingPatient patient: NSDictionary)
@@ -400,22 +401,26 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         }else {
             let patient: Patient = handleForm()
             var message :String = ""
+            var outboxMessage:String = ""
             if isEditingPatient == true {
                 message = "Updating patient record"
+                outboxMessage = "Update patient with ID \(patientID)"
             }else {
                 message = "Creating patient record"
+                outboxMessage = "Create patient with ID \(patientID)"
             }
             
             if !Reachability.connectedToNetwork() {
-                let dictionary: Dictionary<String, Any> = ["requestType": "CreateNewPatient", "patient": patient, "fromMedicalFacility": 4, "image": patientImage, "isCreatingNewPatient": !isEditingPatient]
+                let dictionary: Dictionary<String, Any> = ["requestType": "CreateNewPatient", "value": patient, "fromMedicalFacility": sharedDataSingleton.user.clinic_id, "image": patientImage, "isCreatingNewPatient": !isEditingPatient, "description":outboxMessage]
                 sharedDataSingleton.outbox.append(dictionary)
-                presentViewController(Alert.outbox(), animated: false, completion: nil)
+                JLToast.makeText("Saved to Outbox").show()
+                
                 return
             }
             
             SwiftSpinner.show(message, animated: true)
             let patientAPI = PatientAPI()
-            patientAPI.createNewPatient(patient, fromMedicalFacility: "4", image: self.patientImage, isCreatingNewPatient: !isEditingPatient) { (success) -> Void in
+            patientAPI.createNewPatient(patient, fromMedicalFacility: sharedDataSingleton.user.clinic_id, image: self.patientImage, isCreatingNewPatient: !isEditingPatient) { (success) -> Void in
                 if success == true {
                     SwiftSpinner.hide({ () -> Void in
                         let patientProfileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController

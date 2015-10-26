@@ -30,14 +30,14 @@ install_framework()
 
   # Embed linked Swift runtime libraries
   local basename
-#  basename="$(basename "$1" | sed -E s/\\..+// && exit ${PIPESTATUS[0]})"
-#  local swift_runtime_libs
-#  swift_runtime_libs=$(xcrun otool -LX "${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/${basename}.framework/${basename}" | grep --color=never @rpath/libswift | sed -E s/@rpath\\/\(.+dylib\).*/\\1/g | uniq -u  && exit ${PIPESTATUS[0]})
-#  for lib in $swift_runtime_libs; do
-#    echo "rsync -auv \"${SWIFT_STDLIB_PATH}/${lib}\" \"${destination}\""
-#    rsync -auv "${SWIFT_STDLIB_PATH}/${lib}" "${destination}"
-#    code_sign_if_enabled "${destination}/${lib}"
-#  done
+  basename="$(basename "$1" | sed -E s/\\..+// && exit ${PIPESTATUS[0]})"
+  local swift_runtime_libs
+  swift_runtime_libs=$(xcrun otool -LX "${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/${basename}.framework/${basename}" | grep --color=never @rpath/libswift | sed -E s/@rpath\\/\(.+dylib\).*/\\1/g | uniq -u  && exit ${PIPESTATUS[0]})
+  for lib in $swift_runtime_libs; do
+    echo "rsync -auv \"${SWIFT_STDLIB_PATH}/${lib}\" \"${destination}\""
+    rsync -auv "${SWIFT_STDLIB_PATH}/${lib}" "${destination}"
+    code_sign_if_enabled "${destination}/${lib}"
+  done
 }
 
 # Signs a framework with the provided identity
@@ -55,17 +55,17 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-MediBand/AFNetworking.framework'
   install_framework 'Pods-MediBand/Alamofire.framework'
   install_framework 'Pods-MediBand/Haneke.framework'
+  install_framework 'Pods-MediBand/JLToast.framework'
   install_framework 'Pods-MediBand/SwiftKeychainWrapper.framework'
   install_framework 'Pods-MediBand/SwiftSpinner.framework'
-  install_framework 'Pods-MediBand/SwiftValidator.framework'
   install_framework 'Pods-MediBand/XLForm.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-MediBand/AFNetworking.framework'
   install_framework 'Pods-MediBand/Alamofire.framework'
   install_framework 'Pods-MediBand/Haneke.framework'
+  install_framework 'Pods-MediBand/JLToast.framework'
   install_framework 'Pods-MediBand/SwiftKeychainWrapper.framework'
   install_framework 'Pods-MediBand/SwiftSpinner.framework'
-  install_framework 'Pods-MediBand/SwiftValidator.framework'
   install_framework 'Pods-MediBand/XLForm.framework'
 fi

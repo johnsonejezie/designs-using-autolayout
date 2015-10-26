@@ -77,6 +77,7 @@
 		A5ED9B1E1B8BA74400E3EF49 /* SCLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B151B8BA74400E3EF49 /* SCLButton.m */; };
 		A5ED9B1F1B8BA74400E3EF49 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B181B8BA74400E3EF49 /* SCLTimerDisplay.m */; };
 		A5ED9B201B8BA74400E3EF49 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A5ED9B1A1B8BA74400E3EF49 /* UIImage+ImageEffects.m */; };
+		A5F8F95A1BDD96ED004CFFDC /* OutboxData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5F8F9591BDD96ED004CFFDC /* OutboxData.plist */; };
 		B264E8E594B74C4FAD8CDBF9 /* Pods_MediBand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4140736F615BCEE6A380469F /* Pods_MediBand.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -191,6 +192,7 @@
 		A5ED9B181B8BA74400E3EF49 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTimerDisplay.m; sourceTree = "<group>"; };
 		A5ED9B191B8BA74400E3EF49 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		A5ED9B1A1B8BA74400E3EF49 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		A5F8F9591BDD96ED004CFFDC /* OutboxData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OutboxData.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +381,7 @@
 				A5D15A4F1B4995E400DC15AB /* Images.xcassets */,
 				A5D15A471B4995E400DC15AB /* Info.plist */,
 				A5D15A481B4995E400DC15AB /* AppDelegate.swift */,
+				A5F8F9591BDD96ED004CFFDC /* OutboxData.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5D15A4E1B4995E400DC15AB /* Main.storyboard in Resources */,
+				A5F8F95A1BDD96ED004CFFDC /* OutboxData.plist in Resources */,
 				A5D15A531B4995E400DC15AB /* LaunchScreen.xib in Resources */,
 				A5D15A501B4995E400DC15AB /* Images.xcassets in Resources */,
 			);

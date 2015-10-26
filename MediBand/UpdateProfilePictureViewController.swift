@@ -9,6 +9,7 @@
 import UIKit
 import SwiftSpinner
 import Haneke
+import JLToast
 
 class UpdateProfilePictureViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -98,9 +99,9 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
             staff.firstname = sharedDataSingleton.user.firstName
         
         if !Reachability.connectedToNetwork() {
-            let dictionary: Dictionary<String, Any> = ["requestType": "UpdateStaff", "staff": self.staff, "image": self.staffImage, "isCreatingNewStaff": false]
+            let dictionary: Dictionary<String, Any> = ["requestType": "CreateStaff", "value": staff, "image": staffImage, "isCreatingNewStaff": false, "description":"Change profile picture"]
             sharedDataSingleton.outbox.append(dictionary)
-            presentViewController(Alert.outbox(), animated: false, completion: nil)
+            JLToast.makeText("Saved to Outbox").show()
             return
         }
 //

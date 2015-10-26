@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import JLToast
 
 
 class PatientsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -39,6 +40,10 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getPatients(pageNumber:String) {
+        if !Reachability.connectedToNetwork() {
+            JLToast.makeText("No Internet Connection").show()
+            return
+        }
         if sharedDataSingleton.patients.count <= 0 {
             SwiftSpinner.show("Loading Patients", animated: true)
             patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNumber) { (success) -> Void in
