@@ -25,7 +25,7 @@ PODS:
   - JLToast (1.3.2)
   - SwiftKeychainWrapper (1.0.11)
   - SwiftSpinner (0.7.1)
-  - SwiftValidator (2.1.1)
+  - SwiftValidator (3.0.1)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
@@ -36,7 +36,7 @@ DEPENDENCIES:
   - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper`,
     branch `master`)
   - SwiftSpinner (from `https://github.com/zbeckman/SwiftSpinner.git`)
-  - SwiftValidator (= 2.1.1)
+  - SwiftValidator (= 3.0.1)
   - XLForm (~> 3.0)
 
 EXTERNAL SOURCES:
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   JLToast: e76b9f82ca29aef98993053302e5a9c49ed905a4
   SwiftKeychainWrapper: 011a6946923948ffa49708014dd691164d7621d1
   SwiftSpinner: 19a31d2b4d3166de6c7244d7581b3cee20dbe4bf
-  SwiftValidator: 79936ea870f1dba8a0824763375375bb209fe30d
+  SwiftValidator: c59223144754045d7691febdc3b3ecc2e73b609c
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
 COCOAPODS: 0.38.0.beta.2

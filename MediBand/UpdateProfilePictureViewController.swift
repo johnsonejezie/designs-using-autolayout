@@ -23,7 +23,7 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     override func viewDidLoad() {
         super.viewDidLoad()
         uploadBtn.backgroundColor = sharedDataSingleton.theme
-        cancelBtn.backgroundColor = sharedDataSingleton.theme
+//        cancelBtn.backgroundColor = sharedDataSingleton.theme
         if (sharedDataSingleton.user.image != "") {
             let URL = NSURL(string: sharedDataSingleton.user.image)!
             
@@ -71,27 +71,30 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     }
     
     func update(){
+        
         let constants = Contants()
         
-        let indexofA = constants.specialist.filter({$0 as! String == sharedDataSingleton.user.speciality})
-        if indexofA.count == 0 {
+        let indexOfSpecialist = constants.specialist.indexOf(sharedDataSingleton.user.speciality)
+//        ({$0 == sharedDataSingleton.user.speciality})
+        if indexOfSpecialist == nil {
             
             staff.speciality = ""
         }else {
-            var count: Int = indexofA[0] as! Int
-            count = count + 1
+            print(indexOfSpecialist)
+            let count: Int = indexOfSpecialist! + 1
             staff.speciality = String(count)
         }
         
         staff.general_practional_id = sharedDataSingleton.user.general_practitioner_id
         staff.member_id = sharedDataSingleton.user.memberid
         staff.medical_facility_id = sharedDataSingleton.user.clinic_id
-        let indexOfRole = constants.role.filter({$0 as! String == sharedDataSingleton.user.role})
-        if indexOfRole.count == 0 {
+        let indexOfRole = constants.role.indexOf(sharedDataSingleton.user.role)
+//        ({$0 == sharedDataSingleton.user.role})
+        if indexOfRole == nil {
             staff.role = ""
         }else {
-            var count: Int = indexOfRole[0] as! Int
-            count = count + 1
+//            let indexAsString 
+            let count: Int = indexOfRole! + 1
             staff.role = String(count)
         }
             staff.email = sharedDataSingleton.user.email
@@ -105,18 +108,18 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
             return
         }
 //
-//        
+        SwiftSpinner.show("Updating profile picture")
         let staffMethods = StaffNetworkCall()
         staffMethods.create(staff, image: staffImage, isCreatingNewStaff: false) { (success) -> Void in
             if success == true {
                 SwiftSpinner.hide({ () -> Void in
                     let alertView = SCLAlertView()
-                    alertView.showEdit(self, title: "Sucess", subTitle: "Profile picture changed", closeButtonTitle: "Cancel", duration: 2000)
+                    alertView.showEdit(self, title: "Sucess", subTitle: "Profile picture changed", closeButtonTitle: "OK", duration: 2000)
                 })
             }else {
                 SwiftSpinner.hide({ () -> Void in
                     let alertView = SCLAlertView()
-                    alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                    alertView.showError("Error", subTitle: "An error occurred. Please try again later", closeButtonTitle: "OK", duration: 200)
                     alertView.alertIsDismissed({ () -> Void in
                         
                     })
@@ -127,3 +130,4 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     }
 //}
 }
+

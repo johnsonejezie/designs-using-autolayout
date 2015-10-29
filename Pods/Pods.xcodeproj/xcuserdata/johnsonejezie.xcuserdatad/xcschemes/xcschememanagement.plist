@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftValidator.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XLForm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,17 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>11868AB21F3E89D441C2F4993832944A</key>
+		<key>1251F4958E0A8BFE69BA92FF2A44277F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2B61AD90636C648D448FA9C28DEB8520</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3EFB58C644BF763DB8F3DEDBFA35C4A2</key>
+		<key>185A4D1EEA3C8CD904014C0B05A13E52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,12 +72,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83CDD5FFDE751F28A7391B1051A38538</key>
+		<key>657A838C1F3CEE72E93926DFC42B146B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>886AA3D9C2A6F3EB19F42F307E3D4B99</key>
+		<key>77A879830A9A3BD071B2288478429DFD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>83FCE0E351E7341F24569007F2AFE80C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9526547AF4D75FB82293ADAC198998AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

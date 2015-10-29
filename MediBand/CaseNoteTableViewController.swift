@@ -18,7 +18,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     var task: Task!
     var caseNotes = [CaseNote]()
     var currentPageNumber:Int = 1
-    let caseNoteAPI = CaseNoteAPI()
+
     
     @IBAction func addCaseNote(sender: AnyObject) {
         
@@ -102,6 +102,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     
     
     func getCaseNote(task_id:String, staff_id:String, page:String) {
+            let caseNoteAPI = CaseNoteAPI()
         if self.caseNotes.count == 0 {
             SwiftSpinner.show("Getting Case Notes", animated: true)
             caseNoteAPI.getCaseNotes(task_id, staff_id: staff_id, page: page) { (allCaseNotes, error) -> () in
@@ -197,6 +198,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
 extension CaseNoteTableViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+            let caseNoteAPI = CaseNoteAPI()
         if indexPath.row == (caseNotes.count - 1) && (sharedDataSingleton.caseNotesCurrentPage < sharedDataSingleton.caseNotesTotalPage) {
             print("end of table")
             ++currentPageNumber

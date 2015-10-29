@@ -1126,8 +1126,8 @@
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8la-tz-VG4">
                                                     <rect key="frame" x="277" y="0.0" width="278" height="104"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="4/4/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pS-XiV">
-                                                            <rect key="frame" x="8" y="39" width="69" height="25"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="4/4/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pS-XiV">
+                                                            <rect key="frame" x="8" y="39" width="262" height="25"/>
                                                             <animations/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1148,6 +1148,7 @@
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.15686274510000001" green="0.89019607840000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="dVu-pS-XiV" secondAttribute="trailing" constant="8" id="5Ol-E8-e9n"/>
                                                         <constraint firstItem="CGF-eg-vnC" firstAttribute="leading" secondItem="8la-tz-VG4" secondAttribute="leading" constant="8" id="7b7-eK-0vS"/>
                                                         <constraint firstAttribute="centerY" secondItem="dVu-pS-XiV" secondAttribute="centerY" id="8dU-4L-DoY"/>
                                                         <constraint firstItem="JKu-Ch-uPQ" firstAttribute="height" secondItem="dVu-pS-XiV" secondAttribute="height" id="8ju-Zs-2Bf"/>
@@ -1455,7 +1456,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="138" height="92"/>
                                                 <animations/>
-                                                <color key="backgroundColor" patternImage="F9E390C3-A2FB-4E62-82EA-EB3155DB68E2" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="B0F97867-349C-4892-BA92-5DB5D7648C70" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2913,7 +2914,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="F9E390C3-A2FB-4E62-82EA-EB3155DB68E2" width="512" height="512">
+        <image name="B0F97867-349C-4892-BA92-5DB5D7648C70" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

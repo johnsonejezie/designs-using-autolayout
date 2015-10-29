@@ -9,7 +9,7 @@ use_frameworks!
 
 pod 'AFNetworking', '~> 2.5'
 pod 'Alamofire', '~> 2.0.0'
-pod 'SwiftValidator', '2.1.1'
+pod 'SwiftValidator', '3.0.1'
 pod "SwiftSpinner", :git => 'https://github.com/zbeckman/SwiftSpinner.git'
 pod 'HanekeSwift', :git => 'https://github.com/meteochu/HanekeSwift.git', :branch => 'swift-2.0'
 pod 'XLForm', '~> 3.0'

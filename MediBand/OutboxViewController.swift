@@ -140,6 +140,9 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
         })
         
         let delete = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.deleteTaskIndexPath = indexPath
+            let taskToDelete = sharedDataSingleton.outbox[indexPath.row]
+            self.confirmDelete(taskToDelete)
             
         }
         

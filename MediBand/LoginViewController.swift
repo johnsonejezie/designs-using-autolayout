@@ -128,8 +128,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
 //
             }else {
                 print("error")
-                let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
-                let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
+                let _: Bool = KeychainWrapper.removeObjectForKey("email")
+                let _: Bool = KeychainWrapper.removeObjectForKey("password")
                 SwiftSpinner.hide(nil)
                 let alertView = SCLAlertView()
                 alertView.showError(self, title: "Login Error", subTitle: "Invalid email or password", closeButtonTitle: "Cancel", duration: 2000)
@@ -227,7 +227,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     func keyboardWillHide(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y += keyboardSize.height/2
+            self.view.frame.origin.y = 0
             self.keyboardPresented = false
         }
     }

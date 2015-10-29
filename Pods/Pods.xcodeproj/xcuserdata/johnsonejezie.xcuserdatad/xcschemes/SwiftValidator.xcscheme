@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9CA75EC467B1D4CA3B60AFD5"
-               BuildableName = "XLForm.framework"
-               BlueprintName = "XLForm"
+               BlueprintIdentifier = "AD3D76433B5B1089EE08B8C1"
+               BuildableName = "SwiftValidator.framework"
+               BlueprintName = "SwiftValidator"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
