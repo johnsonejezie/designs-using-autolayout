@@ -229,11 +229,11 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             if error != nil {
                 SwiftSpinner.hide()
                 let alertView = SCLAlertView()
-                alertView.showError(self, title: "Error", subTitle: "Failed to update task status. Try again later", closeButtonTitle: "Cancel", duration: 20000)
+                alertView.showError(self, title: "Error", subTitle: "Failed to update task status. Try again later", closeButtonTitle: "OK", duration: 20000)
             }else {
                 SwiftSpinner.hide()
                 let alertView = SCLAlertView()
-                alertView.showEdit(self, title: "Success", subTitle: "Task Status Updated", closeButtonTitle: "Cancel", duration: 20000)
+                alertView.showEdit(self, title: "Success", subTitle: "Task Status Updated", closeButtonTitle: "OK", duration: 20000)
             }
         }
     }
