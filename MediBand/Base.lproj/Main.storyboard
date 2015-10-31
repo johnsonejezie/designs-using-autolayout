@@ -1456,7 +1456,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-BK-qie">
                                                 <rect key="frame" x="8" y="108" width="138" height="92"/>
                                                 <animations/>
-                                                <color key="backgroundColor" patternImage="B0F97867-349C-4892-BA92-5DB5D7648C70" colorSpace="pattern"/>
+                                                <color key="backgroundColor" patternImage="A811DADA-EC4D-42D6-9DAB-0D74CCF09DC0" colorSpace="pattern"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="SCAN PATIENT">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2914,7 +2914,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="B0F97867-349C-4892-BA92-5DB5D7648C70" width="512" height="512">
+        <image name="A811DADA-EC4D-42D6-9DAB-0D74CCF09DC0" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

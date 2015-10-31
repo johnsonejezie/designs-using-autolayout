@@ -117,19 +117,20 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
                     SwiftSpinner.show("Searching for patient", animated: true)
                     let patientAPI = PatientAPI()
                     patientAPI.getPatient(self.patientID, fromMedicalFacility: sharedDataSingleton.user.clinic_id, completionHandler: { (scannedPatient:Patient?, error:NSError?) -> () in
-                        if error == nil {
-                            SwiftSpinner.hide()
-                            if let aPatient = scannedPatient {
+                            if let aPatient:Patient = scannedPatient {
+                                 SwiftSpinner.hide()
                                 sharedDataSingleton.selectedPatient = aPatient
+                                let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController
+                                controller.patient = sharedDataSingleton.selectedPatient
+                                self.navigationController?.pushViewController(controller, animated: true)
                             }
-                            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("PatientProfileViewController") as! PatientProfileViewController
-                            controller.patient = sharedDataSingleton.selectedPatient
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }else {
+                           else {
                              SwiftSpinner.hide()
-                           let alertView = SCLAlertView()
-                            alertView.showEdit(self, title: "Notice", subTitle: "Patient doesn't exist", closeButtonTitle: "Cancel", duration: 20000)
-                        }
+                           let alertView1 = SCLAlertView()
+                            alertView1.showEdit(self, title: "Notice", subTitle: "Patient doesn't exist", closeButtonTitle: "Cancel", duration: 20000)
+                                alertView1.alertIsDismissed({ () -> Void in
+                                    self.performSegueWithIdentifier("GoToHomeView", sender: nil)
+                                })                        }
                         
                     })
                     

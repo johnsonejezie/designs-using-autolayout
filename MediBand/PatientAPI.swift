@@ -167,16 +167,21 @@ class PatientAPI {
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
             print("JSON: \(responseObject)")
+            
             if let dictionary = responseObject["data"] as? [String:AnyObject] {
-               self.parseDictionaryToPatient(dictionary)
-                completionHandler(sharedDataSingleton.selectedPatient, nil)
+                if dictionary.count == 0 {
+                    completionHandler(nil, nil)
+                }else {
+                    self.parseDictionaryToPatient(dictionary)
+                    completionHandler(sharedDataSingleton.selectedPatient, nil)
+                }
             }else {
                 completionHandler(nil, nil)
             }
             
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             print("error in getting single patient\(error.description)")
-            completionHandler(nil, nil)
+            completionHandler(nil, error)
         }
     }
 
