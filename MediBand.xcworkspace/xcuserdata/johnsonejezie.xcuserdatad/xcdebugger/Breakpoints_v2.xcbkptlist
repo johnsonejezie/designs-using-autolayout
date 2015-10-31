@@ -141,13 +141,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MediBand/PatientAPI.swift"
+            filePath = "MediBand/ViewController.swift"
             timestampString = "467949202.903628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "getPatient(_:fromMedicalFacility:completionHandler:)"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "captureOutput(_:didOutputMetadataObjects:fromConnection:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -157,13 +157,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MediBand/ViewController.swift"
-            timestampString = "467949202.903628"
+            filePath = "MediBand/PatientAPI.swift"
+            timestampString = "467951408.340163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "captureOutput(_:didOutputMetadataObjects:fromConnection:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "getAllPatients(_:fromMedicalFacility:withPageNumber:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

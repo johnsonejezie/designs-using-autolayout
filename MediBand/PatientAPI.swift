@@ -142,9 +142,12 @@ class PatientAPI {
             manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
             manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                 print("patiens response object \(responseObject)")
-                let dictionary = responseObject["data"] as! [String:AnyObject]
-                self.parseDictionaryToPatient(dictionary)
-                completionHandler(success: true)
+                if let dictionary = responseObject["data"] as? [String:AnyObject] {
+                    self.parseDictionaryToPatient(dictionary)
+                    completionHandler(success: true)
+                }else {
+                   completionHandler(success: false)
+                }
                 }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                     completionHandler(success: false)
             }

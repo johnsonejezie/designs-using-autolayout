@@ -89,8 +89,11 @@ class StaffNetworkCall{
                 let result:AnyObject = responseObject
                     if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
                         self.parseDict(dict)
-                    }
-                completionBlock(success: true)
+                        completionBlock(success: true)
+                    }else {
+                        completionBlock(success: false)
+                }
+               
                 }, failure:{ (requestOperation, error) -> Void in
                     completionBlock(success: false)
                     print(error)
@@ -109,6 +112,8 @@ class StaffNetworkCall{
             let result:AnyObject = responseObject
             if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
                 self.parseDict(dict)
+            }else {
+                
             }
             }, failure:{ (requestOperation, error) -> Void in
             print(" view staff :: \(error)")
@@ -134,6 +139,8 @@ class StaffNetworkCall{
                          completionBlock(done:true)
                     }
                 })
+            }else {
+               completionBlock(done:false)
             }
             }, failure:{ (requestOperation, error) -> Void in
                 print(error)
