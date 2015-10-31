@@ -141,14 +141,25 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         }
         section.addFormRow(row)
         
+        
         // Title
-        row = XLFormRowDescriptor(tag: "title", rowType: XLFormRowDescriptorTypeText)
-        row.cellConfigAtConfigure["textField.placeholder"] = "Title"
+        row = XLFormRowDescriptor(tag: "title", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Title")
         row.required = true
         if sharedDataSingleton.selectedPatient != nil {
             row.value = sharedDataSingleton.selectedPatient.lkp_nametitle
+        }else {
+            row.value = XLFormOptionsObject(value: 0, displayText: "Mr")
         }
+        row.selectorTitle = "Title"
+        row.selectorOptions = [XLFormOptionsObject(value: 0, displayText:"Mr"),
+            XLFormOptionsObject(value: 1, displayText:"Mrs"),
+            XLFormOptionsObject(value: 2, displayText:"Miss"),
+            XLFormOptionsObject(value: 3, displayText:"Master"),
+            
+        ]
         section.addFormRow(row)
+        
+        
         
         // Address
         row = XLFormRowDescriptor(tag: "address", rowType: XLFormRowDescriptorTypeText)
@@ -487,12 +498,13 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             isAnyFieldEmpty = true
             middlename = ""
         }
+//        form.formRowWithTag(Tags.maritalStatus.rawValue)!.value as? String
         let lkp_nametitle: String?
-        if let nameTitle = form.formRowWithTag(Tags.title.rawValue)!.value as? String {
+        if let nameTitle = form.formRowWithTag(Tags.title.rawValue)!.value?.formDisplayText() {
             lkp_nametitle = nameTitle
         }else {
             isAnyFieldEmpty = true
-            lkp_nametitle = ""
+            lkp_nametitle = "Mr"
         }
         
         let address: String?
@@ -561,7 +573,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             ischild = false
         }
         let maritalstatus: String?
-        if let patientMaritalStatus = form.formRowWithTag(Tags.maritalStatus.rawValue)!.value as? String {
+        if let patientMaritalStatus = form.formRowWithTag(Tags.maritalStatus.rawValue)!.value?.formDisplayText() {
             maritalstatus = patientMaritalStatus
         }else {
             isAnyFieldEmpty = true
