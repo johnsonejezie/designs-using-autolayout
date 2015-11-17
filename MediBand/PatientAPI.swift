@@ -21,9 +21,10 @@ class PatientAPI {
         let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
         let parameters = [
             "medical_facility_id": sharedDataSingleton.user.clinic_id,
-            "staff_id": assigned_staff
+            "staff_id": assigned_staff,
+            "page":pageNumber
         ]
-
+        print(parameters)
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()

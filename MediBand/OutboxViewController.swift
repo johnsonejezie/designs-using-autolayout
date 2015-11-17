@@ -24,31 +24,10 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var navBar: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     var deleteTaskIndexPath: NSIndexPath? = nil
-//    @IBAction func refresh(sender: UIBarButtonItem) {
-//        for (index, value) in sharedDataSingleton.outbox.enumerate() {
-//            SwiftSpinner.show("Updating Offline Transactions")
-//            let requestType = value["requestType"] as! String
-//            switch requestType {
-//                case "CreateStaff", "UpdateStaff":
-//                    createUpdateStaff(value["staff"] as! Staff, staffImage: value["image"] as? UIImage, isCreatingNewStaff: value["isCreatingNewStaff"] as! Bool, index: index)
-//                case "CreateTask":
-//                    createTask(value["task"] as! Task, index: index)
-//                case "CreateNewPatient":
-//                    print(value)
-//                    createPatient(value["patient"] as! Patient, fromMedicalFacility: value["fromMedicalFacility"] as! String, image: value["image"] as! UIImage, isCreatingNewPatient: value["isCreatingNewPatient"] as! Bool, index: index)
-//                case "UpdateTaskStatus":
-//                    updateTaskStatus(value["taskID"] as! String, userID: value["staffID"] as! String, resolutionID: value["resolutionID"] as! String, index: index)
-//                case "createCaseNote":
-//                    createCaseNote(value["caseNote"] as! CaseNote, index: index)
-//                default:
-//                    break
-//            }
-//        }
-//        SwiftSpinner.hide()
-//    }
     
     func UpdateOutbox(dict: [String: Any], index:Int) {
        let requestType = dict["requestType"] as! String
+        trackEvent("UX", action: "Offline transaction Updated", label: "Send editAction on tableview cell", value: nil)
         switch requestType {
         case "CreateStaff", "UpdateStaff":
             createUpdateStaff(dict["value"] as! Staff, staffImage: dict["image"] as? UIImage, isCreatingNewStaff: dict["isCreatingNewStaff"] as! Bool, index: index)
@@ -124,9 +103,8 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
             UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        setScreeName("Outbox View");
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
@@ -145,7 +123,9 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
             self.confirmDelete(taskToDelete)
             
         }
-        
+        delete.backgroundColor = UIColor(patternImage: UIImage(named: "ic_delete")!)
+        send.backgroundColor = UIColor(patternImage: UIImage(named: "ic_send")!)
+
         let arrayofactions: Array = [delete, send]
         
         return arrayofactions
@@ -186,6 +166,7 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
     
     func handleDeleteTask(alertAction: UIAlertAction!) -> Void {
         if let indexPath = deleteTaskIndexPath {
+            trackEvent("UX", action: "Offline transaction Deleted", label: "Delete editAction on tableview cell", value: nil)
             tableView.beginUpdates()
             
             sharedDataSingleton.outbox.removeAtIndex(indexPath.row)
@@ -203,4 +184,27 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
    
+}
+
+extension OutboxViewController {
+    
+    func setScreeName(name: String) {
+        self.title = name
+        self.sendScreenView(name)
+    }
+    
+    func sendScreenView(screenName: String) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: self.title)
+        let build = GAIDictionaryBuilder.createScreenView().set(screenName, forKey: kGAIScreenName).build() as NSDictionary
+        
+        tracker.send(build as [NSObject: AnyObject])
+    }
+    
+    func trackEvent(category: String, action: String, label: String, value: NSNumber?) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let trackDictionary = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build()
+        tracker.send(trackDictionary as [NSObject: AnyObject])
+    }
+    
 }

@@ -18,16 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let themeColor = settings.colorForKey("themeColor") {
             sharedDataSingleton.theme = themeColor
         }else {
-           sharedDataSingleton.theme = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0)
+           sharedDataSingleton.theme = UIColor(red: 153/255, green: 102/255, blue: 204/255, alpha: 1)
         }
-//        if let userSelectedColorData = settings.objectForKey("themeColor") as? NSData {
-//            if let userSelectedColor = NSKeyedUnarchiver.unarchiveObjectWithData(userSelectedColorData) as? UIColor {
-//                print(userSelectedColor)
-//                sharedDataSingleton.theme = userSelectedColor
-//            }
-//        }else {
-//            sharedDataSingleton.theme = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0)
-//        }
+
         UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
@@ -35,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
-        var tracker:GAITracker = GAI.sharedInstance().trackerWithTrackingId("UA-65859570-1")
+        var tracker:GAITracker = GAI.sharedInstance().trackerWithTrackingId("UA-67847144-1")
         
         return true
     }

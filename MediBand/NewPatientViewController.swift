@@ -365,7 +365,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         uploadImgBtn.setTitle("UPLOAD PIC", forState: UIControlState.Normal)
         uploadImgBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         uploadImgBtn.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-        uploadImgBtn.backgroundColor = UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1)
+        uploadImgBtn.backgroundColor = sharedDataSingleton.theme
         uploadImgBtn.layer.cornerRadius = 5
         uploadImgBtn.clipsToBounds = true
         uploadImgBtn.backgroundColor = sharedDataSingleton.theme

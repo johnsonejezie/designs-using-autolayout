@@ -99,36 +99,36 @@ class SettingsViewController: XLFormViewController, UIAlertViewDelegate {
         section.hidden = "$\(Tags.themeSection.rawValue)==0"
         form.addFormSection(section)
         
-        row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Lime")
+        row = XLFormRowDescriptor(tag: Tags.theme1.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Purple")
         row.action.formSelector = "purpleColor"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Coffe")
-        row.action.formSelector = "coffeColor"
+        row = XLFormRowDescriptor(tag: Tags.theme2.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Red")
+        row.action.formSelector = "redColor"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme3.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Sky Blue")
-        row.action.formSelector = "skyblue"
+        row = XLFormRowDescriptor(tag: Tags.theme3.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Blue")
+        row.action.formSelector = "blueColor"
         section.addFormRow(row)
         
-        row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "WaterMelon")
-        row.action.formSelector = "brownColor"
+        row = XLFormRowDescriptor(tag: Tags.theme4.rawValue, rowType: XLFormRowDescriptorTypeButton, title: "Green")
+        row.action.formSelector = "greenblue"
         section.addFormRow(row)
         self.form = form
     }
     
-    func purpleColor(){
-        resetApp(UIColor(red: 0.56, green: 0.69, blue: 0.13, alpha: 1))
+    func redColor(){
+        resetApp(UIColor(red: 238/255, green: 116/255, blue: 99/255, alpha: 1))
     }
     
-    func coffeColor(){
-        resetApp(UIColor(red: 0.56, green: 0.45, blue: 0.37, alpha: 1))
+    func blueColor(){
+        resetApp(UIColor(red: 0/255, green: 102/255, blue: 204/255, alpha: 1))
     }
-    func skyblue(){
-        resetApp(UIColor(red: 0.16, green: 0.89, blue: 0.98, alpha: 1.0))
+    func greenblue(){
+        resetApp(UIColor(red: 102/255, green: 204/255, blue: 51/255, alpha: 1.0))
     }
-    func brownColor(){
-        resetApp(UIColor(red: 0.85, green: 0.33, blue: 0.35, alpha: 1))
+    func purpleColor(){
+        resetApp(UIColor(red: 153/255, green: 102/255, blue: 204/255, alpha: 1))
     }
     
     func resetApp(color:UIColor) {
