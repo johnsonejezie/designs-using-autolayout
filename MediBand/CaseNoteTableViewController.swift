@@ -32,14 +32,15 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         super.viewDidLoad()
         
         tableView.rowHeight = 120
+        let pageNoToString:String = String(currentPageNumber)
+        getCaseNote(task.id, staff_id: sharedDataSingleton.user.id, page: pageNoToString)
     
     }
     
     override func viewWillAppear(animated: Bool) {
         UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         self.setScreeName("Case Notes View")
-        let pageNoToString:String = String(currentPageNumber)
-        getCaseNote(task.id, staff_id: sharedDataSingleton.user.id, page: pageNoToString)
+
         
     }
 
@@ -50,8 +51,7 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
+
         var count = 1
         if caseNotes.count > 0 {
             count = caseNotes.count

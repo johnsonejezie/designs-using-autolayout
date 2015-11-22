@@ -129,6 +129,8 @@ class PatientAPI {
                             }
                         }
                        
+                    }else {
+                        completionHandler(success: false)
                     }
                     
                 }else {
@@ -144,8 +146,12 @@ class PatientAPI {
             manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                 print("patiens response object \(responseObject)")
                 if let dictionary = responseObject["data"] as? [String:AnyObject] {
-                    self.parseDictionaryToPatient(dictionary)
-                    completionHandler(success: true)
+                    if dictionary.count > 0 {
+                        self.parseDictionaryToPatient(dictionary)
+                        completionHandler(success: true)
+                    }else {
+                        completionHandler(success: false)
+                    }
                 }else {
                    completionHandler(success: false)
                 }
@@ -154,9 +160,7 @@ class PatientAPI {
             }
         }
     }
-    
-    
-    
+
     func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(Patient?, NSError?)-> ()){
         getSinglePatient = true;
         let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"

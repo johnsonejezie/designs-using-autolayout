@@ -27,37 +27,76 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
         sharedDataSingleton.selectedIDs = []
         let patientDict:NSDictionary = [
             "Patient id": patient.patient_id,
-            "Title": patient.lkp_nametitle,
-            "Marital Status": patient.maritalstatus,
-            "Medical Insurance Provider": patient.medicalinsuranceprovider,
-            "Forename": patient.forename,
             "Surname": patient.surname,
+            "Forename": patient.forename,
             "Middle Name": patient.middlename,
-            "Phone": patient.addressphone,
+            "Title": patient.lkp_nametitle,
             "Address": patient.address,
-            "Other phone": patient.addressotherphone,
             "Post Code": patient.addresspostcode,
-            "Occupation": patient.occupation,
-            "Nationality": patient.nationality,
-            "Date of birth": patient.dob,
+            "Phone": patient.addressphone,
+            "Other phone": patient.addressotherphone,
             "gp": patient.gp,
             "gpsurgery": patient.gpsurgery,
-            "Is patient a child?": patient.ischild,
+            "Medical Insurance Provider": patient.medicalinsuranceprovider,
+            "Occupation": patient.occupation,
             "Language": patient.language,
+            "Nationality": patient.nationality,
             "Next of Kin": patient.next_of_kin,
-            "Next of kin contact": patient.next_of_kin_contact
+            "Next of kin contact": patient.next_of_kin_contact,
+            "Is patient a child?": patient.ischild,
+            "Date of birth": patient.dob,
+            "Marital Status": patient.maritalstatus
+            
         ]
-        
-        
-        
-        arrayOfKeys = patientDict.allKeys
-        arrayOfValues = patientDict.allValues
+        arrayOfKeys = [
+            "Patient id",
+            "Surname",
+            "Forename",
+            "Middle Name",
+            "Title",
+            "Address",
+            "Post Code",
+            "Phone",
+            "Other phone",
+            "gp",
+            "gpsurgery",
+            "Medical Insurance Provider",
+            "Occupation",
+            "Language",
+            "Nationality",
+            "Next of Kin",
+            "Next of kin contact",
+            "Is patient a child?",
+            "Date of birth",
+            "Marital Status"
+            ]
+        arrayOfValues = [
+            patient.patient_id,
+            patient.surname,
+            patient.forename,
+            patient.middlename,
+            patient.lkp_nametitle,
+            patient.address,
+            patient.addresspostcode,
+            patient.addressphone,
+             patient.addressotherphone,
+           patient.gp,
+             patient.gpsurgery,
+             patient.medicalinsuranceprovider,
+            patient.occupation,
+             patient.language,
+            patient.nationality,
+             patient.next_of_kin,
+             patient.next_of_kin_contact,
+             patient.ischild,
+            patient.dob,
+             patient.maritalstatus
+        ]
         
         print(patientDict)
         print(arrayOfValues)
         
-          UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
-//        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         
         addCareButton.layer.cornerRadius = 4
         viewHistoryButton.layer.cornerRadius = 4
@@ -110,12 +149,6 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
             }else {
                 valueLabel.text = arrayOfValues[indexPath.row] as? String
             }
-            
-            
-            
-            
-            
-            
             return cell
         }
         
@@ -124,11 +157,6 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
         return false
     }
     
-    
-    override func viewDidLayoutSubviews() {
-//        imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = imageView.frame.size.height/2
-    }
     
     @IBAction func unwindToVC(segue: UIStoryboardSegue) {
     }
@@ -182,7 +210,6 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
 extension PatientProfileViewController {
     
     func setScreeName(name: String) {
-//        self.title = name
         self.sendScreenView(name)
     }
     

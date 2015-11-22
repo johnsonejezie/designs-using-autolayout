@@ -441,7 +441,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
                 }else {
                     SwiftSpinner.hide({ () -> Void in
                         let alertView = SCLAlertView()
-                        alertView.showError("Error", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                        alertView.showError("Error", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 2000)
                         alertView.alertIsDismissed({ () -> Void in
                             
                         })
