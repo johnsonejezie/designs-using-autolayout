@@ -441,7 +441,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
                 }else {
                     SwiftSpinner.hide({ () -> Void in
                         let alertView = SCLAlertView()
-                        alertView.showError("Erro", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
+                        alertView.showError("Error", subTitle: "An error occurred. Please try again later", closeButtonTitle: "Ok", duration: 200)
                         alertView.alertIsDismissed({ () -> Void in
                             
                         })
@@ -499,13 +499,24 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             middlename = ""
         }
 //        form.formRowWithTag(Tags.maritalStatus.rawValue)!.value as? String
+
         let lkp_nametitle: String?
-        if let nameTitle = form.formRowWithTag(Tags.title.rawValue)!.value?.formDisplayText() {
-            lkp_nametitle = nameTitle
+        if isEditingPatient == true {
+            if let nameTitle = form.formRowWithTag(Tags.title.rawValue)!.value?.displayText() {
+                lkp_nametitle = nameTitle
+            }else {
+                isAnyFieldEmpty = true
+                lkp_nametitle = "Mr"
+            }
         }else {
-            isAnyFieldEmpty = true
-            lkp_nametitle = "Mr"
+            if let nameTitle = form.formRowWithTag(Tags.title.rawValue)!.value?.formDisplayText() {
+                lkp_nametitle = nameTitle
+            }else {
+                isAnyFieldEmpty = true
+                lkp_nametitle = "Mr"
+            }
         }
+
         
         let address: String?
         if let patientAddress = form.formRowWithTag(Tags.address.rawValue)!.value as? String {
@@ -573,12 +584,22 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             ischild = false
         }
         let maritalstatus: String?
-        if let patientMaritalStatus = form.formRowWithTag(Tags.maritalStatus.rawValue)!.value?.formDisplayText() {
-            maritalstatus = patientMaritalStatus
+        if isEditingPatient == true {
+            if let patientMaritalStatus = form.formRowWithTag(Tags.maritalStatus.rawValue)!.value?.displayText() {
+                maritalstatus = patientMaritalStatus
+            }else {
+                isAnyFieldEmpty = true
+                maritalstatus = "Single"
+            }
         }else {
-            isAnyFieldEmpty = true
-            maritalstatus = "Single"
+            if let patientMaritalStatus = form.formRowWithTag(Tags.maritalStatus.rawValue)!.value?.formDisplayText() {
+                maritalstatus = patientMaritalStatus
+            }else {
+                isAnyFieldEmpty = true
+                maritalstatus = "Single"
+            }
         }
+
         
         let next_of_kin_contact: String?
         if let patientNextOfKinContact = form.formRowWithTag(Tags.nextOfKinContact.rawValue)!.value as? String {
@@ -594,8 +615,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             isAnyFieldEmpty = true
             addressotherphone = ""
         }
-        let medical_facility: String? = "4"
-        
         
         let language: String?
         if let patientLanguage = form.formRowWithTag(Tags.language.rawValue)!.value as? String {
@@ -631,7 +650,7 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         newPatient.addressphone = addressphone!
         newPatient.gp = gp!
         newPatient.gpsurgery = gpsurgery!
-        newPatient.medical_facility = medical_facility!
+        newPatient.medical_facility = sharedDataSingleton.user.clinic_id
         newPatient.medicalinsuranceprovider = medicalinsuranceprovider!
         newPatient.occupation = occupation!
         newPatient.nationality = nationality!

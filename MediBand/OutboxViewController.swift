@@ -123,9 +123,6 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
             self.confirmDelete(taskToDelete)
             
         }
-        delete.backgroundColor = UIColor(patternImage: UIImage(named: "ic_delete")!)
-        send.backgroundColor = UIColor(patternImage: UIImage(named: "ic_send")!)
-
         let arrayofactions: Array = [delete, send]
         
         return arrayofactions
