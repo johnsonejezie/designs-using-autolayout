@@ -20,7 +20,7 @@ class Login {
             "password": password,
         ]
         
-        let url = "http://www.iconglobalnetwork.com/mediband/api/login"
+        let url = sharedDataSingleton.baseURL + "login"
         
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
@@ -57,7 +57,7 @@ class Login {
             "newpassword":newPassword
         ]
         
-        let url = "http://www.iconglobalnetwork.com/mediband/api/reset_password"
+        let url = sharedDataSingleton.baseURL + "reset_password"
         
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()

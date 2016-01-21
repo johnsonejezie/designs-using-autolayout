@@ -10,6 +10,7 @@ import UIKit
 
 class DataSingleton {
     
+    let baseURL = "http://www.iconglobalnetwork.com/demos/mediband/api/"
     var medical_facility:String = ""
     var user:User!
     var patients:[Patient] = []

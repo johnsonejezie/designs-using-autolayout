@@ -2,7 +2,7 @@
 //  OutboxViewController.swift
 //  MediBand
 //
-//  Created by Ahmed Onawale on 10/1/15.
+//  Created by Johnson Ejezie on 10/1/15.
 //  Copyright © 2015 Johnson Ejezie. All rights reserved.
 //
 

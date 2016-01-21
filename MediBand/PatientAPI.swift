@@ -18,7 +18,7 @@ class PatientAPI {
     func getAllPatients(assigned_staff:String, fromMedicalFacility medical_facility:String, withPageNumber pageNumber:String, completionHandler:(success:Bool)-> Void) {
        
 //        var patientResult = [Patient]()
-        let url = "http://www.iconglobalnetwork.com/mediband/api/get_patients"
+        let url = sharedDataSingleton.baseURL + "get_patients"
         let parameters = [
             "medical_facility_id": sharedDataSingleton.user.clinic_id,
             "staff_id": assigned_staff,
@@ -71,9 +71,9 @@ class PatientAPI {
         print(parameters)
         
         if isCreatingNewPatient == true {
-            url = "http:/iconglobalnetwork.com/mediband/api/create_patient"
+            url = sharedDataSingleton.baseURL + "create_patient"
         }else {
-            url = "http:/iconglobalnetwork.com/mediband/api/edit_patient"
+            url = sharedDataSingleton.baseURL + "edit_patient"
         }
         if let anImage:UIImage = image {
             let imgData = UIImageJPEGRepresentation(image!, 0.6)
@@ -163,7 +163,7 @@ class PatientAPI {
 
     func getPatient(patient_id:String, fromMedicalFacility medical_facility_id:String, completionHandler:(Patient?, NSError?)-> ()){
         getSinglePatient = true;
-        let url = "http://www.iconglobalnetwork.com/mediband/api/view_patient"
+        let url = sharedDataSingleton.baseURL + "view_patient"
         let parameters = [
             "patient_id": patient_id,
             "medical_facility_id": medical_facility_id,

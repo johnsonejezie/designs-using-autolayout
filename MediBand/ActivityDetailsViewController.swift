@@ -47,7 +47,7 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         let constants = Contants()
         specialityLabel.text = self.fetchStringValueFromArray(constants.specialist, atIndex: (task.specialist_id as String))
         taskCareActivityLabel.text = self.fetchStringValueFromArray(constants.care, atIndex: (task.care_activity_id as String))
-        careTypeLabel.text = self.fetchStringValueFromArray(constants.resolution, atIndex: (task.care_activity_type_id as String))
+        careTypeLabel.text = self.fetchStringValueFromArray(constants.careType, atIndex: (task.care_activity_type_id as String))
         taskPatientNameLabel.text = task.task_patient_name
         let aStaff = task.attending_professionals[0]
         assignedByLabel.text = aStaff.name

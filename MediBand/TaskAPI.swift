@@ -34,20 +34,20 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     
     func getTaskByStaff(staff_id: String, page:String, callback: APICallback) {
-        let url = "http://www.iconglobalnetwork.com/mediband/api/get_task_by_staff_id"
+        let url = sharedDataSingleton.baseURL + "get_task_by_staff_id"
         let body = "staff_id=\(staff_id)&page=\(page)"
         makeHTTPPostRequest(Path.GET_TASK_BY_STAFF, callback: callback, url: url, body: body)
     }
     
     func deleteTask(task_id:String, staff_id:String, callback: APICallback) {
-        let url = "http://www.iconglobalnetwork.com/mediband/api/delete_task"
+        let url = sharedDataSingleton.baseURL + "delete_task"
         let body = "task_id=\(task_id)&staff_id=\(staff_id)"
         makeHTTPPostRequest(Path.DELETE_TASK, callback: callback, url: url, body: body)
         
     }
     
     func updateTaskStatus(task_id:String, staff_id:String, resolution_id:String, callback: APICallback) {
-        let url = "http:/www.iconglobalnetwork.com/mediband/api/update_task_status"
+        let url = sharedDataSingleton.baseURL + "update_task_status"
         let body = "staff_id=\(staff_id)&task_id=\(task_id)&resolution_id=\(resolution_id)&medical_facility_id=\(sharedDataSingleton.user.clinic_id)"
         makeHTTPPostRequest(Path.UPDATE_TASK_STATUS, callback: callback, url: url, body: body)
     }
@@ -58,7 +58,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             sharedDataSingleton.isCheckingNewPatientID = false
             patientTasks = []
         }
-        let url = "http://www.iconglobalnetwork.com/mediband/api/get_task_by_patient_id"
+        let url = sharedDataSingleton.baseURL + "get_task_by_patient_id"
         let body = "patient_id=\(patient_id)&medical_facility_id=\(sharedDataSingleton.user.clinic_id)&page=\(page)"
         makeHTTPPostRequest(Path.GET_TASK_BY_PATIENT, callback: callback, url: url, body: body)
 //        isPatientTask = false
@@ -66,7 +66,7 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     func createTask(task: Task, callback: APICallback) {
         isCreatingTask = true
-        let url = "http://www.iconglobalnetwork.com/mediband/api/create_task"
+        let url = sharedDataSingleton.baseURL + "create_task"
         let body = "patient_id=\(task.patient_id)&care_activity_id=\(task.care_activity_id)&specialist_id=\(task.specialist_id)&care_activity_type_id=\(task.care_activity_type_id)&care_activity_category_id=1&selected_staff_ids=\(task.selected_staff_ids)&medical_facility_id=\(sharedDataSingleton.user.medical_facility)&resolution=\(task.resolution)"
         print(body)
         makeHTTPPostRequest(Path.CREATE_TASK, callback: callback, url: url, body: body)

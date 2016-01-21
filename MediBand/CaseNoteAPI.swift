@@ -26,7 +26,7 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
     
     
     func getCaseNotes(task_id:String, staff_id: String, page:String, callback: APICallback) {
-        let url = "http://iconglobalnetwork.com/mediband/api/get_casenotes"
+        let url = sharedDataSingleton.baseURL + "get_casenotes"
         let body = "task_id=\(task_id)&staff_id=\(staff_id)&page=\(page)"
         makeHTTPPostRequest(Path.GET_CASENOTE, callback: callback, url: url, body: body)
     }
@@ -34,7 +34,7 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
     
     func createCaseNote(caseNote: CaseNote, callback: APICallback) {
         isCreatingCaseNote = true
-        let url = "http://iconglobalnetwork.com/mediband/api/create_casenote"
+        let url = sharedDataSingleton.baseURL + "create_casenote"
         let body = "task_id=\(caseNote.task_id)&details=\(caseNote.details)&staff_id=\(caseNote.staff_id)"
         print(body)
         makeHTTPPostRequest(Path.CREATE_CASENOTE, callback: callback, url: url, body: body)

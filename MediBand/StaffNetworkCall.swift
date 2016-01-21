@@ -40,9 +40,9 @@ class StaffNetworkCall{
         print("this is staff obj \(data)")
         
         if isCreatingNewStaff == true {
-            url = "http://iconglobalnetwork.com/mediband/api/create_staff"
+            url = sharedDataSingleton.baseURL + "create_staff"
         }else {
-            url = "http://iconglobalnetwork.com/mediband/api/edit_staff"
+            url = sharedDataSingleton.baseURL + "edit_staff"
         }
         
          print("this is staff obj \(data)")
@@ -107,7 +107,8 @@ class StaffNetworkCall{
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         let data : [String:String] = ["email":email]
-        self.operationManger.POST("http://iconglobalnetwork.com/mediband/api/view_staff", parameters: data, success: { (requestOperation, responseObject) -> Void in
+        let url = sharedDataSingleton.baseURL + "view_staff"
+        self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
             print(" view staff :: \(responseObject)")
             let result:AnyObject = responseObject
             if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
@@ -126,7 +127,8 @@ class StaffNetworkCall{
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
         let data : [String:String] = ["medical_facility_id":medical_facility_id]
-        self.operationManger.POST("http://www.iconglobalnetwork.com/mediband/api/get_staff", parameters: data, success: { (requestOperation, responseObject) -> Void in
+        let url = sharedDataSingleton.baseURL + "get_staff"
+        self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
             print(responseObject)
             
             let responseDicts = responseObject as! [String:AnyObject]

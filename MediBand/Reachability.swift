@@ -2,7 +2,7 @@
 //  Reachability.swift
 //  MediBand
 //
-//  Created by Ahmed Onawale on 9/30/15.
+//  Created by Johnson Ejezie on 9/30/15.
 //  Copyright © 2015 Johnson Ejezie. All rights reserved.
 //
 
