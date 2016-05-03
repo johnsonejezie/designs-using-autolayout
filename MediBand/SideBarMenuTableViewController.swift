@@ -62,7 +62,6 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        print(sharedDataSingleton.user.isAdmin)
         if sharedDataSingleton.user.isAdmin == true {
             switch (indexPath.row) {
             case 0:
@@ -130,8 +129,6 @@ class SideBarMenuTableViewController: UITableViewController, UIPopoverPresentati
         let removeEmailSuccessful: Bool = KeychainWrapper.removeObjectForKey("email")
         let removePasswordSuccessful: Bool = KeychainWrapper.removeObjectForKey("password")
         destroy()
-        print(removeEmailSuccessful)
-        print(removePasswordSuccessful)
         performSegueWithIdentifier("LogOut", sender: nil)
     }
     

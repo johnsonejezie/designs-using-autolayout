@@ -93,9 +93,6 @@ class PatientProfileViewController: UIViewController, UITableViewDataSource, UIT
              patient.maritalstatus
         ]
         
-        print(patientDict)
-        print(arrayOfValues)
-        
         UINavigationBar.appearance().barTintColor = sharedDataSingleton.theme
         
         addCareButton.layer.cornerRadius = 4

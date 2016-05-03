@@ -36,7 +36,6 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         isCreatingCaseNote = true
         let url = sharedDataSingleton.baseURL + "create_casenote"
         let body = "task_id=\(caseNote.task_id)&details=\(caseNote.details)&staff_id=\(caseNote.staff_id)"
-        print(body)
         makeHTTPPostRequest(Path.CREATE_CASENOTE, callback: callback, url: url, body: body)
     }
     
@@ -79,7 +78,6 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         }
     }
     func handleGetCaseNotes(json: AnyObject)-> [CaseNote]? {
-        print("this is staff json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -98,7 +96,6 @@ class CaseNoteAPI:NSObject, NSURLConnectionDataDelegate {
         return nil
     }
     func handleCreateCaseNote(json: AnyObject)-> CaseNote? {
-        print("this is staff json \(json)")
         if let resultDict = json["data"] as? [String: AnyObject] {
             self.parseDictionaryToCaseNote(resultDict)
             return self.caseNote

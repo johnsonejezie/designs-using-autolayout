@@ -58,7 +58,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("selected \(options[indexPath.row])");
         self.dismissViewControllerAnimated(true, completion: nil)
         delegate?.menuViewResponse(self, didDismissPopupView: indexPath.row);
     }

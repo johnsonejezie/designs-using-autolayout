@@ -91,7 +91,6 @@ class PatientsViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.generalPhysicianLabel.hidden = false
             cell.patientImageView.hidden = false
             let patient = patients[indexPath.row]
-            //print(patient.occupation)
             cell.patientNameLabel.text = patient.forename + " " + patient.surname
             cell.generalPhysicianLabel.text = patient.gp
             
@@ -187,10 +186,8 @@ extension PatientsViewController {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == (patients.count - 1) && (sharedDataSingleton.patientsCurrentPage < sharedDataSingleton.patientsTotalPage) {
-            print("end of table")
             ++currentPageNumber
             let pageNoToString = String(currentPageNumber)
-            print("page number \(pageNoToString)")
             patientAPI.getAllPatients(sharedDataSingleton.user.id, fromMedicalFacility: sharedDataSingleton.user.clinic_id, withPageNumber:pageNoToString) { (success) -> Void in
                 if success == true {
                     self.patients = sharedDataSingleton.patients

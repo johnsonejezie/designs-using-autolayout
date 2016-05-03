@@ -76,7 +76,6 @@ class NewTaskViewController: XLFormViewController {
         if let specialist = form.formRowWithTag(Tags.specialist.rawValue)!.value?.formDisplayText() {
             sharedDataSingleton.specialistFilterString = specialist
         }
-        print(sharedDataSingleton.specialistFilterString)
     }
     
     @IBAction func submit(sender: UIBarButtonItem) {
@@ -104,11 +103,7 @@ class NewTaskViewController: XLFormViewController {
         }
         
         if let staff_ids = form.formRowWithTag(Tags.selectedStaff.rawValue)!.value as? [String] {
-            
-            print(staff_ids)
-            
-               task.selected_staff_ids = staff_ids
-            
+            task.selected_staff_ids = staff_ids
             
         }else {
             let alertView = UIAlertView(title: "Form Error", message: "Select a staff for this task", delegate: self, cancelButtonTitle: "OK")
@@ -116,8 +111,6 @@ class NewTaskViewController: XLFormViewController {
             return
         }
         task.patient_id = sharedDataSingleton.selectedPatient.patient_id
-        
-        print(form.formRowWithTag(Tags.selectedStaff.rawValue)!.value)
         
         if !Reachability.connectedToNetwork() {
             let dictionary: Dictionary<String, Any> = ["requestType": "CreateTask", "description":"Create task for patient with ID \(task.patient_id)", "value": task]
@@ -135,7 +128,6 @@ class NewTaskViewController: XLFormViewController {
                     SwiftSpinner.hide(nil)
                     sharedDataSingleton.selectedIDs = []
                     self.performSegueWithIdentifier("UnwindToPatientProfile", sender: nil)
-                    print("this is newtask \(newtask.resolution)")
                 }
                 
             }
@@ -160,9 +152,7 @@ class NewTaskViewController: XLFormViewController {
         if sharedDataSingleton.allStaffs.count == 0 {
             staffMethods.getStaffs(sharedDataSingleton.user.clinic_id, inPageNumber: "1", completionBlock: { (done) -> Void in
                 if(done){
-                    print("all staffs fetched and passed from staff table view controller")
                 }else{
-                    print("error fetching and passing all staffs from staff table view controller")
                 }
             })
         }
@@ -272,7 +262,6 @@ class NewTaskViewController: XLFormViewController {
         // Care Type
         row = XLFormRowDescriptor(tag: "careType", rowType:XLFormRowDescriptorTypeSelectorPush, title:"Type of Care Activity")
         row.value = XLFormOptionsObject(value: 1, displayText: "Admin Event")
-        print(row.value?.formValue())
         row.selectorTitle = "Admin Event"
         row.selectorOptions = [XLFormOptionsObject(value: 1, displayText:"Admin EventT"),
             XLFormOptionsObject(value: 2, displayText:"Administration Error"),

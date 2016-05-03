@@ -61,7 +61,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
     
     func setUpValidator(){
         validator.styleTransformers(success:{ (validationRule) -> Void in
-            print("here")
             // clear error label
             validationRule.errorLabel?.hidden = true
             validationRule.errorLabel?.text = ""
@@ -69,7 +68,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
             validationRule.textField.layer.borderWidth = 0.5
             
             }, error:{ (validationError) -> Void in
-                print("error")
                 validationError.errorLabel?.hidden = false
                 validationError.errorLabel?.text = validationError.errorMessage
                 validationError.textField.layer.borderColor = UIColor.redColor().CGColor
@@ -109,14 +107,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
         SwiftSpinner.show("Connecting...", animated: true)
         let login = Login()
         login.loginUserWith(email, andPassword: password) { (success) -> Void in
-            print("successful \(success)")
             if success == true {
                 if self.resetKeychain == true {
                     let saveSuccessful: Bool = KeychainWrapper.setString(self.passwordTextfield.text!, forKey: "password")
                     let saveSuccessful1: Bool = KeychainWrapper.setString(self.userNameTextfield.text!, forKey: "email")
-                    print("\(saveSuccessful) and \(saveSuccessful1)")
                 }
-                print(sharedDataSingleton.user.is_password_set)
                 if sharedDataSingleton.user.is_password_set == false {
                     SwiftSpinner.hide({ () -> Void in
                         self.loadResetPasswordAlert()
@@ -127,7 +122,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
                 }
 //
             }else {
-                print("error")
                 let _: Bool = KeychainWrapper.removeObjectForKey("email")
                 let _: Bool = KeychainWrapper.removeObjectForKey("password")
                 SwiftSpinner.hide(nil)
@@ -159,7 +153,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, ValidationDele
             let passedValidation:Bool = !emailTextField.text!.isEmpty && !oldPasswordTextField.text!.isEmpty && !newPasswordTextField.text!.isEmpty
             return passedValidation
         }) { () -> Void in
-            print("validated")
             self.resetPassword(emailTextField.text!, oldPassword: oldPasswordTextField.text!, newPassword: newPasswordTextField.text!)
         }
         alertView.showEdit(self, title: "Password Reset", subTitle: "", closeButtonTitle: "Cancel", duration: 2000)

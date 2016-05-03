@@ -55,9 +55,7 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         let form : XLFormDescriptor
         var section : XLFormSectionDescriptor
         var row : XLFormRowDescriptor
-        
-        let constant = Contants()
-        
+                
         form = XLFormDescriptor(title: "Staff")
         
         section = XLFormSectionDescriptor.formSection()
@@ -275,31 +273,25 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
 
         if sharedDataSingleton.selectedStaff != nil {
             if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
-                print(specialist)
                 if let index = Contants().specialist.indexOf(specialist as! String) {
                     let id = index + 1
                     staff.speciality = String(id)
-                    print(id)
                 }
                
             }
         }else if isEditingMyProfile == true{
             if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
-                print(specialist)
                 if let index = Contants().specialist.indexOf(specialist as! String) {
                     let id = index + 1
                     staff.speciality = String(id)
-                    print(id)
                 }
                 
             }
         }else {
             if let specialist = form.formRowWithTag(Tags.specialist.rawValue)?.value?.displayText() {
-                print(specialist)
                 if let index = Contants().specialist.indexOf(specialist as! String) {
                     let id = index + 1
                     staff.speciality = String(id)
-                    print(id)
                 }
             }
             
@@ -318,31 +310,25 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
         
         if sharedDataSingleton.selectedStaff != nil {
             if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
-                print(role)
                 if let index = Contants().role.indexOf(role as! String) {
                     let id = index + 1
                     staff.role = String(id)
-                    print(id)
                 }
             }
         }else if isEditingMyProfile == true{
             if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
-                print(role )
                 if let index = Contants().role.indexOf(role as! String) {
                     let id = index + 1
                     staff.role = String(id)
-                    print(id)
                 }
                 
             }
         }else {
 
             if let role = form.formRowWithTag(Tags.role.rawValue)?.value?.displayText() {
-                print(role )
                 if let index = Contants().role.indexOf(role as! String) {
                     let id = index + 1
                     staff.role = String(id)
-                    print(id)
                 }
                 
             }
@@ -406,7 +392,6 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     
     
     func pressed(sender: UIButton!) {
-        print("upload")
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
@@ -418,7 +403,6 @@ class AddStaffViewController : XLFormViewController, UINavigationControllerDeleg
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            print("done")
         })
         self.staffImage = image
         staffImageView.image = image

@@ -149,13 +149,11 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
 
         
         alertView.addButton("EXISTING PATIENT", actionBlock: { () -> Void in
-            print("existing")
             self.isExistingPatient = true
             self.isStartingSession = true
             self.session.startRunning()
         })
         alertView.addButton("NEW PATIENT", actionBlock: { () -> Void in
-            print("new")
             self.isExistingPatient = false
             self.isStartingSession = true
             self.session.startRunning()
@@ -170,7 +168,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, 
         }
     }
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        print("scan again button clicked")
         if buttonIndex == 1 {
             if isExistingPatient == false {
                  sharedDataSingleton.selectedPatient = nil

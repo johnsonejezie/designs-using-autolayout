@@ -296,8 +296,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
                         let dateFormatter = NSDateFormatter()
                         dateFormatter.dateFormat = "dd/MM/yyyy"
                         let date = dateFormatter.dateFromString(dateString)
-            print(dateString)
-            print(date)
             row.value = date
         }else {
           row.value = NSDate()
@@ -338,7 +336,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        print("patient id \(patientID)")
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
         let topView:UIView = UIView(frame: CGRectMake(0, 45, view.frame.size.width, 160))
         topView.backgroundColor = UIColor.whiteColor()
@@ -386,7 +383,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     }
     
     func pressed(sender: UIButton!) {
-        print("upload")
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
@@ -398,7 +394,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            print("done")
         })
         self.patientImage = image
         patientImageView.image = image
@@ -464,7 +459,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
         if let fullName = form.formRowWithTag(Tags.surname.rawValue)!.value as? String {
             results["name"] = fullName
         }
-        print(results)
         
         let surname: String?
         if let patientSurname = form.formRowWithTag(Tags.surname.rawValue)!.value as? String {
@@ -474,7 +468,6 @@ class NewPatientViewController: XLFormViewController, UINavigationControllerDele
             surname = ""
         }
         if let dob:NSDate = form.formRowWithTag(Tags.dateOfBirth.rawValue)!.value as? NSDate {
-            print(dob)
             let date = dob
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd-MM-yyyy"

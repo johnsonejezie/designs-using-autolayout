@@ -63,26 +63,20 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
             SwiftSpinner.show("Loading Staff", animated: true)
             staffMethods.getStaffs(sharedDataSingleton.user.clinic_id, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
                 if(done){
-                    print("all staffs fetched and passed from staff table view controller")
                     self.tableView.reloadData()
                     SwiftSpinner.hide(nil)
-                    print("staff count \(sharedDataSingleton.allStaffs.count) ")
                 }else{
                     SwiftSpinner.hide(nil)
-                    print("error fetching and passing all staffs from staff table view controller")
                     
                 }
             })
         }else {
             staffMethods.getStaffs(sharedDataSingleton.user.clinic_id, inPageNumber: pageNumber, completionBlock: { (done) -> Void in
                 if(done){
-                    print("all staffs fetched and passed from staff table view controller")
                     self.tableView.reloadData()
                     SwiftSpinner.hide(nil)
-                    print("staff count \(sharedDataSingleton.allStaffs.count) ")
                 }else{
                     SwiftSpinner.hide(nil)
-                    print("error fetching and passing all staffs from staff table view controller")
                     
                 }
             })
@@ -126,8 +120,6 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
             
             
             let staff = sharedDataSingleton.allStaffs[indexPath.row]
-            print("member id \(staff.member_id)")
-             print("general id \(staff.general_practional_id)")
             cell?.staffNameLabel.text = "\(staff.firstname) \(staff.surname)"
             cell?.staffIDLabel.text = staff.id
             //            cell.staffContactLabel.text = staff["contact"]
@@ -160,6 +152,7 @@ class StaffTableViewController: UIViewController, UITableViewDataSource, UITable
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddStaff" {
             sharedDataSingleton.selectedStaff = nil
+            sharedDataSingleton.isEditingProfile = false
             let controller = segue.destinationViewController
                 as! AddStaffViewController
             controller.delegate = self

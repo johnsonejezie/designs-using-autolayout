@@ -68,7 +68,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
         isCreatingTask = true
         let url = sharedDataSingleton.baseURL + "create_task"
         let body = "patient_id=\(task.patient_id)&care_activity_id=\(task.care_activity_id)&specialist_id=\(task.specialist_id)&care_activity_type_id=\(task.care_activity_type_id)&care_activity_category_id=1&selected_staff_ids=\(task.selected_staff_ids)&medical_facility_id=\(sharedDataSingleton.user.medical_facility)&resolution=\(task.resolution)"
-        print(body)
         makeHTTPPostRequest(Path.CREATE_TASK, callback: callback, url: url, body: body)
     }
     
@@ -123,7 +122,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     
     
     func handleGetTaskByStaff(json: AnyObject)-> [Task]? {
-        print("this is all task json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -144,7 +142,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleDeleteTask(json:AnyObject)->Bool? {
-        print("this is delete message \(json)")
         if let resultDict = json["message"] as? String {
             if resultDict == "message Task deleted successfully!" {
                 return true
@@ -157,7 +154,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleGetTaskByPatient(json: AnyObject)-> [Task]? {
-        print("this is patient json \(json)")
         if let array:AnyObject = json["data"] {
             for resultDict in array as! [AnyObject] {
                 if let resultDict = resultDict as? [String: AnyObject] {
@@ -178,7 +174,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleCreateTask(json: AnyObject)-> Task? {
-        print("this is staff json \(json)")
         if let resultDict = json["data"] as? [String: AnyObject] {
             self.parseDictionaryToTask(resultDict)
             return self.task
@@ -187,7 +182,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func handleUpdateTask(json: AnyObject)-> Bool? {
-        print("this is staff json \(json)")
         if let resultDict = json["data"] as? [String: AnyObject]{
             if let success: Bool = resultDict["success"] as? Bool {
                 if success == true {
@@ -276,7 +270,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
             task.task_patient_name = ""
         }
             if let selected_staff_ids:AnyObject = resultDict["selected_staff_ids"] {
-                print(selected_staff_ids)
                 task.attending_professionals = self.parseAttendingStaff(selected_staff_ids)
             }
         if isCreatingTask == true {
@@ -292,12 +285,9 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
     }
     
     func parseAttendingStaff(json:AnyObject?)->[Staff] {
-        print(json)
         var attendingStaff = [Staff]()
         if let array:AnyObject = json {
-            print(array)
             for resultDict in array as! [AnyObject] {
-                print(resultDict)
                 let staff = Staff()
                 if let resultDict = resultDict as? [String: AnyObject] {
                         if let image: String = resultDict["image"] as? String {
@@ -312,7 +302,6 @@ class TaskAPI: NSObject,NSURLConnectionDataDelegate {
                         if let staff_id: String = resultDict["staff_id"] as? String {
                             staff.id = staff_id as String
                         }
-                    print(staff.name)
                     
                 }
                 attendingStaff.append(staff)

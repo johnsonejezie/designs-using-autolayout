@@ -52,7 +52,6 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     
     
     func pressed(sender: UIButton!) {
-        print("upload")
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum){
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum;
@@ -64,7 +63,6 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            print("done")
         })
         self.staffImage = image
         self.profileImage.image = image
@@ -80,7 +78,6 @@ class UpdateProfilePictureViewController: UIViewController, UINavigationControll
             
             staff.speciality = ""
         }else {
-            print(indexOfSpecialist)
             let count: Int = indexOfSpecialist! + 1
             staff.speciality = String(count)
         }

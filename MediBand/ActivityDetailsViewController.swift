@@ -79,10 +79,8 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
 //            SwiftSpinner.show("Loading Staff", animated: true)
             staffMethods.getStaffs(sharedDataSingleton.user.medical_facility, inPageNumber: "1", completionBlock: { (done) -> Void in
                 if(done){
-                    print("all staffs fetched and passed from staff table view controller")
 //                    SwiftSpinner.hide(completion: nil)
                 }else{
-                    print("error fetching and passing all staffs from staff table view controller")
 //                    SwiftSpinner.hide(completion: nil)
                 }
             })
@@ -90,7 +88,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         print(task.attending_professionals.count)
         return task.attending_professionals.count
        
     }
@@ -162,8 +159,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
         if let i = index {
             count = i - 1
         }
-        print(constantArray)
-        print(count)
         if count >= constantArray.count {
             return ""
         }else {
@@ -213,7 +208,6 @@ class ActivityDetailsViewController: UIViewController , UICollectionViewDelegate
             let resolution_id = String(currentCell + 1)
             updateActivityButton.setTitle(self.fetchStringValueFromArray(Contants().resolution, atIndex: resolution_id), forState: UIControlState.Normal)
             self.updateTaskStatus(resolution_id)
-            print("choice is \(currentCell)")
     }
     
     func updateTaskStatus(resolution:String) {

@@ -156,7 +156,6 @@ class SettingsViewController: XLFormViewController, UIAlertViewDelegate {
             let passedValidation:Bool = !emailTextField.text!.isEmpty && !oldPasswordTextField.text!.isEmpty && !newPasswordTextField.text!.isEmpty
             return passedValidation
             }) { () -> Void in
-                print("validated")
                 self.resetPassword(emailTextField.text!, oldPassword: oldPasswordTextField.text!, newPassword: newPasswordTextField.text!)
         }
         alertView.showEdit(self, title: "Password Reset", subTitle: "", closeButtonTitle: "Cancel", duration: 2000)

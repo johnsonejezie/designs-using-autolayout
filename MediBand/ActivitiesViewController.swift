@@ -119,7 +119,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         case 0:
             displayPopOver(sender )
         case 1:
-            print("date")
             sortByDate()
         default:
             break
@@ -140,8 +139,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        print(touches)
         self.view.endEditing(true)
     }
     
@@ -252,7 +249,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
 //            taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id)
             taskAPI.deleteTask(task.id, staff_id: sharedDataSingleton.user.id, callback: { (success, error) -> () in
                 if error == nil {
-                    print(success)
                 }
             })
             // Note that indexPath is wrapped in an array:  [indexPath]
@@ -275,8 +271,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
         if let i = index {
             count = i - 1
         }
-        print(constantArray)
-        print(count)
         if count >= constantArray.count {
             return ""
         }else {
@@ -357,7 +351,6 @@ class ActivitiesViewController: UIViewController, UITableViewDataSource, UITable
     
 //    
     func activityStatusTableViewController(controller: ActivityStatusTableViewController, didSelectItem item: String) {
-        print(item)
         if item == "All" {
             searchActive = false
             tableView.reloadData()
@@ -404,11 +397,8 @@ extension ActivitiesViewController {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == (tasks.count - 1) && (sharedDataSingleton.taskCurrentPage < sharedDataSingleton.taskTotalPage) {
-            print("end of table \(sharedDataSingleton.taskCurrentPage)")
-            print("end of table \(sharedDataSingleton.taskTotalPage)")
             ++currentPageNumber
             let pageNoToString = String(currentPageNumber)
-            print("page number \(pageNoToString)")
             if isPatientTask == true {
                 if let patient_id = patientID {
                     taskAPI.getTaskByPatient(patient_id, page: pageNoToString, callback: { (task:AnyObject?, error:NSError?) -> () in

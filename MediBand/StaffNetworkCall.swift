@@ -22,7 +22,6 @@ class StaffNetworkCall{
     func create(staff:Staff, image:UIImage?, isCreatingNewStaff:Bool, completionBlock:(success:Bool)->Void){
         isCreatingStaff = true
         var url:String = ""
-        print("this is staff obj \(staff)")
         self.operationManger.requestSerializer = AFJSONRequestSerializer()
         self.operationManger.responseSerializer = AFJSONResponseSerializer()
         self.operationManger.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as Set<NSObject>
@@ -37,15 +36,12 @@ class StaffNetworkCall{
             "firstname":staff.firstname
         ];
         
-        print("this is staff obj \(data)")
-        
         if isCreatingNewStaff == true {
             url = sharedDataSingleton.baseURL + "create_staff"
         }else {
             url = sharedDataSingleton.baseURL + "edit_staff"
         }
         
-         print("this is staff obj \(data)")
         if let anImage:UIImage = image {
             let imageData = UIImageJPEGRepresentation(image!, 0.6)
             let mm = NetData(data: imageData!, mimeType: MimeType.ImageJpeg, filename: "staff_picture.jpg")
@@ -65,11 +61,7 @@ class StaffNetworkCall{
             let urlRequest = self.urlRequestWithComponents(url, parameters: parameters)
             Alamofire.upload(urlRequest.0, data: urlRequest.1)
                 .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                    print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
                 }.responseJSON { _, _, result in
-                    print("this is \(result.value)")
-                    debugPrint(result)
-                    
                     if (result.value != nil) {
                         if let resultDict:AnyObject = result.value {
                         if let dict:[String: AnyObject] = resultDict["data"] as? [String: AnyObject]{
@@ -85,7 +77,6 @@ class StaffNetworkCall{
 
         }else {
             self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
-                print(responseObject)
                 let result:AnyObject = responseObject
                     if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
                         self.parseDict(dict)
@@ -96,7 +87,6 @@ class StaffNetworkCall{
                
                 }, failure:{ (requestOperation, error) -> Void in
                     completionBlock(success: false)
-                    print(error)
             })
         }
 
@@ -109,7 +99,6 @@ class StaffNetworkCall{
         let data : [String:String] = ["email":email]
         let url = sharedDataSingleton.baseURL + "view_staff"
         self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
-            print(" view staff :: \(responseObject)")
             let result:AnyObject = responseObject
             if let dict:[String: AnyObject] = result["data"] as? [String: AnyObject] {
                 self.parseDict(dict)
@@ -117,7 +106,6 @@ class StaffNetworkCall{
                 
             }
             }, failure:{ (requestOperation, error) -> Void in
-            print(" view staff :: \(error)")
         })
     }
     
@@ -129,14 +117,11 @@ class StaffNetworkCall{
         let data : [String:String] = ["medical_facility_id":medical_facility_id]
         let url = sharedDataSingleton.baseURL + "get_staff"
         self.operationManger.POST(url, parameters: data, success: { (requestOperation, responseObject) -> Void in
-            print(responseObject)
-            
             let responseDicts = responseObject as! [String:AnyObject]
             if let arrayDict:AnyObject = responseDicts["data"]{
             
                 self.parseStaffs(arrayDict as! [AnyObject], completionBlock: { (done) -> Void in
                     if (done) {
-                        print("all staffs parsed")
                         sharedDataSingleton.allStaffs = self.allStaff
                          completionBlock(done:true)
                     }
@@ -145,7 +130,6 @@ class StaffNetworkCall{
                completionBlock(done:false)
             }
             }, failure:{ (requestOperation, error) -> Void in
-                print(error)
              
                   completionBlock(done:false)
         })
@@ -161,7 +145,6 @@ class StaffNetworkCall{
             }
         }
 //        sharedDataSingleton.allStaffs = result
-         print("staff count 1 \(sharedDataSingleton.allStaffs.count) ")
         completionBlock(done:true)
     }
     
@@ -199,7 +182,6 @@ class StaffNetworkCall{
         }
         staffData.email = dict["email"] as! String
         
-        print(staffData, terminator: "")
         if isCreatingStaff == true {
             sharedDataSingleton.selectedStaff = staffData
         }

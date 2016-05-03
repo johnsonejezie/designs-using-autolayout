@@ -24,18 +24,15 @@ class PatientAPI {
             "staff_id": assigned_staff,
             "page":pageNumber
         ]
-        print(parameters)
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-            print("patiens response object \(responseObject)")
             let dictionary = responseObject as! [String:AnyObject]
             self.parseDictionary(dictionary)
             completionHandler(success: true)
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            print(error)
             completionHandler(success: false)
         }
     }
@@ -67,8 +64,6 @@ class PatientAPI {
             "next_of_kin":patient.next_of_kin,
             "next_of_kin_relationship": patient.next_of_kin_relationship
         ]
-        
-        print(parameters)
         
         if isCreatingNewPatient == true {
             url = sharedDataSingleton.baseURL + "create_patient"
@@ -108,14 +103,8 @@ class PatientAPI {
             
             Alamofire.upload(urlRequest.0, data: urlRequest.1)
                 .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                    print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
                 }.responseJSON { _, _, result in
-                    print(result)
-                    debugPrint(result)
             }.responseJSON { _, _, result in
-                print("this is \(result.value)")
-                debugPrint(result)
-                
                 if (result.value != nil) {
                     if let resultDict:AnyObject = result.value {
                         if let resultError = resultDict["success"] as? Bool {
@@ -144,7 +133,6 @@ class PatientAPI {
             manager.responseSerializer = AFJSONResponseSerializer()
             manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
             manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-                print("patiens response object \(responseObject)")
                 if let dictionary = responseObject["data"] as? [String:AnyObject] {
                     if dictionary.count > 0 {
                         self.parseDictionaryToPatient(dictionary)
@@ -168,14 +156,11 @@ class PatientAPI {
             "patient_id": patient_id,
             "medical_facility_id": medical_facility_id,
         ]
-        print(parameters)
         let manager = AFHTTPRequestOperationManager()
         manager.requestSerializer = AFJSONRequestSerializer()
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
-            print("JSON: \(responseObject)")
-            
             if let dictionary = responseObject["data"] as? [String:AnyObject] {
                 if dictionary.count == 0 {
                     completionHandler(nil, nil)
@@ -188,7 +173,6 @@ class PatientAPI {
             }
             
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            print("error in getting single patient\(error.description)")
             completionHandler(nil, error)
         }
     }

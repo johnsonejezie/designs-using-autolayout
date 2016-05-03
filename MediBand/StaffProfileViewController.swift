@@ -91,7 +91,6 @@ class StaffProfileViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.setScreeName("Staff Profile")
-        print(isMyProfile)
         if isMyProfile == true {
             let emailString: String? = KeychainWrapper.stringForKey("email")
             let passwordString: String? = KeychainWrapper.stringForKey("password")

@@ -24,7 +24,6 @@ class CaseNoteTableViewController: UITableViewController, UIViewControllerTransi
         
         performSegueWithIdentifier("AddCaseNote", sender: nil)
         
-        print("add new note")
     }
     
 
@@ -200,10 +199,8 @@ extension CaseNoteTableViewController {
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
             let caseNoteAPI = CaseNoteAPI()
         if indexPath.row == (caseNotes.count - 1) && (sharedDataSingleton.caseNotesCurrentPage < sharedDataSingleton.caseNotesTotalPage) {
-            print("end of table")
             ++currentPageNumber
             let pageNoToString = String(currentPageNumber)
-            print("page number \(pageNoToString)")
             caseNoteAPI.getCaseNotes(task.id, staff_id: sharedDataSingleton.user.id, page: pageNoToString) { (allCaseNotes, error) -> () in
                 if error == nil {
                     let taskCaseNotes:[CaseNote] = (allCaseNotes as? [CaseNote])!

@@ -29,7 +29,6 @@ class Login {
 //        
         manager.POST(url, parameters: parameters, success: { (operation: AFHTTPRequestOperation!,
             responseObject: AnyObject!) -> Void in
-            print(responseObject)
             let dictionary:[String: AnyObject] = responseObject as! [String: AnyObject]
             if let message: String = dictionary["message"] as? String {
                 if (message == "Invalid email or password" || message == "Error incomplete inputs :email,password") {
@@ -45,7 +44,6 @@ class Login {
             }
             }) { (operation: AFHTTPRequestOperation!,
                 error: NSError!) -> Void in
-                print(error)
                 completionHandler(success: false)
         }
     }
@@ -64,10 +62,8 @@ class Login {
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.responseSerializer.acceptableContentTypes = NSSet(object: "text/html") as Set<NSObject>
         manager.POST(url, parameters: parameter, success: { (operation:AFHTTPRequestOperation!, json:AnyObject!) -> Void in
-            print(json)
             completionBlock(success: true)
             }) { (operation:AFHTTPRequestOperation, error:NSError) -> Void in
-                print(error)
                 completionBlock(success: false)
         }
         
@@ -81,7 +77,6 @@ class Login {
         let user = User()
         if let resultDict: AnyObject = dictionary["data"] {
                 if let resultDict = resultDict as? [String: AnyObject] {
-                    print(resultDict)
                     user.created = resultDict["created"] as! String
                     user.email = resultDict["email"] as! String
                     user.firstName = resultDict["firstname"] as! String

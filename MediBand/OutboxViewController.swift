@@ -34,7 +34,6 @@ class OutboxViewController: UIViewController, UITableViewDataSource, UITableView
         case "CreateTask":
             createTask(dict["value"] as! Task, index: index)
         case "CreateNewPatient":
-            print(dict)
             createPatient(dict["value"] as! Patient, fromMedicalFacility: sharedDataSingleton.user.clinic_id, image: dict["image"] as? UIImage, isCreatingNewPatient: dict["isCreatingNewPatient"] as! Bool, index: index)
         case "UpdateTaskStatus":
             updateTaskStatus(dict["taskID"] as! String, userID: dict["staffID"] as! String, resolutionID: dict["resolutionID"] as! String, index: index)
